@@ -1,0 +1,23 @@
+{% extends "global/Page.html" %}
+{% load staticfiles otree_tags %}
+
+{% block head_title %}
+    NGS2 Montage Instructions
+{% endblock %}
+
+{% block title %} NGS2 Montage Instructions {% endblock %}
+
+{% block content %}
+
+   <p>
+        You started with an endowment of {{ Constants.endowment }},
+        of which you contributed {{ player.contribution }}.
+        Your group contributed {{ group.total_contribution }},
+        resulting in an individual share of {{ group.individual_share }}.
+        Your profit is therefore {{ player.profit }}.
+    </p>
+
+    <br/>
+    {% next_button %}
+
+{% endblock %}

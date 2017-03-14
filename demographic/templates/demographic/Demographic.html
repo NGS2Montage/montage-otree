@@ -1,0 +1,27 @@
+{% extends "global/Page.html" %}
+{% load staticfiles otree_tags %}
+
+{% block head_title %}
+    Sociodemographic Survey
+{% endblock %}
+
+{% block title %} Sociodemographic Survey {% endblock %}
+
+{% block content %}
+
+    <p>
+        Hi {{ user.first_name|title }}, Please answer the following questions
+    </p>
+
+    <ol>
+    {% for field in form %}
+        <li>
+            {% formfield field %}
+        </li>
+    {% endfor %}
+    </ol>
+
+    <br/>
+    {% next_button %}
+
+{% endblock %}

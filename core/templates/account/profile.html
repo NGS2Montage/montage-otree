@@ -1,0 +1,17 @@
+{% extends "account/base.html" %}
+
+{% load i18n %}
+
+{% block head_title %}{% trans "Your Profile" %}{% endblock %}
+
+{% block inner %}
+    <h1>{% trans "Your Profile" %}</h1>
+
+    <ul>
+        <li><a href="{% url 'account_email' %}">Manage E-mail Addresses</a></li>
+        <li><a href="{% url 'account_token' %}">Manage API Token</a></li>
+        <li><a href="{% url 'account_change_password' %}">Change Password</a></li>
+        <li><a href="{% url 'account_logout' %}">Logout</a></li>
+    </ul>
+{% endblock %}
+

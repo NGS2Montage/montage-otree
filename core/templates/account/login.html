@@ -1,0 +1,27 @@
+{% extends "account/base_logout.html" %}
+
+{% load i18n %}
+{% load account socialaccount %}
+{% load crispy_forms_tags %}
+
+
+{% block head_title %}{% trans "Sign In" %}{% endblock %}
+
+{% block inner %}
+
+<h1>{% trans "Sign In" %}</h1>
+<br/>
+
+<form class="login form-horizontal" method="POST" action="{% url 'account_login' %}">
+  {% csrf_token %}
+  {% crispy form %}
+  <div class="form-group" style="text-align: center;">
+  <a class="button secondaryAction" href="{% url 'account_reset_password' %}">{% trans "Forgot Password?" %}</a>
+  <button class="primaryAction btn btn-primary" type="submit">{% trans "Sign In" %}</button>
+      </div>
+</form>
+
+
+
+{% endblock %}
+

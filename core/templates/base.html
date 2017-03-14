@@ -1,0 +1,68 @@
+{% load staticfiles i18n %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <base href="." />
+
+    {% if debug %}
+        <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+        <meta http-equiv="Pragma" content="no-cache">
+        <meta http-equiv="Expires" content="0">
+    {% endif %}
+
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>{% block title %}NGS2 Montage | Discovery Analytics Center{% endblock title %}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+
+    <link rel="apple-touch-icon-precomposed" sizes="57x57" href="https://dac.cs.vt.edu/wp-content/themes/FoundationPress/assets/favicons/apple-icon-57x57.png?v2">
+    <link rel="apple-touch-icon-precomposed" sizes="60x60" href="https://dac.cs.vt.edu/wp-content/themes/FoundationPress/assets/favicons/apple-icon-60x60.png?v2">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="https://dac.cs.vt.edu/wp-content/themes/FoundationPress/assets/favicons/apple-icon-72x72.png?v2">
+    <link rel="apple-touch-icon-precomposed" sizes="76x76" href="https://dac.cs.vt.edu/wp-content/themes/FoundationPress/assets/favicons/apple-icon-76x76.png?v2">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="https://dac.cs.vt.edu/wp-content/themes/FoundationPress/assets/favicons/apple-icon-114x114.png?v2">
+    <link rel="apple-touch-icon-precomposed" sizes="120x120" href="https://dac.cs.vt.edu/wp-content/themes/FoundationPress/assets/favicons/apple-icon-120x120.png?v2">
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="https://dac.cs.vt.edu/wp-content/themes/FoundationPress/assets/favicons/apple-icon-144x144.png?v2">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="https://dac.cs.vt.edu/wp-content/themes/FoundationPress/assets/favicons/apple-icon-152x152.png?v2">
+    <link rel="apple-touch-icon-precomposed" sizes="180x180" href="https://dac.cs.vt.edu/wp-content/themes/FoundationPress/assets/favicons/apple-icon-180x180.png?v2">
+    <link rel="icon" type="image/png" href="https://dac.cs.vt.edu/wp-content/themes/FoundationPress/assets/favicons/favicon-16x16.png?v2" sizes="16x16">
+    <link rel="icon" type="image/png" href="https://dac.cs.vt.edu/wp-content/themes/FoundationPress/assets/favicons/favicon-32x32.png?v2" sizes="32x32">
+    <link rel="icon" type="image/png" href="https://dac.cs.vt.edu/wp-content/themes/FoundationPress/assets/favicons/favicon-96x96.png?v2" sizes="96x96">
+    <meta name="application-name" content="VT Discovery Analytics Center">
+    <meta name="msapplication-TileColor" content="#FFFFFF">
+    <meta name="msapplication-square70x70logo" content="https://dac.cs.vt.edu/wp-content/themes/FoundationPress/assets/favicons/ms-icon-70x70.png?v2">
+    <meta name="msapplication-TileImage" content="https://dac.cs.vt.edu/wp-content/themes/FoundationPress/assets/favicons/ms-icon-144x144.png?v2">
+    <meta name="msapplication-square150x150logo" content="https://dac.cs.vt.edu/wp-content/themes/FoundationPress/assets/favicons/ms-icon-150x150.png?v2">
+    <meta name="msapplication-wide310x150logo" content="https://dac.cs.vt.edu/wp-content/themes/FoundationPress/assets/favicons/ms-icon-310x150.png?v2">
+    <meta name="msapplication-square310x310logo" content="https://dac.cs.vt.edu/wp-content/themes/FoundationPress/assets/favicons/ms-icon-310x310.png?v2">
+
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="https://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    {% block css %}
+
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    {% endblock %}
+
+    {% block extra_head %}{% endblock extra_head %}
+
+  </head>
+
+  {% block body %}
+
+  {% endblock body %}
+
+    <!-- Le javascript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    {% block javascript %}
+<script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha256-cCueBR6CsyA4/9szpPfrX3s49M9vUU5BgtiJj06wt/s=" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    {% endblock javascript %}
+
+</html>
+

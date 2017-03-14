@@ -1,0 +1,24 @@
+{% extends "account/base_login.html" %}
+{% load i18n %}
+{% block head_title %} OOPS {% endblock %}
+
+{% block inner %}
+
+    <div class="row" style="margin-top: 200px;">
+        <div class="col-md-2"></div>
+        <div class="col-md-8" style="background: white; padding: 30px; border-color: lightgray;
+                border-radius: 12px; border-width: 3px; border-style: groove;">
+
+            <h1 style="text-align: center;">{% trans "OOPS" %}</h1>
+            <br/>
+            <p style="font-size: 120%;">{% trans 'What are you doing here? You are not suppose to be here !!' %}</p>
+            <br/>
+            <p style="font-size: 120%;">If you can't get out of here please contact admin at
+                <a href="mailto:ngs2.montage@gmail.com?Subject=Stuck">ngs2.montage@gmail.com</a></p>
+
+        </div>
+        <div class="col-md-2"></div>
+    </div>
+
+
+{% endblock %}

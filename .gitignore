@@ -1,0 +1,11 @@
+.env
+.env.production
+
+*.sqlite3
+*.pyc
+/static/
+logs/
+.aws_keys
+.ipynb_checkpoints/
+*.ipynb
+*.save

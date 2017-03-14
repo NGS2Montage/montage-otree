@@ -1,0 +1,113 @@
+{% extends "otree/FormPage.html" %}
+{% load staticfiles otree_tags %}
+{% load i18n %}
+{% load floppyforms otree_tags %}
+
+{% block body_main %}
+
+    {% block myscripts %} {% endblock %}
+
+    <nav class="navbar navbar-default navbar-fixed-top" id="navbar_topdiv"
+         style="border-radius: 0px; background: rgb(241, 241, 241); border: 0px;">
+        <div class="container-fluid">
+            <div class="navbar-header col-md-4 text-center">
+                <a class="navbar-brand" href="{% url 'redirect' %}"
+                   style="margin-left: 20px; font-size: 180%; font-weight: bold; font-family: 'Times New Roman', Times, serif;">
+                    <b><span style="color: #EC4335;">N</span><span style="color: #34AA54;">G</span><span
+                            style="color: #4285F5;">S</span><span style="color: #F26722;">2</span>
+                        <span style="color: #34AA54;">Montage</span></b>
+                </a>
+            </div>
+            <div class="col-md-4" style="text-align: center; padding-top: 10px;">
+                {% block header_message %}
+                {% endblock %}
+            </div>
+            <div class="col-md-4">
+                <ul class="nav navbar-nav navbar-right" style="padding-right: 25px;">
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#"><span
+                                style="font-size:120%;">Welcome {{ user.first_name|title }}</span>
+                            <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="{% url 'account_change_password' %}" style="font-size:120%;">Change
+                                Password</a></li>
+                            <li><a href="{% url 'account_logout' %}" style="font-size:120%;">Logout</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container" id="main_container">
+
+        <div class="row" style="margin-top: 120px;">
+            <div class="col-md-12" style="background: white; padding: 30px; border-color: lightgray;
+                border-radius: 12px; border-width: 3px; border-style: groove;">
+
+                <div class="page-header" style="margin-top: 20px">
+                    <h2>{% block title %}{% endblock %}</h2>
+                </div>
+                <div>
+                    {% if view.has_timeout %}
+                        {% include 'otree/includes/TimeLimit.html' with form_element_id="form" %}
+                    {% endif %}
+
+                    {% if form.errors %}
+                        <div class="alert alert-danger alert-dismissable">
+                            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                            {{ form.non_field_errors }}
+                        </div>
+                    {% endif %}
+
+                    <div id="error-notice" class="alert alert-danger"
+                         style="display:none">
+                        {% blocktrans trimmed %}
+                            An error occurred. Please check the logs or ask
+                            the administrator for help.{% endblocktrans %}
+                    </div>
+
+
+                    <form action="" method="post" role="form" class="form"
+                          id="form">{% csrf_token %}
+                        <input type="hidden" value="{{ request.path }}"
+                               name="origin_url"/>
+                        {% form form using %}
+                            {% formconfig row using "floppyforms/rows/bootstrap.html" %}
+                            <div id="otree-content">
+                                {% block content %}{% endblock %}
+                            </div>
+                        {% endform %}
+                    </form>
+                </div>
+                <br/>
+                {% if view.is_debug %}
+                    {% include 'otree/includes/debug_info.html' %}
+                {% endif %}
+
+            </div>
+        </div>
+
+    </div>
+
+
+
+{% endblock %}
+
+
+{% block global_styles %}
+    <style>
+        body {
+            background-image: url('/static/images/bg3.jpg');
+            background-size: 100% auto;
+            background-repeat: no-repeat;
+        }
+    </style>
+
+{% endblock %}
+
+{% block global_scripts %}
+    <script>
+       // document.getElementById('main_container').style.maxHeight = window.innerHeight - 150 + "px";
+    </script>
+{% endblock %}

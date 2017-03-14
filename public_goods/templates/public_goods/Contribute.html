@@ -1,0 +1,40 @@
+{% extends "global/Page.html" %}
+{% load staticfiles otree_tags %}
+
+{% block head_title %}
+    Team Contribution
+{% endblock %}
+
+{% block title %} Team Contribution {% endblock %}
+
+{% block content %}
+
+    <p>
+        Welcome, {{ user.first_name | title }}! You now have 3 minutes to decide how much of your current earnings you
+        would like to donate to the group, with a chance of increasing your overall earnings. Please enter the amount
+        in the box below and click arrow in order to submit
+    </p>
+
+    <div class="row" style="margin-top: 20px;">
+        <div class="col-md-1"></div>
+        <div class="col-md-5" style="height: 300px; background: #eeeeee; padding: 50px; border-color: lightgray;
+                border-radius: 12px; border-width: 3px; border-style: groove; text-align: center;">
+
+            <h1>Your Current Earnings</h1>
+            <br/>
+            <h1>{{ Constants.endowment | c }}</h1>
+
+        </div>
+        <div class="col-md-5" style="height: 300px; background: #eeeeee; padding: 50px; border-color: lightgray;
+                border-radius: 12px; border-width: 3px; border-style: groove; text-align: center; margin-left: 50px;">
+
+            <div class="col-xs-2" style="display: inline-block; margin-top: 60px; margin-left: 70px;" >
+                <input type="number" name="contribution" id="id_contribution" class="input-lg">
+            </div>
+        </div>
+    </div>
+
+    <br/>
+    {% next_button %}
+
+{% endblock %}

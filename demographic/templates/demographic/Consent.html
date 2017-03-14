@@ -1,0 +1,276 @@
+{% extends "global/Page.html" %}
+{% load staticfiles otree_tags %}
+
+{% block head_title %}
+    User Consent
+{% endblock %}
+
+{% block title %} Informed Consent Agreement {% endblock %}
+
+
+{% block styles %}
+    <style>
+        table {
+            border: 1px solid #eeeeee;
+            border-collapse: collapse;
+        }
+
+        th {
+            border: 1px solid #eeeeee;
+            border-collapse: collapse;
+            padding: 10px;
+            text-align: left;
+        }
+
+        td {
+            border: 1px solid #eeeeee;
+            border-collapse: collapse;
+            padding: 10px;
+        }
+    </style>
+{% endblock %}
+
+{% block content %}
+
+    <table style="width:100%">
+        <tr>
+            <th>Project Title</th>
+            <td>NGS2 - Montage; Group Ultimatum Experiment</td>
+        </tr>
+
+        <tr>
+            <th>Principal<br/>Investigator</th>
+            <td>
+                Dr. Naren Ramakrishnan,<br/>
+                Professor, Department of Computer Science at Virginia Tech<br/>
+                900 N. Glebe Rd.<br/>
+                Arlington, VA 22203, USA<br/>
+                (571) 858-3331<br/>
+                e-mail: naren@vt.edu
+            </td>
+        </tr>
+
+        <tr>
+            <th>Sponsorship</th>
+            <td>Defense Advanced Research Projects Activity (DARPA) - Department of Defense (DoD)</td>
+        </tr>
+
+        <tr>
+            <th>Purpose of<br/>Research</th>
+            <td>
+                You are being asked to volunteer for this research study to help us better understand the
+                formation and persistence of collective identity through a three-phase experiment. We will
+                test hypotheses related to theories in collective identity with these experiments and compare
+                the outcomes to our predictive models. We anticipate up to 4000 recruited participants per
+                experiment. The researchers are faculty members and students at the following academic
+                institutions: Virginia Tech, Stanford University, Cornell University, Northwestern University,
+                and Johns Hopkins University.
+            </td>
+        </tr>
+
+        <tr>
+            <th>Criteria for<br/>Participation</th>
+            <td>
+                You must be at least 18 years of age to participate in this study. We are inviting you to
+                participate in this research project, because you are at least 18 years of age, understand
+                English, understand US currency, and use an Internet-enabled computer.
+            </td>
+        </tr>
+
+        <tr>
+            <th>Procedures</th>
+            <td>
+                The experiment consists of a web application that is the main interface. The experiment will
+                proceed as follows with an introduction and survey followed by three phases of the game.
+                Throughout the game, visual and textual questions may be asked in the form of exit surveys in
+                order to clarify various decisions made throughout the phases. The flow of the game will
+                proceed as follows:
+
+                <ol>
+                    <li>
+                        <b>Personal Survey.</b> You will be asked for sociodemographic information. If you decide to
+                        leave the game, all of this information will be deleted automatically.
+                    </li>
+
+                    <li>
+                        <b>Introduction.</b> You will be introduced to the use of the game and how to interact with its
+                        various features.
+                    </li>
+
+                    <li>
+                        <b>Understanding of game.</b> Next, a web form will test for a basic understanding of the game
+                        that follows. After this, you will be randomly assigned to a team for the three-phase play of
+                        the game.
+                    </li>
+
+                    <li>
+                        <b>Phase 1: Word Count Exercise.</b> The screen will contain a set of letters that your team
+                        must work together on to produce a threshold (i.e., a minimum) number of words. The letters
+                        will consist of the American alphabet and the accepted words will be American English. You
+                        will be able to see your own words as well as those produced by other members of the team.
+                        This exercise will be timed. Fill out exit survey.
+                    </li>
+
+                    <li>
+                        <b>Phase 2: Additional Earnings Opportunity.</b> Having completed Phase 1, a new interface
+                        will be displayed where members of the group will have the option to contribute a portion of
+                        their winnings to the team "pot" of money. Contributions will be totaled and the redistributed
+                        to the team following a prescribed amount. Fill out exit survey.
+                    </li>
+
+                    <li>
+                        <b>Phase 3: Group Competition.</b> Your team will then be paired with another team. One
+                        team will receive an additional amount of money that they can choose to share with the other
+                        group. Members of the other team must determine a minimum level of sharing that they will
+                        accept. If the deal succeeds, both teams split the money in the agreed-upon way. A team splits
+                        any money evenly. Otherwise, no team succeeds, meaning neither team receives any money.
+                        You will be able to communicate with members of your team through chat interfaces. This
+                        session will be time limited to encourage discussion and each group member has to decide
+                        whether or not to make (or accept) the offer from members of the other group. Fill out exit
+                        survey.
+                    </li>
+
+                    <li>
+                        <b>Conclusion:</b> After the final phase, the final screen will display the results of the game and
+                        give the user's final winnings from participating. The game is now complete.
+                    </li>
+                </ol>
+
+            </td>
+        </tr>
+
+        <tr>
+            <th>Time Required</th>
+            <td>
+                You will spend at most 2 hours in the session today. There is no obligation for any additional
+                sessions. However, you may be asked to volunteer again in the future to participate in a
+                similar experiment.
+            </td>
+        </tr>
+
+        <tr>
+            <th>Risks</th>
+            <td>There are no anticipated risks.</td>
+        </tr>
+
+        <tr>
+            <th>Benefits</th>
+            <td>
+                There will be no direct benefits to you by participating in this study, other than typical types
+                of remuneration for these experiments. However, your participation will help us learn about
+                various aspects of collective identity and group behavior. No promise or guarantee of benefits
+                has been made to encourage you to participate.
+            </td>
+        </tr>
+
+        <tr>
+            <th>Compensation</th>
+            <td>
+                There will be a $0.05 - show-up fee for agreeing to participate. Rewards in the subsequent
+                phases will reflect the decisions made and will range from $1 - $5.
+            </td>
+        </tr>
+
+        <tr>
+            <th>Voluntary<br/>Participation</th>
+            <td>
+                Your participation in this study is completely voluntary. You may refuse to take part in the
+                research or exit the study at any time without penalty. You are free to decline to answer any
+                particular question or disengage from the game at any time for any reason without question.
+            </td>
+        </tr>
+
+        <tr>
+            <th>Right to<br/>Withdraw from<br/>the Study</th>
+            <td>
+                You have the right to withdraw from the study at any time without any negative
+                consequences.
+                <b>Note: As per Amazon Mechanical Turk standard, you will earn rewards only for the
+                tasks you appropriately complete before your withdrawal. There is no penalty for
+                withdrawing, and you will still earn a $.05 show-up fee. Your worker ID will not be
+                    stored upon withdrawal.</b>
+            </td>
+        </tr>
+
+        <tr>
+            <th>Anonymity and<br/>Confidentiality</th>
+            <td>
+                <p>
+                    Your individual privacy will be protected in all papers, books, talks, posts, or stories resulting
+                    from this study. In order to protect the confidentiality of your responses, we will assign you
+                    an identification (ID) number, and your decisions and the collected data will be recorded
+                    using that number, without a link to your name or other identifiable information. The ID
+                    number will be stored separately in a database which can only be accessed by authorized
+                    personnel.
+                </p>
+                <p>
+                    Your name will not be used in any report, and we will obtain no information linking your
+                    name to the ID number. The results of the study, including laboratory or any other data, may
+                    be published for scientific purposes and may be shared with other researchers, but we will not
+                    give your name or any identifiable references to you.
+                </p>
+                <p>
+                    Please be aware that any work performed on Amazon Mechanical Turk can potentially be
+                    linked to information about you on your Amazon public profile page, depending on the
+                    settings you have for your Amazon profile. We will not be accessing any personally
+                    identifying information about you that you may have put on your Amazon public profile page.
+                    We will not store your Mechanical Turk worker ID or any other personally identifiable
+                    information about you.
+                </p>
+                <p>
+                    At no time will the researchers release identifiable results of the study to anyone other than
+                    individuals working on the project without your written consent. The Virginia Tech
+                    Institutional Review Board (IRB) may view the study’s data for auditing purposes. The IRB is
+                    responsible for the oversight of the protection of human subjects involved in research.
+                    Representatives from the Department of Defense (DoD) may view the study’s data for
+                    auditing purposes and protection of human subjects.
+                </p>
+            </td>
+        </tr>
+
+        <tr>
+            <th>Questions of<br/>Concerns</th>
+            <td>
+                If you have any questions or would like additional information about this study, please
+                contact:
+                <ol>
+                    <li>
+                        Brian J. Goode; Discovery Analytics Center (Virginia Tech); (571) 858-3344;
+                        <a href="mailto:bjgoode@vt.edu" target="_top">bjgoode@vt.edu</a>
+                    </li>
+                    <li>
+                        Chris Kuhlman; Biocomplexity Institute of Virginia Tech; (540) 231-3997;
+                        <a href="mailto:ckuhlman@vbi.vt.edu" target="_top">ckuhlman@vbi.vt.edu</a>
+                    </li>
+                </ol>
+            </td>
+        </tr>
+
+        <tr>
+            <th>Electronic<br/>
+                Consent</th>
+            <td>
+                Please select your choice below. You may print a copy of this consent form for your records.
+                By clicking on the “Agree” button you indicate that
+                <ol>
+                    <li>
+                        You have read and understand the above information.
+                    </li>
+                    <li>
+                        You voluntarily agree to participate.
+                    </li>
+                    <li>
+                        You are 18 years of age or older.
+                    </li>
+                </ol>
+                    <input type="radio" name="consent" value="True"> Agree<br>
+                    <input type="radio" name="consent" value="False"> Disagree<br>
+            </td>
+        </tr>
+
+    </table>
+
+    <br/>
+    {% next_button %}
+
+{% endblock %}

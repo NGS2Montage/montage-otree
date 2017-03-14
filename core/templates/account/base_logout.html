@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block title %}{% block head_title %}{% endblock head_title %}{% endblock title %}
+
+
+{% block css %}
+    {{ block.super }}
+{% endblock %}
+
+
+{% block body %}
+
+    <body style="background-image: url('/static/images/bg3.jpg'); background-size:100% auto; background-repeat:repeat-y;">
+
+    <nav class="navbar navbar-default" id="navbar_topdiv"
+         style="border-radius: 0px; background: rgb(241, 241, 241); border: 0px;">
+        <div class="container-fluid">
+            <div class="navbar-header col-md-5 text-center">
+                <a class="navbar-brand" href="{% url 'account_logout' %}"
+                   style="margin-left: 20px; font-size: 180%; font-weight: bold; font-family: 'Times New Roman', Times, serif;">
+                    <b><span style="color: #EC4335;">N</span><span style="color: #34AA54;">G</span><span
+                            style="color: #4285F5;">S</span><span style="color: #F26722;">2</span>
+                        <span style="color: #34AA54;">Montage</span></b>
+                </a>
+            </div>
+            <div class="col-md-7">
+            </div>
+        </div>
+    </nav>
+
+    {% block container %}
+        <div class="container">
+
+            <div class="row" style="margin-top: 150px;">
+                <div class="col-md-3"></div>
+                <div class="col-md-6" style="background: white; padding: 30px; border-color: lightgray;
+                border-radius: 12px; border-width: 3px; border-style: groove;">
+                    {% include 'account/messages.html' %}
+                    {% block inner %}{% endblock %}
+                </div>
+                <div class="col-md-3"></div>
+            </div>
+
+        </div> <!-- /container -->
+    {% endblock container %}
+
+    {% block modal %}{% endblock modal %}
+
+    </body>
+
+{% endblock body %}

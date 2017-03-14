@@ -1,0 +1,247 @@
+{% extends "global/Page.html" %}
+{% load staticfiles otree_tags %}
+
+{% block head_title %}
+    Anagram Instructions
+{% endblock %}
+
+
+{% block title %} Phase 1. Anagrams {% endblock %}
+
+
+{% block content %}
+
+    <!-- YouTube WELL : START -->
+    <div class="row" style="margin-top: 5px;">
+        <div class="col-md-12" style="padding-left: 5px; padding-right: 5px;">
+            <div class="well heading-well text-center" style="padding: 10px;">
+                <div style="float:right">
+                                <span class="glyphicon glyphicon-minus" id="youtubeControlGlyph"
+                                      onclick="hide_panel('youtubeDiv', 'youtubeControlGlyph');">
+                                </span>
+                </div>
+                <b><span style="color: rgb(34, 34, 34); font-family: Arial, sans-serif; font-weight: bold;
+                font-size: 120%;">Video Tutorial</span></b>
+            </div>
+        </div>
+    </div>
+    <!-- YouTube WELL : END -->
+
+    <!-- YouTube DIV : START -->
+    <div class="row" id="youtubeDiv" style="margin-top: 0px;">
+        <div class="col-md-12" style="text-align: center;">
+            <iframe width="80%" height="315" src="https://www.youtube.com/embed/fjCCmiiY0YY" frameborder="0"
+                    allowfullscreen></iframe>
+        </div>
+    </div>
+    <!-- YouTube DIV : END -->
+
+    <!-- Instructions WELL : START -->
+    <div class="row" style="margin-top: 25px;">
+        <div class="col-md-12" style="padding-left: 5px; padding-right: 5px;">
+            <div class="well heading-well text-center" style="padding: 10px;">
+                <div style="float:right">
+                                <span class="glyphicon glyphicon-minus" id="instructionsControlGlyph"
+                                      onclick="hide_panel('instructionsDiv', 'instructionsControlGlyph');">
+                                </span>
+                </div>
+                <b><span style="color: rgb(34, 34, 34); font-family: Arial, sans-serif; font-weight: bold;
+                font-size: 120%;">Instructions</span></b>
+            </div>
+        </div>
+    </div>
+    <!-- Instructions WELL : END -->
+
+    <!-- Instructions DIV : START -->
+    <div class="row" id="instructionsDiv">
+        <div class="col-md-12">
+            <p>
+                You have been placed in a team of <span style="color:red;">[sample size]</span> members, and every team member including you is able
+                to communicate with a certain number of other members called neighbors, also participating in this
+                exercise. The objective is to form as many words as possible as a group. Words that have been formed by
+                every member of the group will appear in the screen before you. You may also request letters from your
+                neighbors. Your payout will be based on the performance of the entire team (that is, all individuals). You
+                will be able to submit a single word only once, but duplicate words are allowed within the team. Your
+                team’s reward/payment will increase as the number of words submitted by multiple team members
+                increases. For example, if Player A submits the word "bag," then the team benefits more by Player B
+                submitting "bag" than if Player B submits "gab."
+            </p>
+
+            <p>
+                You will interact only with your neighbors, but all members of the team are playing the same game, using
+                the same directions. You and your neighbors that you interact with is your <b><i>neighborhood</i></b>.
+            </p>
+
+            <p>
+                Your neighborhood will be provided with tiles, with a letter written on each tile. Your neighborhood has
+                to form as many words with at least 3 letters as you can with these letters in <span style="color:red;">[4]</span> minutes. The money you
+                earn will depend on the number of words found by the entire team. If your neighborhood finds <span style="color:red;">[12]</span>
+                words, your neighborhood will earn <span style="color:red;">$12</span> (which will be divided equally among the members of the entire
+                team). For each additional word (beyond <span style="color:red;">12</span>) your neighborhood finds, the group will receive an extra <span style="color:red;">$1</span>
+                that will be also divided equally among all the members of the entire team. So, the greater the number of
+                words your neighborhood finds, the more money everyone on the team will make.
+            </p>
+
+            <p>
+                Throughout the game you will most likely receive requests for letters from your neighbors. When a
+                request is made, you have the ability to copy your letter and pass it to your neighbor. Likewise, you have
+                the ability to ask your neighbor to copy letters for you in order to form words. There is no penalty for
+                copying letters, but this operation can only be performed <span style="color:red;">[X]</span> times per letter that you choose to share.
+            </p>
+
+            <p>
+                For constructed words, proper names are not allowed. Plurals are allowed. Verbal conjugation is allowed.
+            </p>
+        </div>
+    </div>
+    <!-- Instructions DIV : END -->
+
+
+    <!-- Quiz WELL : START -->
+    <div class="row" style="margin-top: 25px;">
+        <div class="col-md-12" style="padding-left: 5px; padding-right: 5px;">
+            <div class="well heading-well text-center" style="padding: 10px;">
+                <div style="float:right">
+                                <span class="glyphicon glyphicon-minus" id="quizControlGlyph"
+                                      onclick="hide_panel('quizDiv', 'quizControlGlyph');">
+                                </span>
+                </div>
+                <b><span style="color: rgb(34, 34, 34); font-family: Arial, sans-serif; font-weight: bold;
+                font-size: 120%;">Quiz</span></b>
+            </div>
+        </div>
+    </div>
+    <!-- Quiz WELL : END -->
+
+    <!-- Quiz DIV : START -->
+    <div class="row" id="quizDiv" style="margin-top: 0px;">
+        <div class="col-md-12">
+            <p>
+                Please answer the following questions:
+            </p>
+
+            <ol>
+                <li>
+                    <b>You are trying to build the word "can" in the team building exercise. You have the letters "a" and
+                    "n." You need the letter "c." You can see that one of your neighbors as the letter "c". Which of
+                        the following are true? Check all that apply.</b><br/>
+                    <div class="checkbox">
+                        <label><input type="checkbox" name="question1[]" value="a">
+                            You can request that your neighbor send you the letter "c."
+                        </label>
+                    </div>
+                    <div class="checkbox">
+                        <label><input type="checkbox" name="question1[]" value="b">
+                            You have to rely on your neighbor to recognize that if she sends you a "c," then you can form "can."
+                        </label>
+                    </div>
+                    <div class="checkbox">
+                        <label><input type="checkbox" name="question1[]" value="c">
+                            You cannot request a letter from your neighbor.
+                        </label>
+                    </div>
+                    <br/>
+                </li>
+
+                <li>
+                    <b>
+                        You receive a request from a neighbor for you to send her the letter "g," which you have and
+                        can send to her. Which are true. (Check all that apply.)
+                    </b><br/>
+                     <div class="checkbox">
+                        <label><input type="checkbox" name="question2[]" value="a">
+                            You should look at all of her letters and determine what she is going to do with the "g"
+                            before you send it.
+                        </label>
+                    </div>
+                    <div class="checkbox">
+                        <label><input type="checkbox" name="question2[]" value="b">
+                            Rely that your neighbor knows what she is doing, and send her the "g" so that you can
+                            focus on building words yourself while your neighbor is also building words.
+                        </label>
+                    </div>
+                    <br/>
+                </li>
+
+                <li>
+                    <b>
+                        You have the letters g, b, r, u. Which of the following are valid actions? Check all that apply.
+                    </b><br/>
+                     <div class="checkbox">
+                        <label><input type="checkbox" name="question3[]" value="a">
+                            Form the word "grub." Even though your words have to be at least 3 characters, it is
+                            perfectly acceptable to submit four-letter words.
+                        </label>
+                    </div>
+                    <div class="checkbox">
+                        <label><input type="checkbox" name="question3[]" value="b">
+                            Form the word "bug." Since you only need 3-letter words, you can save the "r" for
+                            another word.
+                        </label>
+                    </div>
+                    <div class="checkbox">
+                        <label><input type="checkbox" name="question3[]" value="c">
+                            You recognize that you can form the words "rub" and "rug" and that each word is valid
+                            and will help the team. However, you notice that a teammate has already submitted the
+                            word "rub" because you can see a list of all words formed by all team members, so you
+                            submit that word because your team gets extra points when different team members
+                            cooperate by submitting the same word.
+                        </label>
+                    </div>
+                    <br/>
+                </li>
+
+                <li>
+                    <b>
+                        You have the letters t, u, and b. One of your neighbors requests the letter "b" from you. What
+                        should you do? (Check all that apply.)
+                    </b><br/>
+                     <div class="checkbox">
+                        <label><input type="checkbox" name="question4[]" value="a">
+                            Ignore your neighbor because you need the "b" to form "tub."
+                        </label>
+                    </div>
+                    <div class="checkbox">
+                        <label><input type="checkbox" name="question4[]" value="b">
+                            Send her the "b" because you know that the letters you use yourself to form words are
+                            completely separate from the supply of letters that you can send to neighbors.
+                        </label>
+                    </div>
+                </li>
+
+                <input type="hidden" name="anagram_hidden" value="5" id="id_anagram_hidden"/>
+
+            </ol>
+        </div>
+    </div>
+    <!-- Quiz DIV : END -->
+
+    <br/>
+    {% next_button %}
+
+{% endblock %}
+
+
+{% block scripts %}
+    <script>
+        function hide_panel(divId, glyphId) {
+            if (!document.getElementById(divId)) {
+                alert("Given Div Id : " + divId + " Doesn't Exist.");
+                return
+            }
+            if (!document.getElementById(glyphId)) {
+                alert("Given glyph Id : " + glyphId + " Doesn't Exist.");
+                return
+            }
+            if (document.getElementById(glyphId).className == 'glyphicon glyphicon-minus') {
+                document.getElementById(divId).style.display = 'none';
+                document.getElementById(glyphId).className = 'glyphicon glyphicon-plus';
+            }
+            else {
+                document.getElementById(divId).style.display = 'block';
+                document.getElementById(glyphId).className = 'glyphicon glyphicon-minus';
+            }
+        }
+    </script>
+{% endblock %}
+

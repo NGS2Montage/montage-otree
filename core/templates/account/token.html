@@ -1,0 +1,50 @@
+{% extends "account/base.html" %}
+
+{% load i18n %}
+
+{% block head_title %}{% trans "Manage Your API Token" %}{% endblock %}
+
+{% block inner %}
+    <h1>{% trans "Your API Token" %}</h1>
+
+    {% if user.auth_token %}
+        <div class="form-group">
+            <label for="api-input">API Key</label>
+
+            <div class="input-group">
+                <input id="api-input" class="form-control" onClick="this.select();" type="text" readonly value="{{ user.auth_token }}"></input>
+                <span id="api-input-copy" class="input-group-addon addon-btn addon-btn-primary">Copy</span>
+            </div>
+        </div>
+    {% else %}
+        <p>You don't have an API token yet.</p>
+
+        <form name="create_station" method="post" action="{% url 'account_token' %}">
+            <div class="form-group">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-primary">Generate Token</button>
+            </div>
+        </form>
+    {% endif %}
+
+    <p>Check out the web-browsable <a href="{% url 'api-root' %}">API documentation.</a></p>
+
+    <script type="text/javascript">
+        var copyBtn = document.getElementById('api-input-copy');
+        var tokenInput = document.getElementById('api-input');
+
+        if (copyBtn && tokenInput) {
+            copyBtn.addEventListener('click', function() {
+                tokenInput.select();
+                document.execCommand('copy');
+                copyBtn.textContent = 'Copied';
+                copyBtn.classList.remove('addon-btn-primary');
+                setTimeout(function() {
+                    copyBtn.textContent = 'Copy';
+                    copyBtn.classList.add('addon-btn-primary');
+                }, 5000);
+            });
+        }
+    </script>
+{% endblock %}
+
