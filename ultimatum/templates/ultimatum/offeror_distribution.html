@@ -1,0 +1,45 @@
+{% extends "global/Page.html" %}
+{% load staticfiles otree_tags %}
+
+{% block head_title %}
+    Initial Offer
+{% endblock %}
+
+{% block title %} Initial Offer {% endblock %}
+
+{% block content %}
+
+    <p>
+        Welcome, {{ user.first_name | title }}! You now have 3 minutes to decide how much do you want to offer to the
+        other team. Also, make a guess for how much the other team is expecting to receive. Please enter the amount
+        in the boxes below and click next in order to submit
+    </p>
+
+    <h2>Your Role: {{ player.player_role | title }}</h2>
+
+    <div class="row" style="margin-top: 20px;">
+        <div class="col-md-1"></div>
+        <div class="col-md-5" style="height: 300px; background: #eeeeee; padding: 50px; border-color: lightgray;
+                border-radius: 12px; border-width: 3px; border-style: groove; text-align: center;">
+
+            {% for bid in bids %}
+                <p>
+                {{ bid.offer }}
+                <button type="button" class="btn btn-info" onclick="alert('{{ bid.offeror_id }} and {{ bid.user_id }}')">Up</button>
+                <button type="button" class="btn btn-info" onclick="alert('{{ bid.offeror_id }} and {{ bid.user_id }}')">Down</button>
+                </p>
+            {% endfor %}
+
+        </div>
+        <div class="col-md-5" style="height: 300px; background: #eeeeee; padding: 50px; border-color: lightgray;
+                border-radius: 12px; border-width: 3px; border-style: groove; text-align: center; margin-left: 50px;">
+
+            {{ player.initial_offered_amount }}
+
+        </div>
+    </div>
+
+    <br/>
+    {% next_button %}
+
+{% endblock %}

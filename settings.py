@@ -153,6 +153,12 @@ SESSION_CONFIGS = [
         'num_demo_participants': 6,
         'app_sequence': ['demographic', 'instructions'],
     },
+    {
+        'name': 'ultimatum',
+        'display_name': 'Ultimatum',
+        'num_demo_participants': 4,
+        'app_sequence': ['ultimatum'],
+    },
 ]
 
 ROOT_URLCONF = 'urls'
