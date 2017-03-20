@@ -70,13 +70,13 @@ def main(emails_file, session_name):
             path = reverse('create_account_from_key', kwargs=dict(uid=user_pk_to_url_str(user), key=temp_key,
                                                                   sid=str(session_id.id)))
             url = build_absolute_uri(None, path)
+            print("%s: %s" % (email, url))
             context = {'account_creation_url': url}
             get_adapter(None).send_mail(
                 'account/email/account_creation_key',
                 email,
                 context
             )
-            print("Email sent to: %s" % email)
 
 
 if __name__ == "__main__":
