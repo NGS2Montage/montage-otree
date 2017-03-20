@@ -1,0 +1,4 @@
+{% load i18n %}
+{% autoescape off %}
+{% blocktrans %}Welcome to NGS2 Montage{% endblocktrans %}
+{% endautoescape %}

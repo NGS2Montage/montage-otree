@@ -172,7 +172,7 @@ STATICFILES_DIRS = [
 
 # CHANNELS
 # ------------------------------------------------------------------------------
-CHANNEL_ROUTING = 'core.routing.channel_routing'
+# CHANNEL_ROUTING = 'core.routing.channel_routing'
 # This overrides the default ROUTING "otree.channels.routing.channel_routing". Might pose a challenge
 
 
@@ -274,7 +274,7 @@ ACCOUNT_EMAIL_VERIFICATION = 'optional'
 ACCOUNT_ALLOW_REGISTRATION = env.bool('DJANGO_ACCOUNT_ALLOW_REGISTRATION', True)
 ACCOUNT_ADAPTER = 'core.users.adapters.AccountAdapter'
 SOCIALACCOUNT_ADAPTER = 'core.users.adapters.SocialAccountAdapter'
-
+ACCOUNT_EMAIL_SUBJECT_PREFIX = '[NGS2 Montage] '
 
 # These can be useful
 LOGIN_REDIRECT_URL = 'redirect'

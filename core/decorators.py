@@ -1,19 +1,12 @@
-import arrow
-import json
 import logging
 logger = logging.getLogger(__name__)
-
 
 from django.conf import settings
 from django.http import HttpResponseRedirect
 from django.core.urlresolvers import reverse
 
-from annoying.functions import get_object_or_None
-from channels import Group
 
-from .models import ChatMessage, Game
-
-
+'''
 def game_state_required(user_state, game_state, *dec_args, **dec_kwargs):
     def _decorator(view_func):
         def _view(request, *args, **kwargs):
@@ -38,3 +31,4 @@ def game_state_required(user_state, game_state, *dec_args, **dec_kwargs):
             return HttpResponseRedirect(reverse('redirect'))
         return _view
     return _decorator
+'''

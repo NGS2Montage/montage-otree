@@ -6,10 +6,10 @@ from django.db.models import Q
 
 from channels_api.bindings import ResourceBinding
 
-from .models import ChatMessage, Group
+# from .models import ChatMessage, Group
 from .serializers import ChatMessageSerializer, GroupSerializer, UserSerializer
 
-
+'''
 class UserBinding(ResourceBinding):
 
     model = User
@@ -89,3 +89,5 @@ class ChatMessageBinding(ResourceBinding):
 
         # allow create, list, retrieve, subscribe
         return True
+
+'''

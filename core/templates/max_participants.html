@@ -1,0 +1,22 @@
+{% extends "account/base_login.html" %}
+{% load i18n %}
+{% block head_title %} Max Participants Limit Reached {% endblock %}
+
+{% block inner %}
+
+    <div class="row" style="margin-top: 200px;">
+        <div class="col-md-1"></div>
+        <div class="col-md-10" style="background: white; padding: 30px; border-color: lightgray;
+                border-radius: 12px; border-width: 3px; border-style: groove;">
+
+            <h1 style="text-align: center;">{% trans "Maximum number of participants limit reached" %}</h1>
+            <br/>
+            <p>It seems we have reached the maximum number of participants allowed for this session.
+                If you think this is a mistake, {% include 'contact_admin.html' %}</p>
+
+        </div>
+        <div class="col-md-1"></div>
+    </div>
+
+
+{% endblock %}

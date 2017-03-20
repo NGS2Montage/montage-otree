@@ -6,9 +6,9 @@ logger = logging.getLogger(__name__)
 from channels import Group
 from channels.auth import channel_session_user
 
-from .models import ChatMessage
+# from .models import ChatMessage
 
-
+'''
 @channel_session_user
 def chat_consumer(message):
     # Save to model
@@ -29,3 +29,5 @@ def chat_consumer(message):
     Group("chat-%s" % room).send({
         "text": json.dumps(reply)
     })
+
+'''

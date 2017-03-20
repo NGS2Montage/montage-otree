@@ -1,0 +1,22 @@
+{% extends "account/base_login.html" %}
+{% load i18n %}
+{% block head_title %} No Consent {% endblock %}
+
+{% block inner %}
+
+    <div class="row" style="margin-top: 200px;">
+        <div class="col-md-2"></div>
+        <div class="col-md-8" style="background: white; padding: 30px; border-color: lightgray;
+                border-radius: 12px; border-width: 3px; border-style: groove;">
+
+            <h1 style="text-align: center;">{% trans "No Consent Given" %}</h1>
+            <br/>
+            <p>It seems you disagreed to the consent form. Since we do not have your consent, we can't let you play
+                the game. If you think this is a mistake, {% include 'contact_admin.html' %}</p>
+
+        </div>
+        <div class="col-md-2"></div>
+    </div>
+
+
+{% endblock %}

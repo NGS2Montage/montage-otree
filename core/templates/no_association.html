@@ -1,0 +1,21 @@
+{% extends "account/base_login.html" %}
+{% load i18n %}
+{% block head_title %} No Association {% endblock %}
+
+{% block inner %}
+
+    <div class="row" style="margin-top: 200px;">
+        <div class="col-md-2"></div>
+        <div class="col-md-8" style="background: white; padding: 30px; border-color: lightgray;
+                border-radius: 12px; border-width: 3px; border-style: groove;">
+
+            <h1 style="text-align: center;">{% trans "Account not associated with any session" %}</h1>
+            <br/>
+            <p>It seems your account is not associated with any session. {% include 'contact_admin.html' %}</p>
+
+        </div>
+        <div class="col-md-2"></div>
+    </div>
+
+
+{% endblock %}

@@ -2,9 +2,9 @@ from django.contrib.auth.models import User
 
 from rest_framework import serializers
 
-from .models import ChatMessage, Group
+# from .models import ChatMessage, Group
 
-
+'''
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
@@ -25,3 +25,4 @@ class ChatMessageSerializer(serializers.ModelSerializer):
         extra_kwargs = {
             'room': {'write_only': True}
         }
+'''

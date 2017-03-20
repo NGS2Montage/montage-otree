@@ -1,6 +1,8 @@
 from . import models
 from ._builtin import Page
 from django.contrib.auth.decorators import login_required
+from django.shortcuts import redirect
+from django.core.urlresolvers import reverse
 
 
 class LoginRequiredMixin(object):
@@ -14,6 +16,19 @@ class Consent(LoginRequiredMixin, Page):
     form_model = models.Player
     form_fields = ['consent']
     is_debug = False
+    timeout_submission = {'consent': False}
+
+    def before_next_page(self):
+        user_participant = self.request.user.userparticipantassociation
+
+        if self.player.consent is False:
+            user_participant.consent = False
+            user_participant.participant = None
+            user_participant.save()
+            self.participant.vars['consent'] = False
+        else:
+            user_participant.consent = True
+            user_participant.save()
 
 
 class ByeBye(LoginRequiredMixin, Page):
@@ -34,6 +49,21 @@ class Demographic(LoginRequiredMixin, Page):
                    "timezone", "timezone_access", "time_of_day", "hours_spent", "start_frequency", "location",
                    "location_other", "multitask", "multitask_yes", "hits", "number_of_studies", "participation_number"]
     is_debug = False
+    timeout_submission = {"age": 1, "income": "Less than $25,000", "sex": "Male", "marital_status": "single",
+                          "country_born": "Empty", "country_reside": "Empty", "year_moved": "0000",
+                          "highest_degree": "Not Sure", "speciality": "None", "employment_status": "Unable to work",
+                          "occupation": "None", "religious_preference": "Other", "other_religion": "None",
+                          "device_type": "None", "membership_duration": "0", "access_turk": "Other",
+                          "access_turk_other": "None", "timezone": "None", "timezone_access": "None",
+                          "time_of_day": "4am-8am; early morning", "hours_spent": "0", "start_frequency": "Weekly",
+                          "location": "Other", "location_other": "None", "multitask": "Yes", "multitask_yes": "None",
+                          "hits": "None", "number_of_studies": 0, "participation_number": 0}
+
+    def is_displayed(self):
+        if self.player.consent:
+            return True
+        else:
+            return False
 
     def error_message(self, values):
         err_messages = []
@@ -68,6 +98,10 @@ class Demographic(LoginRequiredMixin, Page):
             for err in err_messages[1:]:
                 err_string += "<li>"+err+"</li>"
             return err_string
+
+    def before_next_page(self):
+        if self.timeout_happened:
+            self.participant.vars['playing'] = False
 
 
 page_sequence = [

@@ -1,0 +1,12 @@
+{% extends "account/base_logout.html" %}
+
+{% load i18n %}
+{% block head_title %}{% trans "Account Created" %}{% endblock %}
+
+{% block inner %}
+    <h1>{% trans "Account Created" %}</h1>
+    <br/>
+    <p>{% trans 'Your account has been created now. Please login to continue' %}</p>
+    <a href="{% url 'redirect' %}" class="btn btn-primary" role="button">Login</a>
+{% endblock %}
+

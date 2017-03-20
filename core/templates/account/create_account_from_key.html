@@ -1,0 +1,33 @@
+{% extends "account/base_logout.html" %}
+
+{% load i18n %}
+{% load crispy_forms_tags %}
+{% block head_title %}{% trans "Create Account" %}{% endblock %}
+
+{% block inner %}
+    <h1>{% if token_fail %}{% trans "Bad Token" %}{% else %}{% trans "Create Account" %}{% endif %}</h1>
+    <br/>
+
+    {% if token_fail %}
+        {% url 'account_reset_password' as passwd_reset_url %}
+        <p>{% blocktrans %}The account creation link was invalid, possibly because it has already been used. {% endblocktrans %}</p>
+    {% else %}
+        {% if form %}
+
+            <p>Your username is: <b>{{ email }}</b></p>
+            <br/>
+
+            <form method="POST" action="." class="form-horizontal">
+                {% csrf_token %}
+                {% crispy form %}
+
+                <div class="form-group" style="text-align: center">
+                    <input type="submit" name="action" class="btn btn-primary" value="{% trans 'create account' %}"/>
+                </div>
+            </form>
+        {% else %}
+            <p>{% trans 'Your account is now created.' %}</p>
+        {% endif %}
+    {% endif %}
+{% endblock %}
+

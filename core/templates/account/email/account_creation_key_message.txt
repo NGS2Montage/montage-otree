@@ -1,0 +1,17 @@
+{% load i18n %}
+
+Hello from NGS2 Montage!
+
+We would like to invite you to participate in our game.
+
+To create an account, please click the link below:
+
+{{ account_creation_url }}
+
+{% if username %}{% blocktrans %}Your username is {{ username }}.{% endblocktrans %}
+{% endif %}
+
+Thank you.
+
+Regards,
+NGS2 Montage Team

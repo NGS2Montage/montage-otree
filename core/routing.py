@@ -1,6 +1,6 @@
 from channels.routing import route, include, route_class
 from anagrams.consumers import Demultiplexer
-from .consumers import chat_consumer
+# from .consumers import chat_consumer
 from otree.channels.routing import channel_routing
 
 # anagrams_routing = [
@@ -10,6 +10,7 @@ from otree.channels.routing import channel_routing
 
 # ]
 
+'''
 chat_routing = [
     route("chat-messages", chat_consumer),
 ]
@@ -20,3 +21,4 @@ channel_routing += [
     route_class(Demultiplexer, path=r"^/anagrams/"),
     include(chat_routing),
 ]
+'''
