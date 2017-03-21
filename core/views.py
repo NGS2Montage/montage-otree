@@ -34,9 +34,9 @@ class MyRedirectView(LoginRequiredMixin, RedirectView):
             self.url = reverse('no-association')
             return super(MyRedirectView, self).get(request, args, kwargs)
 
-        if user_association.consent is False:
-            self.url = reverse('no-consent')
-            return super(MyRedirectView, self).get(request, args, kwargs)
+        # if user_association.consent is False:
+        #     self.url = reverse('no-consent')
+        #     return super(MyRedirectView, self).get(request, args, kwargs)
 
         if user_association.participant is None:
             empty_participants = Participant.objects.filter(label__isnull=True,

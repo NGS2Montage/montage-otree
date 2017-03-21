@@ -1,0 +1,64 @@
+{% extends 'otree/WaitPage.html' %}
+{% load staticfiles otree_tags %}
+{% load i18n %}
+{% block title %}Wait Page{% endblock %}
+
+{% block body_main %}
+
+     <nav class="navbar navbar-default navbar-fixed-top" id="navbar_topdiv"
+         style="border-radius: 0px; background: rgb(241, 241, 241); border: 0px;">
+        <div class="container-fluid">
+            <div class="navbar-header col-md-4 text-center">
+                <a class="navbar-brand" href="{% url 'redirect' %}"
+                   style="margin-left: 20px; font-size: 180%; font-weight: bold; font-family: 'Times New Roman', Times, serif;">
+                    <b><span style="color: #EC4335;">N</span><span style="color: #34AA54;">G</span><span
+                            style="color: #4285F5;">S</span><span style="color: #F26722;">2</span>
+                        <span style="color: #34AA54;">Montage</span></b>
+                </a>
+            </div>
+            <div class="col-md-4" style="text-align: center; padding-top: 10px;">
+                {% block header_message %}
+                {% endblock %}
+            </div>
+            <div class="col-md-4">
+                <ul class="nav navbar-nav navbar-right" style="padding-right: 25px;">
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#"><span
+                                style="font-size:120%;">Welcome {{ user.first_name|title }}</span>
+                            <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="{% url 'account_change_password' %}" style="font-size:120%;">Change
+                                Password</a></li>
+                            <li><a href="{% url 'account_logout' %}" style="font-size:120%;">Logout</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div id="otree-wait-page-body" class="container">
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h2 id="otree-wait-page-title-text" class="panel-title" style="margin-top: 40px; margin-bottom: 10px;">{% block titletext %}{{ title_text }}{% endblock %}</h2>
+        </div>
+        <div class="panel-body">
+            <div id="otree-server-error" class="alert alert-danger" style="display:none">
+                {% blocktrans trimmed %}An error occurred. Please check the logs or ask the administrator for help.{% endblocktrans %}
+            </div>
+            <div id="error-traceback" class="alert alert-danger" style="display:none"></div>
+
+            {% include 'global/wait_progress_bar.html' %}
+
+            {% block content %}
+            <p id="otree-wait-page-body-text">{{ body_text }}</p>
+            {% endblock %}
+        </div>
+    </div>
+    {% if view.is_debug %}
+        {% include 'otree/includes/debug_info.html' %}
+    {% endif %}
+</div>
+
+
+{% endblock %}

@@ -1,8 +1,7 @@
 from . import models
 from ._builtin import Page
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import redirect
-from django.core.urlresolvers import reverse
+import floppyforms.__future__ as forms
 
 
 class LoginRequiredMixin(object):
@@ -12,27 +11,25 @@ class LoginRequiredMixin(object):
         return login_required(view)
 
 
-class Consent(LoginRequiredMixin, Page):
+class Consent(Page):
     form_model = models.Player
     form_fields = ['consent']
     is_debug = False
     timeout_submission = {'consent': False}
+    template_name = 'demographic/consent.html'
 
     def before_next_page(self):
-        user_participant = self.request.user.userparticipantassociation
+        if self.timeout_happened:
+            self.participant.vars['consent'] = False
+            self.participant.vars['playing'] = False
 
         if self.player.consent is False:
-            user_participant.consent = False
-            user_participant.participant = None
-            user_participant.save()
             self.participant.vars['consent'] = False
-        else:
-            user_participant.consent = True
-            user_participant.save()
 
 
-class ByeBye(LoginRequiredMixin, Page):
+class ByeBye(Page):
     is_debug = False
+    template_name = 'demographic/byebye.html'
 
     def is_displayed(self):
         if self.player.consent:
@@ -41,8 +38,9 @@ class ByeBye(LoginRequiredMixin, Page):
             return True
 
 
-class Demographic(LoginRequiredMixin, Page):
+class Demographic(Page):
     form_model = models.Player
+    template_name = 'demographic/demographic.html'
     form_fields = ["age", "income", "sex", "marital_status", "country_born", "country_reside", "year_moved",
                    "highest_degree", "speciality", "employment_status", "occupation", "religious_preference",
                    "other_religion", "device_type", "membership_duration", "access_turk", "access_turk_other",
@@ -60,7 +58,7 @@ class Demographic(LoginRequiredMixin, Page):
                           "hits": "None", "number_of_studies": 0, "participation_number": 0}
 
     def is_displayed(self):
-        if self.player.consent:
+        if self.participant.vars['consent'] and self.participant.vars['playing']:
             return True
         else:
             return False
@@ -94,9 +92,10 @@ class Demographic(LoginRequiredMixin, Page):
         if len(err_messages) == 1:
             return err_messages[0]
         if len(err_messages) > 1:
-            err_string = err_messages[0]
-            for err in err_messages[1:]:
-                err_string += "<li>"+err+"</li>"
+            err_string = err_messages[-1]
+            for err in err_messages[:-1]:
+                e = forms.ValidationError(err)
+                self.form.add_error(None, e)
             return err_string
 
     def before_next_page(self):
@@ -107,5 +106,5 @@ class Demographic(LoginRequiredMixin, Page):
 page_sequence = [
     Consent,
     ByeBye,
-    Demographic
+    # Demographic
 ]

@@ -150,8 +150,9 @@ SESSION_CONFIGS = [
     {
         'name': 'begin',
         'display_name': 'Begin',
-        'num_demo_participants': 6,
-        'app_sequence': ['demographic', 'instructions'],
+        'num_demo_participants': 4,
+        'app_sequence': ['demographic', 'anagrams_waiting', 'public_goods_waiting', 'ultimatum_waiting', 'public_goods', 'ultimatum'],
+        'participation_money': 0.05,
     },
     {
         'name': 'ultimatum',

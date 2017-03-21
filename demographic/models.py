@@ -2,7 +2,6 @@ from otree.api import (
     models, widgets, BaseConstants, BaseSubsession, BaseGroup, BasePlayer,
     Currency as c, currency_range
 )
-from django.utils.safestring import mark_safe
 
 author = 'Parang'
 
@@ -18,7 +17,13 @@ class Constants(BaseConstants):
 
 
 class Subsession(BaseSubsession):
-    pass
+    def before_session_starts(self):
+        for player in self.get_players():
+            player.participant.vars['consent'] = True
+            player.participant.vars['playing'] = True
+            player.participant.vars['locked'] = False
+            player.participant.vars['money_earned'] = self.session.config['participation_money']
+        self.session.vars['locked'] = False
 
 
 class Group(BaseGroup):
@@ -31,11 +36,10 @@ class Player(BasePlayer):
     )
 
     income = models.CharField(
-        verbose_name="What is your household income (answer in USD; conversion tool: "
-                     "<a href=\'https://www.google.com/finance/converter\'>Currency Converter</a>)?",
+        verbose_name="What is your household income (answer in USD)",
         choices=["Less than $25,000", "$25,000 - $49,999", "$50,000 - $74,999", "$75,000 - $99,999",
                  "$100,000 - $124,999", "$125,000 - $149,999", "Greater than $150,000"],
-        widget=widgets.RadioSelect()
+        widget=widgets.RadioSelect(),
     )
 
     sex = models.CharField(
@@ -97,7 +101,7 @@ class Player(BasePlayer):
         verbose_name="What type of device are you using to complete this task (tablet, desktop, laptop, phone, etc)?"
     )
 
-    membership_duration = models.CharField(
+    membership_duration = models.PositiveIntegerField(
         verbose_name="How long have you been a member of Amazon Mechanical Turk (in years)?"
     )
 
@@ -126,7 +130,7 @@ class Player(BasePlayer):
         widget=widgets.RadioSelect()
     )
 
-    hours_spent = models.CharField(
+    hours_spent = models.PositiveIntegerField(
         verbose_name="How long do you usually spend during a session using Amazon Mechanical Turk? (in hours)",
     )
 

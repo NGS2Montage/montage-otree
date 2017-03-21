@@ -1,0 +1,22 @@
+{% extends "global/WaitPage.html" %}
+{% load staticfiles otree_tags %}
+
+{% block head_title %} Please Wait - Phase I {% endblock %}
+{% block titletext %}Waiting for all participants to arrive{% endblock %}
+
+{% block content %}
+
+    <p>
+        While you are waiting, please read the game instructions below:
+    </p>
+
+
+    {% include 'instructions/instructions_anagram.html' %}
+
+    {% include 'instructions/anagrams_youtube.html' %}
+
+{% endblock %}
+
+{% block scripts %}
+    <script type="text/javascript" src="{% static 'js/hide_panel.js' %}"></script>
+{% endblock %}

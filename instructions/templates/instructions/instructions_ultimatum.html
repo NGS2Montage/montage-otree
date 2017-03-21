@@ -1,0 +1,74 @@
+<!-- Instructions WELL : START -->
+    <div class="row" style="margin-top: 25px;">
+        <div class="col-md-12" style="padding-left: 5px; padding-right: 5px;">
+            <div class="well heading-well text-center" style="padding: 10px;">
+                <div style="float:right">
+                                <span class="glyphicon glyphicon-minus" id="instructionsControlGlyph"
+                                      onclick="hide_panel('instructionsDiv', 'instructionsControlGlyph');">
+                                </span>
+                </div>
+                <b><span style="color: rgb(34, 34, 34); font-family: Arial, sans-serif; font-weight: bold;
+                font-size: 120%;">Instructions</span></b>
+            </div>
+        </div>
+    </div>
+    <!-- Instructions WELL : END -->
+
+    <!-- Instructions DIV : START -->
+    <div class="row" id="instructionsDiv" style="margin-top: 0px;">
+        <div class="col-md-12">
+            <p>
+                The final phase of the project is the most detailed. Your team now has the opportunity to earn an
+                additional sum of money on top of the results of the first two games. Two teams will be selected, and an
+                additional amount of money, <span style="color:red">$[xx]</span>, will be given to one of the teams at random. This will be called the
+                <b><i>offeror team</i></b>. The offeror team will be given the opportunity to then communicate among themselves and
+                determine how much, if any, of this money that they would like to give to the other team, <b><i>the responder</i></b>
+                team. Communication works as it did in phase 1 among neighbors within the team. Initially, every
+                member of your team will determine a percentage to offer. Then, you and all members of the team will
+                view their neighbors’ offer choices and provide feedback on whether or not you think that you neighbors
+                should raise or lower their offer. Meanwhile, the responder team will be communicating using the same
+                mechanism to determine the minimum percentage level that they are willing to accept. After a set amount
+                of time, <span style="color:red">[5]</span> minutes, each member of each team must vote for the percentage they would like to see
+                offered or received. Consensus will be assumed to be the simple average of all of the responses. This
+                process may be repeated so that your team can interact multiple times to try to establish a consensus
+                choice.
+            </p>
+
+            <p>
+                The outcome will be determined based on the average thresholds of each group. If the offeror team offers
+                a higher or equal percentage than the responder team, the transaction is made and both sides receive the
+                requisite additional income. If, however, the offeror team’s percentage is lower than the responder
+                group’s threshold, the deal does not occur and both sides forfeit the money; that is, both teams receive
+                nothing.
+            </p>
+
+            <p>
+                <b><i>Example.</i></b><br/>
+                Assume that the offeror team receives $20 additional funds in phase 3. After 5 minutes, the group can
+                each adjust the percentage that they think should be given to the other team. However, after the 5 minutes,
+                each member of the team must vote. Let’s say the average of the votes is 10% of the additional funds
+                should be offered to the responder team, or $2.
+            </p>
+
+            <p>
+                The responder team will have meanwhile deliberated in the same way:
+            </p>
+
+            <p>
+                <b>Case 1</b>. If their minimum percentage average of the responder team is 12%, the deal will <b><i>not</i></b> go through,
+                because 10% &lt; 12%. The responder team wants a higher percentage than the offeror team is willing to
+                give.
+            </p>
+
+            <p>
+                <b>Case 2</b>. If their minimum percentage average is 8%, the deal will go through and the offeror team <b><i>will</i></b>
+                receive $18 to distribute amongst the offeror team, and the responder team will receive $2 to split
+                amongst its team members.
+            </p>
+
+            <p>
+                All choices, once made are final. The next screen will give a few examples to illustrate this process.
+            </p>
+        </div>
+    </div>
+    <!-- Instructions DIV : END -->

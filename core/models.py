@@ -14,7 +14,7 @@ class UserParticipantAssociation(models.Model):
     session_name = models.CharField(max_length=255)
     participant = models.OneToOneField(Participant, null=True)
     money_earned = models.DecimalField(default=0, max_digits=6, decimal_places=2)
-    consent = models.NullBooleanField(null=True)
+    # consent = models.NullBooleanField(null=True)
 
     def __str__(self):
         return u'user={} session={}-{} participant={}'.format(self.user.username, self.session, self.session_name,

@@ -10,14 +10,28 @@ class LoginRequiredMixin(object):
         return login_required(view)
 
 
-class Introduction(LoginRequiredMixin, Page):
+class Introduction(Page):
     is_debug = False
+    template_name = 'instructions/introduction.html'
+
+    def is_displayed(self):
+        if self.participant.vars['consent'] and self.participant.vars['playing']:
+            return True
+        else:
+            return False
 
 
-class InstructionsAnagram(LoginRequiredMixin, Page):
+class InstructionsPhase1(Page):
     form_model = models.Player
     form_fields = ['anagram_hidden']
     is_debug = False
+
+    def is_displayed(self):
+        if self.participant.vars['consent'] and self.participant.vars['playing'] and \
+                        'anagrams' in self.session.config['app_sequence']:
+            return True
+        else:
+            return False
 
     def error_message(self, values):
         question1_str = "__".join(self.request.POST.getlist('question1[]'))
@@ -46,11 +60,23 @@ class InstructionsAnagram(LoginRequiredMixin, Page):
             self.player.anagram_question4 = question4_str
             self.player.anagram_score = score
 
+    def before_next_page(self):
+        if self.timeout_happened:
+            self.participant.vars['playing'] = False
 
-class InstructionsPublicGoods(LoginRequiredMixin, Page):
+
+
+class InstructionsPhase2(Page):
     form_model = models.Player
     form_fields = ['public_goods_hidden']
     is_debug = False
+
+    def is_displayed(self):
+        if self.participant.vars['consent'] and self.participant.vars['playing'] and \
+                        'public_goods' in self.session.config['app_sequence']:
+            return True
+        else:
+            return False
 
     def error_message(self, values):
         question1_str = "__".join(self.request.POST.getlist('question1[]'))
@@ -66,11 +92,22 @@ class InstructionsPublicGoods(LoginRequiredMixin, Page):
             self.player.public_goods_question1 = question1_str
             self.player.public_goods_score = score
 
+    def before_next_page(self):
+        if self.timeout_happened:
+            self.participant.vars['playing'] = False
 
-class InstructionsUltimatum(LoginRequiredMixin, Page):
+
+class InstructionsPhase3(Page):
     form_model = models.Player
     form_fields = ['ultimatum_question1']
     is_debug = False
+
+    def is_displayed(self):
+        if self.participant.vars['consent'] and self.participant.vars['playing'] and \
+                        'ultimatum' in self.session.config['app_sequence']:
+            return True
+        else:
+            return False
 
     def error_message(self, values):
         question2_str = "__".join(self.request.POST.getlist('question2[]'))
@@ -101,10 +138,14 @@ class InstructionsUltimatum(LoginRequiredMixin, Page):
             self.player.ultimatum_question5 = question5_str
             self.player.ultimatum_score = score
 
+    def before_next_page(self):
+        if self.timeout_happened:
+            self.participant.vars['playing'] = False
+
 
 page_sequence = [
     Introduction,
-    InstructionsAnagram,
-    InstructionsPublicGoods,
-    InstructionsUltimatum
+    InstructionsPhase1,
+    InstructionsPhase2,
+    InstructionsPhase3
 ]

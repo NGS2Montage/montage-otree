@@ -78,5 +78,6 @@ class Player(BasePlayer):
     ultimatum_question3_solution = models.CharField(choices=["a__d"])
     ultimatum_question4_solution = models.CharField(choices=["b"])
     ultimatum_question5_solution = models.CharField(choices=["a"])
+    ultimatum_hidden = models.IntegerField()
     ultimatum_score = models.IntegerField()
 

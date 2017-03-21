@@ -11,91 +11,9 @@
 
 {% block content %}
 
-    <!-- YouTube WELL : START -->
-    <div class="row" style="margin-top: 5px;">
-        <div class="col-md-12" style="padding-left: 5px; padding-right: 5px;">
-            <div class="well heading-well text-center" style="padding: 10px;">
-                <div style="float:right">
-                                <span class="glyphicon glyphicon-minus" id="youtubeControlGlyph"
-                                      onclick="hide_panel('youtubeDiv', 'youtubeControlGlyph');">
-                                </span>
-                </div>
-                <b><span style="color: rgb(34, 34, 34); font-family: Arial, sans-serif; font-weight: bold;
-                font-size: 120%;">Video Tutorial</span></b>
-            </div>
-        </div>
-    </div>
-    <!-- YouTube WELL : END -->
+    {% include 'instructions/anagrams_youtube.html' %}
 
-    <!-- YouTube DIV : START -->
-    <div class="row" id="youtubeDiv" style="margin-top: 0px;">
-        <div class="col-md-12" style="text-align: center;">
-            <iframe width="80%" height="315" src="https://www.youtube.com/embed/fjCCmiiY0YY" frameborder="0"
-                    allowfullscreen></iframe>
-        </div>
-    </div>
-    <!-- YouTube DIV : END -->
-
-    <!-- Instructions WELL : START -->
-    <div class="row" style="margin-top: 25px;">
-        <div class="col-md-12" style="padding-left: 5px; padding-right: 5px;">
-            <div class="well heading-well text-center" style="padding: 10px;">
-                <div style="float:right">
-                                <span class="glyphicon glyphicon-minus" id="instructionsControlGlyph"
-                                      onclick="hide_panel('instructionsDiv', 'instructionsControlGlyph');">
-                                </span>
-                </div>
-                <b><span style="color: rgb(34, 34, 34); font-family: Arial, sans-serif; font-weight: bold;
-                font-size: 120%;">Instructions</span></b>
-            </div>
-        </div>
-    </div>
-    <!-- Instructions WELL : END -->
-
-    <!-- Instructions DIV : START -->
-    <div class="row" id="instructionsDiv">
-        <div class="col-md-12">
-            <p>
-                You have been placed in a team of <span style="color:red;">[sample size]</span> members, and every team member including you is able
-                to communicate with a certain number of other members called neighbors, also participating in this
-                exercise. The objective is to form as many words as possible as a group. Words that have been formed by
-                every member of the group will appear in the screen before you. You may also request letters from your
-                neighbors. Your payout will be based on the performance of the entire team (that is, all individuals). You
-                will be able to submit a single word only once, but duplicate words are allowed within the team. Your
-                team’s reward/payment will increase as the number of words submitted by multiple team members
-                increases. For example, if Player A submits the word "bag," then the team benefits more by Player B
-                submitting "bag" than if Player B submits "gab."
-            </p>
-
-            <p>
-                You will interact only with your neighbors, but all members of the team are playing the same game, using
-                the same directions. You and your neighbors that you interact with is your <b><i>neighborhood</i></b>.
-            </p>
-
-            <p>
-                Your neighborhood will be provided with tiles, with a letter written on each tile. Your neighborhood has
-                to form as many words with at least 3 letters as you can with these letters in <span style="color:red;">[4]</span> minutes. The money you
-                earn will depend on the number of words found by the entire team. If your neighborhood finds <span style="color:red;">[12]</span>
-                words, your neighborhood will earn <span style="color:red;">$12</span> (which will be divided equally among the members of the entire
-                team). For each additional word (beyond <span style="color:red;">12</span>) your neighborhood finds, the group will receive an extra <span style="color:red;">$1</span>
-                that will be also divided equally among all the members of the entire team. So, the greater the number of
-                words your neighborhood finds, the more money everyone on the team will make.
-            </p>
-
-            <p>
-                Throughout the game you will most likely receive requests for letters from your neighbors. When a
-                request is made, you have the ability to copy your letter and pass it to your neighbor. Likewise, you have
-                the ability to ask your neighbor to copy letters for you in order to form words. There is no penalty for
-                copying letters, but this operation can only be performed <span style="color:red;">[X]</span> times per letter that you choose to share.
-            </p>
-
-            <p>
-                For constructed words, proper names are not allowed. Plurals are allowed. Verbal conjugation is allowed.
-            </p>
-        </div>
-    </div>
-    <!-- Instructions DIV : END -->
-
+    {% include 'instructions/instructions_anagram.html' %}
 
     <!-- Quiz WELL : START -->
     <div class="row" style="margin-top: 25px;">
@@ -223,25 +141,6 @@
 
 
 {% block scripts %}
-    <script>
-        function hide_panel(divId, glyphId) {
-            if (!document.getElementById(divId)) {
-                alert("Given Div Id : " + divId + " Doesn't Exist.");
-                return
-            }
-            if (!document.getElementById(glyphId)) {
-                alert("Given glyph Id : " + glyphId + " Doesn't Exist.");
-                return
-            }
-            if (document.getElementById(glyphId).className == 'glyphicon glyphicon-minus') {
-                document.getElementById(divId).style.display = 'none';
-                document.getElementById(glyphId).className = 'glyphicon glyphicon-plus';
-            }
-            else {
-                document.getElementById(divId).style.display = 'block';
-                document.getElementById(glyphId).className = 'glyphicon glyphicon-minus';
-            }
-        }
-    </script>
+    <script type="text/javascript" src="{% static 'js/hide_panel.js' %}"></script>
 {% endblock %}
 

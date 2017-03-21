@@ -47,6 +47,8 @@ def main(emails_file, session_name):
     with codecs.open(emails_file, encoding='utf8', mode='r') as infile:
         for line in infile:
             email = line.strip()
+            if email == "":
+                continue
             try:
                 u = User.objects.get(email=email)
                 if not u.is_active:
