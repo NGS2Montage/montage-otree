@@ -37,4 +37,11 @@
     <br/>
     {% next_button %}
 
+    {% include 'instructions/instructions_public_goods.html' %}
+    {% include 'instructions/public_goods_youtube.html' %}
+
+{% endblock %}
+
+{% block scripts %}
+    <script type="text/javascript" src="{% static 'js/hide_panel.js' %}"></script>
 {% endblock %}

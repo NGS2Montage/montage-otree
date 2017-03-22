@@ -2,20 +2,65 @@
 {% load staticfiles otree_tags %}
 
 {% block head_title %}
-    NGS2 Montage Instructions
+    Phase 2: Results
 {% endblock %}
 
-{% block title %} NGS2 Montage Instructions {% endblock %}
+{% block title %} Phase 2: Results {% endblock %}
+
+{% block styles %}
+    <style>
+        table {
+            border: 1px solid #eeeeee;
+            border-collapse: collapse;
+        }
+
+        th {
+            border: 1px solid #eeeeee;
+            border-collapse: collapse;
+            padding: 10px;
+            text-align: left;
+            width:60%;
+        }
+
+        td {
+            border: 1px solid #eeeeee;
+            border-collapse: collapse;
+            padding: 10px;
+            text-align: center;
+        }
+    </style>
+{% endblock %}
 
 {% block content %}
 
-   <p>
-        You started with an endowment of {{ Constants.endowment }},
-        of which you contributed {{ player.contribution }}.
-        Your group contributed {{ group.total_contribution }},
-        resulting in an individual share of {{ group.individual_share }}.
-        Your profit is therefore {{ player.profit }}.
-    </p>
+    <table style="width: 60%">
+        <tr>
+            <th>Initial Endowment</th>
+            <td>{{ Constants.endowment }}</td>
+        </tr>
+        <tr>
+            <th>Your Contribution</th>
+            <td>{{ player.contribution }}</td>
+        </tr>
+        <tr>
+            <th>Your Group's Total Contribution </th>
+            <td>{{ subsession.total_contribution }}</td>
+        </tr>
+        <tr>
+            <th>Multiplication Factor</th>
+            <td>{{ Constants.efficiency_factor }}</td>
+        </tr>
+        <tr>
+            <th>Individual Earnings</th>
+            <td>{{ subsession.individual_share }}</td>
+        </tr>
+        <tr>
+            <th>Your Profit (or loss)</th>
+            <td>{{ player.profit }}</td>
+        </tr>
+
+    </table>
+
 
     <br/>
     {% next_button %}

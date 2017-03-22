@@ -22,9 +22,10 @@ class Consent(Page):
         if self.timeout_happened:
             self.participant.vars['consent'] = False
             self.participant.vars['playing'] = False
-
+            self.participant.vars['clicked'] = False
         if self.player.consent is False:
             self.participant.vars['consent'] = False
+
 
 
 class ByeBye(Page):

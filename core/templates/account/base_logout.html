@@ -7,6 +7,36 @@
 
 {% block css %}
     {{ block.super }}
+    <style>
+
+    html {
+  position: relative;
+  min-height: 100%;
+}
+body {
+  /* Margin bottom by footer height */
+  margin-bottom: 60px;
+}
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  /* Set the fixed height of the footer here */
+  height: 50px;
+  background-color: white;
+}
+
+    .navbar-nav > li > a, .navbar-brand {
+            padding-top:10px !important; padding-bottom:10px !important;
+            height: 40px;
+         }
+        .navbar {
+            min-height:30px !important;
+            margin-bottom: 0px;
+
+        }
+
+    </style>
 {% endblock %}
 
 
@@ -19,7 +49,7 @@
         <div class="container-fluid">
             <div class="navbar-header col-md-5 text-center">
                 <a class="navbar-brand" href="{% url 'account_logout' %}"
-                   style="margin-left: 20px; font-size: 180%; font-weight: bold; font-family: 'Times New Roman', Times, serif;">
+                   style="margin-left: 20px; font-size: 150%; font-weight: bold; font-family: 'Times New Roman', Times, serif;">
                     <b><span style="color: #EC4335;">N</span><span style="color: #34AA54;">G</span><span
                             style="color: #4285F5;">S</span><span style="color: #F26722;">2</span>
                         <span style="color: #34AA54;">Montage</span></b>
@@ -33,7 +63,7 @@
     {% block container %}
         <div class="container">
 
-            <div class="row" style="margin-top: 150px;">
+            <div class="row" style="margin-top: 70px;">
                 <div class="col-md-3"></div>
                 <div class="col-md-6" style="background: white; padding: 30px; border-color: lightgray;
                 border-radius: 12px; border-width: 3px; border-style: groove;">
@@ -48,6 +78,28 @@
 
     {% block modal %}{% endblock modal %}
 
+   <!-- FOOTER : START -->
+
+    <footer class="footer">
+        <div class="container-fluid" style="padding-left: 15px; padding-right: 15px;">
+            <div class="row" id="footer_div"
+         style="padding-top: 10px; border-top: solid 1px rgba(0, 0, 0, .14902); margin: 0px 0px 0px 0px; background: white;">
+        <div class="col-md-12 text-center" style="font-size: 85%;">
+            <p style="margin-bottom: 0px;">
+                Copyright © 2017 - 2018 <a href="http://dac.cs.vt.edu/">Discovery Analytics Center</a>.
+                All rights reserved.
+            </p>
+
+            <p style="margin-top: -2px; margin-bottom: 5px;">
+                Developed by <a href="http://people.cs.vt.edu/parang/">Parang Saraf</a> and
+                <a href="http://dac.cs.vt.edu/person/nathan-self/">Nathan Self</a>.
+            </p>
+        </div>
+    </div>
+        </div>
+    </footer>
+
+    <!-- FOOTER: END -->
     </body>
 
 {% endblock body %}

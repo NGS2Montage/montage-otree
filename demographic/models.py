@@ -22,6 +22,7 @@ class Subsession(BaseSubsession):
             player.participant.vars['consent'] = True
             player.participant.vars['playing'] = True
             player.participant.vars['locked'] = False
+            player.participant.vars['clicked'] = True
             player.participant.vars['money_earned'] = self.session.config['participation_money']
         self.session.vars['locked'] = False
 
