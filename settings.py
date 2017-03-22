@@ -151,8 +151,12 @@ SESSION_CONFIGS = [
         'name': 'begin',
         'display_name': 'Begin',
         'num_demo_participants': 4,
-        'app_sequence': ['demographic', 'public_goods_waiting', 'public_goods', 'ultimatum'],
+        'app_sequence': ['demographic', 'ultimatum'],
         'participation_money': 0.05,
+        'ultimatum_split': False,
+        'ultimatum_player_role': 'receiver',  # Applicable only if 'ultimatum_split' is False
+        'ultimatum_cutoff': 50,  # Applicable only if 'ultimatum_split' is False
+        'ultimatum_group_size': 2
     },
     {
         'name': 'ultimatum',

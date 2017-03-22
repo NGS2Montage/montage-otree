@@ -8,27 +8,50 @@
 {% block title %} Initial Offer {% endblock %}
 
 {% block content %}
-
+    {% if player.player_role == 'offeror' %}
     <p>
         Welcome, {{ user.first_name | title }}! You now have 3 minutes to decide how much do you want to offer to the
         other team. Also, make a guess for how much the other team is expecting to receive. Please enter the amount
         in the boxes below and click next in order to submit
     </p>
+    {% else %}
+        <p>
+        Welcome, {{ user.first_name | title }}! You now have 3 minutes to decide how much are you expecting to receive
+        from the other team. Also, make a guess for how much the other team is expecting to offer. Please enter the amount
+        in the boxes below and click next in order to submit
+    </p>
+    {% endif %}
 
-    <h2>Your Role: {{ player.player_role | title }}</h2>
+    <h3>Your Role: {{ player.player_role | title }}</h3>
 
     <div class="row" style="margin-top: 20px;">
         <div class="col-md-1"></div>
-        <div class="col-md-5" style="height: 300px; background: #eeeeee; padding: 50px; border-color: lightgray;
+        <div class="col-md-5" style="height: 300px; background: #eeeeee; padding: 30px; border-color: lightgray;
                 border-radius: 12px; border-width: 3px; border-style: groove; text-align: center;">
 
-            {% formfield player.initial_offered_amount %}
+            {% if player.player_role == 'offeror' %}
+            <h4>Choose an amount you would like to offer:</h4>
+            {% else %}
+            <h4>What do you think 'offerors' will offer?</h4>
+            {% endif %}
+                (choose a number between 0 and 100)<br/>
+            <div class="col-xs-2" style="display: inline-block; margin-top: 60px; margin-left: 70px;" >
+                <input type="number" name="initial_offered_amount" id="id_initial_offered_amount" class="input-lg">
+            </div>
 
         </div>
-        <div class="col-md-5" style="height: 300px; background: #eeeeee; padding: 50px; border-color: lightgray;
+        <div class="col-md-5" style="height: 300px; background: #eeeeee; padding: 30px; border-color: lightgray;
                 border-radius: 12px; border-width: 3px; border-style: groove; text-align: center; margin-left: 50px;">
 
-            {% formfield player.initial_receiver_expectation %}
+            {% if player.player_role == 'offeror' %}
+            <h4>What do you think 'receivers' are expecting?:</h4>
+            {% else %}
+            <h4>How much are you expecting to receive?</h4>
+            {% endif %}
+                (choose a number between 0 and 100)<br/>
+            <div class="col-xs-2" style="display: inline-block; margin-top: 60px; margin-left: 70px;" >
+                <input type="number" name="initial_receiver_expectation" id="id_initial_receiver_expectation" class="input-lg">
+            </div>
 
         </div>
     </div>
@@ -36,4 +59,11 @@
     <br/>
     {% next_button %}
 
+    {% include 'instructions/instructions_ultimatum.html' %}
+    {% include 'instructions/ultimatum_youtube.html' %}
+
+{% endblock %}
+
+{% block scripts %}
+    <script type="text/javascript" src="{% static 'js/hide_panel.js' %}"></script>
 {% endblock %}

@@ -12,20 +12,15 @@ class LoginRequiredMixin(object):
         return login_required(view)
 
 
-class DifiIndex(Page):
+class WaitPage(WaitPage):
     is_debug = False
-    form_model = models.Player
-    form_fields = ['distanceScale', 'overlapScale']
+    template_name = 'public_goods/WaitPage.html'
 
-    def is_displayed(self):
-        if self.participant.vars['consent'] and self.participant.vars['playing'] and self.participant.vars['locked']:
-            return True
-        else:
-            return False
-
-    def before_next_page(self):
-        if self.timeout_happened:
-            self.participant.vars['playing'] = False
+    def after_all_players_arrive(self):
+        for participant in self.session.get_participants():
+            if participant.vars['consent'] and participant.vars['playing']:
+                participant.vars['locked'] = True
+        self.session.vars['locked'] = True
 
 
 class Contribute(Page):
@@ -93,7 +88,24 @@ class NoResponse(Page):
             return False
 
 
+class DifiIndex(Page):
+    is_debug = False
+    form_model = models.Player
+    form_fields = ['distanceScale', 'overlapScale']
+
+    def is_displayed(self):
+        if self.participant.vars['consent'] and self.participant.vars['playing'] and self.participant.vars['locked']:
+            return True
+        else:
+            return False
+
+    def before_next_page(self):
+        if self.timeout_happened:
+            self.participant.vars['playing'] = False
+
+
 page_sequence = [
+    WaitPage,
     Contribute,
     ResultsWaitPage,
     Results,
