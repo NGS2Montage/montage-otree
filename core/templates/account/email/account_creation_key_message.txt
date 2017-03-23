@@ -10,7 +10,6 @@ To create an account, please click the link below:
 
 {% if username %}{% blocktrans %}Your username is {{ username }}.{% endblocktrans %}
 {% endif %}
-
 Thank you.
 
 Regards,
