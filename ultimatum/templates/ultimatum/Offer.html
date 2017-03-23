@@ -25,9 +25,9 @@
     <h3>Your Role: {{ player.player_role | title }}</h3>
 
     <div class="row" style="margin-top: 20px;">
-        <div class="col-md-1"></div>
+
         <div class="col-md-5" style="height: 300px; background: #eeeeee; padding: 30px; border-color: lightgray;
-                border-radius: 12px; border-width: 3px; border-style: groove; text-align: center;">
+                border-radius: 12px; border-width: 3px; border-style: groove; text-align: center; margin-left: 60px;">
 
             {% if player.player_role == 'offeror' %}
             <h4>Choose an amount you would like to offer:</h4>
@@ -56,8 +56,9 @@
         </div>
     </div>
 
-    <br/>
-    {% next_button %}
+    <br/><br/>
+
+    <div style="text-align: center">{% next_button %}</div>
 
     {% include 'instructions/instructions_ultimatum.html' %}
     {% include 'instructions/ultimatum_youtube.html' %}

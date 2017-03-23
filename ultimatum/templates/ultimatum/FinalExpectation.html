@@ -1,0 +1,49 @@
+{% extends "global/Page.html" %}
+{% load staticfiles otree_tags %}
+
+{% block head_title %}
+    Final Receiver Expectation
+{% endblock %}
+
+{% block title %} Final Receiver Expectation {% endblock %}
+
+{% block content %}
+
+    <p>
+        {{ user.first_name | title }}, you now have 3 minutes to decide what is the final amount you are expecting to
+        receive from the other team. Please enter the amount in the box below and click next in order to submit.
+    </p>
+
+
+    <h3>Your Role: {{ player.player_role | title }}</h3>
+
+    <div class="row" style="margin-top: 20px;">
+
+        <div class="col-md-3"></div>
+
+        <div class="col-md-6" style="height: 300px; background: #eeeeee; padding: 30px; border-color: lightgray;
+                border-radius: 12px; border-width: 3px; border-style: groove; text-align: center;">
+
+            <h4>Final amount you are expecting to receive:</h4>
+                (choose a number between 0 and 100)<br/>
+
+            <div class="col-xs-2" style="display: inline-block; margin-top: 60px; margin-left: 120px;" >
+                <input type="number" name="final_receiver_expectation" id="id_final_receiver_expectation" class="input-lg">
+            </div>
+
+        </div>
+        <div class="col-md-3"></div>
+    </div>
+
+    <br/><br/>
+
+    <div style="text-align: center">{% next_button %}</div>
+
+    {% include 'instructions/instructions_ultimatum.html' %}
+    {% include 'instructions/ultimatum_youtube.html' %}
+
+{% endblock %}
+
+{% block scripts %}
+    <script type="text/javascript" src="{% static 'js/hide_panel.js' %}"></script>
+{% endblock %}

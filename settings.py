@@ -154,9 +154,10 @@ SESSION_CONFIGS = [
         'app_sequence': ['demographic', 'ultimatum'],
         'participation_money': 0.05,
         'ultimatum_split': False,
-        'ultimatum_player_role': 'receiver',  # Applicable only if 'ultimatum_split' is False
+        'ultimatum_player_role': 'offeror',  # Applicable only if 'ultimatum_split' is False
         'ultimatum_cutoff': 50,  # Applicable only if 'ultimatum_split' is False
-        'ultimatum_group_size': 2
+        'ultimatum_group_size': 3,
+        'ultimatum_histogram': True
     },
     {
         'name': 'ultimatum',

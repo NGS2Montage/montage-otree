@@ -1,13 +1,83 @@
 {% extends "global/Page.html" %}
 {% load staticfiles otree_tags %}
 
-{% block title %}
-    Page title
+{% block head_title %}
+    Phase 3: Results
+{% endblock %}
+
+{% block title %} Phase 3: Results {% endblock %}
+
+{% block styles %}
+    <style>
+        table {
+            border: 1px solid #eeeeee;
+            border-collapse: collapse;
+        }
+
+        th {
+            border: 1px solid #eeeeee;
+            border-collapse: collapse;
+            padding: 10px;
+            text-align: left;
+            width: 60%;
+        }
+
+        td {
+            border: 1px solid #eeeeee;
+            border-collapse: collapse;
+            padding: 10px;
+            text-align: center;
+        }
+    </style>
 {% endblock %}
 
 {% block content %}
 
+    <table style="width: 60%">
+        <tr>
+            <th>Your Role</th>
+            <td>{{ player.player_role | title }}</td>
+        </tr>
+        <tr>
+            <th>Initial Endowment</th>
+            <td>{{ Constants.endowment }}</td>
+        </tr>
+
+        {% if player.player_role == 'offeror' %}
+            <tr>
+                <th>Your Offer</th>
+                <td>{{ player.final_offered_amount }}</td>
+            </tr>
+            <tr>
+                <th>Your Team's Average Offer</th>
+                <td>{{ subsession.offerors_average }}</td>
+            </tr>
+            <tr>
+                <th>Receiving Team's Average Expectation</th>
+                <td>{{ subsession.receivers_average }}</td>
+            </tr>
+        {% else %}
+            <tr>
+                <th>Your Expectation</th>
+                <td>{{ player.final_receiver_expectation }}</td>
+            </tr>
+            <tr>
+                <th>Your Team's Average Expectation</th>
+                <td>{{ subsession.receivers_average }}</td>
+            </tr>
+            <tr>
+                <th>Offering Team's Average Offer</th>
+                <td>{{ subsession.offerors_average }}</td>
+            </tr>
+        {% endif %}
+        <tr>
+            <th>Your Payoff</th>
+            <td>{{ player.payoff }}</td>
+        </tr>
+    </table>
+
+
+    <br/>
     {% next_button %}
+
 {% endblock %}
-
-
