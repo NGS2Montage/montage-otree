@@ -89,6 +89,13 @@ class Player(BasePlayer):
             letter.letter = random.choice(alphabet)
             letter.save()
 
+    def get_transaction_channel(self):
+        return '{}-transaction-{}-{}'.format(
+            Constants.name_in_url,
+            self.session.id,
+            self.participant.code
+        )
+
     def chat_nickname(self):
         return 'Player {}'.format(self.id_in_group)
 
@@ -111,6 +118,18 @@ class Player(BasePlayer):
 class UserLetter(Model):
     letter = models.CharField(max_length=1)
     player = ForeignKey(Player)
+
+
+class LetterTransaction(models.Model):
+    class Meta:
+        index_together = ['channel', 'timestamp']
+
+    player = ForeignKey(Player)  # this is the borrower
+    letter = ForeignKey(UserLetter)
+    approved = models.BooleanField(default=False)
+
+    channel = models.CharField(max_length=255)
+    timestamp = models.FloatField(default=time.time)
 
 
 class ChatGroup(django_models.Model):

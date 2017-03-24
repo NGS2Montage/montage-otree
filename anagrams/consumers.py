@@ -1,5 +1,5 @@
 from channels import Group, Channel
-from .models import Dictionary, TeamWord
+from .models import Dictionary, TeamWord, UserLetter
 from otree.models.participant import Participant
 import json
 from channels.generic.websockets import JsonWebsocketConsumer
@@ -8,6 +8,35 @@ from channels.generic.websockets import JsonWebsocketConsumer
 def get_chat_group(channel):
     print('words-{}'.format(channel))
     return 'words-{}'.format(channel)
+
+def get_transaction_group(channel):
+    print('transactions-{}'.format(channel))
+    return 'transactions-{}'.format(channel)
+
+
+def transaction_consumer(message):
+    content = message.content
+
+    channel = content['channel']
+    letter_pk = content['requested_letter']
+    channels_group = get_transaction_group(channel)
+
+    participant = Participant.objects.get(code=content['participant_code'])
+    anagrams_player = participant.anagrams_player.first()
+
+    user_letter = UserLetter.objects.get(pk=letter_pk)
+
+    transaction = anagrams_player.lettertransaction_set.create(
+        channel=channel,
+        letter=user_letter)
+
+    transaction_message = {
+        'type': 'new_transaction',
+        'requested_letters': [letter_pk],
+    }
+
+    owner_group = get_transaction_group(transaction.letter.player.get_transaction_channel())
+    Group(owner_group).send({'text': json.dumps(transaction_message)})
 
 
 def msg_consumer(message):
@@ -30,27 +59,57 @@ def msg_consumer(message):
         channel=channel,
         word=word)
 
-    # nickname = NicknameRegistration.objects.values_list(
-    #     'nickname', flat=True).get(participant=participant_id, channel=channel)
-
     words_message = {
-        # 'channel': channel,
         'type': 'word',
         'words': [word],
-        # 'participant_id': participant_id
     }
 
-    print("I'm going to send a success word to {}".format(channels_group))
     Group(channels_group).send({'text': json.dumps(words_message)})
 
-    # ChatMessage.objects.create(
-    #     participant_id=participant_id,
-    #     channel=channel,
-    #     body=content['body'],
-    #     nickname=nickname
-    # )
 
+class TransactionConsumer(JsonWebsocketConsumer):
 
+    strict_ordering = False
+
+    def connection_groups(self, **kwargs):
+        """
+        Called to return the list of groups to automatically add/remove
+        this connection to/from.
+        """
+        return [get_transaction_group(kwargs['channel'])]
+
+    def connect(self, message, **kwargs):
+        # print("Connecting to {}".format(kwargs['channel']))
+        # history = TeamWord.objects.filter(
+        #     channel=kwargs['channel']).order_by('timestamp').only('word')
+
+        # message = {
+        #     'type': 'word',
+        #     'words': [w.word for w in history],
+        # }
+        # self.send(message)
+        pass
+
+    def receive(self, content, **kwargs):
+        letter_pk = content['requested_letter']
+
+        if not UserLetter.objects.filter(pk=letter_pk).exists():
+            message = {
+                'type': 'error',
+                'msg': "No such letter to request: {}".format(letter_pk),
+            }
+
+            self.send(message)
+            return
+
+        # Necessary?
+        message = {
+            'type': 'request_success',
+            'requested_letter': letter_pk,
+        }
+        self.send(message)
+
+        Channel("anagrams.transaction_message").send(content)
 
 
 class AnagramsConsumer(JsonWebsocketConsumer):
@@ -63,11 +122,9 @@ class AnagramsConsumer(JsonWebsocketConsumer):
         Called to return the list of groups to automatically add/remove
         this connection to/from.
         """
-        print("this guy is connected to {}".format(kwargs['channel']))
         return [get_chat_group(kwargs['channel'])]
 
     def connect(self, message, **kwargs):
-        print("Connecting to {}".format(kwargs['channel']))
         history = TeamWord.objects.filter(
             channel=kwargs['channel']).order_by('timestamp').only('word')
 

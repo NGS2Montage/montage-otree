@@ -47,10 +47,10 @@ class Anagrams(Page):
         context = {}
 
         letters = {
-            self.player.chat_nickname(): [ul.letter for ul in self.player.userletter_set.all()]
+            self.player.chat_nickname(): [{'letter': ul.letter, 'pk': ul.pk} for ul in self.player.userletter_set.all()]
         }
         for neighbor in self.player.neighbors.all():
-            letters[neighbor.chat_nickname()] = [ul.letter for ul in neighbor.userletter_set.all()]
+            letters[neighbor.chat_nickname()] = [{'letter': ul.letter, 'pk': ul.pk} for ul in neighbor.userletter_set.all()]
 
 
         context['word_channel'] = 'word-{}-{}-{}'.format(
@@ -59,12 +59,15 @@ class Anagrams(Page):
                 self.group.id
             )
 
+        context['transaction_channel'] = self.player.get_transaction_channel()
+
         vars_for_js = {
             'participant_code': self.participant.code,
             'nickname': self.player.chat_nickname(),
             'letters': letters,
             'group': self.group.id,
-            'word_channel': context['word_channel']
+            'word_channel': context['word_channel'],
+            'transaction_channel': context['transaction_channel'],
         }
 
         context['vars_for_js'] = safe_json(vars_for_js)
