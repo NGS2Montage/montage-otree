@@ -29,9 +29,6 @@ class Constants(BaseConstants):
 class Subsession(BaseSubsession):
     def before_session_starts(self):   # called each round
         """For each player, create a fixed number of "decision stubs" with random values to be decided upon later."""
-        for p in self.get_players():
-            p.generate_user_letters()
-            p.channel = p.get_word_channel()
 
         if self.round_number == 1:
 
@@ -74,6 +71,13 @@ class Subsession(BaseSubsession):
             self.set_group_matrix(list_of_lists)
         else:
             self.group_like_round(1)
+
+
+        for p in self.get_players():
+            p.generate_user_letters()
+            p.word_channel = p.get_word_channel()
+            p.save()
+
 
 
 class Group(BaseGroup):

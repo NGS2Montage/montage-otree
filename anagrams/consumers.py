@@ -205,7 +205,7 @@ class AnagramsConsumer(JsonWebsocketConsumer):
             self.send(message)
             return
 
-        player = Player.objects.filter(channel=channel).first()
+        player = Player.objects.filter(word_channel=channel).first()
         available_letters = [letter.letter for letter in player.userletter_set.all()]
 
         for neighbor in player.neighbors.all():
@@ -222,6 +222,6 @@ class AnagramsConsumer(JsonWebsocketConsumer):
                 self.send(message)
                 return
 
-            available_letters.remove(letter)
+            available_letters.remove(letter.upper())
 
         Channel("anagrams.word_message").send(content)
