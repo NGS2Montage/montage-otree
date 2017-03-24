@@ -54,6 +54,7 @@ INSTALLED_APPS = ['otree',
 
                   'channels',  # websockets
                   'channels_api',
+                  'otreechat',
 
                   # our stuff
                   'core'
@@ -156,13 +157,20 @@ SESSION_CONFIGS = [
         'ultimatum_split': False,
         'ultimatum_player_role': 'receiver',  # Applicable only if 'ultimatum_split' is False
         'ultimatum_cutoff': 50,  # Applicable only if 'ultimatum_split' is False
-        'ultimatum_group_size': 2
+        'ultimatum_group_size': 2,
+        'anagrams_group_size': 2,
     },
     {
         'name': 'ultimatum',
         'display_name': 'Ultimatum',
         'num_demo_participants': 4,
         'app_sequence': ['ultimatum'],
+    },
+    {
+        'name': 'anagrams',
+        'display_name': 'Anagrams',
+        'num_demo_participants': 8,
+        'app_sequence': ['anagrams'],
     },
 ]
 
@@ -172,12 +180,13 @@ TEMPLATE_DIRS = [ROOT_DIR.path('core')('templates')]
 
 STATICFILES_DIRS = [
     ROOT_DIR.path('core')('static'),
+    ROOT_DIR.path('anagrams')('static'),
 ]
 
 
 # CHANNELS
 # ------------------------------------------------------------------------------
-# CHANNEL_ROUTING = 'core.routing.channel_routing'
+CHANNEL_ROUTING = 'anagrams.routing.channel_routing'
 # This overrides the default ROUTING "otree.channels.routing.channel_routing". Might pose a challenge
 
 
