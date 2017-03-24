@@ -31,6 +31,7 @@ class Subsession(BaseSubsession):
         """For each player, create a fixed number of "decision stubs" with random values to be decided upon later."""
         for p in self.get_players():
             p.generate_user_letters()
+            p.channel = p.get_word_channel()
 
         if self.round_number == 1:
 
@@ -81,6 +82,7 @@ class Group(BaseGroup):
 
 class Player(BasePlayer):
     neighbors = django_models.ManyToManyField('Player')
+    word_channel = django_models.CharField(max_length=255)
 
     def generate_user_letters(self):
         alphabet = list(string.ascii_lowercase)
@@ -94,6 +96,13 @@ class Player(BasePlayer):
             Constants.name_in_url,
             self.session.id,
             self.participant.code
+        )
+
+    def get_word_channel(self):
+        return 'word-{}-{}-{}'.format(
+            self.session.id,
+            Constants.name_in_url,
+            self.group.id
         )
 
     def chat_nickname(self):

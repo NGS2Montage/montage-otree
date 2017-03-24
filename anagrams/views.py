@@ -53,12 +53,7 @@ class Anagrams(Page):
             letters[neighbor.chat_nickname()] = [{'letter': ul.letter, 'pk': ul.pk} for ul in neighbor.userletter_set.all()]
 
 
-        context['word_channel'] = 'word-{}-{}-{}'.format(
-                self.session.id,
-                Constants.name_in_url,
-                self.group.id
-            )
-
+        context['word_channel'] = self.player.get_word_channel()
         context['transaction_channel'] = self.player.get_transaction_channel()
 
         vars_for_js = {

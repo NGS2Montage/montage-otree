@@ -1,5 +1,5 @@
 from channels import Group, Channel
-from .models import Dictionary, TeamWord, UserLetter, LetterTransaction
+from .models import Dictionary, TeamWord, UserLetter, LetterTransaction, Player
 from otree.models.participant import Participant
 import json
 from channels.generic.websockets import JsonWebsocketConsumer
@@ -194,6 +194,8 @@ class AnagramsConsumer(JsonWebsocketConsumer):
     def receive(self, content, **kwargs):
         # Stick the message onto the processing queue
         word = content['word']
+        channel = content['channel']
+
         if not Dictionary.objects.filter(word=word).exists():
             message = {
                 'type': 'error',
@@ -202,5 +204,24 @@ class AnagramsConsumer(JsonWebsocketConsumer):
 
             self.send(message)
             return
+
+        player = Player.objects.filter(channel=channel).first()
+        available_letters = [letter.letter for letter in player.userletter_set.all()]
+
+        for neighbor in player.neighbors.all():
+            for user_letter in neighbor.userletter_set.all():
+                available_letters.append(user_letter.letter)
+
+        for letter in word:
+            if letter.upper() not in available_letters:
+                message = {
+                    'type': 'error',
+                    'msg': "Letter '{}' not available for {}".format(letter, word),
+                }
+
+                self.send(message)
+                return
+
+            available_letters.remove(letter)
 
         Channel("anagrams.word_message").send(content)
