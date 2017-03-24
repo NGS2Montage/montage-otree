@@ -73,7 +73,7 @@ def main(emails_file, session_name):
                                                                   sid=str(session_id.id)))
             url = build_absolute_uri(None, path)
             print("%s: %s" % (email, url))
-            context = {'account_creation_url': url}
+            context = {'account_creation_url': url, 'username': email}
             get_adapter(None).send_mail(
                 'account/email/account_creation_key',
                 email,

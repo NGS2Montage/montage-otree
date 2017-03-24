@@ -33,7 +33,8 @@ class Subsession(BaseSubsession):
     def get_allowed_players(self):
         players = []
         for player in self.get_players():
-            if player.participant.vars['consent'] and player.participant.vars['playing']:
+            if player.participant.vars['consent'] and player.participant.vars['playing'] and \
+                    player.participant.vars['locked']:
                 players.append(player)
         return players
 

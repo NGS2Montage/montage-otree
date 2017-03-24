@@ -1,0 +1,28 @@
+{% extends "global/Page.html" %}
+{% load staticfiles otree_tags %}
+
+{% block head_title %}
+    Thank You
+{% endblock %}
+
+{% block title %} Thank you for playing {% endblock %}
+
+{% block content %}
+
+    <p>
+        Hi {{ user.first_name|title }},
+    </p>
+
+    <p>
+        Thank you so much for playing the game.
+    </p>
+
+    <p>
+        You can sign out using the button below:
+    </p>
+
+    <br/>
+    <a href="{% url 'account_logout' %}" class="btn btn-primary" role="button">Sign Out</a>
+
+
+{% endblock %}

@@ -1,0 +1,121 @@
+{% extends "global/Page.html" %}
+{% load staticfiles otree_tags %}
+
+{% block head_title %}
+    Initial Receiver Expectations
+{% endblock %}
+
+{% block title %} Initial Receiver Expectations {% endblock %}
+
+{% block content %}
+
+    <div class="row">
+        <div class="col-md-6" style="text-align: center;">
+            <h3>Your Role: {{ player.player_role | title }}</h3>
+        </div>
+        <div class="col-md-6" style="text-align: center;">
+            {% if view.show_histogram %}
+                <h3>Your Expectation: {{ player.initial_receiver_expectation }}</h3>
+            {% endif %}
+        </div>
+    </div>
+
+
+    <div class="row" style="margin-top: 20px;">
+        <div class="col-md-6" style="height: 300px; padding: 0px 50px 10px 50px;
+                text-align: center; overflow-y:auto;">
+
+            <h4>Your Neighbors:</h4><br/>
+            {% for neighbor in neighbors %}
+                <p>
+                    <button type="button" class="btn btn-default disabled"
+                            style="width: 230px;">{{ neighbor.expectation }}</button>
+                    <button type="button" class="btn btn-success"
+                            onclick="alert('{{ neighbor.neighbor_id }} and {{ neighbor.user_id }}')">Up
+                    </button>
+                    <button type="button" class="btn btn-warning"
+                            onclick="alert('{{ neighbor.neighbor_id }} and {{ neighbor.user_id }}')">Down
+                    </button>
+                </p>
+            {% endfor %}
+
+        </div>
+        <div class="col-md-6" style="height: 300px; padding: 10px; text-align: center;">
+
+            {% if view.show_histogram %}
+                <div id="histogram" style="height: 280px; margin: 0 auto"></div>
+            {% else %}
+                <h3>Your Expectation: {{ player.initial_receiver_expectation }}</h3>
+            {% endif %}
+
+        </div>
+    </div>
+
+    <br/>
+
+    <div class="row">
+        <div class="col-md-6" style="height:200px;">
+            Chat will appear here
+        </div>
+        <div class="col-md-6" style="height:200px;">
+            Signals from other users will appear here
+        </div>
+    </div>
+
+    <br/><br/>
+
+    <div style="text-align: center">{% next_button %}</div>
+
+
+    {% include 'instructions/instructions_ultimatum.html' %}
+    {% include 'instructions/ultimatum_youtube.html' %}
+
+{% endblock %}
+
+{% block scripts %}
+    <script type="text/javascript" src="{% static 'js/hide_panel.js' %}"></script>
+
+    {% if view.show_histogram %}
+        <script src="https://code.highcharts.com/highcharts.js"></script>
+        <script src="https://code.highcharts.com/modules/exporting.js"></script>
+        <script>
+            Highcharts.chart('histogram', {
+                chart: {
+                    type: 'column'
+                },
+                title: {
+                    text: 'Histogram of Expectations'
+                },
+                xAxis: {
+                    categories: {{ labels }},
+                    crosshair: true
+                },
+                yAxis: {
+                    min: 0,
+                    title: {
+                        text: 'Count'
+                    }
+                },
+                tooltip: {
+                    headerFormat: '<span style="font-size:10px">{point.key}: {point.y} players </span>',
+                    pointFormat: '',
+                    footerFormat: '',
+                    shared: true,
+                    useHTML: true
+                },
+                plotOptions: {
+                    column: {
+                        pointPadding: 0.2,
+                        borderWidth: 0
+                    }
+                },
+                series: [{
+                    name: 'Bins',
+                    data: {{ values }}
+                }]
+            });
+
+        </script>
+    {% endif %}
+
+{% endblock %}
