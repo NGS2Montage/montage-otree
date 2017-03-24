@@ -4,6 +4,7 @@ var app = {
     chats: [],
     newChat: "",
     successWords: [],
+    requests: [],
     newWord: "",
     subscribed: false,
     letters: {},
@@ -57,16 +58,12 @@ UserLetter.prototype.requestLetter = function (event, model) {
     console.log("request a letter yo", model.letter.pk);
 
     var data = {
+        'type': 'letter_request',
         'requested_letter': model.letter.pk,
         'participant_code': participantCode,
-        'channel': transactionChannel
+        'channel': transactionChannel,
     };
     tSocket.send(JSON.stringify(data));
-
-    app.user.transactions.push(new LetterTransaction({
-        letter: model.letter,
-        borrower: app.user,
-    }));
 };
 
 UserLetter.prototype.toString = function () {
@@ -77,7 +74,9 @@ UserLetter.prototype.toString = function () {
 // LetterTransaction
 //////////////////////////////////////////////////////////////
 function LetterTransaction(obj) {
+    console.log("makeing a new transaction", obj);
     this.letter = obj.letter;
+    this.owner = obj.owner;
     this.pk = obj.pk;
     this.borrower = obj.borrower;
     this.approved = ('approved' in obj) ? obj.approved : false;
@@ -85,24 +84,22 @@ function LetterTransaction(obj) {
 
 LetterTransaction.prototype.approve = function (event, model) {
     console.log("Need to approve this transaction yo");
-    // msg = {
-    //   stream: "lettertransactions",
-    //   payload: {
-    //     action: "update",
-    //     pk: model.transaction.pk,
-    //     data: {
-    //         borrower: model.transaction.borrower,
-    //         letter: model.transaction.letter.pk,
-    //         approved: true,
-    //     }
-    //   }
-    // };
 
-    // socket.send(JSON.stringify(msg));
+    model.transaction.approved = true;
+
+    var data = {
+        'type': 'request_approved',
+        'transaction_pk': model.transaction.pk,
+        'participant_code': participantCode,
+        'channel': transactionChannel
+    };
+    console.log("about to send this as approval message");
+    console.log(data)
+    tSocket.send(JSON.stringify(data));
 }
 
 LetterTransaction.prototype.toString = function () {
-    return this.letter.toString();
+    return this.letter;
 };
 
 
@@ -198,49 +195,42 @@ tSocket.onmessage = function (message) {
     var message = JSON.parse(message.data);
     console.log(message);
 
-    // if (message.type === "error") {
-    //     app.wordError = message.msg;
-    // } else {
-    //     app.wordError = '';
-    // }
+    if (message.type === "request_success") {
+        message.requested_letters.forEach(function (transaction) {
+            app.user.transactions.push(new LetterTransaction(transaction));
+        });
+    }
 
-    // if (message.type === "word") {
-    //     for (var i = 0; i < message.words.length; i++) {
-    //         app.successWords.push(message.words[i]);
-    //     }
-    // }
+    if (message.type === "error") {
+        app.transactionError = message.msg;
+    } else {
+        app.transactionError = '';
+    }
+
+    if (message.type === "new_transaction") {
+        message.requested_letters.forEach(function (transaction) {
+            app.requests.push(new LetterTransaction(transaction));
+        });
+    }
+
+    if (message.type === "transaction_approved") {
+        var transaction = app.user.transactions.find(function (transaction) {
+            return transaction.pk === message.transaction_pk;
+        });
+
+        if (transaction) {
+            transaction.approved = true;
+        }
+    }
 };
 
 tSocket.onopen = function () {
     console.log("Connected to transaction tSocket");
     // clear message history so we can re-populate
+    app.requests = [];
+    app.user.transactions = [];
 };
 
 tSocket.onclose = function () {
     console.log("Disconnected from transaction tSocket");
 };
-
-// function sendWord() {
-//     var body = $wordsInput.val();
-//     if (!body) {
-//         return;
-//     }
-//     var data = {
-//         'word': $wordsInput.val(),
-//         'participant_code': participantCode,
-//         'channel': wordChannel
-//     };
-//     tSocket.send(JSON.stringify(data));
-//     $wordsInput.val('');
-// }
-
-// $wordsWidget.find('button').click(function(e) {
-//     sendWord();
-// });
-
-// $wordsInput.on('keypress', function (e) {
-//     if (e.which == 13) {
-//         e.preventDefault();
-//         sendWord();
-//     }
-// });

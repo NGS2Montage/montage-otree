@@ -28,6 +28,7 @@ http://getbootstrap.com/components/
                 border-radius: 12px; border-width: 3px; border-style: groove;">
     <div class="col-md-4">
         <div class="row">
+            <p>{app.transactionError}</p>
             <ul>
                 <li rv-each-friend="app.friends">
                     <span>Friend : { friend.name }</span>
@@ -98,24 +99,31 @@ http://getbootstrap.com/components/
                 <li rv-each-letter="app.user.letters">{letter}</li>
             </ul>
             Requested by your friends:
-            <ul rv-each-friend="app.friends">
+            <!--<ul rv-each-friend="app.friends">
                 <li rv-each-transaction="friend.transactions"
                     rv-on-click="transaction.approve"
                     rv-hide="transaction.approved">
                     {friend.name} requests your {transaction}
+                </li>
+            </ul>-->
+            <ul>
+                <li rv-each-transaction="app.requests"
+                    rv-on-click="transaction.approve"
+                    rv-hide="transaction.approved">
+                    {transaction.borrower} requests your {transaction}
                 </li>
             </ul>
             Received from your friends:
             <ul>
                 <li rv-each-transaction="app.user.transactions"
                     rv-show="transaction.approved">
-                    {transaction} from {transaction.letter.user}</li>
+                    {transaction} from {transaction.owner}</li>
             </ul>
             Requested by you and waiting for response:
             <ul>
                 <li rv-each-transaction="app.user.transactions"
                     rv-hide="transaction.approved">
-                    requested {transaction} from {transaction.letter.user}</li>
+                    requested {transaction} from {transaction.owner}</li>
             </ul>
         </div>
     </div>

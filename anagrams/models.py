@@ -86,7 +86,7 @@ class Player(BasePlayer):
         alphabet = list(string.ascii_lowercase)
         for _ in range(Constants.num_user_letters):
             letter = self.userletter_set.create()
-            letter.letter = random.choice(alphabet)
+            letter.letter = random.choice(alphabet).upper()
             letter.save()
 
     def get_transaction_channel(self):
@@ -129,7 +129,17 @@ class LetterTransaction(models.Model):
     approved = models.BooleanField(default=False)
 
     channel = models.CharField(max_length=255)
+    owner_channel = models.CharField(max_length=255)
     timestamp = models.FloatField(default=time.time)
+
+    def to_dict(self):
+        return {
+            'letter': self.letter.letter,
+            'owner': self.letter.player.chat_nickname(),
+            'borrower': self.player.chat_nickname(),
+            'pk': self.pk,
+            'approved': self.approved,
+        }
 
 
 class ChatGroup(django_models.Model):

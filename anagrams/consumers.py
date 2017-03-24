@@ -1,5 +1,5 @@
 from channels import Group, Channel
-from .models import Dictionary, TeamWord, UserLetter
+from .models import Dictionary, TeamWord, UserLetter, LetterTransaction
 from otree.models.participant import Participant
 import json
 from channels.generic.websockets import JsonWebsocketConsumer
@@ -14,6 +14,24 @@ def get_transaction_group(channel):
     return 'transactions-{}'.format(channel)
 
 
+def approval_consumer(message):
+    content = message.content
+
+    transaction_pk = content['transaction_pk']
+    transaction = LetterTransaction.objects.get(pk=transaction_pk)
+    transaction.approved = True
+    transaction.save()
+
+    approval_message = {
+        'type': 'transaction_approved',
+        'transaction_pk': transaction.pk
+    }
+
+    group = get_transaction_group(transaction.channel)
+    print("Sending approval notice to {}".format(group))
+    Group(group).send({'text': json.dumps(approval_message)})
+
+
 def transaction_consumer(message):
     content = message.content
 
@@ -25,18 +43,26 @@ def transaction_consumer(message):
     anagrams_player = participant.anagrams_player.first()
 
     user_letter = UserLetter.objects.get(pk=letter_pk)
+    owner_channel = user_letter.player.get_transaction_channel()
 
     transaction = anagrams_player.lettertransaction_set.create(
         channel=channel,
+        owner_channel=owner_channel,
         letter=user_letter)
 
-    transaction_message = {
-        'type': 'new_transaction',
-        'requested_letters': [letter_pk],
+    requester_message = {
+        'type': 'request_success',
+        'requested_letters': [transaction.to_dict()]
     }
+    requester_group = get_transaction_group(channel)
+    Group(requester_group).send({'text': json.dumps(requester_message)})
 
-    owner_group = get_transaction_group(transaction.letter.player.get_transaction_channel())
-    Group(owner_group).send({'text': json.dumps(transaction_message)})
+    owner_message = {
+        'type': 'new_transaction',
+        'requested_letters': [transaction.to_dict()]
+    }
+    owner_group = get_transaction_group(owner_channel)
+    Group(owner_group).send({'text': json.dumps(owner_message)})
 
 
 def msg_consumer(message):
@@ -79,37 +105,68 @@ class TransactionConsumer(JsonWebsocketConsumer):
         return [get_transaction_group(kwargs['channel'])]
 
     def connect(self, message, **kwargs):
-        # print("Connecting to {}".format(kwargs['channel']))
-        # history = TeamWord.objects.filter(
-        #     channel=kwargs['channel']).order_by('timestamp').only('word')
+        print("Connecting to {}".format(kwargs['channel']))
+        history = LetterTransaction.objects.filter(
+            channel=kwargs['channel']).order_by('timestamp').only('letter')
 
-        # message = {
-        #     'type': 'word',
-        #     'words': [w.word for w in history],
-        # }
-        # self.send(message)
-        pass
-
-    def receive(self, content, **kwargs):
-        letter_pk = content['requested_letter']
-
-        if not UserLetter.objects.filter(pk=letter_pk).exists():
-            message = {
-                'type': 'error',
-                'msg': "No such letter to request: {}".format(letter_pk),
-            }
-
-            self.send(message)
-            return
-
-        # Necessary?
         message = {
             'type': 'request_success',
-            'requested_letter': letter_pk,
+            'requested_letters': [transaction.to_dict() for transaction in history]
         }
         self.send(message)
 
-        Channel("anagrams.transaction_message").send(content)
+        history = LetterTransaction.objects.filter(
+            owner_channel=kwargs['channel']).order_by('timestamp').only('letter')
+
+        message = {
+            'type': 'new_transaction',
+            'requested_letters': [transaction.to_dict() for transaction in history]
+        }
+        self.send(message)
+
+    def receive(self, content, **kwargs):
+        channel = content['channel']
+        msg_type = content['type']
+
+        if msg_type == "request_approved":
+            print("Content for approve {}".format(content))
+            transaction_pk = content['transaction_pk']
+            transaction = LetterTransaction.objects.filter(pk=transaction_pk)
+
+            if transaction.count() == 0:
+                message = {
+                    'type': 'error',
+                    'msg': "No such letter transaction to approve: {}".format(transaction_pk),
+                }
+
+                self.send(message)
+                return
+
+            Channel("anagrams.transaction_approval").send(content)
+
+        if msg_type == "letter_request":
+            letter_pk = content['requested_letter']
+
+            if not UserLetter.objects.filter(pk=letter_pk).exists():
+                message = {
+                    'type': 'error',
+                    'msg': "No such letter to request: {}".format(letter_pk),
+                }
+
+                self.send(message)
+                return
+
+            user_letter = UserLetter.objects.get(pk=letter_pk)
+            if LetterTransaction.objects.filter(letter=user_letter, channel=channel).exists():
+                message = {
+                    'type': 'error',
+                    'msg': "Letter {} already requested from {}".format(user_letter.letter, user_letter.player.chat_nickname()),
+                }
+
+                self.send(message)
+                return
+
+            Channel("anagrams.transaction_message").send(content)
 
 
 class AnagramsConsumer(JsonWebsocketConsumer):
