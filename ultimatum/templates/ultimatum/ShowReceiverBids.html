@@ -1,5 +1,6 @@
 {% extends "global/Page.html" %}
 {% load staticfiles otree_tags %}
+{% load otreechat %}
 
 {% block head_title %}
     Initial Receiver Expectations
@@ -54,10 +55,18 @@
     <br/>
 
     <div class="row">
-        <div class="col-md-6" style="height:200px;">
-            Chat will appear here
+        <div class="col-md-6">
+            {% for chat in player.chats %}
+                <div class="row">
+                <div class="col-md-12">
+                    <h4>{{ chat.label }}</h4>
+                    {% chat nickname=player.chat_nickname channel=chat.channel %}
+                </div>
+                    
+                </div>
+            {% endfor %}
         </div>
-        <div class="col-md-6" style="height:200px;">
+        <div class="col-md-6">
             Signals from other users will appear here
         </div>
     </div>
@@ -118,4 +127,8 @@
         </script>
     {% endif %}
 
+{% endblock %}
+
+{% block global_scripts %}
+    <script type="text/javascript" src="{% static 'ultimatum/voting.js' %}"></script>
 {% endblock %}

@@ -98,3 +98,21 @@ class Player(BasePlayer):
     # Difi Index Columns
     distanceScale = models.IntegerField()
     overlapScale = models.IntegerField()
+
+    def nickname(self):
+        return 'Player {}'.format(self.id)
+
+    def chats(self):
+        channels = []
+        for other in self.neighbors.all():
+            if other.id_in_group < self.id_in_group:
+                lower_id, higher_id = other.id_in_group, self.id_in_group
+            else:
+                lower_id, higher_id = self.id_in_group, other.id_in_group
+            channels.append({
+                # make a name for the channel that is the same for all
+                # channel members. That's why we order it (lower, higher)
+                'channel': '{}-{}-{}'.format(self.group.id, lower_id, higher_id),
+                'label': 'Chat with {}'.format(other.nickname())
+            })
+        return channels
