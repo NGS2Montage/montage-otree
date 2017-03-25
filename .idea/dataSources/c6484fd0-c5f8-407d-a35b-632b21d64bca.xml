@@ -1230,7 +1230,7 @@ model</ColNames>
       <DataType>BOOL(0,-1)|4</DataType>
       <NotNull>1</NotNull>
     </column>
-    <index id="286" parent="24" name="otree_completedgroupwaitpage_page_index_7deb68526d9d1cd9_idx">
+    <index id="286" parent="24" name="otree_completedgroupwaitpage_page_index_671e72a03120c71c_idx">
       <ColNames>page_index
 session_id
 id_in_subsession</ColNames>
@@ -1276,7 +1276,7 @@ id_in_subsession</ColNames>
       <DataType>BOOL(0,-1)|4</DataType>
       <NotNull>1</NotNull>
     </column>
-    <index id="294" parent="25" name="otree_completedsubsessionwaitpage_page_index_7ec6647ba10bb9c2_idx">
+    <index id="294" parent="25" name="otree_completedsubsessionwaitpage_page_index_5693af3be455acb3_idx">
       <ColNames>page_index
 session_id</ColNames>
       <Unique>1</Unique>
@@ -1433,7 +1433,7 @@ session_id</ColNames>
       <DataType>INTEGER UNSIGNED(0,-1)|4</DataType>
       <NotNull>1</NotNull>
     </column>
-    <index id="324" parent="29" name="otree_pagetimeout_participant_id_134f67abe28ebf5f_idx">
+    <index id="324" parent="29" name="otree_pagetimeout_participant_id_37181078663c230e_idx">
       <ColNames>participant_id
 page_index</ColNames>
       <Unique>1</Unique>
@@ -1566,7 +1566,7 @@ page_index</ColNames>
       <Position>27</Position>
       <DataType>BOOL(0,-1)|4</DataType>
     </column>
-    <index id="355" parent="30" name="otree_participant_session_id_50aeff97d60e1387_idx">
+    <index id="355" parent="30" name="otree_participant_session_id_1c5cb22c798c2555_idx">
       <ColNames>session_id
 mturk_worker_id
 mturk_assignment_id</ColNames>
@@ -1688,7 +1688,7 @@ mturk_assignment_id</ColNames>
       <DataType>VARCHAR(300)(0,-1)|12</DataType>
       <NotNull>1</NotNull>
     </column>
-    <index id="380" parent="33" name="otree_participanttoplayerlookup_participant_id_3aafb1fc52b4daf7_idx">
+    <index id="380" parent="33" name="otree_participanttoplayerlookup_participant_id_706853714a25f657_idx">
       <ColNames>participant_id
 page_index</ColNames>
       <Unique>1</Unique>

@@ -118,7 +118,7 @@ class InitialResultsWaitPage(WaitPage):
 
 class ShowOfferorBids(Page):
     is_debug = False
-    timeout_seconds = 180
+    # timeout_seconds = 180
     show_histogram = False
 
     def vars_for_template(self):

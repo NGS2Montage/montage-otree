@@ -63,26 +63,32 @@
 
     <br/>
 
-    <div class="row">
-        <div class="col-md-6">
+    <div class="row" style="margin-top: 15px;">
+        <div class="col-md-12">
+            <div class="row">
+                <div class="col-md-6">
+                    <b>Signals from Neighbors:</b>
+                    <div id="vote-view" style="border: 1px solid #ccc; height: 116px; overflow-y: auto; margin-top: 5px;">
+                        <ul>
+                            <li rv-each-vote="app.votes">
+                                {vote}
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
             {% for chat in player.chats %}
-                <div class="row">
-                <div class="col-md-12">
-                    <h4>{{ chat.label }}</h4>
-                    {% chat nickname=player.chat_nickname channel=chat.channel %}
-                </div>
-                    
-                </div>
-            {% endfor %}
-        </div>
-        <div class="col-md-6">
-            <div id="vote-view">
-                <ul>
-                    <li rv-each-vote="app.votes">
-                        {vote}
-                    </li>
-                </ul>
+                {% if not forloop.counter0|divisibleby:2 %}
+                    <div class="row" style="margin-top: 10px;">
+                {% endif %}
+            <div class="col-md-6">
+                <b>{{ chat.label }}</b>
+                {% chat nickname=player.nickname channel=chat.channel %}
             </div>
+            {% if forloop.counter0|divisibleby:2 or forloop.last %}
+                </div>
+            {% endif %}
+            {% endfor %}
         </div>
     </div>
 
@@ -146,4 +152,26 @@
 
 {% block global_scripts %}
     <script type="text/javascript" src="{% static 'ultimatum/voting.js' %}"></script>
+
+    <style>
+        .otree-chat {
+            border: 1px solid #ccc;
+            padding: 5px;
+            margin: 5px 0 0 0;
+        }
+
+        .otree-chat .messages {
+            height: 70px;
+            overflow-y: auto;
+            background: #eee;
+            margin: 2px 0 5px 0;
+        }
+
+        .otree-chat .nickname {
+            display: inline-block;
+            color: #C07A36;
+            font-weight: bold;
+        }
+    </style>
+
 {% endblock %}

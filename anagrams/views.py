@@ -10,7 +10,7 @@ class WaitPage(WaitPage):
     template_name = 'anagrams/WaitPage.html'
 
     def after_all_players_arrive(self):
-        group_size = Constants.num_neighbors;
+        group_size = Constants.num_neighbors
         for group in self.subsession.get_groups():
             self.assign_players_in_chatgroups(group.get_players(), group_size)
 
