@@ -186,7 +186,7 @@ STATICFILES_DIRS = [
 
 # CHANNELS
 # ------------------------------------------------------------------------------
-CHANNEL_ROUTING = 'anagrams.routing.channel_routing'
+CHANNEL_ROUTING = 'core.routing.channel_routing'
 # This overrides the default ROUTING "otree.channels.routing.channel_routing". Might pose a challenge
 
 

@@ -8,6 +8,15 @@
 
 {% block title %} Initial Receiver Expectations {% endblock %}
 
+{% block myscripts %}
+<script type="text/javascript">
+    // var from_django = "foobar";
+    var channel = "{{ channel }}";
+    var participantCode = "{{ participantCode }}";
+</script>
+<script type="text/javascript" src="{% static 'anagrams/rivets.bundled.min.js' %}"></script>
+{% endblock %}
+
 {% block content %}
 
     <div class="row">
@@ -32,10 +41,10 @@
                     <button type="button" class="btn btn-default disabled"
                             style="width: 230px;">{{ neighbor.expectation }}</button>
                     <button type="button" class="btn btn-success"
-                            onclick="alert('{{ neighbor.neighbor_id }} and {{ neighbor.user_id }}')">Up
+                            onclick="sendVote({{ neighbor.neighbor_id }}, {{ neighbor.user_id }}, true)">Up
                     </button>
                     <button type="button" class="btn btn-warning"
-                            onclick="alert('{{ neighbor.neighbor_id }} and {{ neighbor.user_id }}')">Down
+                            onclick="sendVote({{ neighbor.neighbor_id }}, {{ neighbor.user_id }}, false)">Down
                     </button>
                 </p>
             {% endfor %}
@@ -67,7 +76,13 @@
             {% endfor %}
         </div>
         <div class="col-md-6">
-            Signals from other users will appear here
+            <div id="vote-view">
+                <ul>
+                    <li rv-each-vote="app.votes">
+                        {vote}
+                    </li>
+                </ul>
+            </div>
         </div>
     </div>
 

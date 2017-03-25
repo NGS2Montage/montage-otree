@@ -122,6 +122,8 @@ class ShowOfferorBids(Page):
     show_histogram = False
 
     def vars_for_template(self):
+        channel = self.player.get_vote_channel()
+
         neighbors = []
         for player in self.player.neighbors.all():
             if player.participant.vars['playing']:
@@ -136,8 +138,8 @@ class ShowOfferorBids(Page):
                         player.participant.vars['locked'] and player.player_role == 'offeror':
                     bids.append(player.initial_offered_amount)
             labels, values = create_histogram(bids)
-            return {'neighbors': neighbors, 'labels': safe_json(labels), 'values': safe_json(values)}
-        return {'neighbors': neighbors}
+            return {'neighbors': neighbors, 'labels': safe_json(labels), 'values': safe_json(values), 'channel': channel, 'participantCode': self.participant.code}
+        return {'neighbors': neighbors, 'channel': channel, 'participantCode': self.participant.code}
 
     def is_displayed(self):
         if self.participant.vars['consent'] and self.participant.vars['playing'] and \
@@ -171,6 +173,8 @@ class ShowReceiverBids(Page):
     show_histogram = False
 
     def vars_for_template(self):
+        channel = self.player.get_vote_channel()
+        
         neighbors = []
         for player in self.player.neighbors.all():
             if player.participant.vars['playing']:
@@ -185,8 +189,8 @@ class ShowReceiverBids(Page):
                         player.participant.vars['locked'] and player.player_role == 'receiver':
                     bids.append(player.initial_receiver_expectation)
             labels, values = create_histogram(bids)
-            return {'neighbors': neighbors, 'labels': safe_json(labels), 'values': safe_json(values)}
-        return {'neighbors': neighbors}
+            return {'neighbors': neighbors, 'labels': safe_json(labels), 'values': safe_json(values), 'channel': channel, 'participantCode': self.participant.code}
+        return {'neighbors': neighbors, 'channel': channel, 'participantCode': self.participant.code}
 
     def is_displayed(self):
         if self.participant.vars['consent'] and self.participant.vars['playing'] and \

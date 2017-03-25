@@ -86,7 +86,6 @@ class ChatGroup(django_models.Model):
     players = django_models.ManyToManyField('Player')
 
 
-
 class Player(BasePlayer):
     initial_offered_amount = models.IntegerField(min=-1, max=Constants.endowment + 10)
     initial_receiver_expectation = models.IntegerField(min=-1, max=Constants.endowment + 10)
@@ -98,6 +97,13 @@ class Player(BasePlayer):
     # Difi Index Columns
     distanceScale = models.IntegerField()
     overlapScale = models.IntegerField()
+
+    def get_vote_channel(self):
+        return '{}-vote-{}-{}'.format(
+            Constants.name_in_url,
+            self.session.id,
+            self.participant.code
+        )
 
     def nickname(self):
         return 'Player {}'.format(self.id)
