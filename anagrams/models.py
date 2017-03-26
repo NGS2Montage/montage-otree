@@ -90,6 +90,9 @@ class Group(BaseGroup):
 class Player(BasePlayer):
     neighbors = django_models.ManyToManyField('Player')
     word_channel = django_models.CharField(max_length=255)
+    # Difi Index Columns
+    distanceScale = models.IntegerField()
+    overlapScale = models.IntegerField()
 
     def generate_user_letters(self):
         # alphabet = list(string.ascii_lowercase)
@@ -187,5 +190,5 @@ class TeamWord(models.Model):
 
 
 class Dictionary(models.Model):
-    # word = models.CharField(max_length=100, db_index=True, unique=True)
-    word = models.CharField(max_length=100)
+    word = models.CharField(max_length=100, db_index=True, unique=True)
+    # word = models.CharField(max_length=100)

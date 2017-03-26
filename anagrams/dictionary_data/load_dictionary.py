@@ -12,6 +12,7 @@ import codecs
 import argparse
 
 from anagrams.models import Dictionary
+from datetime import datetime
 
 
 def load_dictionary(filename):
@@ -33,4 +34,6 @@ if __name__ == "__main__":
     ap.add_argument('-dic', '--dictionary', metavar='dictionary', type=str, required=True, help='dictionary')
     args = ap.parse_args()
 
+    print(datetime.now())
     load_dictionary(args.dictionary)
+    print(datetime.now())

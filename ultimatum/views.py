@@ -84,7 +84,7 @@ class Offer(Page):
     form_fields = ['initial_offered_amount', 'initial_receiver_expectation']
     is_debug = False
     template_name = 'ultimatum/offer.html'
-    timeout_seconds = 180
+    timeout_seconds = 1800
     timeout_submission = {'initial_offered_amount': -1, 'initial_receiver_expectation': Constants.endowment + 10}
 
     def is_displayed(self):
@@ -118,7 +118,7 @@ class InitialResultsWaitPage(WaitPage):
 
 class ShowOfferorBids(Page):
     is_debug = False
-    # timeout_seconds = 180
+    timeout_seconds = 1800
     show_histogram = False
 
     def vars_for_template(self):
@@ -169,7 +169,7 @@ def create_histogram(bids):
 
 class ShowReceiverBids(Page):
     is_debug = False
-    timeout_seconds = 180
+    timeout_seconds = 1800
     show_histogram = False
 
     def vars_for_template(self):
@@ -204,7 +204,7 @@ class FinalOffer(Page):
     form_model = models.Player
     form_fields = ['final_offered_amount']
     is_debug = False
-    timeout_seconds = 180
+    timeout_seconds = 1800
     timeout_submission = {'final_offered_amount': -1}
 
     def is_displayed(self):
@@ -229,7 +229,7 @@ class FinalExpectation(Page):
     form_model = models.Player
     form_fields = ['final_receiver_expectation']
     is_debug = False
-    timeout_seconds = 180
+    timeout_seconds = 1800
     timeout_submission = {'final_receiver_expectation': Constants.endowment + 10}
 
     def is_displayed(self):

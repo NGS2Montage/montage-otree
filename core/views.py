@@ -54,7 +54,10 @@ class MyRedirectView(LoginRequiredMixin, RedirectView):
             return super(MyRedirectView, self).get(request, args, kwargs)
         else:
             user_code = user_association.participant.code
-            self.url = '/InitializeParticipant/%s/' % user_code
+            if user_association.participant.var['locked'] == user_association.session.var['locked']:
+                self.url = '/InitializeParticipant/%s/' % user_code
+            else:
+                self.url = reverse('game-started')
             return super(MyRedirectView, self).get(request, args, kwargs)
 
 

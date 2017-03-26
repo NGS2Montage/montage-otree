@@ -5,123 +5,122 @@
 
 {% block body_main %}
 
-    {% block myscripts %} {% endblock %}
+{% block myscripts %} {% endblock %}
 
-    <nav class="navbar navbar-default navbar-fixed-top" id="navbar_topdiv"
-         style="border-radius: 0px; background: rgb(241, 241, 241); border: 0px;">
-        <div class="container-fluid">
-            <div class="navbar-header col-md-4 text-center">
-                <a class="navbar-brand" href="{% url 'redirect' %}"
-                   style="margin-left: 20px; font-size: 150%; font-weight: bold; font-family: 'Times New Roman', Times, serif;">
-                    <b><span style="color: #EC4335;">N</span><span style="color: #34AA54;">G</span><span
-                            style="color: #4285F5;">S</span><span style="color: #F26722;">2</span>
-                        <span style="color: #34AA54;">Montage</span></b>
-                </a>
-            </div>
-            <div class="col-md-4" style="text-align: center; padding-top: 10px;">
-                {% block header_message %}
-                {% endblock %}
-            </div>
-            <div class="col-md-4">
-                <ul class="nav navbar-nav navbar-right" style="padding-right: 25px;">
-                    <li class="dropdown">
-                        <a class="dropdown-toggle" data-toggle="dropdown" href="#"><span
-                                style="font-size:100%;">Welcome {{ user.first_name|title }}</span>
-                            <span class="caret"></span></a>
-                        <ul class="dropdown-menu">
-                            <li><a href="{% url 'account_change_password' %}" style="font-size:100%;">Change
-                                Password</a></li>
-                            <li><a href="{% url 'account_logout' %}" style="font-size:100%;">Logout</a></li>
-                        </ul>
-                    </li>
-                </ul>
-            </div>
+<nav class="navbar navbar-default navbar-fixed-top" id="navbar_topdiv"
+     style="border-radius: 0px; background: rgb(241, 241, 241); border: 0px;">
+    <div class="container-fluid">
+        <div class="navbar-header col-md-4 text-center">
+            <a class="navbar-brand" href="{% url 'redirect' %}"
+               style="margin-left: 20px; font-size: 150%; font-weight: bold; font-family: 'Times New Roman', Times, serif;">
+                <b><span style="color: #EC4335;">N</span><span style="color: #34AA54;">G</span><span
+                        style="color: #4285F5;">S</span><span style="color: #F26722;">2</span>
+                    <span style="color: #34AA54;">Montage</span></b>
+            </a>
         </div>
-    </nav>
+        <div class="col-md-4" style="text-align: center; padding-top: 10px;">
+            {% block header_message %}
+            {% endblock %}
+        </div>
+        <div class="col-md-4">
+            <ul class="nav navbar-nav navbar-right" style="padding-right: 25px;">
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#"><span
+                            style="font-size:100%;">Welcome {{ user.first_name|title }}</span>
+                        <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="{% url 'account_change_password' %}" style="font-size:100%;">Change
+                            Password</a></li>
+                        <li><a href="{% url 'account_logout' %}" style="font-size:100%;">Logout</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
 
-    <div class="container" id="main_container">
+<div class="container" id="main_container">
 
-        <div class="row" style="margin-top: 120px;">
-            <div class="col-md-12" style="background: white; padding: 30px; border-color: lightgray;
+    <div class="row" style="margin-top: 120px;">
+        <div class="col-md-12" style="background: white; padding: 30px; border-color: lightgray;
                 border-radius: 12px; border-width: 3px; border-style: groove;">
 
-                <div class="page-header" style="margin-top: 0px; padding-top: 0px; padding-bottom: 15px;">
-                    <h2>{% block title %}{% endblock %}</h2>
-                </div>
-                <div>
-                    {% if view.has_timeout %}
-                        {% include 'otree/includes/TimeLimit.html' with form_element_id="form" %}
-                    {% endif %}
-
-                    {% if form.errors %}
-                        {% if form.non_field_errors %}
-                            <div class="alert alert-danger alert-dismissable">
-                                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                                {{ form.non_field_errors }}
-                            </div>
-                        {% endif %}
-                        {% for field, errors in form.errors.items %}
-                            <div class="alert alert-danger alert-dismissable">
-                                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                                {{ field }} : {{ errors }}
-                            </div>
-                        {% endfor %}
-                    {% endif %}
-
-                    <div id="error-notice" class="alert alert-danger"
-                         style="display:none">
-                        {% blocktrans trimmed %}
-                            An error occurred. Please check the logs or ask
-                            the administrator for help.{% endblocktrans %}
-                    </div>
-
-
-                    <form action="" method="post" role="form" class="form"
-                          id="form">{% csrf_token %}
-                        <input type="hidden" value="{{ request.path }}"
-                               name="origin_url"/>
-                        {% form form using %}
-                            {% formconfig row using "floppyforms/rows/bootstrap.html" %}
-                            <div id="otree-content">
-                                {% block content %}{% endblock %}
-                            </div>
-                        {% endform %}
-                    </form>
-                </div>
-                <br/>
-                {% if view.is_debug %}
-                    {% include 'otree/includes/debug_info.html' %}
+            <div class="page-header" style="margin-top: 0px; padding-top: 0px; padding-bottom: 15px;">
+                <h2>{% block title %}{% endblock %}</h2>
+            </div>
+            <div>
+                {% if view.has_timeout %}
+                    {% include 'otree/includes/TimeLimit.html' with form_element_id="form" %}
                 {% endif %}
 
+                {% if form.errors %}
+                    {% for field, errors in form.errors.items %}
+                        <div class="alert alert-danger alert-dismissable">
+                            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                            {{ field }} : {{ errors }}
+                        </div>
+                    {% endfor %}
+                {% elif form.non_field_errors %}
+                    <div class="alert alert-danger alert-dismissable">
+                        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                        {{ form.non_field_errors }}
+                    </div>
+                {% endif %}
+
+                <div id="error-notice" class="alert alert-danger"
+                     style="display:none">
+                    {% blocktrans trimmed %}
+                        An error occurred. Please check the logs or ask
+                        the administrator for help.{% endblocktrans %}
+                </div>
+
+
+                <form action="" method="post" role="form" class="form"
+                      id="form">{% csrf_token %}
+                    <input type="hidden" value="{{ request.path }}"
+                           name="origin_url"/>
+                    {% form form using %}
+                        {% formconfig row using "floppyforms/rows/bootstrap.html" %}
+                        <div id="otree-content">
+                            {% block content %}{% endblock %}
+                        </div>
+                    {% endform %}
+                </form>
+            </div>
+            <br/>
+            {% if view.is_debug %}
+                {% include 'otree/includes/debug_info.html' %}
+            {% endif %}
+
+        </div>
+    </div>
+
+</div>
+
+
+<!-- FOOTER : START -->
+
+<footer class="footer">
+    <div class="container-fluid" style="padding-left: 15px; padding-right: 15px;">
+        <div class="row" id="footer_div"
+             style="padding-top: 10px; border-top: solid 1px rgba(0, 0, 0, .14902); margin: 0px 0px 0px 0px; background: white;">
+            <div class="col-md-12 text-center" style="font-size: 85%;">
+                <p style="margin-bottom: 0px;">
+                    Copyright © 2017 - 2018 <a href="http://dac.cs.vt.edu/">Discovery Analytics Center</a>.
+                    All rights reserved.
+                </p>
+
+                <p style="margin-top: -2px; margin-bottom: 5px;">
+                    Developed by <a href="http://people.cs.vt.edu/parang/">Parang Saraf</a> and
+                    <a href="http://dac.cs.vt.edu/person/nathan-self/">Nathan Self</a>.
+                    Powered by <a href="http://otree.readthedocs.io/en/latest/">oTree</a>
+                </p>
             </div>
         </div>
-
     </div>
+</footer>
 
-
-    <!-- FOOTER : START -->
-
-    <footer class="footer">
-        <div class="container-fluid" style="padding-left: 15px; padding-right: 15px;">
-            <div class="row" id="footer_div"
-         style="padding-top: 10px; border-top: solid 1px rgba(0, 0, 0, .14902); margin: 0px 0px 0px 0px; background: white;">
-        <div class="col-md-12 text-center" style="font-size: 85%;">
-            <p style="margin-bottom: 0px;">
-                Copyright © 2017 - 2018 <a href="http://dac.cs.vt.edu/">Discovery Analytics Center</a>.
-                All rights reserved.
-            </p>
-
-            <p style="margin-top: -2px; margin-bottom: 5px;">
-                Developed by <a href="http://people.cs.vt.edu/parang/">Parang Saraf</a> and
-                <a href="http://dac.cs.vt.edu/person/nathan-self/">Nathan Self</a>.
-                Powered by <a href="http://otree.readthedocs.io/en/latest/">oTree</a>
-            </p>
-        </div>
-    </div>
-        </div>
-    </footer>
-
-    <!-- FOOTER: END -->
+<!-- FOOTER: END -->
 
 
 {% endblock %}
@@ -135,26 +134,29 @@
             background-repeat: no-repeat;
             margin-bottom: 60px;
         }
+
         html {
-  position: relative;
-  min-height: 100%;
-}
+            position: relative;
+            min-height: 100%;
+        }
 
-    .footer {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  /* Set the fixed height of the footer here */
-  height: 50px;
-  background-color: white;
-}
+        .footer {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            /* Set the fixed height of the footer here */
+            height: 50px;
+            background-color: white;
+        }
 
-    .navbar-nav > li > a, .navbar-brand {
-            padding-top:10px !important; padding-bottom:10px !important;
+        .navbar-nav > li > a, .navbar-brand {
+            padding-top: 10px !important;
+            padding-bottom: 10px !important;
             height: 40px;
-         }
+        }
+
         .navbar {
-            min-height:30px !important;
+            min-height: 30px !important;
             margin-bottom: 0px;
 
         }

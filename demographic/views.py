@@ -104,8 +104,29 @@ class Demographic(Page):
             self.participant.vars['playing'] = False
 
 
+
+class Demographic2(Page):
+    form_model = models.Player
+    template_name = 'demographic/demographic.html'
+    form_fields = ["age", "income"]
+    is_debug = False
+    timeout_submission = {"age": 1, "income": "Less than $25,000"}
+
+    def is_displayed(self):
+        if self.participant.vars['consent'] and self.participant.vars['playing']:
+            return True
+        else:
+            return False
+
+    def before_next_page(self):
+        if self.timeout_happened:
+            self.participant.vars['playing'] = False
+
+
+
 page_sequence = [
     Consent,
     ByeBye,
-    # Demographic
+    # Demographic,
+    Demographic2
 ]

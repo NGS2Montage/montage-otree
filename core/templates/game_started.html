@@ -1,0 +1,22 @@
+{% extends "account/base_login.html" %}
+{% load i18n %}
+{% block head_title %} Game Started {% endblock %}
+
+{% block inner %}
+
+    <div class="row" style="margin-top: 200px;">
+        <div class="col-md-1"></div>
+        <div class="col-md-10" style="background: white; padding: 30px; border-color: lightgray;
+                border-radius: 12px; border-width: 3px; border-style: groove;">
+
+            <h1 style="text-align: center;">{% trans "Too Late: Game Started" %}</h1>
+            <br/>
+            <p>It seems that you were late and the game has already started. You can't join now.
+                If you think this is a mistake, {% include 'contact_admin.html' %}</p>
+
+        </div>
+        <div class="col-md-1"></div>
+    </div>
+
+
+{% endblock %}

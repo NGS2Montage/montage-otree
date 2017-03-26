@@ -18,6 +18,7 @@ urlpatterns = [
     url(r'^no_association/$', TemplateView.as_view(template_name='no_association.html'), name='no-association'),
     url(r'^no_consent/$', TemplateView.as_view(template_name='no_consent.html'), name='no-consent'),
     url(r'^max_participants/$', TemplateView.as_view(template_name='max_participants.html'), name='max-participants'),
+    url(r'^game_started/$', TemplateView.as_view(template_name='game_started.html'), name='game-started'),
     url(r'^oops/$', TemplateView.as_view(template_name='oops.html'), name='oops'),
     url(r'^additional_user_info/$', views.AdditionUserView.as_view(template_name='additional_user_info.html'),
         name='additional-user-info'),
