@@ -2,39 +2,16 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0c8a2729-87a8-4a15-b762-8385a6b64f9a" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/temp_group_generation/.n.12.d.4.s.55.m.2.0_0" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/temp_group_generation/.n.12.d.8.s.55.m.2.0_7" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/temp_group_generation/.n.4.d.2.s.55.m.2.0_0" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/temp_group_generation/code.to.generate.k.reg.random.graphs.tar.gz" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/anagrams/dictionary_data/all_words.txt" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/anagrams/dictionary_data/dictionary.readme" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/anagrams/dictionary_data/load_dictionary.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/temp_group_generation/README.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/temp_group_generation/output/tests.n.10.d.4.s.55.m.2.0_4" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/temp_group_generation/output/tests.n.100.d.10.s.55.m.2.0_0" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/temp_group_generation/output/tests.n.100.d.11.s.55.m.2.0_2" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/temp_group_generation/output/tests.n.11.d.3.s.55.m.2.0_0" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/temp_group_generation/output/tests.n.11.d.5.s.55.m.2.0_0" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/temp_group_generation/output/tests.n.11.d.8.s.55.m.2.0_2" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/temp_group_generation/output/tests.n.12.d.7.s.55.m.2.0_0" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/temp_group_generation/output/tests.n.12.d.8.s.55.m.2.0_3" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/temp_group_generation/output/tests.n.35.d.7.s.55.m.2.0_0" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/temp_group_generation/output/tests.n.6.d.3.s.55.m.2.0_1" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/temp_group_generation/run.diff.2" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/temp_group_generation/run.v04.all" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/temp_group_generation/social_driver.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/temp_group_generation/social_graph.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/temp_group_generation/tests.n.10.d.4.s.55.m.2.0_4.valid" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/temp_group_generation/tests.n.6.d.3.s.55.m.2.0_1.valid" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ultimatum_waiting/social_graph.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/NGS2 Workflow Logic.xlsx" afterPath="$PROJECT_DIR$/NGS2 Workflow Logic.xlsx" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/anagrams/dictionary_data/letter_distribution.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/anagrams/templates/anagrams/initial_results_wait.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/dataSources/c6484fd0-c5f8-407d-a35b-632b21d64bca.xml" afterPath="$PROJECT_DIR$/.idea/dataSources/c6484fd0-c5f8-407d-a35b-632b21d64bca.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/anagrams/models.py" afterPath="$PROJECT_DIR$/anagrams/models.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/anagrams/templates/anagrams/Anagrams.html" afterPath="$PROJECT_DIR$/anagrams/templates/anagrams/Anagrams.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/anagrams/templates/anagrams/Results.html" afterPath="$PROJECT_DIR$/anagrams/templates/anagrams/Results.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/anagrams/templates/anagrams/WaitPage.html" afterPath="$PROJECT_DIR$/anagrams/templates/anagrams/WaitPage.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/anagrams/views.py" afterPath="$PROJECT_DIR$/anagrams/views.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/core/account_creation/emails.txt" afterPath="$PROJECT_DIR$/core/account_creation/emails.txt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ultimatum/templates/ultimatum/ShowOfferorBids.html" afterPath="$PROJECT_DIR$/ultimatum/templates/ultimatum/ShowOfferorBids.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ultimatum/templates/ultimatum/ShowReceiverBids.html" afterPath="$PROJECT_DIR$/ultimatum/templates/ultimatum/ShowReceiverBids.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ultimatum/views.py" afterPath="$PROJECT_DIR$/ultimatum/views.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/settings.py" afterPath="$PROJECT_DIR$/settings.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -69,24 +46,27 @@
   </component>
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
-    <splitter split-orientation="horizontal" split-proportion="0.5007153">
+    <splitter split-orientation="horizontal" split-proportion="0.44800693">
       <split-first>
         <leaf>
-          <file leaf-file-name="models.py" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/ultimatum/models.py">
+          <file leaf-file-name="views.py" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/ultimatum/views.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="-660">
-                  <caret line="36" column="20" lean-forward="false" selection-start-line="36" selection-start-column="20" selection-end-line="36" selection-end-column="20" />
-                  <folding />
+                <state relative-caret-position="243">
+                  <caret line="27" column="23" lean-forward="true" selection-start-line="22" selection-start-column="8" selection-end-line="27" selection-end-column="47" />
+                  <folding>
+                    <element signature="e#4531#4605#0" expanded="false" />
+                    <marker date="1490427344000" expanded="true" signature="10036:10057" ph="..." />
+                  </folding>
                 </state>
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="views.py" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/anagrams/views.py">
+          <file leaf-file-name="Results.html" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/ultimatum/templates/ultimatum/Results.html">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="155">
-                  <caret line="12" column="35" lean-forward="false" selection-start-line="12" selection-start-column="35" selection-end-line="12" selection-end-column="35" />
+                <state relative-caret-position="-360">
+                  <caret line="3" column="0" lean-forward="false" selection-start-line="3" selection-start-column="0" selection-end-line="5" selection-end-column="14" />
                   <folding />
                 </state>
               </provider>
@@ -95,8 +75,8 @@
           <file leaf-file-name="models.py" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/anagrams/models.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="-197">
-                  <caret line="24" column="24" lean-forward="true" selection-start-line="24" selection-start-column="24" selection-end-line="24" selection-end-column="24" />
+                <state relative-caret-position="372">
+                  <caret line="191" column="0" lean-forward="true" selection-start-line="191" selection-start-column="0" selection-end-line="191" selection-end-column="0" />
                   <folding />
                 </state>
               </provider>
@@ -115,8 +95,8 @@
           <file leaf-file-name="ShowOfferorBids.html" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/ultimatum/templates/ultimatum/ShowOfferorBids.html">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="426">
-                  <caret line="95" column="10" lean-forward="true" selection-start-line="68" selection-start-column="4" selection-end-line="95" selection-end-column="10" />
+                <state relative-caret-position="195">
+                  <caret line="103" column="55" lean-forward="true" selection-start-line="97" selection-start-column="4" selection-end-line="103" selection-end-column="55" />
                   <folding />
                 </state>
               </provider>
@@ -146,7 +126,7 @@
             <entry file="file://$PROJECT_DIR$/../python3/lib/python3.4/site-packages/otreechat/templates/otreechat/widget.html">
               <provider selected="true" editor-type-id="text-editor">
                 <state relative-caret-position="375">
-                  <caret line="25" column="8" lean-forward="true" selection-start-line="7" selection-start-column="0" selection-end-line="25" selection-end-column="8" />
+                  <caret line="25" column="8" lean-forward="false" selection-start-line="7" selection-start-column="0" selection-end-line="25" selection-end-column="8" />
                   <folding />
                 </state>
               </provider>
@@ -156,21 +136,103 @@
       </split-first>
       <split-second>
         <leaf>
-          <file leaf-file-name="ShowReceiverBids.html" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/ultimatum/templates/ultimatum/ShowReceiverBids.html">
+          <file leaf-file-name="abstract.py" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/../python3/lib/python3.4/site-packages/otree/views/abstract.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="531">
-                  <caret line="92" column="10" lean-forward="false" selection-start-line="92" selection-start-column="10" selection-end-line="92" selection-end-column="10" />
+                <state relative-caret-position="136">
+                  <caret line="644" column="0" lean-forward="false" selection-start-line="644" selection-start-column="0" selection-end-line="644" selection-end-column="0" />
                   <folding />
                 </state>
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="settings.py" pinned="false" current-in-tab="true">
+          <file leaf-file-name="views.py" pinned="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/anagrams/views.py">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="1635">
+                  <caret line="129" column="80" lean-forward="false" selection-start-line="129" selection-start-column="80" selection-end-line="129" selection-end-column="80" />
+                  <folding>
+                    <element signature="e#2018#2867#0" expanded="false" />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="settings.py" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/settings.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="315">
+                <state relative-caret-position="1290">
                   <caret line="171" column="34" lean-forward="false" selection-start-line="171" selection-start-column="34" selection-end-line="171" selection-end-column="34" />
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="views.py" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/demographic/views.py">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="444">
+                  <caret line="109" column="6" lean-forward="false" selection-start-line="109" selection-start-column="6" selection-end-line="109" selection-end-column="6" />
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="initial_results_wait.html" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/anagrams/templates/anagrams/initial_results_wait.html">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="45">
+                  <caret line="3" column="44" lean-forward="false" selection-start-line="3" selection-start-column="44" selection-end-line="3" selection-end-column="44" />
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="WaitPage.html" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/anagrams/templates/anagrams/WaitPage.html">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="225">
+                  <caret line="15" column="37" lean-forward="false" selection-start-line="15" selection-start-column="37" selection-end-line="15" selection-end-column="37" />
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="Results.html" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/anagrams/templates/anagrams/Results.html">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="225">
+                  <caret line="51" column="17" lean-forward="false" selection-start-line="51" selection-start-column="17" selection-end-line="51" selection-end-column="17" />
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="models.py" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/ultimatum/models.py">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="285">
+                  <caret line="36" column="20" lean-forward="false" selection-start-line="36" selection-start-column="20" selection-end-line="36" selection-end-column="20" />
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="instructions_public_goods.html" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/instructions/templates/instructions/instructions_public_goods.html">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="0">
+                  <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="instructions_anagram.html" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/instructions/templates/instructions/instructions_anagram.html">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="165">
+                  <caret line="13" column="10" lean-forward="true" selection-start-line="13" selection-start-column="10" selection-end-line="13" selection-end-column="10" />
                   <folding />
                 </state>
               </provider>
@@ -183,15 +245,14 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Python Script" />
         <option value="JavaScript File" />
         <option value="HTML File" />
+        <option value="Python Script" />
       </list>
     </option>
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>default_</find>
       <find>current_site</find>
       <find>format_email_subject</find>
       <find>reverse</find>
@@ -220,6 +281,7 @@
       <find>nvalid argument provided</find>
       <find>send_mail</find>
       <find>styles</find>
+      <find>create_network</find>
       <find>num_groups</find>
     </findStrings>
     <replaceStrings>
@@ -234,13 +296,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/instructions/templates/instructions/instructions_public_goods.html" />
-        <option value="$PROJECT_DIR$/instructions/templates/instructions/InstructionsPhase2.html" />
-        <option value="$PROJECT_DIR$/instructions/templates/instructions/ultimatum_youtube.html" />
-        <option value="$PROJECT_DIR$/instructions/templates/instructions/instructions_ultimatum.html" />
-        <option value="$PROJECT_DIR$/instructions/models.py" />
-        <option value="$PROJECT_DIR$/instructions/templates/instructions/InstructionsPhase3.html" />
-        <option value="$PROJECT_DIR$/instructions/views.py" />
         <option value="$PROJECT_DIR$/_templates/global/wait_progress_bar.html" />
         <option value="$PROJECT_DIR$/anagrams_waiting/templates/anagrams_waiting/WaitPage.html" />
         <option value="$PROJECT_DIR$/ultimatum_waiting/templates/ultimatum_waiting/WaitPage.html" />
@@ -279,12 +334,19 @@
         <option value="$PROJECT_DIR$/core/templates/account/email/account_creation_key_message.txt" />
         <option value="$PROJECT_DIR$/demographic/views.py" />
         <option value="$PROJECT_DIR$/core/account_creation/emails.txt" />
-        <option value="$PROJECT_DIR$/anagrams/views.py" />
         <option value="$PROJECT_DIR$/anagrams/dictionary_data/load_dictionary.py" />
         <option value="$PROJECT_DIR$/ultimatum/templates/ultimatum/ShowOfferorBids.html" />
         <option value="$PROJECT_DIR$/ultimatum/templates/ultimatum/ShowReceiverBids.html" />
         <option value="$PROJECT_DIR$/ultimatum/views.py" />
+        <option value="$PROJECT_DIR$/anagrams_trash/anagrams/master_data/temp/letter_distribution.py" />
+        <option value="$PROJECT_DIR$/anagrams/dictionary_data/letter_distribution.py" />
+        <option value="$PROJECT_DIR$/anagrams/templates/anagrams/Anagrams.html" />
+        <option value="$PROJECT_DIR$/anagrams/templates/anagrams/initial_results_wait.html" />
+        <option value="$PROJECT_DIR$/anagrams/templates/anagrams/WaitPage.html" />
+        <option value="$PROJECT_DIR$/anagrams/templates/anagrams/Results.html" />
         <option value="$PROJECT_DIR$/settings.py" />
+        <option value="$PROJECT_DIR$/anagrams/views.py" />
+        <option value="$PROJECT_DIR$/anagrams/models.py" />
       </list>
     </option>
   </component>
@@ -325,6 +387,20 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="montage_otree" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="montage_otree" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="montage_otree" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ultimatum_waiting" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -396,7 +472,119 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="instructions" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="montage_otree" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="montage_otree" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="instructions" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="templates" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="instructions" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="montage_otree" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="montage_otree" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="demographic" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="montage_otree" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="montage_otree" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="anagrams" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="montage_otree" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="montage_otree" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="anagrams" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="templates" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="anagrams" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="montage_otree" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="montage_otree" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="anagrams" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="static" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="anagrams" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="montage_otree" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="montage_otree" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="anagrams" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="dictionary_data" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -446,11 +634,11 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/anagrams/templates/anagrams" />
       <recent name="$PROJECT_DIR$/anagrams/dictionary_data" />
       <recent name="$PROJECT_DIR$/ultimatum/templates/ultimatum" />
       <recent name="$PROJECT_DIR$/public_goods/templates/public_goods" />
       <recent name="$PROJECT_DIR$/ultimatum" />
-      <recent name="$PROJECT_DIR$/core/templates" />
     </key>
   </component>
   <component name="RunManager" selected="Django server.montage_otree">
@@ -750,7 +938,7 @@
     <frame x="0" y="23" width="1440" height="873" extended-state="6" />
     <editor active="false" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.17453505" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.17453505" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.30976865" sideWeight="0.5028612" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.31616595" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -758,9 +946,9 @@
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.27120823" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24964234" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.78020567" sideWeight="0.49713877" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3547558" sideWeight="0.49713877" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3084833" sideWeight="0.49713877" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.43830335" sideWeight="0.49713877" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -815,103 +1003,11 @@
           </properties>
         </breakpoint>
       </default-breakpoints>
-      <option name="time" value="76" />
+      <option name="time" value="78" />
     </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/public_goods/models.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="540">
-          <caret line="49" column="0" lean-forward="false" selection-start-line="49" selection-start-column="0" selection-end-line="49" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public_goods/templates/public_goods/Contribute.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="465">
-          <caret line="32" column="18" lean-forward="false" selection-start-line="30" selection-start-column="12" selection-end-line="32" selection-end-column="18" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="dbDummy://dbtable:/440f9cb6/c6484fd0-c5f8-407d-a35b-632b21d64bca/otree_session">
-      <provider editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-        <state>
-          <filtering enabled="true" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/_templates/global/WaitPage.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="536">
-          <caret line="77" column="85" lean-forward="false" selection-start-line="77" selection-start-column="85" selection-end-line="77" selection-end-column="85" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/core/templates/account/base_logout.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="772">
-          <caret line="95" column="85" lean-forward="true" selection-start-line="95" selection-start-column="16" selection-end-line="95" selection-end-column="85" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/core/templates/account/base_login.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="742">
-          <caret line="104" column="16" lean-forward="false" selection-start-line="104" selection-start-column="16" selection-end-line="104" selection-end-column="85" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ultimatum/social_graph.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="330">
-          <caret line="22" column="7" lean-forward="true" selection-start-line="22" selection-start-column="7" selection-end-line="22" selection-end-column="7" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="dbDummy://dbtable:/440f9cb6/c6484fd0-c5f8-407d-a35b-632b21d64bca/otree_undefinedformmodel">
-      <provider editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-        <state>
-          <filtering enabled="true" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../../embers_autogsr_final/embers_autogsr/templates/autogsr/login.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../../embers_autogsr_final/embers_autogsr/templates/autogsr/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1066">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ultimatum/templates/ultimatum/WaitPage.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/ultimatum/templates/ultimatum/initial_results_wait.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="180">
@@ -972,14 +1068,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/ultimatum/templates/ultimatum/Results.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="816">
-          <caret line="75" column="13" lean-forward="false" selection-start-line="75" selection-start-column="13" selection-end-line="75" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/ultimatum/templates/ultimatum/DifiIndex.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="120">
@@ -1023,14 +1111,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="165">
           <caret line="11" column="11" lean-forward="false" selection-start-line="11" selection-start-column="11" selection-end-line="11" selection-end-column="11" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/demographic/views.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="630">
-          <caret line="109" column="6" lean-forward="false" selection-start-line="109" selection-start-column="6" selection-end-line="109" selection-end-column="6" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1116,14 +1196,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/anagrams/dictionary_data/load_dictionary.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="83">
-          <caret line="17" column="0" lean-forward="false" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/ultimatum/static/ultimatum/voting.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -1167,7 +1239,7 @@
     <entry file="file://$PROJECT_DIR$/../python3/lib/python3.4/site-packages/otreechat/templates/otreechat/widget.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="375">
-          <caret line="25" column="8" lean-forward="true" selection-start-line="7" selection-start-column="0" selection-end-line="25" selection-end-column="8" />
+          <caret line="25" column="8" lean-forward="false" selection-start-line="7" selection-start-column="0" selection-end-line="25" selection-end-column="8" />
           <folding />
         </state>
       </provider>
@@ -1180,14 +1252,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/ultimatum/templates/ultimatum/ShowOfferorBids.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="426">
-          <caret line="95" column="10" lean-forward="true" selection-start-line="68" selection-start-column="4" selection-end-line="95" selection-end-column="10" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/ultimatum/templates/ultimatum/ShowReceiverBids.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="531">
@@ -1196,46 +1260,174 @@
         </state>
       </provider>
     </entry>
+    <entry file="dbDummy://dbtable:/440f9cb6/c6484fd0-c5f8-407d-a35b-632b21d64bca/anagrams_dictionary">
+      <provider editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state>
+          <filtering enabled="true" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/anagrams/dictionary_data/load_dictionary.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="99">
+          <caret line="17" column="0" lean-forward="false" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/anagrams/static/anagrams/game.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1800">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/anagrams_trash/anagrams/master_data/temp/letter_distribution.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/anagrams/dictionary_data/letter_distribution.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="27" column="13" lean-forward="true" selection-start-line="27" selection-start-column="13" selection-end-line="27" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ultimatum/templates/ultimatum/Results.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-360">
+          <caret line="3" column="0" lean-forward="false" selection-start-line="3" selection-start-column="0" selection-end-line="5" selection-end-column="14" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ultimatum/templates/ultimatum/ShowOfferorBids.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="195">
+          <caret line="103" column="55" lean-forward="true" selection-start-line="97" selection-start-column="4" selection-end-line="103" selection-end-column="55" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/anagrams/templates/anagrams/Anagrams.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="393">
+          <caret line="184" column="37" lean-forward="false" selection-start-line="184" selection-start-column="37" selection-end-line="184" selection-end-column="37" />
+          <folding>
+            <element signature="n#style#0;n#div#1;n#!!top" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/instructions/templates/instructions/instructions_public_goods.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/instructions/templates/instructions/instructions_anagram.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="165">
+          <caret line="13" column="10" lean-forward="true" selection-start-line="13" selection-start-column="10" selection-end-line="13" selection-end-column="10" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ultimatum/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="285">
+          <caret line="36" column="20" lean-forward="false" selection-start-line="36" selection-start-column="20" selection-end-line="36" selection-end-column="20" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/anagrams/templates/anagrams/initial_results_wait.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="45">
+          <caret line="3" column="44" lean-forward="false" selection-start-line="3" selection-start-column="44" selection-end-line="3" selection-end-column="44" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/anagrams/templates/anagrams/WaitPage.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="225">
+          <caret line="15" column="37" lean-forward="false" selection-start-line="15" selection-start-column="37" selection-end-line="15" selection-end-column="37" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/anagrams/templates/anagrams/Results.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="225">
+          <caret line="51" column="17" lean-forward="false" selection-start-line="51" selection-start-column="17" selection-end-line="51" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/demographic/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="444">
+          <caret line="109" column="6" lean-forward="false" selection-start-line="109" selection-start-column="6" selection-end-line="109" selection-end-column="6" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/ultimatum/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="139">
-          <caret line="120" column="6" lean-forward="false" selection-start-line="120" selection-start-column="6" selection-end-line="120" selection-end-column="6" />
+        <state relative-caret-position="243">
+          <caret line="27" column="23" lean-forward="true" selection-start-line="22" selection-start-column="8" selection-end-line="27" selection-end-column="47" />
           <folding>
-            <element signature="e#658#2202#0" expanded="false" />
             <element signature="e#4531#4605#0" expanded="false" />
             <marker date="1490427344000" expanded="true" signature="10036:10057" ph="..." />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/ultimatum/models.py">
+    <entry file="file://$PROJECT_DIR$/../python3/lib/python3.4/site-packages/otree/views/abstract.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-660">
-          <caret line="36" column="20" lean-forward="false" selection-start-line="36" selection-start-column="20" selection-end-line="36" selection-end-column="20" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/anagrams/views.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="155">
-          <caret line="12" column="35" lean-forward="false" selection-start-line="12" selection-start-column="35" selection-end-line="12" selection-end-column="35" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/anagrams/models.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-197">
-          <caret line="24" column="24" lean-forward="true" selection-start-line="24" selection-start-column="24" selection-end-line="24" selection-end-column="24" />
+        <state relative-caret-position="136">
+          <caret line="644" column="0" lean-forward="false" selection-start-line="644" selection-start-column="0" selection-end-line="644" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/settings.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="315">
+        <state relative-caret-position="1290">
           <caret line="171" column="34" lean-forward="false" selection-start-line="171" selection-start-column="34" selection-end-line="171" selection-end-column="34" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/anagrams/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1635">
+          <caret line="129" column="80" lean-forward="false" selection-start-line="129" selection-start-column="80" selection-end-line="129" selection-end-column="80" />
+          <folding>
+            <element signature="e#2018#2867#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/anagrams/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="372">
+          <caret line="191" column="0" lean-forward="true" selection-start-line="191" selection-start-column="0" selection-end-line="191" selection-end-column="0" />
           <folding />
         </state>
       </provider>

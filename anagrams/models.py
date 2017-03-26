@@ -20,10 +20,14 @@ Your app description
 class Constants(BaseConstants):
     name_in_url = 'anagrams'
     players_per_group = None
-    num_groups = 2
+    num_groups = 1
     num_rounds = 1
     num_user_letters = 3
     num_neighbors = 2
+    letter_distribution = [["a", 46], ["b", 10], ["c", 22], ["d", 19], ["e", 59], ["f", 6], ["g", 13], ["h", 14],
+                           ["i", 46], ["j", 1], ["k", 4], ["l", 30], ["m", 15], ["n", 38], ["o", 38], ["p", 16],
+                           ["q", 1], ["r", 38], ["s", 38], ["t", 34], ["u", 19], ["v", 5], ["w", 4], ["x", 1],
+                           ["y", 10], ["z", 2]]
 
 
 class Subsession(BaseSubsession):
@@ -34,7 +38,7 @@ class Subsession(BaseSubsession):
 
             # extract and mix the players
             players = self.get_players()
-            random.shuffle(players)
+            # random.shuffle(players)
 
             # create the base for number of groups
             num_players = len(players)
@@ -79,7 +83,6 @@ class Subsession(BaseSubsession):
             p.save()
 
 
-
 class Group(BaseGroup):
     pass
 
@@ -89,10 +92,22 @@ class Player(BasePlayer):
     word_channel = django_models.CharField(max_length=255)
 
     def generate_user_letters(self):
-        alphabet = list(string.ascii_lowercase)
+        # alphabet = list(string.ascii_lowercase)
+        distributed_letters = []
+        generated = set()
+        for ltr, num in Constants.letter_distribution:
+            for i in range(num):
+                distributed_letters.append(ltr)
         for _ in range(Constants.num_user_letters):
             letter = self.userletter_set.create()
-            letter.letter = random.choice(alphabet).upper()
+            found = False
+            while not found:
+                letter_choice = random.choice(distributed_letters).upper()
+                if letter_choice in generated:
+                    continue
+                generated.add(letter_choice)
+                found = True
+            letter.letter = letter_choice
             letter.save()
 
     def get_transaction_channel(self):
@@ -172,4 +187,5 @@ class TeamWord(models.Model):
 
 
 class Dictionary(models.Model):
-    word = models.CharField(max_length=100, db_index=True, unique=True)
+    # word = models.CharField(max_length=100, db_index=True, unique=True)
+    word = models.CharField(max_length=100)

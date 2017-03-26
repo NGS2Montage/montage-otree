@@ -169,8 +169,9 @@ SESSION_CONFIGS = [
     {
         'name': 'anagrams',
         'display_name': 'Anagrams',
-        'num_demo_participants': 8,
-        'app_sequence': ['anagrams'],
+        'num_demo_participants': 4,
+        'participation_money': 0.05,
+        'app_sequence': ['demographic', 'anagrams'],
     },
 ]
 

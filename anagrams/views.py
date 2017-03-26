@@ -1,8 +1,9 @@
 from otree.api import Currency as c, currency_range, safe_json
 from . import models
 from ._builtin import Page, WaitPage
-from .models import Constants, ChatGroup
+from .models import Constants, ChatGroup, TeamWord
 from ultimatum.social_graph import create_network
+from django.core.mail import send_mail
 
 
 class WaitPage(WaitPage):
@@ -13,6 +14,43 @@ class WaitPage(WaitPage):
         group_size = Constants.num_neighbors
         for group in self.subsession.get_groups():
             self.assign_players_in_chatgroups(group.get_players(), group_size)
+        '''
+        eligible_players = []
+        self.session.vars['locked'] = True
+        for player in self.subsession.get_players():
+            if player.participant.vars['consent'] and player.participant.vars['playing']:
+                player.participant.vars['locked'] = True
+                eligible_players.append(player)
+
+        num_players = len(eligible_players)
+        ppg_list = [num_players // Constants.num_groups] * Constants.num_groups
+
+        i = 0
+        while sum(ppg_list) < num_players:
+            ppg_list[i] += 1
+            i += 1
+            if i >= len(ppg_list):
+                i = 0
+
+        # reassignment of groups
+        list_of_lists = []
+        for j, ppg in enumerate(ppg_list):
+            start_index = 0 if j == 0 else sum(ppg_list[:j])
+            end_index = start_index + ppg
+            group_players = eligible_players[start_index:end_index]
+            list_of_lists.append(group_players)
+        uneligible_players = []
+        for p in self.subsession.get_players():
+            if p not in eligible_players:
+                uneligible_players.append(p)
+        list_of_lists.append(uneligible_players)
+        self.subsession.set_group_matrix(list_of_lists)
+
+        for p in eligible_players:
+            p.generate_user_letters()
+            p.word_channel = p.get_word_channel()
+            p.save()
+        '''
 
     def assign_players_in_chatgroups(self, players, group_size):
         if group_size < 2:
@@ -42,6 +80,14 @@ class WaitPage(WaitPage):
 
 
 class Anagrams(Page):
+    is_debug = False
+    timeout_seconds = 180
+
+    def is_displayed(self):
+        if self.participant.vars['consent'] and self.participant.vars['playing']:
+            return True
+        else:
+            return False
 
     def vars_for_template(self):
         context = {}
@@ -70,13 +116,29 @@ class Anagrams(Page):
 
 
 class ResultsWaitPage(WaitPage):
+    is_debug = False
+    template_name = 'anagrams/initial_results_wait.html'
 
     def after_all_players_arrive(self):
         pass
 
 
 class Results(Page):
-    pass
+    is_debug = False
+
+    def is_displayed(self):
+        if self.participant.vars['consent'] and self.participant.vars['playing']:
+            return True
+        else:
+            return False
+
+    def vars_for_template(self):
+        word_count = len(TeamWord.objects.filter(group=self.group))
+        earnings_per_word = 0.5
+        total_earnings = word_count * earnings_per_word
+        toReturn = {'word_count': word_count, 'earnings_per_word': earnings_per_word,
+                    'total_earnings': total_earnings}
+        return toReturn
 
 
 page_sequence = [

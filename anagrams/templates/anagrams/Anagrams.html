@@ -8,14 +8,14 @@
 
 {% block content %}
 
-{% block myscripts %}
-<script type="text/javascript">
-    // var from_django = "foobar";
-    var varsFromDjango = {{ vars_for_js }};
-</script>
-<script type="text/javascript" src="{% static 'anagrams/rivets.bundled.min.js' %}"></script>
-{% endblock %}
-<!--
+    {% block myscripts %}
+        <script type="text/javascript">
+            // var from_django = "foobar";
+            var varsFromDjango = {{ vars_for_js }};
+        </script>
+        <script type="text/javascript" src="{% static 'anagrams/rivets.bundled.min.js' %}"></script>
+    {% endblock %}
+    <!--
 Documentation on how to write a django template here:
 https://docs.djangoproject.com/en/1.8/ref/templates/language/
 
@@ -24,114 +24,190 @@ http://getbootstrap.com/components/
 
     {% next_button %}
 -->
-<div id="app-view" class="row" style="background: white; padding: 30px; border-color: lightgray;
+    <div id="app-view" class="row" style="background: white; padding: 30px; border-color: lightgray;
                 border-radius: 12px; border-width: 3px; border-style: groove;">
-    <div class="col-md-4">
-        <div class="row">
-            <p>{app.transactionError}</p>
-            <ul>
-                <li rv-each-friend="app.friends">
-                    <span>Friend : { friend.name }</span>
-                    <ul>
-                        <li rv-each-letter="friend.letters">
-                            <span rv-on-click="letter.requestLetter">Letter : { letter }</span>
-                        </li>
-                    </ul>
-                </li>
-            </ul>
-        </div>
-        <div class="row">
-            {% for chat in player.chats %}
-                <h4>{{ chat.label }}</h4>
-                {% chat nickname=player.chat_nickname channel=chat.channel %}
-            {% endfor %}
+        <div class="col-md-4">
 
-<!--            <ul>
-                <li rv-each-chat="app.chats">
-                    <span>[{ chat.user }]</span>
-                    <span>{chat.message}</span>
-                    <span>({chat.created})</span>
-                </li>
-            </ul>
+            <div class="row"><b>Welcome, {app.user.name}</b></div>
 
-            <form onsubmit="return false">
-                <div class="form-group">
-                    <input rv-value="app.newChat" rv-on-submit="app.sendChat" type="text" name="new-chat">
-                </div>
-                <button rv-on-click="app.sendChat" type="submit" class="btn btn-default">Send Chat</button>
-            </form>-->
-        </div>
-    </div>
-    <div class="col-md-4">
-        <div class="row">
-            <ul>
-                <li rv-each-word="app.successWords">
-                    <span>{word}</span>
-                </li>
-            </ul>
-        </div>
-        <div class="row">
-            Enter word:
-            need input here
+            <div class="row" style="margin-top: 10px; height: 245px; overflow-y: auto;">
+                <p>{app.transactionError}</p>
 
-            <div class='otree-chat' id='anagrams-words-{{ word_channel }}'>
-                <div class='messages'></div>
-                <input size="40">
-                <button type="button">Submit</button>
+                <ul>
+                    <li rv-each-friend="app.friends" style="margin-top: 15px;">
+                        <p style="margin-bottom: 5px;"><b>{ friend.name }</b></p>
+                        <button type="button" class="btn btn-default" rv-each-letter="friend.letters"
+                                rv-on-click="letter.requestLetter" style="margin-left: 5px;">{ letter }
+                        </button>
+
+                    </li>
+                </ul>
             </div>
 
-            <p>{app.wordError}</p>
+            <div class="row" style="margin-top: 20px; padding-left: 30px;">
+                <div class="col-md-12">
+                    <div class="row">
+                        <div class="col-md-7 offset-md-1" style="border-top: 1px dotted #ccc;"></div>
+                    </div>
+                    <div class="row" style="margin-top: 15px;">
+                      <p><b>Your Letters:</b></p>
+                <div class="col-md-12" style="padding-left: 12px;">
+                <button type="button" class="btn btn-default" rv-each-letter="app.user.letters"
+                        style="margin-left: 5px;">{ letter }
+                </button>
+                    </div>
 
-            <!--<form onsubmit="return false">
-                <div class="form-group">
-                    <input rv-value="app.newWord" rv-on-submit="app.sendWord" type="text" name="new-word">
+                    </div>
                 </div>
-                <button rv-on-click="app.sendWord" type="submit" class="btn btn-default">Submit</button>
-            </form>-->
-        </div>
-    </div>
-    <div class="col-md-4">
-        <div class="row">Welcome, {app.user.name}</div>
-        <div class="row">Countdown goes here</div>
-        <div class="row">
-            Your Letters:
-            <ul>
-                <li rv-each-letter="app.user.letters">{letter}</li>
-            </ul>
-            Requested by your friends:
-            <!--<ul rv-each-friend="app.friends">
-                <li rv-each-transaction="friend.transactions"
-                    rv-on-click="transaction.approve"
-                    rv-hide="transaction.approved">
-                    {friend.name} requests your {transaction}
-                </li>
-            </ul>-->
-            <ul>
-                <li rv-each-transaction="app.requests"
-                    rv-on-click="transaction.approve"
-                    rv-hide="transaction.approved">
-                    {transaction.borrower} requests your {transaction}
-                </li>
-            </ul>
-            Received from your friends:
-            <ul>
-                <li rv-each-transaction="app.user.transactions"
-                    rv-show="transaction.approved">
-                    {transaction} from {transaction.owner}</li>
-            </ul>
-            Requested by you and waiting for response:
-            <ul>
-                <li rv-each-transaction="app.user.transactions"
-                    rv-hide="transaction.approved">
-                    requested {transaction} from {transaction.owner}</li>
-            </ul>
-        </div>
-    </div>
-</div>
+            </div>
 
+        </div>
+        <div class="col-md-4" style="padding-left: 0px; padding-right: 40px; height:400px;">
+            <div class="row" style="height: 330px; border: 1px solid #ccc; padding: 5px;">
+                <ul>
+                    <li rv-each-word="app.successWords">
+                        <span>{word}</span>
+                    </li>
+                </ul>
+            </div>
+            <div class="row" style="height: 50px;">
+                <div class='otree-chat' id='anagrams-words-{{ word_channel }}' style="">
+                    <div class='messages' style="height: 0px;"></div>
+                    Enter Word: <input size="25">
+                    <button type="button">Submit</button>
+                </div>
+
+                <p style="margin-top: 7px; color:red; padding-left: 10px; font-weight: bold;">{app.wordError}</p>
+
+                <!--<form onsubmit="return false">
+                    <div class="form-group">
+                        <input rv-value="app.newWord" rv-on-submit="app.sendWord" type="text" name="new-word">
+                    </div>
+                    <button rv-on-click="app.sendWord" type="submit" class="btn btn-default">Submit</button>
+                </form>-->
+            </div>
+        </div>
+        <div class="col-md-4" style="padding-left: 20px;">
+
+
+
+            <div class="row" style="margin-top: 3px;">
+                <div class="col-md-12">
+                    <b>Requested by your friends:</b><br/>
+                    <!--<ul rv-each-friend="app.friends">
+                        <li rv-each-transaction="friend.transactions"
+                            rv-on-click="transaction.approve"
+                            rv-hide="transaction.approved">
+                            {friend.name} requests your {transaction}
+                        </li>
+                    </ul>-->
+
+                    <div class="row" rv-each-transaction="app.requests" style="margin-left: 11px;">
+                        <div rv-hide="transaction.approved">
+                        <button type="button" class="btn btn-info" style="margin-top: 7px;"
+                                rv-on-click="transaction.approve">
+                            {transaction.borrower} requests your {transaction}
+                        </button> (click to approve) </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row" style="margin-top: 20px;">
+                <div class="col-md-12">
+                    <div class="row">
+                        <div class="col-md-10 offset-md-2" style="border-top: 1px dotted #ccc;"></div>
+                    </div>
+
+                    <div class="row" style="margin-top: 15px;">
+                      <div class="col-md-12">
+                <b>Received from your friends:</b><br/>
+
+                    <button type="button" class="btn btn-success disabled" style="display: block; margin-top: 7px; margin-left: 10px;"
+                        rv-each-transaction="app.user.transactions" rv-show="transaction.approved">{transaction} from {transaction.owner}
+                </button>
+
+                </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="row" style="margin-top: 20px;">
+                <div class="col-md-12">
+                    <div class="row">
+                        <div class="col-md-10 offset-md-2" style="border-top: 1px dotted #ccc;"></div>
+                    </div>
+
+                    <div class="row" style="margin-top: 15px;">
+                        <div class="col-md-12">
+                <b>Requested by you and waiting for response:</b><br/>
+                <!--(Tell them to approve your request by clicking it. Use the chat window to send them a message)-->
+
+                <div class="row" rv-each-transaction="app.user.transactions" style="margin-left: 11px;">
+                    <button type="button" class="btn btn-warning disabled" style="display: block; margin-top: 7px;"
+                                rv-hide="transaction.approved">requested {transaction} from {transaction.owner}
+                        </button>
+
+                </div>
+                </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="row" style="background: white; padding: 10px 10px 20px 10px; border-color: lightgray;
+                border-radius: 12px; border-width: 3px; border-style: groove;">
+        <div class="col-md-12">
+            {% for chat in player.chats %}
+                {% if forloop.counter0|divisibleby:2 %}
+                    <div class="row" style="margin-top: 10px;">
+                {% endif %}
+            <div class="col-md-6">
+                <b>{{ chat.label }}</b>
+                {% chat nickname=player.chat_nickname channel=chat.channel %}
+            </div>
+            {% if not forloop.counter0|divisibleby:2 or forloop.last %}
+                </div>
+            {% endif %}
+            {% endfor %}
+
+        </div>
+    </div>
+
+    <br/><br/>
+
+    <div style="text-align: center">{% next_button %}</div>
+
+    {% include 'instructions/instructions_anagram.html' %}
+    {% include 'instructions/anagrams_youtube.html' %}
 
 {% endblock %}
 
 {% block global_scripts %}
     <script type="text/javascript" src="{% static 'anagrams/game.js' %}"></script>
+
+    <style>
+        .otree-chat {
+            border: 1px solid #ccc;
+            padding: 5px;
+            margin: 5px 0 0 0;
+        }
+
+        .otree-chat .messages {
+            height: 70px;
+            overflow-y: auto;
+            background: #eee;
+            margin: 2px 0 5px 0;
+        }
+
+        .otree-chat .nickname {
+            display: inline-block;
+            color: #C07A36;
+            font-weight: bold;
+        }
+    </style>
+
 {% endblock %}
