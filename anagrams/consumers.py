@@ -222,6 +222,15 @@ class AnagramsConsumer(JsonWebsocketConsumer):
                 self.send(message)
                 return
 
-            available_letters.remove(letter.upper())
+            # available_letters.remove(letter.upper())
+
+        if TeamWord.objects.filter(channel=channel, word=word).exists():
+            message = {
+                'type': 'error',
+                'msg': "Word has already been played: {}".format(word),
+            }
+
+            self.send(message)
+            return
 
         Channel("anagrams.word_message").send(content)
