@@ -6,11 +6,9 @@ from channels.generic.websockets import JsonWebsocketConsumer
 
 
 def get_chat_group(channel):
-    print('words-{}'.format(channel))
     return 'words-{}'.format(channel)
 
 def get_transaction_group(channel):
-    print('transactions-{}'.format(channel))
     return 'transactions-{}'.format(channel)
 
 
@@ -28,7 +26,6 @@ def approval_consumer(message):
     }
 
     group = get_transaction_group(transaction.channel)
-    print("Sending approval notice to {}".format(group))
     Group(group).send({'text': json.dumps(approval_message)})
 
 
@@ -105,7 +102,6 @@ class TransactionConsumer(JsonWebsocketConsumer):
         return [get_transaction_group(kwargs['channel'])]
 
     def connect(self, message, **kwargs):
-        print("Connecting to {}".format(kwargs['channel']))
         history = LetterTransaction.objects.filter(
             channel=kwargs['channel']).order_by('timestamp').only('letter')
 
@@ -129,7 +125,6 @@ class TransactionConsumer(JsonWebsocketConsumer):
         msg_type = content['type']
 
         if msg_type == "request_approved":
-            print("Content for approve {}".format(content))
             transaction_pk = content['transaction_pk']
             transaction = LetterTransaction.objects.filter(pk=transaction_pk)
 
@@ -195,6 +190,7 @@ class AnagramsConsumer(JsonWebsocketConsumer):
         # Stick the message onto the processing queue
         word = content['word']
         channel = content['channel']
+        participant_code = content['participant_code']
 
         if not Dictionary.objects.filter(word=word).exists():
             message = {
@@ -205,12 +201,14 @@ class AnagramsConsumer(JsonWebsocketConsumer):
             self.send(message)
             return
 
-        player = Player.objects.filter(word_channel=channel).first()
+        participant = Participant.objects.get(code=participant_code)
+        player = participant.anagrams_player.first()
         available_letters = [letter.letter for letter in player.userletter_set.all()]
 
-        for neighbor in player.neighbors.all():
-            for user_letter in neighbor.userletter_set.all():
-                available_letters.append(user_letter.letter)
+        transaction_channel = player.get_transaction_channel()
+        my_transactions = LetterTransaction.objects.filter(channel=transaction_channel, approved=True)
+        for transaction in my_transactions:
+            available_letters.append(transaction.letter.letter)
 
         for letter in word:
             if letter.upper() not in available_letters:
@@ -221,8 +219,6 @@ class AnagramsConsumer(JsonWebsocketConsumer):
 
                 self.send(message)
                 return
-
-            # available_letters.remove(letter.upper())
 
         if TeamWord.objects.filter(channel=channel, word=word).exists():
             message = {
