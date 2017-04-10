@@ -10,9 +10,9 @@
 {% block content %}
 
     <p>
-        Welcome, {{ user.first_name | title }}! You now have 3 minutes to decide how much of your current earnings you
+        Welcome, {{ user.first_name | title }}! You have {{timeout_minutes}} minute(s) to decide how much of your current earnings you
         would like to donate to the group, with a chance of increasing your overall earnings. Please enter the amount
-        in the box below and click arrow in order to submit
+        in the box below and click arrow in order to submit:
     </p>
 
     <div class="row" style="margin-top: 20px;">
@@ -22,26 +22,62 @@
 
             <h1>Your Current Earnings</h1>
             <br/>
-            <h1>{{ Constants.endowment | c }}</h1>
+            <h1>{{ Constants.endowment}} pts</h1>
 
         </div>
         <div class="col-md-5" style="height: 300px; background: #eeeeee; padding: 50px; border-color: lightgray;
                 border-radius: 12px; border-width: 3px; border-style: groove; text-align: center; margin-left: 50px;">
+				<h1>Enter Your Contribution:</h1>
+            	<br/>
+            	<div class="row" style="width: 100%;">
+            	<div class="col-xs-2 col-md-2"></div>
+            <div class="col-xs-8 col-md-8" style="display: inline-block; margin-top: 5px; margin-left: 0px;" >
+                <input type="number" name="contribution" id="id_contribution" class="input-lg" style="width: 100%;">
+            </div>
+            <div class="col-xs-2 col-md-2" style="display: inline-block; text-align: left;" >
+                <h2>pts</h2>
+            </div>
+            
+            </div>
+        </div>
+    </div>
+    <br/>
 
-            <div class="col-xs-2" style="display: inline-block; margin-top: 60px; margin-left: 70px;" >
-                <input type="number" name="contribution" id="id_contribution" class="input-lg">
+	{% next_button %}
+
+	<div class="row" style="margin-top: 25px;">
+        <div class="col-md-12" style="padding-left: 5px; padding-right: 5px;">
+            <div class="well heading-well text-center" style="padding: 10px;">
+                <div style="float:right">
+                                <span class="glyphicon glyphicon-minus" id="contributionControlGlyph"
+                                      onclick="hide_panel('contributionTableDiv', 'contributionControlGlyph');">
+                                </span>
+                </div>
+                <b><span style="color: rgb(34, 34, 34); font-family: Arial, sans-serif; font-weight: bold;
+                font-size: 120%;">Contribution Table Reference</span></b>
             </div>
         </div>
     </div>
 
-    <br/>
-    {% next_button %}
+    <div class="row" id="contributionTableDiv">
+        <div class="col-md-12">
+        		<p>This table shows the earnings you will expect to see depending on how much you contribute (rows) and how much your team (N= {{nPlayers}}) contributes (columns). Remember, the more you contribute, the more you help your teammates.</p>
+				<div id="contributionTable" style="max-width: 75%; display: block; margin-left: auto; margin-right: auto;"></div>
+        </div>
+    </div>
+    <!-- Instructions DIV : END -->
 
     {% include 'instructions/instructions_public_goods.html' %}
-    {% include 'instructions/public_goods_youtube.html' %}
+    {% comment %} {% include 'instructions/public_goods_youtube.html' %} {% endcomment %}
 
 {% endblock %}
 
 {% block scripts %}
     <script type="text/javascript" src="{% static 'js/hide_panel.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/contributionTable.js' %}"></script>
+    
+    <script type="text/javascript" >
+      var Table = new ContributionTable('{{nPlayers}}', '{{Constants.endowment}}');
+    	Table.init($('#contributionTable'));
+    </script>
 {% endblock %}

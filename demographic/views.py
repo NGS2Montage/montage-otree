@@ -16,7 +16,7 @@ class Consent(Page):
     form_fields = ['consent']
     is_debug = False
     timeout_submission = {'consent': False}
-    template_name = 'demographic/consent.html'
+    template_name = 'demographic/Consent.html'
 
     def before_next_page(self):
         if self.timeout_happened:
@@ -30,7 +30,7 @@ class Consent(Page):
 
 class ByeBye(Page):
     is_debug = False
-    template_name = 'demographic/byebye.html'
+    template_name = 'demographic/ByeBye.html'
 
     def is_displayed(self):
         if self.player.consent:
@@ -41,7 +41,7 @@ class ByeBye(Page):
 
 class Demographic(Page):
     form_model = models.Player
-    template_name = 'demographic/demographic.html'
+    template_name = 'demographic/Demographic.html'
     form_fields = ["age", "income", "sex", "marital_status", "country_born", "country_reside", "year_moved",
                    "highest_degree", "speciality", "employment_status", "occupation", "religious_preference",
                    "other_religion", "device_type", "membership_duration", "access_turk", "access_turk_other",
@@ -107,7 +107,7 @@ class Demographic(Page):
 
 class Demographic2(Page):
     form_model = models.Player
-    template_name = 'demographic/demographic.html'
+    template_name = 'demographic/Demographic.html'
     form_fields = ["age", "income"]
     is_debug = False
     timeout_submission = {"age": 1, "income": "Less than $25,000"}

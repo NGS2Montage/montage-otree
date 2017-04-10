@@ -27,7 +27,7 @@ class Contribute(Page):
     form_model = models.Player
     form_fields = ['contribution']
     is_debug = False
-    timeout_seconds = 60
+    timeout_seconds = 60 #must be multiple of 60;
     timeout_submission = {'contribution': -1}
 
     def is_displayed(self):
@@ -52,6 +52,11 @@ class Contribute(Page):
         if value > Constants.endowment:
             return "Must select a value between 0 and %d" % Constants.endowment
 
+    def vars_for_template(self):
+        return {
+            'nPlayers': len(self.player.get_others_in_group()) + 1,
+            'timeout_minutes': int(self.timeout_seconds/60),
+            }
 
 class ResultsWaitPage(WaitPage):
     is_debug = False
