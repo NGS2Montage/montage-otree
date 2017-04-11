@@ -12,7 +12,7 @@ class LoginRequiredMixin(object):
 
 class Introduction(Page):
     is_debug = False
-    template_name = 'instructions/introduction.html'
+    template_name = 'instructions/Introduction.html'
 
     def is_displayed(self):
         if self.participant.vars['consent'] and self.participant.vars['playing']:
@@ -147,5 +147,5 @@ page_sequence = [
     Introduction,
     InstructionsPhase1,
     InstructionsPhase2,
-    InstructionsPhase3
+#    InstructionsPhase3
 ]

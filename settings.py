@@ -136,30 +136,54 @@ SESSION_CONFIG_DEFAULTS = {
 
 
 SESSION_CONFIGS = [
-    {
-        'name': 'production',
-        'display_name': 'Production',
-        'num_demo_participants': 4,
-        'app_sequence': ['demographic', 'instructions', 'anagrams', 'public_goods', 'ultimatum'],
+   {
+        'name': 'productionNoPriming',
+        'display_name': 'Production P2 Only No Priming',
+        'num_demo_participants': 2,
+        'app_sequence': ['demographic', 'instructions', 'public_goods'],
         'participation_money': 0.05,
         'ultimatum_split': False,
         'ultimatum_player_role': 'offeror',  # Applicable only if 'ultimatum_split' is False
         'ultimatum_cutoff': 50,  # Applicable only if 'ultimatum_split' is False
         'ultimatum_group_size': 3,
         'ultimatum_histogram': True
-    },
-    {
-        'name': 'games',
-        'display_name': 'Games',
-        'num_demo_participants': 4,
-        'app_sequence': ['demographic', 'anagrams', 'public_goods', 'ultimatum'],
+   },
+   {
+        'name': 'productionPriming',
+        'display_name': 'Production P2 Priming',
+        'num_demo_participants': 2,
+        'app_sequence': ['demographic', 'instructions', 'anagrams', 'public_goods'],
         'participation_money': 0.05,
         'ultimatum_split': False,
         'ultimatum_player_role': 'offeror',  # Applicable only if 'ultimatum_split' is False
-        'ultimatum_cutoff': 30,  # Applicable only if 'ultimatum_split' is False
+        'ultimatum_cutoff': 50,  # Applicable only if 'ultimatum_split' is False
         'ultimatum_group_size': 3,
         'ultimatum_histogram': True
-    },
+   },
+#   {
+#        'name': 'production',
+#        'display_name': 'Production',
+#        'num_demo_participants': 4,
+#        'app_sequence': ['demographic', 'instructions', 'anagrams', 'public_goods', 'ultimatum'],
+#        'participation_money': 0.05,
+#        'ultimatum_split': False,
+#        'ultimatum_player_role': 'offeror',  # Applicable only if 'ultimatum_split' is False
+#        'ultimatum_cutoff': 50,  # Applicable only if 'ultimatum_split' is False
+#        'ultimatum_group_size': 3,
+#        'ultimatum_histogram': True
+#    },
+#    {
+#        'name': 'games',
+#        'display_name': 'Games',
+#        'num_demo_participants': 4,
+#        'app_sequence': ['demographic', 'anagrams', 'public_goods', 'ultimatum'],
+#        'participation_money': 0.05,
+#        'ultimatum_split': False,
+#        'ultimatum_player_role': 'offeror',  # Applicable only if 'ultimatum_split' is False
+#        'ultimatum_cutoff': 30,  # Applicable only if 'ultimatum_split' is False
+#        'ultimatum_group_size': 3,
+#        'ultimatum_histogram': True
+#    },
     {
         'name': 'anagrams',
         'display_name': 'Anagrams',
@@ -175,7 +199,7 @@ SESSION_CONFIGS = [
     {
         'name': 'public_goods',
         'display_name': 'Public Goods',
-        'num_demo_participants': 4,
+        'num_demo_participants': 2,
         'app_sequence': ['demographic', 'public_goods'],
         'participation_money': 0.05,
         'ultimatum_split': False,
@@ -184,18 +208,18 @@ SESSION_CONFIGS = [
         'ultimatum_group_size': 3,
         'ultimatum_histogram': True
     },
-    {
-        'name': 'ultimatum',
-        'display_name': 'Ultimatum',
-        'num_demo_participants': 4,
-        'app_sequence': ['demographic', 'ultimatum'],
-        'participation_money': 0.05,
-        'ultimatum_split': False,
-        'ultimatum_player_role': 'offeror',  # Applicable only if 'ultimatum_split' is False
-        'ultimatum_cutoff': 30,  # Applicable only if 'ultimatum_split' is False
-        'ultimatum_group_size': 3,
-        'ultimatum_histogram': True
-    },
+#    {
+#        'name': 'ultimatum',
+#        'display_name': 'Ultimatum',
+#        'num_demo_participants': 4,
+#        'app_sequence': ['demographic', 'ultimatum'],
+#        'participation_money': 0.05,
+#        'ultimatum_split': False,
+#        'ultimatum_player_role': 'offeror',  # Applicable only if 'ultimatum_split' is False
+#        'ultimatum_cutoff': 30,  # Applicable only if 'ultimatum_split' is False
+#        'ultimatum_group_size': 3,
+#        'ultimatum_histogram': True
+#    },
 ]
 
 ROOT_URLCONF = 'urls'

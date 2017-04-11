@@ -122,11 +122,57 @@ class Demographic2(Page):
         if self.timeout_happened:
             self.participant.vars['playing'] = False
 
+class DemographicNoAMT(Page):
+    form_model = models.Player
+    template_name = 'demographic/Demographic.html'
+    form_fields = ["age", "income", "sex", "marital_status", "country_born", "country_reside", "year_moved",
+                   "highest_degree", "speciality", "employment_status", "occupation", "religious_preference",
+                   "other_religion", "device_type"]
+    is_debug = False
+    timeout_submission = {"age": 1, "income": "Less than $25,000", "sex": "Male", "marital_status": "single",
+                          "country_born": "Empty", "country_reside": "Empty", "year_moved": "0000",
+                          "highest_degree": "Not Sure", "speciality": "None", "employment_status": "Unable to work",
+                          "occupation": "None", "religious_preference": "Other", "other_religion": "None",
+                          "device_type": "None"}
+
+    def is_displayed(self):
+        if self.participant.vars['consent'] and self.participant.vars['playing']:
+            return True
+        else:
+            return False
+
+    def error_message(self, values):
+        err_messages = []
+        if values['country_born'].strip() != values['country_reside'].strip():
+            if values['year_moved'].strip() == "":
+                err =  "Your country of birth is different from your country of residence. However, you haven't filled" \
+                       " the year you moved to your current country of residence in question 7."
+                err_messages.append(err)
+
+        if values['religious_preference'] == "Other" and values['other_religion'].strip() == "":
+            err = "In question 12, you selected religion as other, however you haven't filled the other religion in " \
+                  "question 13."
+            err_messages.append(err)
+ 
+        if len(err_messages) == 1:
+            return err_messages[0]
+        if len(err_messages) > 1:
+            err_string = err_messages[-1]
+            for err in err_messages[:-1]:
+                e = forms.ValidationError(err)
+                self.form.add_error(None, e)
+            return err_string
+
+    def before_next_page(self):
+        if self.timeout_happened:
+            self.participant.vars['playing'] = False
+
 
 
 page_sequence = [
     Consent,
     ByeBye,
     # Demographic,
-    Demographic2
+    # Demographic2,
+    DemographicNoAMT,
 ]
