@@ -42,7 +42,12 @@ def get_session_id(session_name):
 
 def main(emails_file, session_name):
 
-    session_id = get_session_id(session_name)
+    try:
+        session_id = Session.objects.get(code=session_name)
+    except Exception as e:
+        print("Problem getting session with the given code")
+        print(e)
+        exit(0)
 
     with codecs.open(emails_file, encoding='utf8', mode='r') as infile:
         for line in infile:
@@ -84,7 +89,7 @@ def main(emails_file, session_name):
 if __name__ == "__main__":
     ap = argparse.ArgumentParser()
     ap.add_argument('-e', '--emails', metavar='emails', type=str, required=True, help='emails')
-    ap.add_argument('-s', '--session', metavar='session', type=str, required=True, help='session')
+    ap.add_argument('-s', '--session', metavar='session', type=str, required=True, help='session code')
     args = ap.parse_args()
 
     main(args.emails, args.session)
