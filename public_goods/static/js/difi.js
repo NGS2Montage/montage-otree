@@ -202,7 +202,7 @@ function difi(myScale, myGroup, mySelf, myColor, myDistance, myVisible, imgDir) 
 
 
   var urlMe = '/static/images/me.png';
-  print img
+  
   // Change png for a gif to fix IE6 transparency issues
   if (/\bMSIE 6/.test(navigator.userAgent) && !window.opera) urlMe = '/static/images//me.gif';
 
