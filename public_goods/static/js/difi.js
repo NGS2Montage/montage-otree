@@ -188,7 +188,7 @@ function calculateResults() {
   }
 
 
-function difi(myScale, myGroup, mySelf, myColor, myDistance, myVisible) {
+function difi(myScale, myGroup, mySelf, myColor, myDistance, myVisible, imgDir) {
   if (typeof(myScale)=="undefined") myScale="Scale";
   if (typeof(myGroup)=="undefined") myGroup="Group";
   if (typeof(mySelf)=="undefined") mySelf="Me";
@@ -201,7 +201,8 @@ function difi(myScale, myGroup, mySelf, myColor, myDistance, myVisible) {
   if (myDistance<-100) myDistance=-100;
 
 
-  var urlMe = '/static/images//me.png';
+  var urlMe = '/static/images/me.png';
+  print img
   // Change png for a gif to fix IE6 transparency issues
   if (/\bMSIE 6/.test(navigator.userAgent) && !window.opera) urlMe = '/static/images//me.gif';
 
