@@ -136,7 +136,14 @@ SESSION_CONFIG_DEFAULTS = {
 
 
 SESSION_CONFIGS = [
-   {
+    {
+        'name': 'Ruse',
+        'display_name': 'Ruse',
+        'num_demo_participants': 2,
+        'app_sequence': ['demographic', 'ruse'],
+        'participation_money': 0.05,
+    },
+    {
         'name': 'productionNoPriming',
         'display_name': 'Production P2 Only No Priming',
         'num_demo_participants': 2,
@@ -147,8 +154,8 @@ SESSION_CONFIGS = [
         'ultimatum_cutoff': 50,  # Applicable only if 'ultimatum_split' is False
         'ultimatum_group_size': 3,
         'ultimatum_histogram': True
-   },
-   {
+    },
+    {
         'name': 'productionPriming',
         'display_name': 'Production P2 Priming',
         'num_demo_participants': 2,
@@ -159,7 +166,7 @@ SESSION_CONFIGS = [
         'ultimatum_cutoff': 50,  # Applicable only if 'ultimatum_split' is False
         'ultimatum_group_size': 3,
         'ultimatum_histogram': True
-   },
+    },
 #   {
 #        'name': 'production',
 #        'display_name': 'Production',
