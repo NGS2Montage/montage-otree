@@ -1,0 +1,37 @@
+{% extends "global/Page.html" %}
+{% load staticfiles otree_tags %}
+{% load static %}
+
+{% block head_title %}
+    Phase 1: Survey
+{% endblock %}
+
+{% block title %} Phase 1: Survey {% endblock %}
+
+{% block myscripts %}
+
+    <script type="text/javascript" src="{% static 'js/difi.js' %}"></script>
+
+{% endblock %}
+
+{% block content %}
+
+    <p>
+		Hi {{ user.first_name|title }}. Once again, the diagram below is designed to represent your relationship with your group. Please indicate your relationship by clicking and dragging the smaller "Me" circle to the
+        position circle representing you such that it best captures your relationship with the group.
+    </p>
+
+    <br/>
+
+    <div style="margin-bottom: 15px;">
+        Distance: <input name="distanceScale_after" id="distanceScale_after">
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        Overlap: <input name="overlapScale_after" id="overlapScale_after">
+    </div>
+
+    <script language="JavaScript">difi("Scale", "My Group", "Me", "maroon", "-50");</script>
+
+    <br/>
+    {% next_button %}
+
+{% endblock %}

@@ -141,10 +141,26 @@ class Results(Page):
         return toReturn
 
 
-class DifiIndex(Page):
+class DifiIndexBefore(Page):
     is_debug = False
     form_model = models.Player
-    form_fields = ['distanceScale', 'overlapScale']
+    form_fields = ['distanceScale_before', 'overlapScale_before']
+
+    def is_displayed(self):
+        if self.participant.vars['consent'] and self.participant.vars['playing']:
+            return True
+        else:
+            return False
+
+    def before_next_page(self):
+        if self.timeout_happened:
+            self.participant.vars['playing'] = False
+
+
+class DifiIndexAfter(Page):
+    is_debug = False
+    form_model = models.Player
+    form_fields = ['distanceScale_after', 'overlapScale_after']
 
     def is_displayed(self):
         if self.participant.vars['consent'] and self.participant.vars['playing']:
@@ -158,9 +174,10 @@ class DifiIndex(Page):
 
 
 page_sequence = [
+    DifiIndexBefore,
     WaitPage,
     Anagrams,
     ResultsWaitPage,
     Results,
-    DifiIndex
+    DifiIndexAfter,
 ]

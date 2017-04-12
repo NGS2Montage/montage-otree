@@ -174,5 +174,5 @@ page_sequence = [
     ByeBye,
     # Demographic,
     # Demographic2,
-    DemographicNoAMT,
+    #DemographicNoAMT,
 ]

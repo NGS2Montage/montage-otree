@@ -91,8 +91,10 @@ class Player(BasePlayer):
     neighbors = django_models.ManyToManyField('Player')
     word_channel = django_models.CharField(max_length=255)
     # Difi Index Columns
-    distanceScale = models.IntegerField()
-    overlapScale = models.IntegerField()
+    distanceScale_before = models.IntegerField()
+    overlapScale_before = models.IntegerField()
+    distanceScale_after = models.IntegerField()
+    overlapScale_after = models.IntegerField()
 
     def generate_user_letters(self):
         # alphabet = list(string.ascii_lowercase)
