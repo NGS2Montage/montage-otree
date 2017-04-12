@@ -27,7 +27,7 @@ class Contribute(Page):
     form_model = models.Player
     form_fields = ['contribution']
     is_debug = False
-    timeout_seconds = 60 #must be multiple of 60;
+    timeout_seconds = Constants.decision_time_min * 60;
     timeout_submission = {'contribution': -1}
 
     def is_displayed(self):
@@ -55,7 +55,6 @@ class Contribute(Page):
     def vars_for_template(self):
         return {
             'nPlayers': len(self.player.get_others_in_group()) + 1,
-            'timeout_minutes': int(self.timeout_seconds/60),
             }
 
 class ResultsWaitPage(WaitPage):

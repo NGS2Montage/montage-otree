@@ -19,4 +19,10 @@
 
 {% block scripts %}
     <script type="text/javascript" src="{% static 'js/hide_panel.js' %}"></script>
+    <script type="text/javascript">
+      $(".var-earnings-p1").html('earnings based on your performance in the anagrams game.');
+		$(".var-bonus").html({{Constants.endowment|json}} + ' pts');
+		$(".var-time-min").html({{Constants.decision_time_min|json}});
+		$(".var").css({color: "black", fontWeight: "bold"});
+	 </script>
 {% endblock %}

@@ -10,7 +10,7 @@
 {% block content %}
 
     <p>
-        Welcome, {{ user.first_name | title }}! You have {{timeout_minutes}} minute(s) to decide how much of your current earnings you
+        Welcome, {{ user.first_name | title }}! You have {{Constants.decision_time_min}} minute(s) to decide how much of your current earnings you
         would like to donate to the group, with a chance of increasing your overall earnings. Please enter the amount
         in the box below and click arrow in order to submit:
     </p>
@@ -79,5 +79,12 @@
     <script type="text/javascript" >
       var Table = new ContributionTable('{{nPlayers}}', '{{Constants.endowment}}');
     	Table.init($('#contributionTable'));
+    </script>
+    
+    <script type="text/javascript">
+      $(".var-earnings-p1").html('earnings based on your performance in the anagrams game.');
+		$(".var-bonus").html({{Constants.endowment|json}} + ' pts');
+		$(".var-time-min").html({{Constants.decision_time_min|json}});
+		$(".var").css({color: "black", fontWeight: "bold"});
     </script>
 {% endblock %}

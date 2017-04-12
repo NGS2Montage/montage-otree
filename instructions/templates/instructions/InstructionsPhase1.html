@@ -142,5 +142,14 @@
 
 {% block scripts %}
     <script type="text/javascript" src="{% static 'js/hide_panel.js' %}"></script>
+    <script type="text/javascript">
+      $(".var-n-players").html({{nPlayers|json}});
+		$(".var-time").html({{Constants.anagrams_duration_sec|json}});
+		$(".var-word-threshold").html({{Constants.word_threshold|json}});
+		$(".var-threshold-payment").html({{Constants.threshold_payment|json}} + ' pts');
+		$(".var-marginal-pay").html({{Constants.marginal_payment}});
+		$(".var-share-limit").html('as many');
+		$(".var").css({color: "black", fontWeight: "bold"});
+    </script>
 {% endblock %}
 

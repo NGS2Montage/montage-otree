@@ -147,7 +147,7 @@ SESSION_CONFIGS = [
         'name': 'productionNoPriming',
         'display_name': 'Production P2 Only No Priming',
         'num_demo_participants': 2,
-        'app_sequence': ['demographic', 'instructions', 'public_goods'],
+        'app_sequence': ['demographic', 'instructions','ruse','public_goods'],
         'participation_money': 0.05,
         'ultimatum_split': False,
         'ultimatum_player_role': 'offeror',  # Applicable only if 'ultimatum_split' is False
@@ -159,7 +159,7 @@ SESSION_CONFIGS = [
         'name': 'productionPriming',
         'display_name': 'Production P2 Priming',
         'num_demo_participants': 2,
-        'app_sequence': ['demographic', 'instructions', 'anagrams', 'public_goods'],
+        'app_sequence': ['demographic', 'instructions', 'anagrams','ruse','public_goods'],
         'participation_money': 0.05,
         'ultimatum_split': False,
         'ultimatum_player_role': 'offeror',  # Applicable only if 'ultimatum_split' is False

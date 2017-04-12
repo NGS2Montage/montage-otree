@@ -17,6 +17,7 @@ class Constants(BaseConstants):
     players_per_group = None
     num_rounds = 1
     endowment = 100
+    decision_time_min = 1
 
 
 class Subsession(BaseSubsession):
