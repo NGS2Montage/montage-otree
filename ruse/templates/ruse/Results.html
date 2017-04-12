@@ -1,0 +1,23 @@
+{% extends "global/Page.html" %}
+{% load staticfiles otree_tags %}
+
+{% block title %}
+    Success!
+{% endblock %}
+
+{% block content %}
+
+<div class="row" id="quizDiv" style="margin-top: 0px;">
+	<div class="col-md-12">
+   	<p>
+      	Good work! The first part of the exercise is complete. To proceed to the next round,
+      	please click next.
+      </p>
+   </div>
+</div>
+
+<br/>
+
+{% next_button %}
+
+{% endblock %}

@@ -1,0 +1,32 @@
+{% extends "global/Page.html" %}
+{% load staticfiles otree_tags %}
+
+{% block title %}
+    Prediction Exercise
+{% endblock %}
+
+{% block content %}
+
+<div class="row" id="quizDiv" style="margin-top: 0px;">
+	<div class="col-md-12">
+   	<p>
+      	This part of the exercise involves making predictions.
+      	Please make an attempt to answer the following questions in 60 seconds or less.
+      	There is no correct answer, and if you are unsure about a particular question, please estimate
+      	to the best of your ability.
+      </p>
+      <br>
+      <h4>Prediction Questions:</h4>
+
+		{% for field in form %}
+    		{% formfield field %}
+		{% endfor %}		
+		
+   </div>
+</div>
+
+<br/>
+
+{% next_button %}
+
+{% endblock %}
