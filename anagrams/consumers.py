@@ -80,7 +80,8 @@ def msg_consumer(message):
 
     anagrams_player.group.teamword_set.create(
         channel=channel,
-        word=word)
+        word=word,
+        player=anagrams_player)
 
     words_message = {
         'type': 'word',

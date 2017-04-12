@@ -184,6 +184,7 @@ class TeamWord(models.Model):
     # the name "channel" here is unrelated to Django channels
     channel = models.CharField(max_length=255)
     group = models.ForeignKey(Group)
+    player = models.ForeignKey(Player)
 
     word = models.CharField(max_length=100)
     timestamp = models.FloatField(default=time.time)

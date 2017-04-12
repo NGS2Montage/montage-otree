@@ -238,6 +238,8 @@ CHANNEL_ROUTING = 'core.routing.channel_routing'
 # This overrides the default ROUTING "otree.channels.routing.channel_routing". Might pose a challenge
 
 
+SENTRY_DSN = 'http://0acbffd8caea463fb47dc7ab8449e49f:ce3a9cd912f240c79a85d96e6fe51066@sentry.otree.org/153'
+
 
 # anything you put after the below line will override
 # oTree's default settings. Use with caution.
