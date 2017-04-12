@@ -81,7 +81,7 @@ def msg_consumer(message):
     anagrams_player.group.teamword_set.create(
         channel=channel,
         word=word,
-        player=anagrams_player)
+        group = channels_group)
 
     words_message = {
         'type': 'word',
@@ -201,7 +201,6 @@ class AnagramsConsumer(JsonWebsocketConsumer):
 
             self.send(message)
             return
-
         participant = Participant.objects.get(code=participant_code)
         player = participant.anagrams_player.first()
         available_letters = [letter.letter for letter in player.userletter_set.all()]
@@ -221,13 +220,12 @@ class AnagramsConsumer(JsonWebsocketConsumer):
                 self.send(message)
                 return
 
-        if TeamWord.objects.filter(channel=channel, word=word).exists():
-            message = {
-                'type': 'error',
-                'msg': "Word has already been played: {}".format(word),
-            }
-
-            self.send(message)
-            return
-
+#        if TeamWord.objects.filter(channel=channel, word=word).exists():
+#            message = {
+#                'type': 'error',
+#                'msg': "Word has already been played: {}".format(word),
+#            }
+#
+#            self.send(message)
+#            return
         Channel("anagrams.word_message").send(content)
