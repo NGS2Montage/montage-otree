@@ -85,7 +85,7 @@ AWS_SECRET_ACCESS_KEY = env.str('AWS_SECRET_ACCESS_KEY', None)
 
 # e.g. EUR, CAD, GBP, CHF, CNY, JPY
 REAL_WORLD_CURRENCY_CODE = 'USD'
-USE_POINTS = False
+USE_POINTS = True
 
 
 # e.g. en, de, fr, it, ja, zh-hans
@@ -237,6 +237,8 @@ STATICFILES_DIRS = [
 CHANNEL_ROUTING = 'core.routing.channel_routing'
 # This overrides the default ROUTING "otree.channels.routing.channel_routing". Might pose a challenge
 
+
+SENTRY_DSN = 'http://0acbffd8caea463fb47dc7ab8449e49f:ce3a9cd912f240c79a85d96e6fe51066@sentry.otree.org/153'
 
 
 # anything you put after the below line will override
