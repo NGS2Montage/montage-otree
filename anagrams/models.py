@@ -28,7 +28,10 @@ class Constants(BaseConstants):
                            ["i", 46], ["j", 1], ["k", 4], ["l", 30], ["m", 15], ["n", 38], ["o", 38], ["p", 16],
                            ["q", 1], ["r", 38], ["s", 38], ["t", 34], ["u", 19], ["v", 5], ["w", 4], ["x", 1],
                            ["y", 10], ["z", 2]]
-
+    anagrams_duration_sec = 300
+    word_threshold = 12
+    threshold_payment = 12
+    marginal_payment = 1
 
 class Subsession(BaseSubsession):
     def before_session_starts(self):   # called each round

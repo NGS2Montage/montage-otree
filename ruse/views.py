@@ -34,6 +34,7 @@ class Ruse(Page):
 
 
 class WaitPage(WaitPage):
+    is_debug = False
     title_text = "Processing Predictions"
     body_text = """Thank you, please wait while the rest of the team submits their
     predictions."""
@@ -47,6 +48,7 @@ class WaitPage(WaitPage):
             return False
  
 class Results(Page):
+    is_debug = False
     pass
 
 page_sequence = [
