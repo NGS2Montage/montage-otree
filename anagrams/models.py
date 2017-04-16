@@ -43,6 +43,11 @@ class Subsession(BaseSubsession):
             players = self.get_players()
             # random.shuffle(players)
 
+            #DOMINGO v - remove before commmit - v
+            for p in players:
+                p.participant.vars['consent'] = True
+                p.participant.vars['playing'] = True
+
             # create the base for number of groups
             num_players = len(players)
 
@@ -91,6 +96,7 @@ class Group(BaseGroup):
 
 
 class Player(BasePlayer):
+
     neighbors = django_models.ManyToManyField('Player')
     word_channel = django_models.CharField(max_length=255)
     # Difi Index Columns
@@ -188,6 +194,7 @@ class TeamWord(models.Model):
 
     # the name "channel" here is unrelated to Django channels
     channel = models.CharField(max_length=255)
+    player = models.ForeignKey(Player)
     group = models.ForeignKey(Group)
 
     word = models.CharField(max_length=100)

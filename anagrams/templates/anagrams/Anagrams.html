@@ -3,7 +3,7 @@
 {% load otreechat %}
 
 {% block title %}
-    Anagrams
+    Anagrams Exercise
 {% endblock %}
 
 {% block content %}
@@ -24,140 +24,157 @@ http://getbootstrap.com/components/
 
     {% next_button %}
 -->
-    <div id="app-view" class="row" style="background: white; padding: 30px; border-color: lightgray;
-                border-radius: 12px; border-width: 3px; border-style: groove;">
-        <div class="col-md-4">
+    <div id="app-view" class="row" style="background: white; min-width: 900px;">
+                
+        <div class="row" style="padding-left: 30px; padding-right: 30px; margin: 0;">
+        		<h3><b>Welcome, {app.user.name}!</b></h3>
+        		<p>How many words can you create with your set of letters? Remember, if you run out of ideas, you can always look at
+        		your teammates' letters to make requests! Duplicate words are ok. Submit anything you can, let us determine if it is a word!
+        		<b><em>Can your team beat the previous record of {{session.config.bestScore}} words?</em></b></p>
+        </div>
 
-            <div class="row"><b>Welcome, {app.user.name}</b></div>
+		  <div class="row">
+		  		<div class="col-md-5" style="padding: 30px; padding-top: 5px;">
+		  			<div class="row" style="padding-left: 30px; height:275px;">
+                	<div class="col-md-12">
+                    <div class="row">
+                      <h4><span class="glyphicon glyphicon-user" aria-hidden="true"></span>&nbsp;<b>Your Letters</b><span style="font-size: 8pt;">
+                      &nbsp;&nbsp;&nbsp;&nbsp;(remember, you can always request more letters below)</span></h4>
+                      
+                			<div class="row" style="padding-left: 12px;">
+                				<button type="button" class="btn btn-info disabled" rv-each-letter="app.user.letters"
+                        	style="margin-left: 5px; margin-bottom: 5px; display: inline-block; background-image: none;"><strong>{ letter }</strong>
+                				</button>
+                			</div>
+                		</div>
+                		<div class="row" style="margin-top: 5px;">
+                      <h4 style="margin: 0;">
+                      	<span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+                      	<span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+                      	<span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+                      	&nbsp;<b>Letters From Your Team</b></h4>
+      						<p id="transaction_message" style="font-weight: bold; color:red;">{app.transactionError}</p>
+                			<div class="row" style="padding-left: 12px; margin-top: 8px;">
+                				<button type="button" class="btn btn-success disabled" style="background-image: none; display: inline-block; margin-bottom: 5px; margin-left: 5px;"
+                        			rv-each-transaction="app.user.transactions" rv-show="transaction.approved"><strong>{transaction}</strong>
+                				</button>
+                    			<button rv-each-transaction="app.user.transactions" type="button" class="btn btn-warning disabled" style="display: inline-block; background-image: none; margin-bottom: 5px; margin-left: 5px;"
+                                		rv-hide="transaction.approved"><strong>{transaction}</strong>
+                        	</button>
+								</div>
+							</div>
+                   </div>
+            	</div>   
+		  		</div>
 
-            <div class="row" style="margin-top: 10px; height: 245px; overflow-y: auto;">
-                <p>{app.transactionError}</p>
+				<div class="col-md-7">
+        			<div class="panel panel-default">
+        				<div class="panel-heading"  style="height:80px;">
 
-                <ul>
-                    <li rv-each-friend="app.friends" style="margin-top: 15px;">
+							<h4 style="padding: 0; margin: 2px; font-weight: bold;">
+        					<span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+                     <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+                     <span class="glyphicon glyphicon-user" aria-hidden="true"></span>							
+							&nbsp;&nbsp;Your Team's Words</h4>
+							<p style="font-size: 10pt;"><em>Tip!</em> You can create the same word many times. Your team will give you ideas:</p>
+						</div>
+						<div id="word-tiles" class="panel-body" style="padding-top: 0px; height:240px; overflow-y: auto;">
+            			<div class="row">                	
+                			<button rv-id="word.id" rv-each-word="app.successWords" type="button" class="btn btn-default disabled" style="background-image: none; background-color: #EEEEEE; text-align: center; font-weight: bold; font-size: 10pt; border-color: black; color: black; margin: 2px; display: inline-block;">
+                        	<span style="vertical-align: bottom;">{ word.word }&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="badge badge-primary" style="width: 3em; color: black; background-color: white; font-size: 8pt; border-style: solid; border-color: black; border-width: 1pt;">{ word.freq }</span>
+                    		</button>
+            			</div>
+        				</div>
+        				<div class="panel-footer">
+        					<p style="width:100%; text-align: right; margin:0; font-size: 10pt;">
+								<strong>Your Team Word Count: <span id="word_count" style="display: inline-block; width:3em; text-align: right;">{app.wordCount}</span> words</strong>
+							</p>
+							<p style="width:100%; text-align: right; margin:0; font-size: 10pt;">
+								Current Record: <span id="word_count_beat" style="display: inline-block; width:3em; text-align: right;">{{session.config.bestScore}}</span> words
+							</p>        				
+        				</div>
+		  			</div>                
+        		</div>		  
+		  </div>       
+        
+       <div class="row" style="padding: 15px; padding-top: 0;">
+       
+         <div class="col-md-5">
+         <div class="row" style="height: 50px; padding-left: 30px; bottom: 0px;">
+         			<p style="margin:0; font-size: 8pt;">
+                     <span class="label label-warning">Orange</span> letters are awaiting team approval.
+                  </p>
+						<p style="margin:1; font-size:10pt;">Type any of the letters appearing in <span class="label label-info">blue</span> or <span class="label label-success">green</span> to form a word:</p>
+						<div class="row input-group otree-chat" id='anagrams-words-{{ word_channel }}' style="border: 0px; padding-top: 0px; margin:0; bottom: 0px;">
+      					<input type="text" class="form-control" placeholder="Enter your word here...">
+      					<span class="input-group-btn">
+        						<button class="btn btn-default" type="button"><span class="glyphicon glyphicon-send" aria-hidden="true"></span>&nbsp;&nbsp;Send to Team!</button>
+      					</span>		
+    					</div>
+    					<p style="margin-top: 7px; color:red; padding-left: 10px; font-weight: bold;">{app.wordError}</p>
+    					<p style="font-size: 10pt;">or, if you are out of words to make:</p>
+    					<div class="row">
+                		<button type="button" class="btn btn-default" data-toggle="modal" data-target="#myModal"
+                       	style="margin-left: 20px; margin-bottom: 5px; display: inline-block; width: 390px;">
+                       	<span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+                      	<span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+                      	<span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+                       	&nbsp;&nbsp;<strong>Request more letters from the team!</strong>
+                		</button>    					
+    					</div>
+    					<div class='messages' style="height: 0px;"></div>
+          		</div>
+         </div>
+		 	<div class="col-md-7" style="padding-right: 0px;">
+		  		<div class="panel panel-default">
+		  			<div class="panel-heading">
+						<h4 style="padding: 0; font-weight: bold; margin: 2px;">
+						<span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+                  <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+                  <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+                  &nbsp;&nbsp;Copy Your Letters to the Team:</h4>
+						<p style="font-size: 9pt; margin:0;"><em>Help your team!</em> Letter requests from your team appear below. <strong>Click on a request to copy and send them a letter.</strong></p>		  			
+		  			</div>
+		  			<div class="panel-body" style="padding:0; height:100px; overflow-y: auto;">
+                        <button type="button" class="btn btn-info" style="margin: 2px;"
+                                rv-on-click="transaction.approve" 
+                                rv-hide="transaction.approved" 
+                                rv-each-transaction="app.requests">
+                             Copy "{transaction}" for {transaction.borrower}
+                        </button>
+		  			</div>
+        		</div>
+        </div>
+
+		 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  			<div class="modal-dialog" role="document">
+    			<div class="modal-content">
+      			<div class="modal-header">
+        				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>        				
+        				<h4 style="font-weight: bold; padding: 0;">
+							<span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+                     <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+                     <span class="glyphicon glyphicon-user" aria-hidden="true"></span>        				
+        				Need more letters?</h4> 
+						<p><em>No problem!</em> We've made it so you can see what a few of your team members have. Choose a letter, and just click on what you need:</p>
+      			</div>
+      			<div class="modal-body" style="max-height: 600px; overflow-y:auto;">
+                		<ul class="list-group">
+                    	<li class="list-group-item" rv-each-friend="app.friends">
                         <p style="margin-bottom: 5px;"><b>{ friend.name }</b></p>
-                        <button type="button" class="btn btn-default" rv-each-letter="friend.letters"
+                        <button type="button" class="btn btn-default" data-dismiss="modal" rv-each-letter="friend.letters"
                                 rv-on-click="letter.requestLetter" style="margin-left: 5px;">{ letter }
                         </button>
 
-                    </li>
-                </ul>
-            </div>
-
-            <div class="row" style="margin-top: 20px; padding-left: 30px;">
-                <div class="col-md-12">
-                    <div class="row">
-                        <div class="col-md-7 offset-md-1" style="border-top: 1px dotted #ccc;"></div>
-                    </div>
-                    <div class="row" style="margin-top: 15px;">
-                      <p><b>Your Letters:</b></p>
-                <div class="col-md-12" style="padding-left: 12px;">
-                <button type="button" class="btn btn-default" rv-each-letter="app.user.letters"
-                        style="margin-left: 5px;">{ letter }
-                </button>
-                    </div>
-
-                    </div>
-                </div>
-            </div>
-
-        </div>
-        <div class="col-md-4" style="padding-left: 0px; padding-right: 40px; height:400px;">
-            <div class="row" style="height: 330px; border: 1px solid #ccc; padding: 5px;">
-                <ul>
-                    <li rv-each-word="app.successWords">
-                        <span>{word}</span>
-                    </li>
-                </ul>
-            </div>
-            <div class="row" style="height: 50px;">
-                <div class='otree-chat' id='anagrams-words-{{ word_channel }}' style="">
-                    <div class='messages' style="height: 0px;"></div>
-                    Enter Word: <input size="25">
-                    <button type="button">Submit</button>
-                </div>
-
-                <p style="margin-top: 7px; color:red; padding-left: 10px; font-weight: bold;">{app.wordError}</p>
-
-                <!--<form onsubmit="return false">
-                    <div class="form-group">
-                        <input rv-value="app.newWord" rv-on-submit="app.sendWord" type="text" name="new-word">
-                    </div>
-                    <button rv-on-click="app.sendWord" type="submit" class="btn btn-default">Submit</button>
-                </form>-->
-            </div>
-        </div>
-        <div class="col-md-4" style="padding-left: 20px;">
-
-
-
-            <div class="row" style="margin-top: 3px;">
-                <div class="col-md-12">
-                    <b>Requested by your friends:</b><br/>
-                    <!--<ul rv-each-friend="app.friends">
-                        <li rv-each-transaction="friend.transactions"
-                            rv-on-click="transaction.approve"
-                            rv-hide="transaction.approved">
-                            {friend.name} requests your {transaction}
-                        </li>
-                    </ul>-->
-
-                    <div class="row" rv-each-transaction="app.requests" style="margin-left: 11px;">
-                        <div rv-hide="transaction.approved">
-                        <button type="button" class="btn btn-info" style="margin-top: 7px;"
-                                rv-on-click="transaction.approve">
-                            {transaction.borrower} requests your {transaction}
-                        </button> (click to approve) </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="row" style="margin-top: 20px;">
-                <div class="col-md-12">
-                    <div class="row">
-                        <div class="col-md-10 offset-md-2" style="border-top: 1px dotted #ccc;"></div>
-                    </div>
-
-                    <div class="row" style="margin-top: 15px;">
-                      <div class="col-md-12">
-                <b>Received from your friends:</b><br/>
-
-                    <button type="button" class="btn btn-success disabled" style="display: block; margin-top: 7px; margin-left: 10px;"
-                        rv-each-transaction="app.user.transactions" rv-show="transaction.approved">{transaction} from {transaction.owner}
-                </button>
-
-                </div>
-
-                    </div>
-                </div>
-            </div>
-
-            <div class="row" style="margin-top: 20px;">
-                <div class="col-md-12">
-                    <div class="row">
-                        <div class="col-md-10 offset-md-2" style="border-top: 1px dotted #ccc;"></div>
-                    </div>
-
-                    <div class="row" style="margin-top: 15px;">
-                        <div class="col-md-12">
-                <b>Requested by you and waiting for response:</b><br/>
-                <!--(Tell them to approve your request by clicking it. Use the chat window to send them a message)-->
-
-                <div class="row" rv-each-transaction="app.user.transactions" style="margin-left: 11px;">
-                    <button type="button" class="btn btn-warning disabled" style="display: block; margin-top: 7px;"
-                                rv-hide="transaction.approved">requested {transaction} from {transaction.owner}
-                        </button>
-
-                </div>
-                </div>
-
-                    </div>
-                </div>
-
-            </div>
-        </div>
+                    	</li>
+                		</ul>
+      			</div>
+    			</div>
+  			</div>
+			</div>        
     </div>
 
+	 {% if session.config.use_chat %}
     <div class="row" style="background: white; padding: 10px 10px 20px 10px; border-color: lightgray;
                 border-radius: 12px; border-width: 3px; border-style: groove;">
         <div class="col-md-12">
@@ -176,6 +193,7 @@ http://getbootstrap.com/components/
 
         </div>
     </div>
+   
 
     <br/><br/>
 
@@ -183,12 +201,13 @@ http://getbootstrap.com/components/
 
     {% include 'instructions/instructions_anagram.html' %}
     {% include 'instructions/anagrams_youtube.html' %}
+    
+     {% endif %}
 
 {% endblock %}
 
 {% block global_scripts %}
-    <script type="text/javascript" src="{% static 'anagrams/game.js' %}"></script>
-	
+	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script type="text/javascript">
       $(".var-n-players").html({{nPlayers|json}});
 		$(".var-time").html({{Constants.anagrams_duration_sec|json}});
@@ -197,7 +216,25 @@ http://getbootstrap.com/components/
 		$(".var-marginal-pay").html({{Constants.marginal_payment}});
 		$(".var-share-limit").html('as many');
 		$(".var").css({color: "black", fontWeight: "bold"});
+		
+		$('#myModal').on('shown.bs.modal', function () {
+  			$('#myInput').focus()
+		});
+		
+		(function($) {
+    		$.fn.goTo = function(complete_func) {
+    			var offset = $(this).offset().top - $('#word-tiles').offset().top + $('#word-tiles').scrollTop();
+        		$('#word-tiles').animate({
+            scrollTop: offset + 'px'
+        		}, 'fast', function (complete_func) {
+        		complete_func;	
+        		});
+        		return this;
+    		}
+		})(jQuery);
     </script>
+    
+    <script type="text/javascript" src="{% static 'anagrams/game.js' %}"></script>
 
     <style>
         .otree-chat {

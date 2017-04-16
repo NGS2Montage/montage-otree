@@ -188,7 +188,7 @@ function calculateResults() {
   }
 
 
-function difi(myScale, myGroup, mySelf, myColor, myDistance, myVisible, imgDir) {
+function difi(myScale, myGroup, mySelf, myColor, myDistance, myVisible) {
   if (typeof(myScale)=="undefined") myScale="Scale";
   if (typeof(myGroup)=="undefined") myGroup="Group";
   if (typeof(mySelf)=="undefined") mySelf="Me";
@@ -204,9 +204,9 @@ function difi(myScale, myGroup, mySelf, myColor, myDistance, myVisible, imgDir) 
   var urlMe = '/static/images/me.png';
   
   // Change png for a gif to fix IE6 transparency issues
-  if (/\bMSIE 6/.test(navigator.userAgent) && !window.opera) urlMe = '//static/images/me.gif';
+  if (/\bMSIE 6/.test(navigator.userAgent) && !window.opera) urlMe = '/static/images/me.gif';
 
-  var urlThem = '//static/images/them_' + myColor + '.png';
+  var urlThem = '/static/images/them_' + myColor + '.png';
 
   document.write('<div style="width:730px;height:380px;padding:15px;border:1px solid black">'+
 
@@ -214,10 +214,10 @@ function difi(myScale, myGroup, mySelf, myColor, myDistance, myVisible, imgDir) 
 
   '<div id="myControl'+myScale+'" style="width:700px;height:50px;left:0px;top:0px;border:0px;position:relative;">' +
   '<table width="700px" height="50px" border="0" cellspacing="0" cellpadding="0"><tr>' +
-  '<td valign="top" align="right" width="100px"><image src="//static/images/go_rewind.png" width="100" height="30" border="0" style="cursor:pointer" onClick=setPositionRewind("'+myScale+'")></td>' +
-  '<td valign="top" align="right" width="100px"><image src="//static/images/go_reverse.png" width="100" height="30" border="0" style="cursor:pointer" onClick=setPositionReverse("'+myScale+'")></td>' +
-  '<td valign="top" align="right" width="100px"><image src="//static/images/go_play.png" width="100" height="30" border="0" style="cursor:pointer" onClick=setPositionPlay("'+myScale+'")></td>' +
-  '<td valign="top" align="left" width="100px"><image src="//static/images/go_forward.png" width="100" height="30" border="0" style="cursor:pointer" onClick=setPositionForward("'+myScale+'")></td>' +
+  '<td valign="top" align="right" width="100px"><image src="/static/images/go_rewind.png" width="100" height="30" border="0" style="cursor:pointer" onClick=setPositionRewind("'+myScale+'")></td>' +
+  '<td valign="top" align="right" width="100px"><image src="/static/images/go_reverse.png" width="100" height="30" border="0" style="cursor:pointer" onClick=setPositionReverse("'+myScale+'")></td>' +
+  '<td valign="top" align="right" width="100px"><image src="/static/images/go_play.png" width="100" height="30" border="0" style="cursor:pointer" onClick=setPositionPlay("'+myScale+'")></td>' +
+  '<td valign="top" align="left" width="100px"><image src="/static/images/go_forward.png" width="100" height="30" border="0" style="cursor:pointer" onClick=setPositionForward("'+myScale+'")></td>' +
   '<td valign="middle" align="center" width="300px">'+myGroup+'</td>' +
   '</tr></table></div>' +
 

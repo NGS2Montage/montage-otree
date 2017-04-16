@@ -4,18 +4,19 @@ var app = {
     chats: [],
     newChat: "",
     successWords: [],
+    countDict: {},
     requests: [],
-    newWord: "",
     subscribed: false,
     letters: {},
     wordError: "",
+    wordCount: "",
+    sentWord: "",
 }
 
 var channel = varsFromDjango.channel;
 var participantCode = varsFromDjango.participant_code;
 var wordChannel = varsFromDjango.word_channel;
 var transactionChannel = varsFromDjango.transaction_channel;
-
 
 
 //////////////////////////////////////////////////////////////
@@ -137,9 +138,34 @@ socket.onmessage = function (message) {
     }
 
     if (message.type === "word") {
+    	  var output = [];
         for (var i = 0; i < message.words.length; i++) {
-            app.successWords.push(message.words[i]);
+            var newWord = message.words[i].toUpperCase();
+
+            if (newWord in app.countDict){
+            	app.countDict[newWord] += 1;
+            } else {
+            	app.countDict[newWord] = 1;
+            }
         }
+        var keys = Object.keys(app.countDict);
+        keys.sort();
+        for (var i=0, len=keys.length; i < len; i++){
+        		var key = keys[i];
+            output.push({
+            	'id': 'word-'+key,
+            	'word': key,
+            	'freq': app.countDict[key],
+            });
+        }
+        app.successWords = output;
+        app.wordCount = output.length;
+        
+        if (!(app.sentWord == "")){
+        var el = $('#word-tiles').find('#word-' + app.sentWord);
+        el.css({backgroundColor: 'orange'})
+        		.goTo(el.animate({backgroundColor: '#EEEEEE'},750));
+        	}
     }
 };
 
@@ -147,6 +173,7 @@ socket.onopen = function () {
     console.log("Connected to words socket");
     // clear message history so we can re-populate
     app.successWords = [];
+    app.countDict = {};
 };
 
 socket.onclose = function () {
@@ -158,8 +185,9 @@ function sendWord() {
     if (!body) {
         return;
     }
+    app.sentWord = $wordsInput.val().toUpperCase();
     var data = {
-        'word': $wordsInput.val(),
+        'word': $wordsInput.val().toLowerCase(),
         'participant_code': participantCode,
         'channel': wordChannel
     };

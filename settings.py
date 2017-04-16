@@ -194,14 +194,17 @@ SESSION_CONFIGS = [
     {
         'name': 'anagrams',
         'display_name': 'Anagrams',
+        'use_chat': False,
         'num_demo_participants': 4,
-        'app_sequence': ['demographic', 'anagrams'],
         'participation_money': 0.05,
+        #'app_sequence': ['demographic', 'anagrams'],
+        'app_sequence': ['anagrams'],
         'ultimatum_split': False,
         'ultimatum_player_role': 'offeror',  # Applicable only if 'ultimatum_split' is False
         'ultimatum_cutoff': 50,  # Applicable only if 'ultimatum_split' is False
         'ultimatum_group_size': 3,
-        'ultimatum_histogram': True
+        'ultimatum_histogram': True,
+        'bestScore': 100,
     },
     {
         'name': 'public_goods',

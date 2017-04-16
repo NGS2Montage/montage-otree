@@ -12,10 +12,8 @@
     <div class="container-fluid">
         <div class="navbar-header col-md-4 text-center">
             <a class="navbar-brand" href="{% url 'redirect' %}"
-               style="margin-left: 20px; font-size: 150%; font-weight: bold; font-family: 'Times New Roman', Times, serif;">
-                <b><span style="color: #EC4335;">N</span><span style="color: #34AA54;">G</span><span
-                        style="color: #4285F5;">S</span><span style="color: #F26722;">2</span>
-                    <span style="color: #34AA54;">Montage</span></b>
+               style="margin-left: 20px; font-size: 150%;">
+                <b><span style='color: black; font-family: "lobster", cursive; font-weight: bold;'>Jointly</span></b> - Multiplayer Games
             </a>
         </div>
         <div class="col-md-4" style="text-align: center; padding-top: 10px;">
@@ -160,13 +158,16 @@
             margin-bottom: 0px;
 
         }
-
-
     </style>
+    <link rel="stylesheet" href="jquery-ui.min.css">
+    <link rel="stylesheet" href="{% static "global/font-awesome-4.7.0/css/font-awesome.min.css" %}">
+    <link href="https://fonts.googleapis.com/css?family=Lobster" rel="stylesheet"> 
+
 
 {% endblock %}
 
 {% block global_scripts %}
+	
     <script>
         // document.getElementById('main_container').style.maxHeight = window.innerHeight - 150 + "px";
     </script>

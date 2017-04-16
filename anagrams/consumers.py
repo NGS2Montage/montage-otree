@@ -81,7 +81,7 @@ def msg_consumer(message):
     anagrams_player.group.teamword_set.create(
         channel=channel,
         word=word,
-        group = channels_group)
+        player = anagrams_player)
 
     words_message = {
         'type': 'word',
@@ -193,6 +193,16 @@ class AnagramsConsumer(JsonWebsocketConsumer):
         channel = content['channel']
         participant_code = content['participant_code']
 
+        if len(word) < 3:
+            message = {
+                'type': 'error',
+                'msg': "Words need to have 3 or more letters: {}".format(word),
+            }
+
+            self.send(message)
+            return
+
+
         if not Dictionary.objects.filter(word=word).exists():
             message = {
                 'type': 'error',
@@ -220,12 +230,13 @@ class AnagramsConsumer(JsonWebsocketConsumer):
                 self.send(message)
                 return
 
-#        if TeamWord.objects.filter(channel=channel, word=word).exists():
-#            message = {
-#                'type': 'error',
-#                'msg': "Word has already been played: {}".format(word),
-#            }
-#
-#            self.send(message)
-#            return
+        if TeamWord.objects.filter(channel=channel, word=word, player=player).exists():
+            message = {
+                'type': 'error',
+                'msg': """You have already played the word, {}. Only another
+                teammate can use it now.""".format(word),
+            }
+
+            self.send(message)
+            return
         Channel("anagrams.word_message").send(content)
