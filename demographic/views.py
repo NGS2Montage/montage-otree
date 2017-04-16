@@ -172,7 +172,7 @@ class DemographicNoAMT(Page):
 page_sequence = [
     Consent,
     ByeBye,
-    Demographic,
+    #Demographic,
     # Demographic2,
     #DemographicNoAMT,
 ]

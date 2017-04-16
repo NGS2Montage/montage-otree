@@ -13,7 +13,7 @@
         <div class="navbar-header col-md-4 text-center">
             <a class="navbar-brand" href="{% url 'redirect' %}"
                style="margin-left: 20px; font-size: 150%;">
-                <b><span style='color: black; font-family: "lobster", cursive; font-weight: bold;'>Jointly</span></b>
+                <b><span class="app-title">Jointly</span></b>
                 »  {% block title %}{% endblock %}
             </a>
         </div>
@@ -125,6 +125,8 @@
 
 {% endblock %}
 
+{% block styles %}
+{% endblock %}
 
 {% block global_styles %}
     <style>
@@ -138,6 +140,12 @@
         html {
             position: relative;
             min-height: 100%;
+        }
+        
+        .app-title {
+				color: black; 
+				font-family: "lobster";
+				cursive: font-weight: bold;        
         }
 
         .footer {

@@ -198,7 +198,7 @@ SESSION_CONFIGS = [
         'num_demo_participants': 4,
         'participation_money': 0.05,
         #'app_sequence': ['demographic', 'anagrams'],
-        'app_sequence': ['anagrams'],
+        'app_sequence': ['instructions','anagrams'],
         'ultimatum_split': False,
         'ultimatum_player_role': 'offeror',  # Applicable only if 'ultimatum_split' is False
         'ultimatum_cutoff': 50,  # Applicable only if 'ultimatum_split' is False
