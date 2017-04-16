@@ -24,22 +24,22 @@ http://getbootstrap.com/components/
 
     {% next_button %}
 -->
-    <div id="app-view" class="row" style="background: white; min-width: 900px;">
-                
-        <div class="row" style="padding-left: 30px; padding-right: 30px; margin: 0;">
-        		<h3><b>Welcome, {app.user.name}!</b></h3>
-        		<p>How many words can you create with your set of letters? Remember, if you run out of ideas, you can always look at
-        		your teammates' letters to make requests! Duplicate words are ok. Submit anything you can, let us determine if it is a word!
-        		<b><em>Can your team beat the previous record of {{session.config.bestScore}} words?</em></b></p>
+    <div id="app-view" class="row" style="background: white;">
+        
+               
+        <div class="row" style="padding-left: 15px; padding-right: 30px; margin: 0;">
+				{% comment %}
+        		<h3><b>Welcome, {app.user.name}!</b></h3>        		
+        		{% endcomment %}
         </div>
 
+		  
 		  <div class="row">
-		  		<div class="col-md-5" style="padding: 30px; padding-top: 5px;">
-		  			<div class="row" style="padding-left: 30px; height:275px;">
+		  		<div class="col-xs-5 col-md-5" style="padding: 30px; padding-top: 5px;">
+		  			<div class="row" style="height:275px;">
                 	<div class="col-md-12">
                     <div class="row">
-                      <h4><span class="glyphicon glyphicon-user" aria-hidden="true"></span>&nbsp;<b>Your Letters</b><span style="font-size: 8pt;">
-                      &nbsp;&nbsp;&nbsp;&nbsp;(remember, you can always request more letters below)</span></h4>
+                      <h4><span class="glyphicon glyphicon-user" aria-hidden="true"></span>&nbsp;<b>Your Letters</b></h4>
                       
                 			<div class="row" style="padding-left: 12px;">
                 				<button type="button" class="btn btn-info disabled" rv-each-letter="app.user.letters"
@@ -52,7 +52,12 @@ http://getbootstrap.com/components/
                       	<span class="glyphicon glyphicon-user" aria-hidden="true"></span>
                       	<span class="glyphicon glyphicon-user" aria-hidden="true"></span>
                       	<span class="glyphicon glyphicon-user" aria-hidden="true"></span>
-                      	&nbsp;<b>Letters From Your Team</b></h4>
+                      	&nbsp;<b>Team Provided Letters</b></h4>
+                      	<button type="button" class="btn btn-default" data-toggle="modal" data-target="#myModal"
+                       	style="background-image: none; display: inline-block; height: 25px; padding: 3px;">
+								<span class="glyphicon glyphicon-download" aria-hidden="true"></span>                       	
+                       	Request More Letters
+                			</button>
       						<p id="transaction_message" style="font-weight: bold; color:red;">{app.transactionError}</p>
                 			<div class="row" style="padding-left: 12px; margin-top: 8px;">
                 				<button type="button" class="btn btn-success disabled" style="background-image: none; display: inline-block; margin-bottom: 5px; margin-left: 5px;"
@@ -67,42 +72,43 @@ http://getbootstrap.com/components/
             	</div>   
 		  		</div>
 
-				<div class="col-md-7">
+				<div class="col-xs-7 col-md-7">
         			<div class="panel panel-default">
-        				<div class="panel-heading"  style="height:80px;">
+        				<div class="panel-heading">
 
 							<h4 style="padding: 0; margin: 2px; font-weight: bold;">
         					<span class="glyphicon glyphicon-user" aria-hidden="true"></span>
                      <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
                      <span class="glyphicon glyphicon-user" aria-hidden="true"></span>							
 							&nbsp;&nbsp;Your Team's Words</h4>
-							<p style="font-size: 10pt;"><em>Tip!</em> You can create the same word many times. Your team will give you ideas:</p>
+						 	<p style="font-size: 10pt;"><em>Duplicate words allowed.</em> </p>
 						</div>
-						<div id="word-tiles" class="panel-body" style="padding-top: 0px; height:240px; overflow-y: auto;">
+						<div id="word-tiles" class="panel-body" style="padding-top: 0px; height:200px; overflow-y: auto;">
             			<div class="row">                	
-                			<button rv-id="word.id" rv-each-word="app.successWords" type="button" class="btn btn-default disabled" style="background-image: none; background-color: #EEEEEE; text-align: center; font-weight: bold; font-size: 10pt; border-color: black; color: black; margin: 2px; display: inline-block;">
+                			<button rv-id="word.id" rv-each-word="app.successWords" type="button" rv-addclass="word.class" class="btn btn-default disabled" style="background-image: none; background-color: #EEEEEE; text-align: center; font-weight: bold; font-size: 10pt; border-color: black; color: black; margin: 2px; display: inline-block;">
                         	<span style="vertical-align: bottom;">{ word.word }&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="badge badge-primary" style="width: 3em; color: black; background-color: white; font-size: 8pt; border-style: solid; border-color: black; border-width: 1pt;">{ word.freq }</span>
                     		</button>
             			</div>
         				</div>
         				<div class="panel-footer">
         					<p style="width:100%; text-align: right; margin:0; font-size: 10pt;">
-								<strong>Your Team Word Count: <span id="word_count" style="display: inline-block; width:3em; text-align: right;">{app.wordCount}</span> words</strong>
+								<strong>Word Count: <span id="word_count" style="display: inline-block; width:3em; text-align: right;">{app.wordCount}</span> words</strong>
 							</p>
 							<p style="width:100%; text-align: right; margin:0; font-size: 10pt;">
-								Current Record: <span id="word_count_beat" style="display: inline-block; width:3em; text-align: right;">{{session.config.bestScore}}</span> words
+								Record to Beat: <span id="word_count_beat" style="display: inline-block; width:3em; text-align: right;">{{session.config.bestScore}}</span> words
 							</p>        				
         				</div>
 		  			</div>                
         		</div>		  
 		  </div>       
         
-       <div class="row" style="padding: 15px; padding-top: 0;">
+       <div class="row" style="padding-top: 0;">
        
-         <div class="col-md-5">
-         <div class="row" style="height: 50px; padding-left: 30px; bottom: 0px;">
+         <div class="col-xs-12 col-md-5" style="display: inline-block;">
+        		<div class="row" style="padding-left: 15px; bottom: 0px;">
+        			<div class="col-xs-12 col-md-12" style="padding: 0;">
          			<p style="margin:0; font-size: 8pt;">
-                     <span class="label label-warning">Orange</span> letters are awaiting team approval.
+                     <span class="label label-warning">Orange</span> letters need teammate approval.
                   </p>
 						<p style="margin:1; font-size:10pt;">Type any of the letters appearing in <span class="label label-info">blue</span> or <span class="label label-success">green</span> to form a word:</p>
 						<div class="row input-group otree-chat" id='anagrams-words-{{ word_channel }}' style="border: 0px; padding-top: 0px; margin:0; bottom: 0px;">
@@ -112,20 +118,12 @@ http://getbootstrap.com/components/
       					</span>		
     					</div>
     					<p style="margin-top: 7px; color:red; padding-left: 10px; font-weight: bold;">{app.wordError}</p>
-    					<p style="font-size: 10pt;">or, if you are out of words to make:</p>
-    					<div class="row">
-                		<button type="button" class="btn btn-default" data-toggle="modal" data-target="#myModal"
-                       	style="margin-left: 20px; margin-bottom: 5px; display: inline-block; width: 390px;">
-                       	<span class="glyphicon glyphicon-user" aria-hidden="true"></span>
-                      	<span class="glyphicon glyphicon-user" aria-hidden="true"></span>
-                      	<span class="glyphicon glyphicon-user" aria-hidden="true"></span>
-                       	&nbsp;&nbsp;<strong>Request more letters from the team!</strong>
-                		</button>    					
-    					</div>
+    					<!-- <p style="font-size: 10pt;">or, if you are out of words to make:</p> -->
+    				</div>
     					<div class='messages' style="height: 0px;"></div>
-          		</div>
+          	</div>
          </div>
-		 	<div class="col-md-7" style="padding-right: 0px;">
+		 	<div class="col-xs-12 col-md-7" style="display: inline-block; padding-top: 5px; padding-right: 15px;">
 		  		<div class="panel panel-default">
 		  			<div class="panel-heading">
 						<h4 style="padding: 0; font-weight: bold; margin: 2px;">
@@ -133,7 +131,7 @@ http://getbootstrap.com/components/
                   <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
                   <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
                   &nbsp;&nbsp;Copy Your Letters to the Team:</h4>
-						<p style="font-size: 9pt; margin:0;"><em>Help your team!</em> Letter requests from your team appear below. <strong>Click on a request to copy and send them a letter.</strong></p>		  			
+						<p style="font-size: 9pt; margin:0;"><em>Help your team!</em> Letter requests from your team will appear below. <strong>Click on a request to copy and send them a letter.</strong></p>		  			
 		  			</div>
 		  			<div class="panel-body" style="padding:0; height:100px; overflow-y: auto;">
                         <button type="button" class="btn btn-info" style="margin: 2px;"
@@ -145,7 +143,8 @@ http://getbootstrap.com/components/
 		  			</div>
         		</div>
         </div>
-
+		</div>
+		
 		 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
   			<div class="modal-dialog" role="document">
     			<div class="modal-content">
@@ -172,7 +171,18 @@ http://getbootstrap.com/components/
     			</div>
   			</div>
 			</div>        
-    </div>
+
+<div class="row" style="text-align: center; padding-left: 15px; padding-right: 15px;">
+	<button type="button" class="btn btn-default" data-toggle="modal" data-target="#Instructions"
+           style="background-image: none; display: inline-block; height: 25px; margin: auto; padding: 3px;">
+		<span class="glyphicon glyphicon-hand-up" aria-hidden="true"></span>                       	
+       	View Detailed Instructions
+   </button>  
+   <p style="text-align: justify;"><strong>Team Anagrams »</strong> How many words can you create with your set of letters? Remember, if you run out of ideas, you can always look at
+        		your teammates' letters to make requests! Duplicate words are ok. Submit anything you can, let us determine if it is a word!
+        		<b><em>Can your team beat the previous record of {{session.config.bestScore}} words?</em></b></p>
+</div>
+  
 
 	 {% if session.config.use_chat %}
     <div class="row" style="background: white; padding: 10px 10px 20px 10px; border-color: lightgray;
@@ -198,10 +208,6 @@ http://getbootstrap.com/components/
     <br/><br/>
 
     <div style="text-align: center">{% next_button %}</div>
-
-    {% include 'instructions/instructions_anagram.html' %}
-    {% include 'instructions/anagrams_youtube.html' %}
-    
      {% endif %}
 
 {% endblock %}

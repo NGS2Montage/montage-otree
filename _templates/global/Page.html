@@ -13,7 +13,8 @@
         <div class="navbar-header col-md-4 text-center">
             <a class="navbar-brand" href="{% url 'redirect' %}"
                style="margin-left: 20px; font-size: 150%;">
-                <b><span style='color: black; font-family: "lobster", cursive; font-weight: bold;'>Jointly</span></b> - Multiplayer Games
+                <b><span style='color: black; font-family: "lobster", cursive; font-weight: bold;'>Jointly</span></b>
+                »  {% block title %}{% endblock %}
             </a>
         </div>
         <div class="col-md-4" style="text-align: center; padding-top: 10px;">
@@ -40,13 +41,14 @@
 <div class="container" id="main_container">
 
     <div class="row" style="margin-top: 120px;">
-        <div class="col-md-12" style="background: white; padding: 30px; border-color: lightgray;
+        <div class="col-md-12" style="background: white; padding: 30px; padding-top: 15px; padding-bottom: 0px; border-color: lightgray;
                 border-radius: 12px; border-width: 3px; border-style: groove;">
 
-            <div class="page-header" style="margin-top: 0px; padding-top: 0px; padding-bottom: 15px;">
+{% comment %}
+             <div class="page-header" style="margin-top: 0px; padding-top: 0px; padding-bottom: 15px;">
                 <h2>{% block title %}{% endblock %}</h2>
-            </div>
-            <div>
+            </div> -->
+{% endcomment %}
                 {% if view.has_timeout %}
                     {% include 'otree/includes/TimeLimit.html' with form_element_id="form" %}
                 {% endif %}
@@ -128,7 +130,7 @@
     <style>
         body {
             background-image: url('/static/images/bg3.jpg');
-            background-size: 100% auto;
+            background-size: cover;
             background-repeat: no-repeat;
             margin-bottom: 60px;
         }
@@ -159,7 +161,6 @@
 
         }
     </style>
-    <link rel="stylesheet" href="jquery-ui.min.css">
     <link rel="stylesheet" href="{% static "global/font-awesome-4.7.0/css/font-awesome.min.css" %}">
     <link href="https://fonts.googleapis.com/css?family=Lobster" rel="stylesheet"> 
 

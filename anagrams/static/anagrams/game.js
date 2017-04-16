@@ -23,6 +23,16 @@ var transactionChannel = varsFromDjango.transaction_channel;
 // rivets init
 //////////////////////////////////////////////////////////////
 rivets.bind(document.getElementById('app-view'), {app: app});
+rivets.binders.addclass = function(el, value){
+	if (el.addedClass){
+		$(el).removeClass(el.addedClass);
+		delete el.addedClass;
+	}
+	if (value){
+		$(el).addClass(value);
+		el.addedClass = value;
+	}
+}
 
 app.user = new User(varsFromDjango.nickname);
 
@@ -30,7 +40,7 @@ app.user = new User(varsFromDjango.nickname);
 // User
 //////////////////////////////////////////////////////////////
 function User(username) {
-    this.name = username + " Group " + varsFromDjango.group;
+    this.name = username; //+ " Group " + varsFromDjango.group;
 
     var letterObjs = varsFromDjango.letters[username];
     if (username === varsFromDjango.nickname) {
@@ -139,14 +149,15 @@ socket.onmessage = function (message) {
 
     if (message.type === "word") {
     	  var output = [];
+    	  var wordClass = {};
         for (var i = 0; i < message.words.length; i++) {
             var newWord = message.words[i].toUpperCase();
-
             if (newWord in app.countDict){
             	app.countDict[newWord] += 1;
             } else {
             	app.countDict[newWord] = 1;
             }
+            wordClass[newWord] = ((newWord == app.sentWord) ? 'word-sent' : 'word-new');
         }
         var keys = Object.keys(app.countDict);
         keys.sort();
@@ -154,6 +165,7 @@ socket.onmessage = function (message) {
         		var key = keys[i];
             output.push({
             	'id': 'word-'+key,
+            	'class': ((key in wordClass) ? wordClass[key] : 'word'),
             	'word': key,
             	'freq': app.countDict[key],
             });
@@ -162,9 +174,17 @@ socket.onmessage = function (message) {
         app.wordCount = output.length;
         
         if (!(app.sentWord == "")){
-        var el = $('#word-tiles').find('#word-' + app.sentWord);
-        el.css({backgroundColor: 'orange'})
-        		.goTo(el.animate({backgroundColor: '#EEEEEE'},750));
+        		el = $(".word-sent");
+        		el.css({backgroundColor: '#00ffcc'})
+        		.goTo(el.animate({backgroundColor: '#EEEEEE'},750))
+        		.removeClass(".word-sent");
+        		app.sentWord = "";
+        	} else {
+        		el = $(".word-new");
+        		el.css({backgroundColor: 'orange'})
+        		.animate({backgroundColor: '#EEEEEE'},750)
+        		.removeClass(".word-new");
+        		app.sentWord = "";
         	}
     }
 };
