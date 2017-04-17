@@ -6,13 +6,26 @@
 {% endblock %}
 
 
-{% block title %} Phase 1. Anagrams {% endblock %}
+{% block title %} Anagrams Game Instructions.{% endblock %}
 
 
 {% block content %}
 
-    {% include 'instructions/instructions_anagram.html' %}
+	<h2>Anagrams Game - Instructions.</h2>
+            <p>
+            You and your team are about to play a game called Anagrams shown below. 
+            The objective of your team is to try to create as many words as possible. 
+            If your team is able to form {{session.config.threshold_num_words}} words, then you will earn 
+            {{session.config.threshold_num_points}} points. 
+            Any additional word will add {{session.config.marginal_points|c}} to the score.
+            <strong>You will have {{session.config.anagrams_timeout_min}} minutes to try to make as many words as possible!</strong>
+            </p>
 
+    {% include 'instructions_anagrams/instructions_anagram.html' %}
+
+	 
+
+{% comment %}
     <!-- Quiz WELL : START -->
     <div class="row" style="margin-top: 25px;">
         <div class="col-md-12" style="padding-left: 5px; padding-right: 5px;">
@@ -28,6 +41,7 @@
         </div>
     </div>
     <!-- Quiz WELL : END -->
+
 
     <!-- Quiz DIV : START -->
     <div class="row" id="quizDiv" style="margin-top: 0px;">
@@ -131,23 +145,16 @@
         </div>
     </div>
     <!-- Quiz DIV : END -->
-
-    <br/>
+{% endcomment %}
+  
+    <h4><strong>Ok, got it? Click next to continue!</strong></h4>
     {% next_button %}
+    <!-- <button style="margin: 15px;" class="otree-next-button btn btn-large btn-primary next-button">Click to Begin.</button> -->
 
 {% endblock %}
 
 
 {% block scripts %}
     <script type="text/javascript" src="{% static 'js/hide_panel.js' %}"></script>
-    <script type="text/javascript">
-      $(".var-n-players").html({{nPlayers|json}});
-		$(".var-time").html({{Constants.anagrams_duration_sec|json}});
-		$(".var-word-threshold").html({{Constants.word_threshold|json}});
-		$(".var-threshold-payment").html({{Constants.threshold_payment|json}} + ' pts');
-		$(".var-marginal-pay").html({{Constants.marginal_payment}});
-		$(".var-share-limit").html('as many');
-		$(".var").css({color: "black", fontWeight: "bold"});
-    </script>
 {% endblock %}
 

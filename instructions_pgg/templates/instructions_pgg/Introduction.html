@@ -1,0 +1,23 @@
+{% extends "global/Page.html" %}
+{% load staticfiles otree_tags %}
+
+{% block head_title %}
+    Team Contribution
+{% endblock %}
+
+{% block title %} Team Contribution {% endblock %}
+
+{% block content %}
+	 <h2>Team Contribution Decision.</h2>
+    <h4 style="text-align: justify;">
+        Congratulations! You have the opportunity increase your earnings from the last round.
+        We have decided to give your team a bonus of {{session.config.pgg_bonus|c}}. This will
+        be split equally among all of your teammates, but we will first give you a chance to double your earnings.
+    </h4>
+   
+	 
+	 <br/>
+	 <p><strong>Click 'Next' to proceed.</strong></p>
+    {% next_button %}
+
+{% endblock %}

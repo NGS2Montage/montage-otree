@@ -1,0 +1,94 @@
+{% extends "global/Page.html" %}
+{% load staticfiles otree_tags %}
+
+{% block head_title %}
+    Phase 2 Instructions
+{% endblock %}
+
+
+{% block title %} Team Reward Decision. {% endblock %}
+
+
+{% block content %}
+
+    {% include 'instructions_pgg/instructions_public_goods.html' %}
+
+    <div class="row" id="quizDiv" style="margin-top: 0px;">
+        <div class="col-md-12">
+            <h4>
+                <strong>Got it? To make sure it's clear, please answer the following question (must get right to continue):</strong>
+            </h4>
+
+<div id="contributionTable" style="max-width: 75%; display: block; margin-left: auto; margin-right: auto;"></div>
+<script type="text/javascript" src="{% static 'js/contributionTable.js' %}"></script>
+    
+    <script type="text/javascript" >
+      var Table = new ContributionTable('1000', '100');
+    	Table.init($('#contributionTable'));
+    </script>
+            <ol>
+                <li>
+                    <b>
+                        You are given 100pts to play this game with 1000 other teammates. You need to decide what fraction of this amount to share with the
+                        team by contributing to the team pool of money. It will be doubled. The table above shows what you can earn. Choose options below that are true. Check all that
+                        apply.
+                    </b><br/>
+                    <div class="checkbox">
+                        <label><input type="checkbox" name="question1[]" value="a">
+                            You are also risking money that you earned in Phase 1, so the $1 has to be added to the
+                            Phase 1 money when considering what percentage to give to the team.
+                        </label>
+                    </div>
+                    <div class="checkbox">
+                        <label><input type="checkbox" name="question1[]" value="b">
+                            You will be interacting with neighbors in this game and should get advice from them.
+                        </label>
+                    </div>
+                    <div class="checkbox">
+                        <label><input type="checkbox" name="question1[]" value="c">
+                            The percentage of money you contribute to the team “pot” will be pooled with the
+                            contributions of other team members, doubled, and redistributed.
+                        </label>
+                    </div>
+                    <div class="checkbox">
+                        <label><input type="checkbox" name="question1[]" value="d">
+                            The percentage that you choose to keep for yourself will be yours, no matter what is
+                            contributed to the team pot by you and your teammates.
+                        </label>
+                    </div>
+                    <div class="checkbox">
+                        <label><input type="checkbox" name="question1[]" value="e">
+                            The correct decision is obvious: keep the entire $1 because the best you can do, if you
+                            contribute money to the team, is if everyone else contributes money and all team
+                            members divide the total amount in the “pot.” So you might as well keep the $1 for
+                            yourself.
+                        </label>
+                    </div>
+                    <div class="checkbox">
+                        <label><input type="checkbox" name="question1[]" value="f">
+                            If you contribute 50pts and on average you think your team will contribute 75pts per person, your earnings will
+                            be 199.95 pts.
+                        </label>
+                    </div>
+                    
+                </li>
+            </ol>
+
+            <input type="hidden" name="public_goods_hidden" value="5" id="id_public_goods_hidden"/>
+
+        </div>
+    </div>
+    <!-- Quiz DIV : END -->
+
+    <br/>
+    <p>
+      <strong>Click next, to continue.</strong>
+    </p>
+    {% next_button %}
+
+{% endblock %}
+
+
+{% block scripts %}
+    <script type="text/javascript" src="{% static 'js/hide_panel.js' %}"></script>
+{% endblock %}

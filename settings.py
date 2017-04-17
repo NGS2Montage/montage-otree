@@ -147,25 +147,39 @@ SESSION_CONFIGS = [
         'name': 'productionNoPriming',
         'display_name': 'Production P2 Only No Priming',
         'num_demo_participants': 2,
-        'app_sequence': ['demographic', 'instructions','ruse','public_goods'],
+        'app_sequence': ['demographic', 'instructions_anagrams','ruse','public_goods'],
         'participation_money': 0.05,
         'ultimatum_split': False,
         'ultimatum_player_role': 'offeror',  # Applicable only if 'ultimatum_split' is False
         'ultimatum_cutoff': 50,  # Applicable only if 'ultimatum_split' is False
         'ultimatum_group_size': 3,
-        'ultimatum_histogram': True
+        'ultimatum_histogram': True,
+        'bestScore': 400,
+        'threshold_num_words': 100,
+        'threshold_num_points': 100,
+        'marginal_points': 1,
+        'timeout_anagrams_min': 3,
+        'pgg_bonus': 100,
+	'pgg_timeout_min': 1,
     },
     {
         'name': 'productionPriming',
         'display_name': 'Production P2 Priming',
         'num_demo_participants': 2,
-        'app_sequence': ['demographic', 'instructions', 'anagrams','ruse','public_goods'],
+        'app_sequence': ['demographic', 'instructions_anagrams', 'anagrams','ruse','instructions_pgg', 'public_goods'],
         'participation_money': 0.05,
         'ultimatum_split': False,
         'ultimatum_player_role': 'offeror',  # Applicable only if 'ultimatum_split' is False
         'ultimatum_cutoff': 50,  # Applicable only if 'ultimatum_split' is False
         'ultimatum_group_size': 3,
-        'ultimatum_histogram': True
+        'ultimatum_histogram': True,
+        'bestScore': 400,
+        'threshold_num_words': 100,
+        'threshold_num_points': 100,
+        'marginal_points': 1,
+        'timeout_anagrams_min': 3,
+        'pgg_bonus': 100,
+	'pgg_timeout_min': 1,
     },
 #   {
 #        'name': 'production',
@@ -198,25 +212,33 @@ SESSION_CONFIGS = [
         'num_demo_participants': 4,
         'participation_money': 0.05,
         #'app_sequence': ['demographic', 'anagrams'],
-        'app_sequence': ['instructions','anagrams'],
+        'app_sequence': ['instructions_anagrams','anagrams'],
         'ultimatum_split': False,
         'ultimatum_player_role': 'offeror',  # Applicable only if 'ultimatum_split' is False
         'ultimatum_cutoff': 50,  # Applicable only if 'ultimatum_split' is False
         'ultimatum_group_size': 3,
         'ultimatum_histogram': True,
-        'bestScore': 100,
+        'bestScore': 400,
+        'threshold_num_words': 100,
+        'threshold_num_points': 100,
+        'marginal_points': 1,
+        'timeout_anagrams_min': 3,
+        'pgg_bonus': 100,
+	'pgg_timeout_min': 1,
     },
     {
         'name': 'public_goods',
         'display_name': 'Public Goods',
         'num_demo_participants': 2,
-        'app_sequence': ['demographic', 'public_goods'],
+        'app_sequence': ['demographic', 'instructions_pgg', 'public_goods'],
         'participation_money': 0.05,
         'ultimatum_split': False,
         'ultimatum_player_role': 'offeror',  # Applicable only if 'ultimatum_split' is False
         'ultimatum_cutoff': 50,  # Applicable only if 'ultimatum_split' is False
         'ultimatum_group_size': 3,
-        'ultimatum_histogram': True
+        'ultimatum_histogram': True,
+        'pgg_bonus': 100,
+	'pgg_timeout_min': 1,
     },
 #    {
 #        'name': 'ultimatum',

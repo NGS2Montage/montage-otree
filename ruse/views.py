@@ -10,7 +10,7 @@ class LoginRequiredMixin(object):
         view = super(LoginRequiredMixin, cls).as_view(**initkwargs)
         return login_required(view)
 
-class Ruse(Page):
+class PredictionPage(Page):
     timeout_seconds = 60
     form_model = models.Player
     form_fields = [
@@ -52,7 +52,7 @@ class Results(Page):
     pass
 
 page_sequence = [
-    Ruse,
+    PredictionPage,
     WaitPage,
     Results,
 ]

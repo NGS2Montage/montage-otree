@@ -10,7 +10,7 @@
 {% block content %}
 
     <p>
-        Welcome, {{ user.first_name | title }}! You have {{Constants.decision_time_min}} minute(s) to decide how much of your current earnings you
+        You have {{session.config.pgg_timeout_min}} minute(s) to decide how much of your current earnings you
         would like to donate to the group, with a chance of increasing your overall earnings. Please enter the amount
         in the box below and click arrow in order to submit:
     </p>
@@ -32,7 +32,7 @@
             	<div class="row" style="width: 100%;">
             	<div class="col-xs-2 col-md-2"></div>
             <div class="col-xs-8 col-md-8" style="display: inline-block; margin-top: 5px; margin-left: 0px;" >
-                <input type="number" name="contribution" id="id_contribution" class="input-lg" style="width: 100%;">
+                <input type="number" placeholder="Enter Amount" name="contribution" id="id_contribution" class="input-lg" style="width: 100%;">
             </div>
             <div class="col-xs-2 col-md-2" style="display: inline-block; text-align: left;" >
                 <h2>pts</h2>
@@ -43,6 +43,7 @@
     </div>
     <br/>
 
+	<p><strong>Enter in a value and click 'next' to continue.</strong></p>
 	{% next_button %}
 
 	<div class="row" style="margin-top: 25px;">
@@ -61,13 +62,16 @@
 
     <div class="row" id="contributionTableDiv">
         <div class="col-md-12">
-        		<p>This table shows the earnings you will expect to see depending on how much you contribute (rows) and how much your team (N= {{nPlayers}}) contributes (columns). Remember, the more you contribute, the more you help your teammates.</p>
+        		<p>This table shows the earnings you will expect to see depending on how much you contribute (rows) and how much your team (N= {{nPlayers}}) contributes (columns). 
+You always end up with a larger bonus by letting everyone else contribute except you; however, 
+bear in mind that if no one contributes to the pool because each person expects everyone else to, 
+then everyone will miss the opportunity to double their winnings.        		
+        		</p>
 				<div id="contributionTable" style="max-width: 75%; display: block; margin-left: auto; margin-right: auto;"></div>
         </div>
     </div>
     <!-- Instructions DIV : END -->
 
-    {% include 'instructions/instructions_public_goods.html' %}
     {% comment %} {% include 'instructions/public_goods_youtube.html' %} {% endcomment %}
 
 {% endblock %}

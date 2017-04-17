@@ -85,7 +85,7 @@ class WaitPage(WaitPage):
 
 class Anagrams(Page):
     is_debug = False
-    #Domingo timeout_seconds = Constants.anagrams_duration_sec
+    timeout_seconds = Constants.anagrams_duration_sec
 
     def is_displayed(self):
         if self.participant.vars['consent'] and self.participant.vars['playing']:
@@ -178,10 +178,10 @@ class DifiIndexAfter(Page):
 
 
 page_sequence = [
-#    DifiIndexBefore,
+    DifiIndexBefore,
     WaitPage,
     Anagrams,
-#    ResultsWaitPage,
-#    Results,
-#    DifiIndexAfter,
+    ResultsWaitPage,
+    Results,
+    DifiIndexAfter,
 ]

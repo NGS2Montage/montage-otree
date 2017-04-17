@@ -40,7 +40,6 @@ http://getbootstrap.com/components/
                 	<div class="col-md-12">
                     <div class="row">
                       <h4><span class="glyphicon glyphicon-user" aria-hidden="true"></span>&nbsp;<b>Your Letters</b></h4>
-                      
                 			<div class="row" style="padding-left: 12px;">
                 				<button type="button" class="btn btn-info disabled" rv-each-letter="app.user.letters"
                         	style="margin-left: 5px; margin-bottom: 5px; display: inline-block; background-image: none;"><strong>{ letter }</strong>
@@ -170,7 +169,21 @@ http://getbootstrap.com/components/
       			</div>
     			</div>
   			</div>
-			</div>        
+			</div>
+			<div class="modal fade" id="Instructions" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  			<div class="modal-dialog" role="document">
+    			<div class="modal-content">
+      			<div class="modal-header">
+        				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>        				
+        				<h4 style="font-weight: bold; padding: 0;">
+							Instructions:</h4> 
+      			</div>
+      			<div class="modal-body" style="max-height: 600px; overflow-y:auto;">
+                		{% include 'instructions_anagrams/instructions_anagram.html' %}	
+      			</div>
+    			</div>
+  			</div>
+			</div>    
 
 <div class="row" style="text-align: center; padding-left: 15px; padding-right: 15px;">
 	<button type="button" class="btn btn-default" data-toggle="modal" data-target="#Instructions"
@@ -206,9 +219,9 @@ http://getbootstrap.com/components/
    
 
     <br/><br/>
-
-    <div style="text-align: center">{% next_button %}</div>
      {% endif %}
+
+<div style="text-align: center">{% next_button %}</div>
 
 {% endblock %}
 
