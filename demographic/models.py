@@ -37,21 +37,21 @@ class Player(BasePlayer):
     )
 
     income = models.CharField(
-        verbose_name="What is your household income (answer in USD)",
+        verbose_name="What is your annual household income (answer in USD)?",
         choices=["Less than $25,000", "$25,000 - $49,999", "$50,000 - $74,999", "$75,000 - $99,999",
-                 "$100,000 - $124,999", "$125,000 - $149,999", "Greater than $150,000"],
+                 "$100,000 - $124,999", "$125,000 - $149,999", "Greater than $150,000", "Do not wish to answer"],
         widget=widgets.RadioSelect(),
     )
 
     sex = models.CharField(
         verbose_name="What is your sex?",
-        choices=["Male", "Female"],
+        choices=["Male", "Female", "Other", "Do not wish to answer"],
         widget=widgets.RadioSelect()
     )
 
     marital_status = models.CharField(
         verbose_name="What is your marital status?",
-        choices=["single", "married", "divorced"],
+        choices=["Never married", "Married", "Widowed", "Separated", "Divorced", "Other", "Do not wish to answer"],
         widget=widgets.RadioSelect()
     )
 
@@ -71,15 +71,16 @@ class Player(BasePlayer):
     )
 
     speciality = models.CharField(
-        verbose_name="What is your area of specialty/major, if applicable? (examples include: Engineering, History, "
-                     "Mathematics, Literature, Foreign Languages, etc.)"
+        verbose_name="What is your area of specialty (college major, work skills, etc.) if applicable?",
+	choices=["Engineering", "History", "Mathematics", "Literature", "Foreign Language", "Social Sciences", "Arts", "Psychology", "Natural Sciences (Biology, Chemistry Physics)", "Agriculture", "Business", "Education", "Health Sciences", "Medicine", "Law", "Other", "Choose not to answer"],
+        widget=widgets.RadioSelect()
     )
 
     employment_status = models.CharField(
         verbose_name="What is your employment status?",
         choices=["Employed for wages", "Self-employed", "Out of work and looking for work",
                  "Out of work but not currently looking for work", "A homemaker", "A student", "Military", "Retired",
-                 "Unable to work"],
+                 "Unable to work", "Other", "Choose not to answer"],
         widget=widgets.RadioSelect()
     )
 

@@ -166,7 +166,7 @@ SESSION_CONFIGS = [
         'name': 'productionPriming',
         'display_name': 'Production P2 Priming',
         'num_demo_participants': 2,
-        'app_sequence': ['demographic', 'instructions_anagrams', 'anagrams','ruse','instructions_pgg', 'public_goods'],
+        'app_sequence': ['welcome', 'demographic', 'instructions_anagrams', 'anagrams','ruse','instructions_pgg', 'public_goods'],
         'participation_money': 0.05,
         'ultimatum_split': False,
         'ultimatum_player_role': 'offeror',  # Applicable only if 'ultimatum_split' is False

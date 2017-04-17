@@ -1,0 +1,71 @@
+{% extends "global/Page.html" %}
+{% load staticfiles otree_tags %}
+
+{% block head_title %}
+    Introduction
+{% endblock %}
+
+{% block title %} Welcome! {% endblock %}
+
+{% block content %}
+	 <h2>Welcome.</h2>
+    <p style="text-align: justify;">
+        Welcome to <span class="app-title">Jointly</span>, a team-based platform for conducting group exercises! 
+        Today, we will play different games to study the emergence and change of collective identity in groups and teams. 
+        In this series of exercises, you will be teamed with other players. These are your teammates.
+        You will have the opportunity to collaborate with your teammates to earn more of a reward.
+        In each of the games, you will have the opportunity to earn a non-trivial amount of money based on how well your
+        team performs. 
+        
+        The table below shows the exercises involved in this study, the amount of time required, and the amount of earnings expected:
+    </p>
+    <div class="row">
+    
+    <table class="table" style="margin: auto; width: 60%">
+    <thead>
+      <tr>
+        <th>Exercise</th>
+        <th>Est. Time Required</th>
+        <th>Max. Earnings</th>
+      </tr>
+    </thead>
+    <tbody>
+    	<tr>
+        <td>Consent and Agreement to Participate</td>
+        <td>< 1 minute</td>
+        <td>{{session.config.participation_money|c}}</td>
+      </tr>
+      <tr>
+        <td>Survey (10 Questions)</td>
+        <td>1 minute</td>
+        <td>{{3|c}}</td>
+      </tr>
+      <tr>
+        <td>Game 1. Anagrams Game</td>
+        <td>3 minutes</td>
+        <td>{{5|c}}</td>
+      </tr>
+      <tr>
+        <td>Game 2. Anagrams Follow-up Question</td>
+        <td>1 minutes</td>
+        <td>{{5|c}}</td>
+      </tr>
+      <tr>
+        <td>Game 3. Anagrams Follow-up Questions</td>
+        <td>2 minutes</td>
+        <td>{{5|c}}</td>
+      </tr>
+      <tr style="font-weight: bold;">
+        <td>Total</td>
+        <td>8 minutes</td>
+        <td>{{5|c}}</td>
+      </tr>
+    </tbody>
+  </table>
+	 </div>
+	 
+	 <br/>
+	 <p><strong>Click 'Next' to move forward.</strong></p>
+    {% next_button %}
+
+{% endblock %}

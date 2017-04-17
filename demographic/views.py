@@ -168,11 +168,41 @@ class DemographicNoAMT(Page):
             self.participant.vars['playing'] = False
 
 
+class Demographic_Condensed(Page):
+    form_model = models.Player
+    template_name = 'demographic/Demographic.html'
+    form_fields = ["age", "income", "sex", "marital_status", "country_born", "country_reside",
+                   "highest_degree", "speciality", "employment_status", "occupation", "device_type", "membership_duration"]
+    is_debug = False
+    timeout_submission = {"age": 1, "income": "Do not wish to answer", "sex": "Do not wish to answer", "marital_status": "Do not wish to answer",
+                          "country_born": "empty", "country_reside": "empty",
+                          "highest_degree": "Not Sure", "speciality": "None", "employment_status": "Do not wish to answer",
+                          "occupation": "empty", "device_type": "empty", "membership_duration": "0"}
+
+    def is_displayed(self):
+        if self.participant.vars['consent'] and self.participant.vars['playing']:
+            return True
+        else:
+            return False
+
+    def error_message(self, values):
+        err_messages = []
+
+        if len(err_messages) == 1:
+            return err_messages[0]
+        if len(err_messages) > 1:
+            err_string = err_messages[-1]
+            for err in err_messages[:-1]:
+                e = forms.ValidationError(err)
+                self.form.add_error(None, e)
+            return err_string
+
+    def before_next_page(self):
+        if self.timeout_happened:
+            self.participant.vars['playing'] = False
 
 page_sequence = [
     Consent,
     ByeBye,
-    #Demographic,
-    # Demographic2,
-    #DemographicNoAMT,
+    Demographic_Condensed,
 ]

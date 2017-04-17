@@ -43,11 +43,6 @@ class Subsession(BaseSubsession):
             players = self.get_players()
             # random.shuffle(players)
 
-            #DOMINGO v - remove before commmit - v
-            for p in players:
-                p.participant.vars['consent'] = True
-                p.participant.vars['playing'] = True
-
             # create the base for number of groups
             num_players = len(players)
 
