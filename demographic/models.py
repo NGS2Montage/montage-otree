@@ -33,7 +33,16 @@ class Group(BaseGroup):
 
 class Player(BasePlayer):
     age = models.PositiveIntegerField(
-        verbose_name="What is your age?"
+        verbose_name="What is your age?",
+        choices=[
+            [1, "0-17 years old"],
+            [2, "18-30 years old"],
+            [3, "30-40 years old"],
+            [4, "40-60 years old"],
+            [5, "60-80 years old"],
+            [6, "greater than 80 years old"],
+        ],
+        widget=widgets.RadioSelect(),
     )
 
     income = models.CharField(
@@ -45,7 +54,7 @@ class Player(BasePlayer):
 
     sex = models.CharField(
         verbose_name="What is your sex?",
-        choices=["Male", "Female", "Other", "Do not wish to answer"],
+        choices=["Male", "Female", "Other"],
         widget=widgets.RadioSelect()
     )
 
@@ -57,14 +66,26 @@ class Player(BasePlayer):
 
     country_born = models.CharField(verbose_name="In which country were you born?")
 
-    country_reside = models.CharField(verbose_name="In which country do you currently reside?")
+    country_reside = models.CharField(
+        verbose_name="""What best describes your current location?""",
+        choices=[
+            "Africa",
+            "Asia/Pacific",
+            "Europe",
+            "Latin America",
+            "Middle East",
+            "North America",
+        ],
+        widget=widgets.RadioSelect(),
+    )
 
     year_moved = models.CharField(verbose_name="If your country of birth is different than your country of residence, "
                                                "what year did you come to your country of current residence?",
                                   blank=True)
 
     highest_degree = models.CharField(
-        verbose_name="What is the highest level of education you completed?",
+        verbose_name="""What is the highest level of education that you have
+        completed (recieved degree or other certification)?""",
         choices=["Did Not Complete High School", "High School", "Some College", "Bachelor's Degree", "Master's Degree",
                  "Advanced Graduate work or Ph.D.", "Not Sure"],
         widget=widgets.RadioSelect()
@@ -100,11 +121,28 @@ class Player(BasePlayer):
     )
 
     device_type = models.CharField(
-        verbose_name="What type of device are you using to complete this task (tablet, desktop, laptop, phone, etc)?"
+        verbose_name="""What type of device are you using to complete 
+            this task (tablet, desktop, laptop, phone, etc)?""",
+        choices=[
+            "desktop computer (e.g., monitor separate from CPU)",
+            "tablet computer (e.g., Microsoft Surface, Apple iPad, etc.)",
+            "phone (e.g., Apple iPhone, Samsung Galaxy, etc.)",
+            "laptop computer (e.g., any portable computer not a tablet or phone)",
+            "other",
+        ],
+        widget=widgets.RadioSelect()
     )
 
     membership_duration = models.PositiveIntegerField(
-        verbose_name="How long have you been a member of Amazon Mechanical Turk (in years)?"
+        verbose_name="""How long have you been a member of Amazon Mechanical
+        Turk?""",
+        choices=[
+            [1, "less than 1 month"],
+            [2, "1 month - 6 months"],
+            [3, "6 months - 1 year"],
+            [4, "greater than 1 year"],
+        ],
+        widget=widgets.RadioSelect(),
     )
 
     access_turk = models.CharField(

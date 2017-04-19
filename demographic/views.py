@@ -171,13 +171,15 @@ class DemographicNoAMT(Page):
 class Demographic_Condensed(Page):
     form_model = models.Player
     template_name = 'demographic/Demographic.html'
-    form_fields = ["age", "income", "sex", "marital_status", "country_born", "country_reside",
-                   "highest_degree", "speciality", "employment_status", "occupation", "device_type", "membership_duration"]
+    form_fields = ["age", "sex", "country_reside",
+                   "highest_degree", "device_type", "membership_duration"]
     is_debug = False
-    timeout_submission = {"age": 1, "income": "Do not wish to answer", "sex": "Do not wish to answer", "marital_status": "Do not wish to answer",
-                          "country_born": "empty", "country_reside": "empty",
-                          "highest_degree": "Not Sure", "speciality": "None", "employment_status": "Do not wish to answer",
-                          "occupation": "empty", "device_type": "empty", "membership_duration": "0"}
+    timeout_submission = {"age": 999,
+                          "sex": "empty",
+                          "country_reside": "empty",
+                          "highest_degree": "empty",
+                          "device_type": "empty", 
+                          "membership_duration": "empty"}
 
     def is_displayed(self):
         if self.participant.vars['consent'] and self.participant.vars['playing']:
