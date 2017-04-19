@@ -4,6 +4,7 @@ var app = {
     chats: [],
     newChat: "",
     successWords: [],
+    trendingWords: [],
     countDict: {},
     requests: [],
     subscribed: false,
@@ -186,6 +187,8 @@ socket.onmessage = function (message) {
         		.removeClass(".word-new");
         		app.sentWord = "";
         	}
+        	
+
     }
 };
 
