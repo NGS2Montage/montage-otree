@@ -1,160 +1,239 @@
 {% extends "global/Page.html" %}
 {% load staticfiles otree_tags %}
 
-{% block head_title %}
-    Anagram Instructions
+{% block title %}
+    Anagrams Exercise Tutorial
 {% endblock %}
-
-
-{% block title %} Anagrams Game Instructions.{% endblock %}
-
 
 {% block content %}
 
-	<h2>Anagrams Game - Instructions.</h2>
-            <p>
-            You and your team are about to play a game called Anagrams shown below. 
-            The objective of your team is to try to create as many words as possible. 
-            If your team is able to form {{session.config.threshold_num_words}} words, then you will earn 
-            {{session.config.threshold_num_points}} points. 
-            Any additional word will add {{session.config.marginal_points|c}} to the score.
-            <strong>You will have {{session.config.anagrams_timeout_min}} minutes to try to make as many words as possible!</strong>
-            </p>
+    {% block myscripts %}
+        <script type="text/javascript">
+            // var from_django = "foobar";
+            //var varsFromDjango = {{ vars_for_js }};
+        </script>
+    {% endblock %}
 
-    {% include 'instructions_anagrams/instructions_anagram.html' %}
-
-	 
-
-{% comment %}
-    <!-- Quiz WELL : START -->
-    <div class="row" style="margin-top: 25px;">
-        <div class="col-md-12" style="padding-left: 5px; padding-right: 5px;">
-            <div class="well heading-well text-center" style="padding: 10px;">
-                <div style="float:right">
-                                <span class="glyphicon glyphicon-minus" id="quizControlGlyph"
-                                      onclick="hide_panel('quizDiv', 'quizControlGlyph');">
-                                </span>
-                </div>
-                <b><span style="color: rgb(34, 34, 34); font-family: Arial, sans-serif; font-weight: bold;
-                font-size: 120%;">Quiz</span></b>
-            </div>
+    <div id="app-view" class="row" style="background: white;">
+        <div class="row" style="padding-left: 15px; padding-right: 30px; margin: 0;">
+				{% comment %}
+        		<h3><b>Welcome!</b></h3>        		
+        		{% endcomment %}
         </div>
-    </div>
-    <!-- Quiz WELL : END -->
 
+		  
+		  <div class="row">
+		  		<div class="col-xs-5 col-md-5" style="padding: 30px; padding-top: 5px;">
+		  			<div class="row" style="height:275px;">
+                	<div class="col-md-12">
+                    <div id="your-letters" class="row">
+                      <h4><span class="glyphicon glyphicon-user" aria-hidden="true"></span>&nbsp;<b>Your Letters</b></h4>
+                			<div class="row letter-row" style="padding-left: 12px;">
+                				<button type="button" class="btn btn-info letter disabled"
+                        	style="margin-left: 5px; margin-bottom: 5px; display: inline-block; background-image: none;"><strong>R</strong>
+                				</button>
+                				
+                				<button type="button" class="btn btn-info letter disabled" 
+                        	style="margin-left: 5px; margin-bottom: 5px; display: inline-block; background-image: none;"><strong>O</strong>
+                				</button>
+                				                				
+                				<button type="button" class="btn btn-info letter disabled"
+                        	style="margin-left: 5px; margin-bottom: 5px; display: inline-block; background-image: none;"><strong>L</strong>
+                				</button>
+                			</div>
+                		</div>
+                		<div id="team-letters" class="row" style="margin-top: 5px;">
+                      <h4 style="margin: 0;">
+                      	<span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+                      	<span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+                      	<span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+                      	&nbsp;<b>Team Provided Letters</b></h4>
+                      	<button id="get-team-letters" type="button" class="btn btn-default disabled" data-toggle="modal" data-target="#myModal"
+                       	style="background-image: none; display: inline-block; height: 25px; padding: 3px;">
+								<span class="glyphicon glyphicon-download" aria-hidden="true"></span>                       	
+                       	Request More Letters
+                			</button>
+      						
+                			<div  class="row letter-row" style="padding-left: 12px; margin-top: 8px;">
+                				<button type="button" class="btn btn-success letter disabled" style="background-image: none; display: inline-block; margin-bottom: 5px; margin-left: 5px;">
+                					<strong>E</strong>
+                				</button>
+                    			<button type="button" class="btn btn-warning disabled" style="display: inline-block; background-image: none; margin-bottom: 5px; margin-left: 5px;">
+                    				<strong>A</strong>
+                        	</button>
+								</div>
+							</div>
+                   </div>
+            	</div>   
+		  		</div>
 
-    <!-- Quiz DIV : START -->
-    <div class="row" id="quizDiv" style="margin-top: 0px;">
-        <div class="col-md-12">
-            <p>
-                Please answer the following questions:
-            </p>
+				<div class="col-xs-7 col-md-7">
+        			<div id="word-panel" class="panel panel-default">
+        				<div class="panel-heading">
 
-            <ol>
-                <li>
-                    <b>You are trying to build the word "can" in the team building exercise. You have the letters "a" and
-                    "n." You need the letter "c." You can see that one of your neighbors as the letter "c". Which of
-                        the following are true? Check all that apply.</b><br/>
-                    <div class="checkbox">
-                        <label><input type="checkbox" name="question1[]" value="a">
-                            You can request that your neighbor send you the letter "c."
-                        </label>
-                    </div>
-                    <div class="checkbox">
-                        <label><input type="checkbox" name="question1[]" value="b">
-                            You have to rely on your neighbor to recognize that if she sends you a "c," then you can form "can."
-                        </label>
-                    </div>
-                    <div class="checkbox">
-                        <label><input type="checkbox" name="question1[]" value="c">
-                            You cannot request a letter from your neighbor.
-                        </label>
-                    </div>
-                    <br/>
-                </li>
+							<h4 style="padding: 0; margin: 2px; font-weight: bold;">
+        					<span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+                     <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+                     <span class="glyphicon glyphicon-user" aria-hidden="true"></span>							
+							&nbsp;&nbsp;Your Team's Words</h4>
+						 	<p style="font-size: 10pt;"><em>Duplicate words allowed.</em> </p>
+							<div class="row" style="height: 25px; overflow: hidden; border-bottom: black groove 1px">
+								<span style="font-weight: bold;padding-left: 5px;">Trending Now: </span>
+								<button type="button" class="btn disabled" style="padding: 2px; background-image: none; background-color: #222222; text-align: center; font-weight: bold; font-size: 8pt; border-color: black; color: white; margin: 2px; display: inline-block;">
+                        	<span style="vertical-align: bottom;">ROLE&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="badge badge-primary" style="width: 3em; color: black; background-color: white; font-size: 6pt; border-style: solid; border-color: black; border-width: 1pt;">2</span>
+                    		</button>
+							</div>
+						</div>
+						<div id="word-tiles" class="panel-body" style="padding-top: 0px; height:200px; overflow-y: auto;">
+            			<div  class="row">                	
+                    		<button type="button" class="btn btn-default disabled" style="background-image: none; background-color: #EEEEEE; text-align: center; font-weight: bold; font-size: 10pt; border-color: black; color: black; margin: 2px; display: inline-block;">
+                        	<span style="vertical-align: bottom;">ROLE&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="badge badge-primary" style="width: 3em; color: black; background-color: white; font-size: 8pt; border-style: solid; border-color: black; border-width: 1pt;">2</span>
+                    		</button>
+                    		<button type="button" class="btn btn-default disabled" style="background-image: none; background-color: #EEEEEE; text-align: center; font-weight: bold; font-size: 10pt; border-color: black; color: black; margin: 2px; display: inline-block;">
+                        	<span style="vertical-align: bottom;">ROLL&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="badge badge-primary" style="width: 3em; color: black; background-color: white; font-size: 8pt; border-style: solid; border-color: black; border-width: 1pt;">1</span>
+                    		</button>
+            			</div>
+        				</div>
+        				<div id="score-div" class="panel-footer">
+        					<p style="width:100%; text-align: right; margin:0; font-size: 10pt;">
+								<strong>Word Count: <span id="word_count" style="display: inline-block; width:3em; text-align: right;">3</span> words</strong>
+							</p>
+							<p style="width:100%; text-align: right; margin:0; font-size: 10pt;">
+								Record to Beat: <span id="word_count_beat" style="display: inline-block; width:3em; text-align: right;">{{session.config.bestScore}}</span> words
+							</p>        				
+        				</div>
+		  			</div>                
+        		</div>		  
+		  </div>       
+        
+       <div class="row" style="padding-top: 0;">
+       
+         <div class="col-xs-12 col-md-5" style="display: inline-block;">
+        		<div class="row" style="padding-left: 15px; bottom: 0px;">
+        			<div id="word-input-group" class="col-xs-12 col-md-12" style="padding: 0;">
+         			<p style="margin:0; font-size: 8pt;">
+                     <span class="label label-warning">Orange</span> letters need teammate approval.
+                  </p>
+						<p style="margin:1; font-size:10pt;">Type any of the letters appearing in <span class="label label-info">blue</span> or <span class="label label-success">green</span> to form a word:</p>
+						<div class="row input-group otree-chat" id='anagrams-words-{{ word_channel }}' style="border: 0px; padding-top: 0px; margin:0; bottom: 0px;">
+							<div>
+								<input disabled style="padding-left: 30px", type="text" id="word-input" class="form-control" placeholder="Enter your word here...">
+								<span style="cursor: pointer; color: gray; display: block; position: absolute; top: 12px;left: 3%;" id="searchclear" class="glyphicon glyphicon-remove-circle"></span>
+							</div>      					
+      					      					
+      					<span class="input-group-btn">
+        						<button class="btn btn-default disabled" type="button"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>&nbsp;&nbsp;Submit Word!</button>
+      					</span>
 
-                <li>
-                    <b>
-                        You receive a request from a neighbor for you to send her the letter "g," which you have and
-                        can send to her. Which are true. (Check all that apply.)
-                    </b><br/>
-                     <div class="checkbox">
-                        <label><input type="checkbox" name="question2[]" value="a">
-                            You should look at all of her letters and determine what she is going to do with the "g"
-                            before you send it.
-                        </label>
-                    </div>
-                    <div class="checkbox">
-                        <label><input type="checkbox" name="question2[]" value="b">
-                            Rely that your neighbor knows what she is doing, and send her the "g" so that you can
-                            focus on building words yourself while your neighbor is also building words.
-                        </label>
-                    </div>
-                    <br/>
-                </li>
-
-                <li>
-                    <b>
-                        You have the letters g, b, r, u. Which of the following are valid actions? Check all that apply.
-                    </b><br/>
-                     <div class="checkbox">
-                        <label><input type="checkbox" name="question3[]" value="a">
-                            Form the word "grub." Even though your words have to be at least 3 characters, it is
-                            perfectly acceptable to submit four-letter words.
-                        </label>
-                    </div>
-                    <div class="checkbox">
-                        <label><input type="checkbox" name="question3[]" value="b">
-                            Form the word "bug." Since you only need 3-letter words, you can save the "r" for
-                            another word.
-                        </label>
-                    </div>
-                    <div class="checkbox">
-                        <label><input type="checkbox" name="question3[]" value="c">
-                            You recognize that you can form the words "rub" and "rug" and that each word is valid
-                            and will help the team. However, you notice that a teammate has already submitted the
-                            word "rub" because you can see a list of all words formed by all team members, so you
-                            submit that word because your team gets extra points when different team members
-                            cooperate by submitting the same word.
-                        </label>
-                    </div>
-                    <br/>
-                </li>
-
-                <li>
-                    <b>
-                        You have the letters t, u, and b. One of your neighbors requests the letter "b" from you. What
-                        should you do? (Check all that apply.)
-                    </b><br/>
-                     <div class="checkbox">
-                        <label><input type="checkbox" name="question4[]" value="a">
-                            Ignore your neighbor because you need the "b" to form "tub."
-                        </label>
-                    </div>
-                    <div class="checkbox">
-                        <label><input type="checkbox" name="question4[]" value="b">
-                            Send her the "b" because you know that the letters you use yourself to form words are
-                            completely separate from the supply of letters that you can send to neighbors.
-                        </label>
-                    </div>
-                </li>
-
-                <input type="hidden" name="anagram_hidden" value="5" id="id_anagram_hidden"/>
-
-            </ol>
+    					</div>
+    					
+    					<!-- <p style="font-size: 10pt;">or, if you are out of words to make:</p> -->
+    				</div>
+    					<div class='messages' style="height: 0px;"></div>
+          	</div>
+         </div>
+		 	<div id="copy-letters-div" class="col-xs-12 col-md-7" style="display: inline-block; padding-top: 5px; padding-right: 15px;">
+		  		<div  class="panel panel-default">
+		  			<div class="panel-heading">
+						<h4 style="padding: 0; font-weight: bold; margin: 2px;">
+						<span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+                  <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+                  <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+                  &nbsp;&nbsp;Copy Your Letters to the Team:</h4>
+						<p style="font-size: 9pt; margin:0;"><em>Help your team!</em> Letter requests from your team will appear below. <strong>Click on a request to copy and send them a letter.</strong></p>		  			
+		  			</div>
+		  			<div class="panel-body" style="padding:0; height:100px; overflow-y: auto;">
+                        <button type="button" class="btn btn-info disabled" style="margin: 2px;">
+                                <span class="glyphicon glyphicon-share-alt" aria-hidden="true"></span>
+                             Copy "O" for Player 2
+                        </button>
+                        <button type="button" class="btn btn-info disabled" style="margin: 2px;">
+                                <span class="glyphicon glyphicon-share-alt" aria-hidden="true"></span>
+                             Copy "L" for Player 2
+                        </button>
+		  			</div>
+        		</div>
         </div>
-    </div>
-    <!-- Quiz DIV : END -->
-{% endcomment %}
+		</div>
+		
+		 <div class="modal fade" data-backdrop="static" id="intro" tabindex="-1" role="dialog">
+  			<div class="modal-dialog" role="document">
+    			<div class="modal-content">
+      			<div class="modal-header">        				
+        				<h4 style="font-weight: bold; padding: 0;">
+							Welcome to the Anagrams game!</h4> 
+      			</div>
+      			<div class="modal-body" style="max-height: 600px; overflow-y:auto;">
+                		<p>You and your team are about to play a game called <strong>Anagrams</strong>. 
+            				The objective of your team is to try to create as many words as possible.
+            				Each word you contribute will add to the points that your team earns.
+            				At the end of the round, points will be split equally among all team members.
+            			</p>
+            			<p>Scoring works as follows: </p>
+            			<ol>
+            				<li>If your team is able to form {{session.config.threshold_num_words}} words, then you will earn 
+            				{{session.config.threshold_num_points}} points.</li>
+            				<li>Any additional word will add {{session.config.marginal_points|c}} to the score.</li>
+            				<li>If you can duplicate another team member's word, then you receive 2x points.</li>
+            			</ol>
+            			<p>	 
+            				<strong>You will have {{session.config.timeout_anagrams_min}} minutes to try to make as many words as possible!</strong>
+            			</p>
+            			<p>First, we'll show you how to play. Please click 'Take Tour' to continue.</p>
+            			<button type="button" class="btn btn-primary" data-dismiss="modal" style="display: inline-block;">
+		                    	Take Tour
+   						</button>
+      			</div>
+    			</div>
+  			</div>
+			</div> 
+
+<div class="row" style="text-align: center; padding-left: 15px; padding-right: 15px;">
+	<button id="info-detail" type="button" class="btn btn-default disabled" data-toggle="modal" data-target="#Instructions"
+           style="background-image: none; display: inline-block; height: 25px; margin: auto; padding: 3px;">
+		<span class="glyphicon glyphicon-hand-up" aria-hidden="true"></span>                       	
+       	View Detailed Instructions
+   </button>  
+   <p style="text-align: justify;"><strong>Team Anagrams »</strong> How many words can you create with your set of letters? Remember, if you run out of ideas, you can always look at
+        		your teammates' letters to make requests! Duplicate words are ok. Submit anything you can, let us determine if it is a word!
+        		<b><em>Can your team beat the previous record of {{session.config.bestScore}} words?</em></b></p>
+</div>
   
-    <h4><strong>Ok, got it? Click next to continue!</strong></h4>
-    {% next_button %}
-    <!-- <button style="margin: 15px;" class="otree-next-button btn btn-large btn-primary next-button">Click to Begin.</button> -->
+
+<div style="text-align: center">{% next_button %}</div>
 
 {% endblock %}
 
+{% block global_scripts %}
+	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/intro.js/2.5.0/intro.min.js"></script>
+    <script src="{% static 'js/game_intro.js' %}"></script>
+    <script type="text/javascript" >
+    	$('#intro').modal()
+    		.on('hidden.bs.modal', function (e) {
+  				tour = new Tour();
+			});
+    </script>
+	 <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/intro.js/2.5.0/introjs.min.css">
+    <style>
+        .otree-chat {
+            border: 1px solid #ccc;
+            padding: 5px;
+            margin: 5px 0 0 0;
+        }
 
-{% block scripts %}
-    <script type="text/javascript" src="{% static 'js/hide_panel.js' %}"></script>
+        .otree-chat .messages {
+            height: 70px;
+            overflow-y: auto;
+            background: #eee;
+            margin: 2px 0 5px 0;
+        }
+
+        .otree-chat .nickname {
+            display: inline-block;
+            color: #C07A36;
+            font-weight: bold;
+        }
+    </style>
+
 {% endblock %}
-

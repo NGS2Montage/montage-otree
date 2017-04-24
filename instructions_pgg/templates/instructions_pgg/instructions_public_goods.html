@@ -13,29 +13,20 @@
 
     <div class="row" id="instructionsDiv">
         <div class="col-md-12">
-            <h3>
-                Just for participating, we will now give each member of your team an additional
-                {{session.config.pgg_bonus|c}}. But, we will also give your team the chance to <strong><em>double</em></strong>
-                their earnings.
-            </h3>
                 
             <h3>Here's how it works:</h3>
-            <h4><strong>1. On the next page, your additional earnings appear in a box like the one shown below.</strong> You can keep this amount if you choose to contribute 
-            nothing to the group.</h4>
-            <img class="img img-responsive" src={% static 'instructions_pgg/images/image20.png'%} alt="Image of entire game here.">
-            
+            <h4>1. You and every member of your team will decide how much of your earnings to contribute to a team account. 
+            <em><strong>This amount will be doubled, and then split evenly for everyone on your team, regardless of their contribution amount.</strong></em> 
+            No one on your team will know how much you contribute.
+            Earnings that are not sent to the team account will be kept in your individual account. These will not be doubled.
+            Your total earnings will be the sum of your team award amount and your individual account.</h4>
+            <br>
+            <img class="img img-responsive" src={% static 'images/pgg_legend.png'%} alt="Image of entire game here.">
             <h4>
-            <strong>2. If you want to contribute, enter in the amount of your additional earnings that you would like to contribute to the group.
-            We will take all the contributions from the group and <em>double the amount</em>.</strong> It will then be redistributed to the team equally. 
-            If everyone on the team contributes their full amount, then the amount of reward given to all the players will be doubled.
-            </h4>
-            <img class="img img-responsive" src={% static 'instructions_pgg/images/image11.png'%} alt="Image of entire game here.">
-            <h4>
-            <strong>3. You will have {{session.config.pgg_timeout_min}} minute(s) to make a decision. Having a hard time deciding how much to contribute? No problem.</strong> We will provide a table
-            that shows how much you can expect to earn based on how much you contribute and the average
-            contribution put in by members of your team. You always end up with a larger bonus by letting everyone else contribute except you; however, 
-bear in mind that if no one contributes to the pool because each person expects everyone else to, 
-then everyone will miss the opportunity to double their winnings.
+            <strong>2. You will have {{session.config.pgg_timeout_min}} minute(s) to make a decision.</strong>
+            	How much you choose to invest is completely up to you.
+            	The less you contribute, the more you keep and benefit from others' contributions.
+            	<strong><em>However, if everyone on the team contributes less, then everyone will receive less.</em></strong>
             </h4>
             
         </div>

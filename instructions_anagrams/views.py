@@ -1,6 +1,6 @@
 from django.contrib.auth.decorators import login_required
 from . import models
-from ._builtin import Page
+from ._builtin import Page, WaitPage
 
 
 class LoginRequiredMixin(object):
@@ -20,6 +20,29 @@ class Introduction(Page):
         else:
             return False
 
+class JoinTeamWaitPage(WaitPage):
+    is_debug = False
+    template_name = 'instructions_anagrams/JoinTeam.html'
+
+    def is_displayed(self):
+        if self.participant.vars['consent'] and self.participant.vars['playing']:
+            return True
+        else:
+            return False
+
+class TeamSummary(Page):
+    is_debug = False
+    template_name = 'instructions_anagrams/TeamSummary.html'
+
+    def is_displayed(self):
+        if self.participant.vars['consent'] and self.participant.vars['playing']:
+            return True
+        else:
+            return False
+
+    def vars_for_template(self):
+        return {'N': len(self.player.get_others_in_group()) + 1}
+
 class InstructionsPhase1(Page):
     is_debug = False
 
@@ -33,9 +56,6 @@ class InstructionsPhase1(Page):
     def before_next_page(self):
         if self.timeout_happened:
             self.participant.vars['playing'] = False
-
-
-
     pass
 
 class InstructionsPhase1_Quiz(Page):
@@ -78,8 +98,12 @@ class InstructionsPhase1_Quiz(Page):
         if self.timeout_happened:
             self.participant.vars['playing'] = False
 
+
+
 page_sequence = [
     Introduction,
+    JoinTeamWaitPage,
+    TeamSummary,
     InstructionsPhase1,
     InstructionsPhase1_Quiz,
 ]

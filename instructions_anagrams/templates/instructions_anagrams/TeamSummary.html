@@ -1,0 +1,27 @@
+{% extends "global/Page.html" %}
+{% load staticfiles otree_tags %}
+
+{% block head_title %}
+    Team Summary
+{% endblock %}
+
+{% block title %} Your Team Has Been Formed! {% endblock %}
+
+{% block content %}
+	 <h2>Your team has been formed!</h2>
+    <p style="text-align: justify;">
+        You have successfully joined the team! Here is some information about your team:
+    </p>
+    <div class="row">
+    	<ul class="list-group">
+			<li class="list-group-item">Your team consists of {{N}} members.</li>
+			<li class="list-group-item">Everyone on your team is a Turker on Amazon Mechanical Turk.</li>
+			<li class="list-group-item">Everyone on your team playing right now, in real time, with you.</li>
+			<li class="list-group-item">Throughout the exercises, you will be able to interact with up to {{session.config.n_neighbors}} members from your team.</li>    	
+    	</ul>
+	 </div>
+	 <h4>The first game that your group will play is: <strong>Anagrams</strong>.</h4>
+	 <p><strong>Click 'Next' to proceed to the Anagrams game.</strong></p>
+    {% next_button %}
+
+{% endblock %}
