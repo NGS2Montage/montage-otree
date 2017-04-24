@@ -15,6 +15,7 @@
                 » {% block title %}Wait Page{% endblock %}
             </a>
         </div>
+        {% comment %}
         <div class="col-md-4" style="text-align: center; padding-top: 10px;">
             {% block header_message %}
             {% endblock %}
@@ -33,6 +34,7 @@
                 </li>
             </ul>
         </div>
+        {% endcomment %}
     </div>
 </nav>
 
@@ -84,6 +86,49 @@
     <!-- FOOTER: END -->
 
 {% endblock %}
+
+{% block global_scripts %}
+
+<script type="text/javascript" >
+
+$(document).ready(function () {
+    var player_ready_socket;
+    initPlayerReadySocket();
+    function initPlayerReadySocket() {
+        var ws_scheme = window.location.protocol == "https:" ? "wss" : "ws";
+        var ws_path = ws_scheme + '://' + window.location.host + "/playerCount/"+ '{{player.participant.code}}/';
+        player_ready_socket = new ReconnectingWebSocket(ws_path);
+        player_ready_socket.onmessage = function(e) {
+            var data = JSON.parse(e.data);
+            // Handle errors
+            if (data.error) {
+                // maybe the div's default text doesn't get shown
+                $("#otree-server-error").text(data.error);
+                $("#otree-server-error").show();
+                if (data.traceback) {
+                    $("#error-traceback").html('<pre>' + data.traceback + '</pre>');
+                    $("#error-traceback").show();
+                }
+                return;
+            }
+            $('#countdown').html(data.remaining);
+            $('#N').html(data.N);
+            var pct_complete = (data.N - data.remaining) / data.N * 100;
+            $('.progress-bar').css('width', pct_complete+'%');
+        };
+        player_ready_socket.onopen = function() {
+            console.log('PlayerReadySocket connected');
+        };
+        player_ready_socket.onclose = function() {
+            console.log('PlayerReadySocket disconnected');
+        };
+    }
+ });
+
+</script>
+
+{% endblock %}
+
 
 {% block global_styles %}
 	<link rel="stylesheet" href="{% static "global/font-awesome-4.7.0/css/font-awesome.min.css" %}">
