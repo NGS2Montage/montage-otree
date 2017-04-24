@@ -86,7 +86,7 @@ UserLetter.prototype.toString = function () {
 // LetterTransaction
 //////////////////////////////////////////////////////////////
 function LetterTransaction(obj) {
-    console.log("makeing a new transaction", obj);
+    console.log("making a new transaction", obj);
     this.letter = obj.letter;
     this.owner = obj.owner;
     this.pk = obj.pk;
@@ -149,46 +149,60 @@ socket.onmessage = function (message) {
     }
 
     if (message.type === "word") {
-    	  var output = [];
-    	  var wordClass = {};
+    	  var output = app.successWords;
+              
         for (var i = 0; i < message.words.length; i++) {
-            var newWord = message.words[i].toUpperCase();
-            if (newWord in app.countDict){
-            	app.countDict[newWord] += 1;
-            } else {
-            	app.countDict[newWord] = 1;
-            }
-            wordClass[newWord] = ((newWord == app.sentWord) ? 'word-sent' : 'word-new');
+        		var newWord = message.words[i].toUpperCase();
+        		var className = ((newWord == app.sentWord) ? 'word-sent' : 'word-new');
+        		var entry_idx = output.findIndex(function (entry) {return entry.word === newWord;});
+        		if (entry_idx < 0)
+        		{
+        			output.push({
+            		'id': 'word-'+newWord,
+            		'class': className,
+            		'word': newWord,
+            		'freq': 1,
+            		'trending': false,
+            	});
+        		} else {
+        			$('#' + output[entry_idx].id).addClass(className);
+        			output[entry_idx].class = className;
+        			output[entry_idx].freq += 1;
+        		}
         }
-        var keys = Object.keys(app.countDict);
-        keys.sort();
-        for (var i=0, len=keys.length; i < len; i++){
-        		var key = keys[i];
-            output.push({
-            	'id': 'word-'+key,
-            	'class': ((key in wordClass) ? wordClass[key] : 'word'),
-            	'word': key,
-            	'freq': app.countDict[key],
-            });
-        }
-        app.successWords = output;
-        app.wordCount = output.length;
+        
+        var words_alphabetical = output.slice(0).sort(
+        		function(a,b){
+					var x = a.word;
+					var y = b.word;        	
+        			return x < y ? -1 : x > y ? 1 : 0;
+        		}
+        );
+        		
+        var words_freq = output.slice(0).sort(
+            function(a,b){     	
+        			return b.freq - a.freq;
+        		}
+        );
+        words_freq = words_freq.splice(0,5);
+        
+        app.successWords = words_alphabetical;
+        app.trendingWords = words_freq;
+        app.wordCount = output.reduce(function(a,b){return a + b.freq;}, 0);
         
         if (!(app.sentWord == "")){
         		el = $(".word-sent");
         		el.css({backgroundColor: '#00ffcc'})
         		.goTo(el.animate({backgroundColor: '#EEEEEE'},750))
-        		.removeClass(".word-sent");
+        		.removeClass("word-sent");
         		app.sentWord = "";
         	} else {
         		el = $(".word-new");
         		el.css({backgroundColor: 'orange'})
         		.animate({backgroundColor: '#EEEEEE'},750)
-        		.removeClass(".word-new");
+        		.removeClass("word-new");
         		app.sentWord = "";
         	}
-        	
-
     }
 };
 

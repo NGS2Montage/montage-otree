@@ -3,10 +3,10 @@
 {% load static %}
 
 {% block head_title %}
-    Phase 1: Survey
+    Team Survey
 {% endblock %}
 
-{% block title %} Phase 1: Survey {% endblock %}
+{% block title %} Team Survey {% endblock %}
 
 {% block myscripts %}
 
@@ -24,35 +24,63 @@
 {% endblock %}
 
 {% block content %}
-	 <h4>Post Exercise Question:</h4>
-    <p>
-        <strong>How closely aligned do you feel you are with your team?</strong>
-        You can drag the circle "Me" closer to or farther away from the circle that says "My Team".
-        The closer you are to "My Team", the more aligned you feel.
+    
+	 <div class="modal fade" id="Instructions" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-backdrop="static">
+  			<div class="modal-dialog" role="document">
+    			<div class="modal-content">
+      			<div class="modal-header">        				
+        				<h4 style="font-weight: bold; padding: 0;">
+							How much do you feel a part of the team?</h4> 
+      			</div>
+      			<div class="modal-body" style="max-height: 600px; overflow-y:auto;">
+                		<p>
+    	Again, 
+        <strong>how closely aligned do you feel with your team?</strong>
+        On the next screen, you can drag the circle "Me" closer to or farther away from the circle that says "My Team".
+        As shown in the examples, the closer you are to "My Team", the more you feel a part of the team.
+        There is no correct answer, but please try to choose a distance that best represents your view toward being on the team.
     </p>
-    <div style="margin-bottom: 15px;">
-        <input name="distanceScale_after" id="distanceScale_after">
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        <input name="overlapScale_after" id="overlapScale_after">
-    </div>
+
 	 <div class="panel panel-default" style="width: 100%; text-align: center;">
 	 	<div class="panel-heading">
 	 	<h4 style="text-align: left; margin: 0; padding: 0;">Examples:</h4>
 	 	</div>
 	 	<div class="panel-body">
 	 	
-	 	<img style="display: inline-block;" height="100px" src="{% static "images/legend.png" %}" alt="">
+	 	<img class="img img-responsive" style="display: inline-block;" height="100px" src="{% static "images/legend.png" %}" alt="">
+	 	
 	 	</div>
 	 	
+	 </div>	
+	 <p><strong>Click 'Next' to continue.</strong></p>
+	 <button type="button" class="btn btn-primary" data-dismiss="modal" style="display: inline-block;">
+			Next
+   	</button>
+      			</div>
+    			</div>
+  			</div>
 	 </div>
-
-
-
-
-	 <p><strong>Move the circle that says "Me" to show show your group proximity:</strong></p>
+    <div style="margin-bottom: 15px;">
+        <input name="distanceScale_after" id="distanceScale_after" value="9999">
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <input name="overlapScale_after" id="overlapScale_after" value="9999">
+    </div>
+	 <h4><strong>Drag the circle that says "Me" to show how much you feel a member of your team:</strong></h4>
     <script language="JavaScript">difi("Scale_after", "My Team", "Me", "maroon", "-50");</script>
 
-
+	 <br/>
     <p><strong>When finished, click 'Next',</strong></p>
     {% next_button %}
- {% endblock %}
+{% endblock %}
+
+{% block scripts %}
+<script type="text/javascript" >
+$(".next-button").addClass("disabled");
+$("#mySliderScale_after").animate({left: "+=100px"},1000)
+									.animate({left: "-=100px"},1000, function () {
+										$("#Instructions").modal();
+										$(".next-button").removeClass("disabled");
+									});
+
+</script>
+{% endblock %}

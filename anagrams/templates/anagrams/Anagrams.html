@@ -15,17 +15,28 @@
         </script>
         <script type="text/javascript" src="{% static 'anagrams/rivets.bundled.min.js' %}"></script>
     {% endblock %}
-    <!--
-Documentation on how to write a django template here:
-https://docs.djangoproject.com/en/1.8/ref/templates/language/
 
-Bootstrap comes pre-loaded, so you can use any Bootstrap elements:
-http://getbootstrap.com/components/
-
-    {% next_button %}
--->
     <div id="app-view" class="row" style="background: white;">
-        
+        <div class="modal fade" id="Instructions" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-backdrop="static">
+  			<div class="modal-dialog" role="document">
+    			<div class="modal-content">
+      			<div class="modal-header">        				
+        				<h4 style="font-weight: bold; padding: 0;">
+							Get Ready to Play!</h4> 
+      			</div>
+      			<div class="modal-body" style="max-height: 600px; overflow-y:auto;">
+                		<p>
+    	Remember, try to score as many words as possible, and request more letters from your teammates.
+    	Duplicate words count 2x.
+    </p>	
+	 <p><strong>Click 'Play Game' to begin.</strong></p>
+	 <button type="button" class="btn btn-primary" data-dismiss="modal" style="display: inline-block;">
+			Play Game!
+   	</button>
+      			</div>
+    			</div>
+  			</div>
+	 </div>
                
         <div class="row" style="padding-left: 15px; padding-right: 30px; margin: 0;">
 				{% comment %}
@@ -38,7 +49,7 @@ http://getbootstrap.com/components/
 		  		<div class="col-xs-5 col-md-5" style="padding: 30px; padding-top: 5px;">
 		  			<div class="row" style="height:275px;">
                 	<div class="col-md-12">
-                    <div class="row">
+                    <div id="your-letters" class="row">
                       <h4><span class="glyphicon glyphicon-user" aria-hidden="true"></span>&nbsp;<b>Your Letters</b></h4>
                 			<div class="row letter-row" style="padding-left: 12px;">
                 				<button type="button" class="btn btn-info letter" rv-each-letter="app.user.letters"
@@ -46,19 +57,19 @@ http://getbootstrap.com/components/
                 				</button>
                 			</div>
                 		</div>
-                		<div class="row" style="margin-top: 5px;">
+                		<div id="team-letters" class="row" style="margin-top: 5px;">
                       <h4 style="margin: 0;">
                       	<span class="glyphicon glyphicon-user" aria-hidden="true"></span>
                       	<span class="glyphicon glyphicon-user" aria-hidden="true"></span>
                       	<span class="glyphicon glyphicon-user" aria-hidden="true"></span>
                       	&nbsp;<b>Team Provided Letters</b></h4>
-                      	<button type="button" class="btn btn-default" data-toggle="modal" data-target="#myModal"
+                      	<button id="get-team-letters" type="button" class="btn btn-default" data-toggle="modal" data-target="#myModal"
                        	style="background-image: none; display: inline-block; height: 25px; padding: 3px;">
 								<span class="glyphicon glyphicon-download" aria-hidden="true"></span>                       	
                        	Request More Letters
                 			</button>
       						<p id="transaction_message" style="font-weight: bold; color:red;">{app.transactionError}</p>
-                			<div class="row letter-row" style="padding-left: 12px; margin-top: 8px;">
+                			<div  class="row letter-row" style="padding-left: 12px; margin-top: 8px;">
                 				<button type="button" class="btn btn-success letter" style="background-image: none; display: inline-block; margin-bottom: 5px; margin-left: 5px;"
                         			rv-each-transaction="app.user.transactions" rv-show="transaction.approved"><strong>{transaction}</strong>
                 				</button>
@@ -72,7 +83,7 @@ http://getbootstrap.com/components/
 		  		</div>
 
 				<div class="col-xs-7 col-md-7">
-        			<div class="panel panel-default">
+        			<div id="word-panel" class="panel panel-default">
         				<div class="panel-heading">
 
 							<h4 style="padding: 0; margin: 2px; font-weight: bold;">
@@ -81,22 +92,22 @@ http://getbootstrap.com/components/
                      <span class="glyphicon glyphicon-user" aria-hidden="true"></span>							
 							&nbsp;&nbsp;Your Team's Words</h4>
 						 	<p style="font-size: 10pt;"><em>Duplicate words allowed.</em> </p>
-							<div class="row" style="height: 25px; border-bottom: black solid 1px">
-								<span style="font-weight: bold;padding-left: 5px;">Trending Now: (feature under development)</span>
-								<button rv-id="word.id" rv-each-word="app.trendingWords" type="button" rv-addclass="word.class" class="btn btn-default disabled" style="background-image: none; background-color: #EEEEEE; text-align: center; font-weight: bold; font-size: 10pt; border-color: black; color: black; margin: 2px; display: inline-block;">
-                        	<span style="vertical-align: bottom;">{ word.word }&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="badge badge-primary" style="width: 3em; color: black; background-color: white; font-size: 8pt; border-style: solid; border-color: black; border-width: 1pt;">{ word.freq }</span>
+							<div class="row" style="height: 25px; overflow: hidden; border-bottom: black groove 1px">
+								<span style="font-weight: bold;padding-left: 5px;">Trending Now: </span>
+								<button rv-each-word="app.trendingWords" type="button" class="btn disabled" style="padding: 2px; background-image: none; background-color: #222222; text-align: center; font-weight: bold; font-size: 8pt; border-color: black; color: white; margin: 2px; display: inline-block;">
+                        	<span style="vertical-align: bottom;">{ word.word }&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="badge badge-primary" style="width: 3em; color: black; background-color: white; font-size: 6pt; border-style: solid; border-color: black; border-width: 1pt;">{ word.freq }</span>
                     		</button>
 							</div>
 						</div>
 						<div id="word-tiles" class="panel-body" style="padding-top: 0px; height:200px; overflow-y: auto;">
 
-            			<div class="row">                	
+            			<div  class="row">                	
                 			<button rv-id="word.id" rv-each-word="app.successWords" type="button" rv-addclass="word.class" class="btn btn-default disabled" style="background-image: none; background-color: #EEEEEE; text-align: center; font-weight: bold; font-size: 10pt; border-color: black; color: black; margin: 2px; display: inline-block;">
                         	<span style="vertical-align: bottom;">{ word.word }&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="badge badge-primary" style="width: 3em; color: black; background-color: white; font-size: 8pt; border-style: solid; border-color: black; border-width: 1pt;">{ word.freq }</span>
                     		</button>
             			</div>
         				</div>
-        				<div class="panel-footer">
+        				<div id="score-div" class="panel-footer">
         					<p style="width:100%; text-align: right; margin:0; font-size: 10pt;">
 								<strong>Word Count: <span id="word_count" style="display: inline-block; width:3em; text-align: right;">{app.wordCount}</span> words</strong>
 							</p>
@@ -112,7 +123,7 @@ http://getbootstrap.com/components/
        
          <div class="col-xs-12 col-md-5" style="display: inline-block;">
         		<div class="row" style="padding-left: 15px; bottom: 0px;">
-        			<div class="col-xs-12 col-md-12" style="padding: 0;">
+        			<div id="word-input-group" class="col-xs-12 col-md-12" style="padding: 0;">
          			<p style="margin:0; font-size: 8pt;">
                      <span class="label label-warning">Orange</span> letters need teammate approval.
                   </p>
@@ -134,8 +145,8 @@ http://getbootstrap.com/components/
     					<div class='messages' style="height: 0px;"></div>
           	</div>
          </div>
-		 	<div class="col-xs-12 col-md-7" style="display: inline-block; padding-top: 5px; padding-right: 15px;">
-		  		<div class="panel panel-default">
+		 	<div id="copy-letters-div" class="col-xs-12 col-md-7" style="display: inline-block; padding-top: 5px; padding-right: 15px;">
+		  		<div  class="panel panel-default">
 		  			<div class="panel-heading">
 						<h4 style="padding: 0; font-weight: bold; margin: 2px;">
 						<span class="glyphicon glyphicon-user" aria-hidden="true"></span>
@@ -199,7 +210,7 @@ http://getbootstrap.com/components/
 			</div>    
 
 <div class="row" style="text-align: center; padding-left: 15px; padding-right: 15px;">
-	<button type="button" class="btn btn-default" data-toggle="modal" data-target="#Instructions"
+	<button id="info-detail" type="button" class="btn btn-default" data-toggle="modal" data-target="#Instructions"
            style="background-image: none; display: inline-block; height: 25px; margin: auto; padding: 3px;">
 		<span class="glyphicon glyphicon-hand-up" aria-hidden="true"></span>                       	
        	View Detailed Instructions
@@ -234,27 +245,28 @@ http://getbootstrap.com/components/
     <br/><br/>
      {% endif %}
 
+{% if session.is_demo %}
 <div style="text-align: center">{% next_button %}</div>
+{% endif %}
 
 {% endblock %}
 
 {% block global_scripts %}
 	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script type="text/javascript">
-      $(".var-n-players").html({{nPlayers|json}});
-		$(".var-time").html({{Constants.anagrams_duration_sec|json}});
-		$(".var-word-threshold").html({{Constants.word_threshold|json}});
-		$(".var-threshold-payment").html({{Constants.threshold_payment|json}} + ' pts');
-		$(".var-marginal-pay").html({{Constants.marginal_payment}});
-		$(".var-share-limit").html('as many');
-		$(".var").css({color: "black", fontWeight: "bold"});
-
+    	$("#Instructions").modal();
 		$(".letter-row").on('click','.letter', function () {
 			var letter= $.trim($(this).text());
 			$("#word-input").val($.trim($("#word-input").val()) + letter);
-			
 		});
-		$("#searchclear").click(function () {
+		
+		$("#searchclear")
+		.hover(function() {
+			$(this).css('color', 'black');		
+		},function () {
+			$(this).css('color', 'gray');
+		})
+		.click(function () {
 			$("#word-input").val("");
 		});
 		
@@ -269,10 +281,9 @@ http://getbootstrap.com/components/
         		return this;
     		}
 		})(jQuery);
+		
     </script>
-    
     <script type="text/javascript" src="{% static 'anagrams/game.js' %}"></script>
-
     <style>
         .otree-chat {
             border: 1px solid #ccc;

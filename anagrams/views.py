@@ -138,10 +138,12 @@ class Results(Page):
 
     def vars_for_template(self):
         word_count = len(TeamWord.objects.filter(group=self.group))
-        earnings_per_word = 0.5
+        n_players = len(self.player.get_others_in_group()) + 1
+        earnings_per_word = 1
         total_earnings = word_count * earnings_per_word
         toReturn = {'word_count': word_count, 'earnings_per_word': earnings_per_word,
-                    'total_earnings': total_earnings}
+                    'total_earnings': total_earnings, 'individual_earnings':
+                    total_earnings / float(n_players)}
         return toReturn
 
 
