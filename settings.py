@@ -179,7 +179,10 @@ SESSION_CONFIGS = [
         'marginal_points': 1,
         'timeout_anagrams_min': 3,
         'pgg_bonus': 100,
-	'pgg_timeout_min': 1,
+	    'pgg_timeout_min': 1,
+        'xChange_ratio': 1,
+        'n_games': 3,
+        'n_neighbors': 2,
     },
 #   {
 #        'name': 'production',
