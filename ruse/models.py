@@ -29,21 +29,18 @@ class Player(BasePlayer):
     
     ruse_Q1 = models.CharField(
         verbose_name= """
-        Sports: Which NBA team in the United States do you think will 
-        win the Championship Title in 2017? 
+        What is your favorite color? 
         """
         )
 
     ruse_Q2 = models.IntegerField(
         verbose_name="""
-        Economy: In how many years will there be another stock
-        market crash on the New York Stock Exchange (NYSE)?
+        What is your favorite number?
         """
         )
 
     ruse_Q3 = models.CharField(
         verbose_name="""
-        Travel: Which city will be ranked the #1 most livable city
-        based on the "livability" index in the year 2017?
+        What is your favorite movie?
         """
         )

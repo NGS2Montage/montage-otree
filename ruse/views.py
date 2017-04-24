@@ -10,7 +10,7 @@ class LoginRequiredMixin(object):
         view = super(LoginRequiredMixin, cls).as_view(**initkwargs)
         return login_required(view)
 
-class PredictionPage(Page):
+class OpinionPage(Page):
     timeout_seconds = 60
     form_model = models.Player
     form_fields = [
@@ -28,10 +28,13 @@ class PredictionPage(Page):
         else:
             return False
     
-    def before_next_page(self):
-        if self.timeout_happened:
-            self.participant.vars['playing'] = False
+#    def before_next_page(self):
+#        if self.timeout_happened:
+#            self.participant.vars['playing'] = False
 
+class Introduction(Page):
+    is_debug = False
+    pass
 
 class WaitPage(WaitPage):
     is_debug = False
@@ -52,7 +55,8 @@ class Results(Page):
     pass
 
 page_sequence = [
-    PredictionPage,
+    Introduction,
+    OpinionPage,
     WaitPage,
     Results,
 ]

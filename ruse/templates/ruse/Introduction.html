@@ -1,0 +1,20 @@
+{% extends "global/Page.html" %}
+{% load staticfiles otree_tags %}
+
+{% block title %}
+    Opinion Exercise
+{% endblock %}
+
+{% block content %}
+
+<h4 style="font-weight: bold; padding: 0;">We need your opinion.</h4> 
+<p>
+      	Before we go to the next game, we want to ask everyone on your team a few questions to see how similarly you think.
+      	Please make an attempt to answer the following questions in 60 seconds or less.
+      	There is no correct answer, and if you are unsure about a particular question, please answer as best as you can.
+</p>
+<br/>
+<p>Click 'Next' to continue.</p>
+{% next_button %}
+
+{% endblock %}
