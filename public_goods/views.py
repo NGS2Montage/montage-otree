@@ -112,7 +112,6 @@ page_sequence = [
     WaitPage,
     Contribute,
     ResultsWaitPage,
-    Results,
     NoResponse,
     DifiIndex,
 ]

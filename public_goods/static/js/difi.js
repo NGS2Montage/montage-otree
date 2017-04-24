@@ -209,7 +209,7 @@ function difi(myScale, myGroup, mySelf, myColor, myDistance, myVisible) {
   //var urlThem = '/static/images/them_' + myColor + '.png';
   var urlThem = '/static/images/group.png';
 
-  document.write('<div style="display: block; margin: auto; width:730px;height:380px;padding:15px;">'+
+  document.write('<div style="display: block; margin: auto; width:730px;height:380px;padding:15px;border: 1px solid gray; border-left: none; border-right: none;">'+
 
   '<div id="myContainer'+myScale+'" style="width:700px;height:350px;font-family:Arial;font-weight:bold;font-size:16px;">' +
 
