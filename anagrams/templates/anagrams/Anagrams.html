@@ -1,6 +1,8 @@
 {% extends "global/Page.html" %}
 {% load staticfiles otree_tags %}
 {% load otreechat %}
+{% load clicktracking %}
+
 
 {% block title %}
     Anagrams
@@ -24,6 +26,7 @@ http://getbootstrap.com/components/
 
     {% next_button %}
 -->
+    {% clicktrack %}
     <div id="app-view" class="row" style="background: white; padding: 30px; border-color: lightgray;
                 border-radius: 12px; border-width: 3px; border-style: groove;">
         <div class="col-md-4">
@@ -73,7 +76,7 @@ http://getbootstrap.com/components/
             <div class="row" style="height: 50px;">
                 <div class='otree-chat' id='anagrams-words-{{ word_channel }}' style="">
                     <div class='messages' style="height: 0px;"></div>
-                    Enter Word: <input size="25">
+                    Enter Word: <input data-track="word-input" size="25">
                     <button type="button">Submit</button>
                 </div>
 

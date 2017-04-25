@@ -57,7 +57,8 @@ INSTALLED_APPS = ['otree',
                   'otreechat',
 
                   # our stuff
-                  'core'
+                  'core',
+                  'clicktracking'
                   ]
 
 
