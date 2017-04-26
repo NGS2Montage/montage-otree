@@ -194,47 +194,49 @@ function difi(myScale, myGroup, mySelf, myColor, myDistance, myVisible) {
   if (typeof(mySelf)=="undefined") mySelf="Me";
   if (typeof(myColor)=="undefined") myColor="grey";
   if (typeof(myDistance)=="undefined") myDistance="-50";
-  if (typeof(myVisible)=="undefined") myVisible="true";
+  if (typeof(myVisible)=="undefined") myVisible="false";
   myColor = myColor.toLowerCase();
   myDistance = parseInt(myDistance);
   if (myDistance>125) myDistance=125;
   if (myDistance<-100) myDistance=-100;
 
 
-  var urlMe = '/static/images//me.png';
+  var urlMe = '/static/images/person.png';
+  
   // Change png for a gif to fix IE6 transparency issues
-  if (/\bMSIE 6/.test(navigator.userAgent) && !window.opera) urlMe = '/static/images//me.gif';
+  if (/\bMSIE 6/.test(navigator.userAgent) && !window.opera) urlMe = '/static/images/person.png';
 
-  var urlThem = '/static/images//them_' + myColor + '.png';
+  //var urlThem = '/static/images/them_' + myColor + '.png';
+  var urlThem = '/static/images/group.png';
 
-  document.write('<div style="width:730px;height:380px;padding:15px;border:1px solid black">'+
+  document.write('<div style="display: block; margin: auto; width:730px;height:380px;padding:15px;border: 1px solid gray; border-left: none; border-right: none;">'+
 
   '<div id="myContainer'+myScale+'" style="width:700px;height:350px;font-family:Arial;font-weight:bold;font-size:16px;">' +
 
   '<div id="myControl'+myScale+'" style="width:700px;height:50px;left:0px;top:0px;border:0px;position:relative;">' +
   '<table width="700px" height="50px" border="0" cellspacing="0" cellpadding="0"><tr>' +
-  '<td valign="top" align="right" width="100px"><image src="/static/images//go_rewind.png" width="100" height="30" border="0" style="cursor:pointer" onClick=setPositionRewind("'+myScale+'")></td>' +
-  '<td valign="top" align="right" width="100px"><image src="/static/images//go_reverse.png" width="100" height="30" border="0" style="cursor:pointer" onClick=setPositionReverse("'+myScale+'")></td>' +
-  '<td valign="top" align="right" width="100px"><image src="/static/images//go_play.png" width="100" height="30" border="0" style="cursor:pointer" onClick=setPositionPlay("'+myScale+'")></td>' +
-  '<td valign="top" align="left" width="100px"><image src="/static/images//go_forward.png" width="100" height="30" border="0" style="cursor:pointer" onClick=setPositionForward("'+myScale+'")></td>' +
-  '<td valign="middle" align="center" width="300px">'+myGroup+'</td>' +
+  '<td valign="top" align="right" width="100px" style="visibility: hidden;"><image src="/static/images/go_rewind.png" width="100" height="30" border="0" style="cursor:pointer" onClick=setPositionRewind("'+myScale+'")></td>' +
+  '<td valign="top" align="right" width="100px" style="visibility: hidden;"><image src="/static/images/go_reverse.png" width="100" height="30" border="0" style="cursor:pointer" onClick=setPositionReverse("'+myScale+'")></td>' +
+  '<td valign="top" align="right" width="100px" style="visibility: hidden;"><image src="/static/images/go_play.png" width="100" height="30" border="0" style="cursor:pointer" onClick=setPositionPlay("'+myScale+'")></td>' +
+  '<td valign="top" align="left" width="100px" style="visibility: hidden;"><image src="/static/images/go_forward.png" width="100" height="30" border="0" style="cursor:pointer" onClick=setPositionForward("'+myScale+'")></td>' +
+  '<td valign="middle" align="center" width="300px" style="padding-top: 10px">'+myGroup+'</td>' +
   '</tr></table></div>' +
 
   '<div id="mySlider'+myScale+'" name="mySlider'+myScale+'" style="width:200px;height:200px; ' +
   '     left:' + (200+(2*myDistance)) + 'px;top:50px;float:left;position:relative;z-index:92; text-align:center;cursor:move;">' +
 
   '   <table width="200px" height="200px" border="0" cellspacing="0" cellpadding="0" ' +
-  '          background="'+urlMe+'" ' + 
+  '          background="'+urlMe+'" ' +
   '          onmousedown="if (event.preventDefault) event.preventDefault()"' +
   '          ontouchmove="if (event.preventDefault) event.preventDefault()">' +
-  '   <tr><td valign="middle" align="center">'+mySelf+'</td></tr></table>' +
+  '   <tr><td valign="top" align="center">'+mySelf+'</td></tr></table>' +
   '</div>' +
 
   '<div id="myDestination'+myScale+'" name="myDestination'+myScale+'" ' +
   '        style="width:300px;height:300px;' +
   '               left:200px;top:0px;float:left;position:relative;z-index:91;">' +
   '<table width="300px" height="300px" border="0" cellspacing="0" cellpadding="0">' +
-  '<tr><td valign="middle" align="center" width="300px" height="300px"><img src="'+urlThem+'"/></td></tr>' +
+  '<tr><td valign="middle" align="center" width="300px" height="300px"><img width="100%" src="'+urlThem+'"/></td></tr>' +
   '</table>' +
   '</div>' +
 

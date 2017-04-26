@@ -1,0 +1,73 @@
+{% extends "global/Page.html" %}
+{% load staticfiles otree_tags %}
+
+{% block head_title %}
+    Introduction
+{% endblock %}
+
+{% block title %} Welcome! {% endblock %}
+
+{% block content %}
+	 <h2>Welcome.</h2>
+    <p style="text-align: justify;">
+        Welcome to <span class="app-title">Jointly</span>, a team-based platform for conducting group exercises!  
+        If you agree to participate you will play {{session.config.n_games}} games where you will be teamed with other players. These are your teammates.
+        You will have the opportunity to collaborate with your teammates to earn more rewards based on team performance.
+        In these game we use a points system where 1 point is worth ${{session.config.xChange_ratio}} USD.
+        The total time expected to complete this study is 15-20 minutes, and you will earn at least $2.00 for completing the entire experiment.
+        Increased wages can be achieved based on performance in the games.
+    </p>
+        {% comment %}
+	 <p>       
+        The table below shows the exercises involved in this study, the amount of time required, and the amount of earnings expected:
+    </p>
+    <div class="row">
+    
+    <table class="table" style="margin: auto; width: 60%">
+    <thead>
+      <tr>
+        <th>Exercise</th>
+        <th>Est. Time Required</th>
+        <th>Max. Earnings</th>
+      </tr>
+    </thead>
+    <tbody>
+    	<tr>
+        <td>Consent and Agreement to Participate</td>
+        <td>< 1 minute</td>
+        <td>{{session.config.participation_money|c}}</td>
+      </tr>
+      <tr>
+        <td>Survey (10 Questions)</td>
+        <td>1 minute</td>
+        <td>{{3|c}}</td>
+      </tr>
+      <tr>
+        <td>Game 1. Anagrams Game</td>
+        <td>3 minutes</td>
+        <td>{{5|c}}</td>
+      </tr>
+      <tr>
+        <td>Game 2. Anagrams Follow-up Question</td>
+        <td>1 minutes</td>
+        <td>{{5|c}}</td>
+      </tr>
+      <tr>
+        <td>Game 3. Anagrams Follow-up Questions</td>
+        <td>2 minutes</td>
+        <td>{{5|c}}</td>
+      </tr>
+      <tr style="font-weight: bold;">
+        <td>Total</td>
+        <td>8 minutes</td>
+        <td>{{5|c}}</td>
+      </tr>
+    </tbody>
+  </table>
+	 </div>
+	 {% endcomment %}
+	 
+	 <p><strong>Click 'Next' to move forward.</strong></p>
+    {% next_button %}
+
+{% endblock %}

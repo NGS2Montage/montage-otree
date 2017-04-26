@@ -207,7 +207,7 @@ function difi(myScale, myGroup, mySelf, myColor, myDistance, myVisible) {
 
   var urlThem = './difi/them_' + myColor + '.png';
 
-  document.write('<div style="width:700px;height:350px;padding:15px;border:1px solid black">'+
+  document.write('<div style="width:700px;height:350px;padding:15px;border:1px solid black;">'+
 
   '<div id="myContainer'+myScale+'" style="width:700px;height:350px;font-family:Arial;font-weight:bold;font-size:16px;">' +
 

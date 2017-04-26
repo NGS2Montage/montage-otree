@@ -37,7 +37,7 @@
 
 
 {% block content %}
-
+<h4>Time is up! Here is how your team performed on the Anagrams game:</h4>
     <table style="width: 60%">
         <tr>
             <th>Total words contributed by your Team:</th>
@@ -45,11 +45,15 @@
         </tr>
         <tr>
             <th>Earnings per word:</th>
-            <td>${{ earnings_per_word }}</td>
+            <td>{{ earnings_per_word|c}}</td>
         </tr>
         <tr>
-            <th>Total earnings:</th>
-            <td>${{ total_earnings }}</td>
+            <th>Team Total earnings:</th>
+            <td>{{ total_earnings|c}}</td>
+        </tr>
+        <tr>
+            <th>Your Total earnings:</th>
+            <td>{{ individual_earnings|c}}</td>
         </tr>
 
     </table>

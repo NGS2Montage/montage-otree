@@ -1,0 +1,83 @@
+{% extends "global/Page.html" %}
+{% load staticfiles otree_tags %}
+
+{% block head_title %}
+    Anagram Instructions
+{% endblock %}
+
+
+{% block title %} Anagrams Game - Quiz.{% endblock %}
+
+
+{% block content %}
+
+	<h2>Anagrams Game - Quiz.</h2>
+   <h4>
+   	To test your understanding, please answer the following question (you need to pass in order to move on):         
+   </h4>
+   <img class="img img-responsive" src={% static 'instructions/images/image07.png'%} alt="Image of entire game here.">
+
+	<ol>
+                <li>
+                    <b>With the letters above, which of the following words can you create? Check all that apply (hint: there are 2 correct words).</b><br/>
+                    <div class="checkbox">
+                        <label><input type="checkbox" name="question1[]" value="a" onclick="onClickHandler(this);">
+                            ROLE&nbsp;&nbsp;<span class="glyphicon glyphicon-ok answer hidden"></span>
+                        </label>
+                    </div>
+                    <div class="checkbox">
+                        <label><input type="checkbox" name="question1[]" value="b" onclick="onClickHandler(this);">
+                            ARE&nbsp;&nbsp;<span style="color: red;" class="answer hidden"><span class="glyphicon glyphicon-remove"></span><span><strong> 'A' is not available.</strong></span></span>
+                        </label>
+                    </div>
+                    <div class="checkbox">
+                        <label><input type="checkbox" name="question1[]" value="c" onclick="onClickHandler(this);">
+                            RARE&nbsp;&nbsp;<span style="color: red;" class="answer hidden"><span class="glyphicon glyphicon-remove"></span><span><strong> 'A' is not available.</strong></span></span>
+                        </label>
+                    </div>
+                    <div class="checkbox">
+                        <label><input type="checkbox" name="question1[]" value="d" onclick="onClickHandler(this);">
+                            ORE&nbsp;&nbsp;<span class="glyphicon glyphicon-ok answer hidden"></span>
+                        </label>
+                    </div>
+                    <div class="checkbox">
+                        <label><input type="checkbox" name="question1[]" value="e" onclick="onClickHandler(this);">
+                            OR&nbsp;&nbsp;<span style="color: red;" class="answer hidden"><span class="glyphicon glyphicon-remove"></span><span><strong> Too few letters.</strong></span></span>
+                        </label>
+                    </div>
+                    <br/>
+                </li>
+    </ol>
+	 <input type="hidden" name="anagram_hidden" value="5" id="id_anagram_hidden"/>
+
+
+
+
+<button style="margin: 15px;" class="otree-next-button btn btn-large btn-primary next-button">Click to Begin.</button>
+
+{% endblock %}
+
+
+{% block scripts %}
+    <script type="text/javascript" src="{% static 'js/hide_panel.js' %}"></script>
+    <script type="text/javascript" >
+    	function onClickHandler(cb){
+    		var span = $(cb.parentElement.getElementsByClassName('answer')[0]);
+			if (cb.checked) {
+				span.removeClass('hidden');
+			} else {
+				span.addClass('hidden');
+			}
+    	}
+    </script>
+{% endblock %}
+
+{% block styles %}
+
+<style type="text/css">
+	.hidden {
+		visibility: hidden;	
+	}
+</style>
+
+{% endblock %}

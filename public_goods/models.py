@@ -17,7 +17,7 @@ class Constants(BaseConstants):
     num_rounds = 1
     endowment = 100
     efficiency_factor = 2.0
-
+    decision_time_min = 3
 
 
 class Subsession(BaseSubsession):

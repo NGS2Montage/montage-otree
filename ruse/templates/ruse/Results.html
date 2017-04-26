@@ -1,0 +1,21 @@
+{% extends "global/Page.html" %}
+{% load staticfiles otree_tags %}
+
+{% block title %}
+    Exercise Complete!
+{% endblock %}
+
+{% block content %}
+
+
+   	<h4>
+      	Good work! The first part of the exercise is complete. To proceed to the next exercise,
+      	please click next.
+      </h4>
+
+
+<br/>
+
+{% next_button %}
+
+{% endblock %}

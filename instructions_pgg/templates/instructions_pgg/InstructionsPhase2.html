@@ -1,0 +1,43 @@
+{% extends "global/Page.html" %}
+{% load staticfiles otree_tags %}
+
+{% block head_title %}
+    Instructions
+{% endblock %}
+
+
+{% block title %} Team Reward Decision. {% endblock %}
+
+
+{% block content %}
+
+    {% include 'instructions_pgg/instructions_public_goods.html' %}
+{% comment %}
+<h4 style="text-align: justify">
+            <strong>3. Example:</strong> The table below shows the amount earnings you can expect to gain or lose by contributing to the team.
+            To use the table, find the row that matches how much you want to contribute. Then, find the column that matches how much, on average, you think your teammates will contribute.
+            For example, this shows that if you contribute {{session.config.pgg_bonus|c}} and you think that everyone on your team will contribute {{session.config.pgg_bonus|c}}, then
+            everyone will earn an additional {{session.config.pgg_bonus|c}}.
+</h4>
+<div id="contributionTable" style="max-width: 75%; display: block; margin-left: auto; margin-right: auto;"></div>
+<script type="text/javascript" src="{% static 'js/contributionTable.js' %}"></script>
+{% endcomment %}    
+
+
+    <br/>
+    <p>
+      <strong>Click next, to continue.</strong>
+    </p>
+    {% next_button %}
+
+{% endblock %}
+
+
+{% block scripts %}
+{% comment %}
+    <script type="text/javascript" >
+      var Table = new ContributionTable({{n_players}}, {{session.config.pgg_bonus}});
+    	Table.init($('#contributionTable'));
+    </script>
+{% endcomment %}
+{% endblock %}

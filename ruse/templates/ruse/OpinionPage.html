@@ -1,0 +1,25 @@
+{% extends "global/Page.html" %}
+{% load staticfiles otree_tags %}
+
+{% block title %}
+    Opinion Exercise
+{% endblock %}
+
+{% block content %}
+
+<div class="row" id="quizDiv" style="margin-top: 0px;">
+	<div class="col-md-12">
+      <h4>Opinion Poll:</h4>
+
+		{% for field in form %}
+    		{% formfield field %}
+		{% endfor %}		
+		
+   </div>
+</div>
+
+<br/>
+
+{% next_button %}
+
+{% endblock %}

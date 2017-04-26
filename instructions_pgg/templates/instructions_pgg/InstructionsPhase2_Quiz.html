@@ -1,0 +1,88 @@
+{% extends "global/Page.html" %}
+{% load staticfiles otree_tags %}
+
+{% block head_title %}
+    Team Contribution - Quiz
+{% endblock %}
+
+
+{% block title %} Team Contribution - Quiz. {% endblock %}
+
+
+{% block content %}
+
+    <h2>Anagrams Game - Quiz.</h2>
+   <h4>
+   	To test your understanding, please answer the following question (you need to pass in order to move on):         
+   </h4>
+            <ol>
+                <li>
+                    <b>
+                        You need to decide how much of your earnings to share in the team account.
+                        The amount shared by the will be doubled.  Choose options below that are true. Check all that
+                        apply (hint: there are three correct answers).
+                    </b><br/>
+                    <div class="checkbox">
+                        <label><input type="checkbox" onclick="onClickHandler(this);" name="question1[]" value="a">
+                            You are risking money that you earned in Phase 1.
+                            <p style="color: red;"><span class="answer hidden"><span class="glyphicon glyphicon-remove"></span><span><strong> You have received a bonus, this in no way affects what you have already earned.</strong></span></span></p>
+                        </label>
+                    </div>
+                    <div class="checkbox">
+                        <label><input type="checkbox" name="question1[]" onclick="onClickHandler(this);" value="b">
+                            Your team will know how much you contributed.
+                            <p style="color: red;"><span class="answer hidden"><span class="glyphicon glyphicon-remove"></span><span><strong>Your contributions are confidential.</strong></span></span></p>
+                        </label>
+                    </div>
+                    <div class="checkbox">
+                        <label><span class="glyphicon glyphicon-ok answer hidden"></span><input type="checkbox" name="question1[]" onclick="onClickHandler(this);" value="c">
+                            The earnings that you contribute to the team account will be pooled with the
+                            contributions of other team members, doubled, and redistributed.
+                        </label>
+                    </div>
+                    <div class="checkbox">
+                        <label><span class="glyphicon glyphicon-ok answer hidden"></span><input type="checkbox" name="question1[]" onclick="onClickHandler(this);" value="d">
+                            The percentage that you choose to keep for yourself will be yours, no matter what is
+                            contributed to the team account by you and your teammates.
+                        </label>
+                    </div>
+                    <div class="checkbox">
+                        <label><input type="checkbox" name="question1[]" onclick="onClickHandler(this);" value="e">
+                            There is no risk in contributing to the team account.
+                            <p style="color: red;"><span class="answer hidden"><span class="glyphicon glyphicon-remove"></span><span><strong>There is risk. The amount you receive depends on how much you contribute and how much your team contributes.</strong></span></span></p>
+                        </label>
+                    </div>
+                    <div class="checkbox">
+                        <label><span class="glyphicon glyphicon-ok answer hidden"></span><input type="checkbox" name="question1[]" onclick="onClickHandler(this);" value="f">
+                            If everyone does not contribute to the team account, then there will be no increase in earnings.
+                        </label>
+                    </div>
+                    
+                </li>
+            </ol>
+
+            <input type="hidden" name="public_goods_hidden" value="5" id="id_public_goods_hidden"/>
+
+    <!-- Quiz DIV : END -->
+
+    <br/>
+    <p>
+      <strong>Click next, to continue.</strong>
+    </p>
+    {% next_button %}
+
+
+{% endblock %}
+
+{% block scripts %}
+<script type="text/javascript" >
+    	function onClickHandler(cb){
+    		var span = $(cb.parentElement.getElementsByClassName('answer')[0]);
+			if (cb.checked) {
+				span.removeClass('hidden');
+			} else {
+				span.addClass('hidden');
+			}
+    	}
+</script>
+{% endblock %}

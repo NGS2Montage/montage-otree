@@ -1,22 +1,13 @@
 {% extends "global/WaitPage.html" %}
 {% load staticfiles otree_tags %}
 
-{% block head_title %} Please Wait - Phase II {% endblock %}
-{% block titletext %}Waiting for all participants to arrive{% endblock %}
+{% block head_title %} Waiting for teammates... {% endblock %}
+{% block titletext %}Waiting for your teammates{% endblock %}
 
 {% block content %}
-
-    <p>
-        While you are waiting, please read the game instructions below:
-    </p>
-
-
-    {% include 'instructions/instructions_public_goods.html' %}
-
-    {% include 'instructions/public_goods_youtube.html' %}
-
+	Although everyone on your team must decide individually how much to contribute, everyone needs to decide at the same time.
+	The next exercise will begin shortly.
 {% endblock %}
 
 {% block scripts %}
-    <script type="text/javascript" src="{% static 'js/hide_panel.js' %}"></script>
 {% endblock %}

@@ -1,22 +1,12 @@
 {% extends "global/WaitPage.html" %}
 {% load staticfiles otree_tags %}
 
-{% block head_title %} Please Wait - Phase III {% endblock %}
-{% block titletext %}Waiting for all participants to arrive{% endblock %}
+{% block head_title %} Teammates are Joining... {% endblock %}
+{% block titletext %}<strong>Building your team now: <span style="font-size: 20pt;" id="countdown"></span> out of <span id="N"></span> remaining.</strong>{% endblock %}
 
 {% block content %}
-
-    <p>
-        While you are waiting, please read the game instructions below:
-    </p>
-
-
-    {% include 'instructions/instructions_anagram.html' %}
-
-    {% include 'instructions/anagrams_youtube.html' %}
-
+<div class="row" style="width:100%; margin:0; padding:0;  text-align:center;">
+<img class="img img-responsive" style="display:inline-block;" src="{% static 'instructions/images/group_entry.png' %}" alt="">
+</div>
 {% endblock %}
 
-{% block scripts %}
-    <script type="text/javascript" src="{% static 'js/hide_panel.js' %}"></script>
-{% endblock %}

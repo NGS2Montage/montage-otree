@@ -33,53 +33,75 @@ class Group(BaseGroup):
 
 class Player(BasePlayer):
     age = models.PositiveIntegerField(
-        verbose_name="What is your age?"
+        verbose_name="What is your age?",
+        choices=[
+            [1, "0-17 years old"],
+            [2, "18-30 years old"],
+            [3, "30-40 years old"],
+            [4, "40-60 years old"],
+            [5, "60-80 years old"],
+            [6, "greater than 80 years old"],
+        ],
+        widget=widgets.RadioSelect(),
     )
 
     income = models.CharField(
-        verbose_name="What is your household income (answer in USD)",
+        verbose_name="What is your annual household income (answer in USD)?",
         choices=["Less than $25,000", "$25,000 - $49,999", "$50,000 - $74,999", "$75,000 - $99,999",
-                 "$100,000 - $124,999", "$125,000 - $149,999", "Greater than $150,000"],
+                 "$100,000 - $124,999", "$125,000 - $149,999", "Greater than $150,000", "Do not wish to answer"],
         widget=widgets.RadioSelect(),
     )
 
     sex = models.CharField(
         verbose_name="What is your sex?",
-        choices=["Male", "Female"],
+        choices=["Male", "Female", "Other"],
         widget=widgets.RadioSelect()
     )
 
     marital_status = models.CharField(
         verbose_name="What is your marital status?",
-        choices=["single", "married", "divorced"],
+        choices=["Never married", "Married", "Widowed", "Separated", "Divorced", "Other", "Do not wish to answer"],
         widget=widgets.RadioSelect()
     )
 
     country_born = models.CharField(verbose_name="In which country were you born?")
 
-    country_reside = models.CharField(verbose_name="In which country do you currently reside?")
+    country_reside = models.CharField(
+        verbose_name="""What best describes your current location?""",
+        choices=[
+            "Africa",
+            "Asia/Pacific",
+            "Europe",
+            "Latin America",
+            "Middle East",
+            "North America",
+        ],
+        widget=widgets.RadioSelect(),
+    )
 
     year_moved = models.CharField(verbose_name="If your country of birth is different than your country of residence, "
                                                "what year did you come to your country of current residence?",
                                   blank=True)
 
     highest_degree = models.CharField(
-        verbose_name="What is the highest level of education you completed?",
+        verbose_name="""What is the highest level of education that you have
+        completed (recieved degree or other certification)?""",
         choices=["Did Not Complete High School", "High School", "Some College", "Bachelor's Degree", "Master's Degree",
                  "Advanced Graduate work or Ph.D.", "Not Sure"],
         widget=widgets.RadioSelect()
     )
 
     speciality = models.CharField(
-        verbose_name="What is your area of specialty/major, if applicable? (examples include: Engineering, History, "
-                     "Mathematics, Literature, Foreign Languages, etc.)"
+        verbose_name="What is your area of specialty (college major, work skills, etc.) if applicable?",
+	choices=["Engineering", "History", "Mathematics", "Literature", "Foreign Language", "Social Sciences", "Arts", "Psychology", "Natural Sciences (Biology, Chemistry Physics)", "Agriculture", "Business", "Education", "Health Sciences", "Medicine", "Law", "Other", "Choose not to answer"],
+        widget=widgets.RadioSelect()
     )
 
     employment_status = models.CharField(
         verbose_name="What is your employment status?",
         choices=["Employed for wages", "Self-employed", "Out of work and looking for work",
                  "Out of work but not currently looking for work", "A homemaker", "A student", "Military", "Retired",
-                 "Unable to work"],
+                 "Unable to work", "Other", "Choose not to answer"],
         widget=widgets.RadioSelect()
     )
 
@@ -99,11 +121,28 @@ class Player(BasePlayer):
     )
 
     device_type = models.CharField(
-        verbose_name="What type of device are you using to complete this task (tablet, desktop, laptop, phone, etc)?"
+        verbose_name="""What type of device are you using to complete 
+            this task (tablet, desktop, laptop, phone, etc)?""",
+        choices=[
+            "desktop computer (e.g., monitor separate from CPU)",
+            "tablet computer (e.g., Microsoft Surface, Apple iPad, etc.)",
+            "phone (e.g., Apple iPhone, Samsung Galaxy, etc.)",
+            "laptop computer (e.g., any portable computer not a tablet or phone)",
+            "other",
+        ],
+        widget=widgets.RadioSelect()
     )
 
     membership_duration = models.PositiveIntegerField(
-        verbose_name="How long have you been a member of Amazon Mechanical Turk (in years)?"
+        verbose_name="""How long have you been a member of Amazon Mechanical
+        Turk?""",
+        choices=[
+            [1, "less than 1 month"],
+            [2, "1 month - 6 months"],
+            [3, "6 months - 1 year"],
+            [4, "greater than 1 year"],
+        ],
+        widget=widgets.RadioSelect(),
     )
 
     access_turk = models.CharField(

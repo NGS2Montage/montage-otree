@@ -1,0 +1,70 @@
+{% load staticfiles otree_tags %}
+
+<style type="text/css">
+	h4 {
+		padding-top: 25px;
+		text-align: justify;	
+	}
+	img {
+		display: block;
+		margin: auto;	
+	}
+</style>
+
+{% comment %}
+<!-- Instructions WELL : START -->
+    <div class="row" style="margin-top: 25px;">
+        <div class="col-md-12" style="padding-left: 5px; padding-right: 5px;">
+            <div class="well heading-well text-center" style="padding: 10px;">
+                <div style="float:right">s
+                                <span class="glyphicon glyphicon-minus" id="instructionsControlGlyph"
+                                      onclick="hide_panel('instructionsDiv', 'instructionsControlGlyph');">
+                                </span>
+                </div>
+                <b><span style="color: rgb(34, 34, 34); font-family: Arial, sans-serif; font-weight: bold;
+                font-size: 120%;">Instructions</span></b>
+            </div>
+        </div>
+    </div>
+    <!-- Instructions WELL : END -->
+{% endcomment %}
+    <!-- Instructions DIV : START -->
+    <div class="row" id="instructionsDiv">
+        <div class="col-md-12">
+        		<h3>Here's how it works:</h3>
+            <h4><strong>1. You will receive 3 letters that appear in <span class="label label-info"> BLUE</span></strong>.</h4>
+            <img class="img img-responsive" src={% static 'instructions/images/image05.png'%} alt="Image of entire game here.">
+            
+            <h4>
+            <strong>2. Form a valid English word that is 3 letters or longer and enter it into the submission box.</strong> 
+            For example, the letters R,O,L can be used to spell the word “ROLL” (case does not matter: roll = ROLL = roLL, etc.).
+            </h4>
+            <img class="img img-responsive" src={% static 'instructions/images/image00.png'%} alt="Image of entire game here.">
+            <h4>
+            <strong>3. The word you submit will appear with all the other words that the team submits.</strong> 
+            They are all counted together. The current record shows the best score so far. 
+            This is what you want to beat, and maximize your earnings. You can only submit the same word once. 
+            However, you can submit the same word that another player submitted. 
+            For example, if Player 1 submits “roll”, Player 2 can also submit “roll”.
+            </h4>
+            <img class="img img-responsive" src={% static 'instructions/images/image06.png'%} alt="Image of entire game here.">
+            <h4>
+             <strong>4. To get more letters to make more words, ask for help from your team! </strong>
+             We have made it possible for you and your team to copy each others’ letters. 
+             You have been randomly assigned to view some of your teammates’ letters. 
+             Click on the button to request more letters from your team, and then click on a letter that you would like. 
+             The letter will appear <span class="label label-warning">ORANGE</span> in your team letters box, and a request will be sent to your teammate.
+				 When your teammate copies the letter, it will turn <span class="label label-success">GREEN
+				</span> and be available for use.            
+            </h4>
+            <img class="img img-responsive" src={% static 'instructions/images/image07.png'%} alt="Image of entire game here.">
+            <h4>
+				<strong>5. Your teammates can also request letter copies from you. </strong>
+				In order for other players to receive a copy of your letter, you must approve them by clicking on the button that appears. 
+				Share with your teammates by answering their requests by clicking the <span class="label label-info"> BLUE</span> buttons.            
+            </h4>
+            <img class="img img-responsive" src={% static 'instructions/images/image01.png'%} alt="Image of entire game here.">
+        </div>
+    </div>
+    
+    <!-- Instructions DIV : END -->

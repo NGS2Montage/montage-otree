@@ -1,4 +1,4 @@
-var ContributionTable = function (n_players,reward_player){
+var ContributionTable = function (n_players,reward_player,contribution){
 
 	if(n_players <= 0) {
 		throw "Number of Players Must be Greater than 0."	
@@ -7,9 +7,15 @@ var ContributionTable = function (n_players,reward_player){
 	if(reward_player <= 0){
 		throw "Reward Must be Greater than 0."
 	};
+
+	if (typeof(contribution)=="undefined"){
+		this.rowPctCont = [0, .5, 1];
+	} else {
+		this.rowPctCont = [contribution/reward_player];
+	}	
 	
-	this.rowPctCont = [0, .25, .5, .75, 1];
-	this.colPctCont = [0, .25, .5, .75, 1];
+	
+	this.colPctCont = [0, .5, 1];
 	this.N = n_players;
 	this.R = reward_player;	
 	
@@ -17,18 +23,18 @@ var ContributionTable = function (n_players,reward_player){
 		var col_header = document.createElement('thead');
 		var header_row = document.createElement('tr');
 		var first = document.createElement('th')
-		first.innerHTML = '<em>Your Contribution</em>';
+		first.innerHTML = '<em>Your Contribution:</em>';
 		header_row.appendChild(first);
 
 		for (var i = 0, len = this.colPctCont.length; i < len; i++){
 			var val = this.colPctCont[i] * this.R;
 			var th = document.createElement('th');
-			th.innerHTML = val+' pts';
+			th.innerHTML = '~ ' + val+' pts';
 			header_row.appendChild(th);
 		}
 
 		var label_row = document.createElement('tr');
-		label_row.innerHTML = '<th></th><th colspan=' + this.colPctCont.length + '>Estimated Team Contribution »</th>';
+		label_row.innerHTML = '<th></th><th colspan=' + this.colPctCont.length + '>~ Team Contribution (per person):</th>';
 				
 		col_header.append(label_row);		
 		col_header.append(header_row);
@@ -40,7 +46,7 @@ var ContributionTable = function (n_players,reward_player){
 
 		var val = rowVal * this.R;
 		var th = document.createElement('th');
-		th.innerHTML = val+' pts';	
+		th.innerHTML = '<em>' + val+' pts </em>';	
 		
 		return th;
 	};
@@ -59,8 +65,12 @@ var ContributionTable = function (n_players,reward_player){
 			
 			for (var i = 0, len = cols.length; i < len; i++) {
 				var cell = document.createElement('td');
-				var val = this.calcValue(rowValue, cols[i], this.R, this.N);
-				cell.innerHTML = val.toFixed(2);
+				var val_you = this.calcValue(rowValue, cols[i], this.R, this.N);
+				var val_team = this.calcValue(cols[i], rowValue, this.R, this.N);
+				cell.innerHTML = '<p style="padding:0; margin:0;">You:&nbsp;&nbsp;&nbsp;&nbsp;' 
+					+ (val_you.toFixed(0) - this.R)
+					+ '</p><p style="padding:0; margin:0;">Team:&nbsp;' 
+					+ (val_team.toFixed(0) - this.R) + '</p>';
 				tblRow.appendChild(cell);
 			};
 			

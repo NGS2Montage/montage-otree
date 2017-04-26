@@ -1,0 +1,35 @@
+{% load staticfiles otree_tags %}
+
+<style type="text/css">
+	#instructionsDiv h4 {
+		padding-top: 25px;
+		text-align: justify;	
+	}
+	#instructionsDiv img {
+		display: block;
+		margin: auto;	
+	}
+</style>
+
+    <div class="row" id="instructionsDiv">
+        <div class="col-md-12">
+                
+            <h3>Here's how it works:</h3>
+            <h4>1. You and every member of your team will decide how much of your earnings to contribute to a team account. 
+            <em><strong>This amount will be doubled, and then split evenly for everyone on your team, regardless of their contribution amount.</strong></em> 
+            No one on your team will know how much you contribute.
+            Earnings that are not sent to the team account will be kept in your individual account. These will not be doubled.
+            Your total earnings will be the sum of your team award amount and your individual account.</h4>
+            <br>
+            <img class="img img-responsive" src={% static 'images/pgg_legend.png'%} alt="Image of entire game here.">
+            <h4>
+            <strong>2. You will have {{session.config.pgg_timeout_min}} minute(s) to make a decision.</strong>
+            	How much you choose to invest is completely up to you.
+            	The less you contribute, the more you keep and benefit from others' contributions.
+            	<strong><em>However, if everyone on the team contributes less, then everyone will receive less.</em></strong>
+            </h4>
+            
+        </div>
+    </div>
+
+    

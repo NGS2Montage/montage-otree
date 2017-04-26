@@ -78,10 +78,14 @@ class WaitPage(WaitPage):
         send_mail(subject=subject, message=message, from_email='NGS2 Montage <ngs2.montage@gmail.com>',
                   recipient_list=['parang.saraf@gmail.com'], fail_silently=True)
 
+    def vars_for_template(self):
+        return {
+        'nPlayers': 1 + len(self.player.get_others_in_group()),
+        }
 
 class Anagrams(Page):
     is_debug = False
-    timeout_seconds = 1800
+    timeout_seconds = Constants.anagrams_duration_sec
 
     def is_displayed(self):
         if self.participant.vars['consent'] and self.participant.vars['playing']:
@@ -134,17 +138,35 @@ class Results(Page):
 
     def vars_for_template(self):
         word_count = len(TeamWord.objects.filter(group=self.group))
-        earnings_per_word = 0.5
+        n_players = len(self.player.get_others_in_group()) + 1
+        earnings_per_word = 1
         total_earnings = word_count * earnings_per_word
         toReturn = {'word_count': word_count, 'earnings_per_word': earnings_per_word,
-                    'total_earnings': total_earnings}
+                    'total_earnings': total_earnings, 'individual_earnings':
+                    total_earnings / float(n_players)}
         return toReturn
 
 
-class DifiIndex(Page):
+class DifiIndexBefore(Page):
     is_debug = False
     form_model = models.Player
-    form_fields = ['distanceScale', 'overlapScale']
+    form_fields = ['distanceScale_before', 'overlapScale_before']
+
+    def is_displayed(self):
+        if self.participant.vars['consent'] and self.participant.vars['playing']:
+            return True
+        else:
+            return False
+
+    def before_next_page(self):
+        if self.timeout_happened:
+            self.participant.vars['playing'] = False
+
+
+class DifiIndexAfter(Page):
+    is_debug = False
+    form_model = models.Player
+    form_fields = ['distanceScale_after', 'overlapScale_after']
 
     def is_displayed(self):
         if self.participant.vars['consent'] and self.participant.vars['playing']:
@@ -158,9 +180,10 @@ class DifiIndex(Page):
 
 
 page_sequence = [
+    DifiIndexBefore,
     WaitPage,
     Anagrams,
     ResultsWaitPage,
     Results,
-    DifiIndex
+    DifiIndexAfter,
 ]

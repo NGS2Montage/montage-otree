@@ -28,7 +28,10 @@ class Constants(BaseConstants):
                            ["i", 46], ["j", 1], ["k", 4], ["l", 30], ["m", 15], ["n", 38], ["o", 38], ["p", 16],
                            ["q", 1], ["r", 38], ["s", 38], ["t", 34], ["u", 19], ["v", 5], ["w", 4], ["x", 1],
                            ["y", 10], ["z", 2]]
-
+    anagrams_duration_sec = 300
+    word_threshold = 12
+    threshold_payment = 12
+    marginal_payment = 1
 
 class Subsession(BaseSubsession):
     def before_session_starts(self):   # called each round
@@ -39,6 +42,16 @@ class Subsession(BaseSubsession):
             # extract and mix the players
             players = self.get_players()
             # random.shuffle(players)
+
+###############################
+## Development only!            
+###############################
+#            for p in players:
+#                p.participant.vars['consent'] = True
+#                p.participant.vars['playing'] = True
+
+###############################
+
 
             # create the base for number of groups
             num_players = len(players)
@@ -88,11 +101,14 @@ class Group(BaseGroup):
 
 
 class Player(BasePlayer):
+
     neighbors = django_models.ManyToManyField('Player')
     word_channel = django_models.CharField(max_length=255)
     # Difi Index Columns
-    distanceScale = models.IntegerField()
-    overlapScale = models.IntegerField()
+    distanceScale_before = models.IntegerField()
+    overlapScale_before = models.IntegerField()
+    distanceScale_after = models.IntegerField()
+    overlapScale_after = models.IntegerField()
 
     def generate_user_letters(self):
         # alphabet = list(string.ascii_lowercase)
@@ -183,8 +199,8 @@ class TeamWord(models.Model):
 
     # the name "channel" here is unrelated to Django channels
     channel = models.CharField(max_length=255)
-    group = models.ForeignKey(Group)
     player = models.ForeignKey(Player)
+    group = models.ForeignKey(Group)
 
     word = models.CharField(max_length=100)
     timestamp = models.FloatField(default=time.time)

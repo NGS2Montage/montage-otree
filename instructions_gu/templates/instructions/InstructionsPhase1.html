@@ -1,0 +1,160 @@
+{% extends "global/Page.html" %}
+{% load staticfiles otree_tags %}
+
+{% block head_title %}
+    Anagram Instructions
+{% endblock %}
+
+
+{% block title %} Anagrams Game Instructions.{% endblock %}
+
+
+{% block content %}
+
+	<h2>Anagrams Game - Instructions.</h2>
+            <p>
+            You and your team are about to play a game called Anagrams shown below. 
+            The objective of your team is to try to create as many words as possible. 
+            If your team is able to form {{session.config.threshold_num_words}} words, then you will earn 
+            {{session.config.threshold_num_points}} points. 
+            Any additional word will add {{session.config.marginal_points|c}} to the score.
+            <strong>You will have {{session.config.anagrams_timeout}} minutes to try to make as many words as possible!</strong>
+            </p>
+
+    {% include 'instructions/instructions_anagram.html' %}
+
+	 
+
+{% comment %}
+    <!-- Quiz WELL : START -->
+    <div class="row" style="margin-top: 25px;">
+        <div class="col-md-12" style="padding-left: 5px; padding-right: 5px;">
+            <div class="well heading-well text-center" style="padding: 10px;">
+                <div style="float:right">
+                                <span class="glyphicon glyphicon-minus" id="quizControlGlyph"
+                                      onclick="hide_panel('quizDiv', 'quizControlGlyph');">
+                                </span>
+                </div>
+                <b><span style="color: rgb(34, 34, 34); font-family: Arial, sans-serif; font-weight: bold;
+                font-size: 120%;">Quiz</span></b>
+            </div>
+        </div>
+    </div>
+    <!-- Quiz WELL : END -->
+
+
+    <!-- Quiz DIV : START -->
+    <div class="row" id="quizDiv" style="margin-top: 0px;">
+        <div class="col-md-12">
+            <p>
+                Please answer the following questions:
+            </p>
+
+            <ol>
+                <li>
+                    <b>You are trying to build the word "can" in the team building exercise. You have the letters "a" and
+                    "n." You need the letter "c." You can see that one of your neighbors as the letter "c". Which of
+                        the following are true? Check all that apply.</b><br/>
+                    <div class="checkbox">
+                        <label><input type="checkbox" name="question1[]" value="a">
+                            You can request that your neighbor send you the letter "c."
+                        </label>
+                    </div>
+                    <div class="checkbox">
+                        <label><input type="checkbox" name="question1[]" value="b">
+                            You have to rely on your neighbor to recognize that if she sends you a "c," then you can form "can."
+                        </label>
+                    </div>
+                    <div class="checkbox">
+                        <label><input type="checkbox" name="question1[]" value="c">
+                            You cannot request a letter from your neighbor.
+                        </label>
+                    </div>
+                    <br/>
+                </li>
+
+                <li>
+                    <b>
+                        You receive a request from a neighbor for you to send her the letter "g," which you have and
+                        can send to her. Which are true. (Check all that apply.)
+                    </b><br/>
+                     <div class="checkbox">
+                        <label><input type="checkbox" name="question2[]" value="a">
+                            You should look at all of her letters and determine what she is going to do with the "g"
+                            before you send it.
+                        </label>
+                    </div>
+                    <div class="checkbox">
+                        <label><input type="checkbox" name="question2[]" value="b">
+                            Rely that your neighbor knows what she is doing, and send her the "g" so that you can
+                            focus on building words yourself while your neighbor is also building words.
+                        </label>
+                    </div>
+                    <br/>
+                </li>
+
+                <li>
+                    <b>
+                        You have the letters g, b, r, u. Which of the following are valid actions? Check all that apply.
+                    </b><br/>
+                     <div class="checkbox">
+                        <label><input type="checkbox" name="question3[]" value="a">
+                            Form the word "grub." Even though your words have to be at least 3 characters, it is
+                            perfectly acceptable to submit four-letter words.
+                        </label>
+                    </div>
+                    <div class="checkbox">
+                        <label><input type="checkbox" name="question3[]" value="b">
+                            Form the word "bug." Since you only need 3-letter words, you can save the "r" for
+                            another word.
+                        </label>
+                    </div>
+                    <div class="checkbox">
+                        <label><input type="checkbox" name="question3[]" value="c">
+                            You recognize that you can form the words "rub" and "rug" and that each word is valid
+                            and will help the team. However, you notice that a teammate has already submitted the
+                            word "rub" because you can see a list of all words formed by all team members, so you
+                            submit that word because your team gets extra points when different team members
+                            cooperate by submitting the same word.
+                        </label>
+                    </div>
+                    <br/>
+                </li>
+
+                <li>
+                    <b>
+                        You have the letters t, u, and b. One of your neighbors requests the letter "b" from you. What
+                        should you do? (Check all that apply.)
+                    </b><br/>
+                     <div class="checkbox">
+                        <label><input type="checkbox" name="question4[]" value="a">
+                            Ignore your neighbor because you need the "b" to form "tub."
+                        </label>
+                    </div>
+                    <div class="checkbox">
+                        <label><input type="checkbox" name="question4[]" value="b">
+                            Send her the "b" because you know that the letters you use yourself to form words are
+                            completely separate from the supply of letters that you can send to neighbors.
+                        </label>
+                    </div>
+                </li>
+
+                <input type="hidden" name="anagram_hidden" value="5" id="id_anagram_hidden"/>
+
+            </ol>
+        </div>
+    </div>
+    <!-- Quiz DIV : END -->
+{% endcomment %}
+  
+    <h4><strong>Ok, got it? Click next to continue!</strong></h4>
+    {% next_button %}
+    <!-- <button style="margin: 15px;" class="otree-next-button btn btn-large btn-primary next-button">Click to Begin.</button> -->
+
+{% endblock %}
+
+
+{% block scripts %}
+    <script type="text/javascript" src="{% static 'js/hide_panel.js' %}"></script>
+{% endblock %}
+
