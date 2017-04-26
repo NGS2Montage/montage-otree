@@ -25,11 +25,11 @@ $(function () {
         } else {
             clickedElement = e.target;
         }
-        if (clickedElement.hasAttribute('data-track')) {
-            console.log(clickedElement.getAttribute('data-track'));
+        if (clickedElement.id) {
+            console.log(clickedElement.id);
 
             var data = {
-                'element': clickedElement.getAttribute('data-track'),
+                'element': clickedElement.id,
                 'participant_code': participantCode,
                 'timestamp': (new Date).getTime()
             };

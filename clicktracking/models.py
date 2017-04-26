@@ -6,3 +6,6 @@ class Click(models.Model):
     participant = models.ForeignKey(Participant)
     timestamp = models.FloatField(default=time.time)
     element = models.CharField(max_length=255)
+
+    def __str__(self):
+        return "{} {}".format(self.participant.code, self.element)
