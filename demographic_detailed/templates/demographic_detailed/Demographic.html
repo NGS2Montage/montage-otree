@@ -1,0 +1,141 @@
+{% extends "global/Page.html" %}
+{% load staticfiles otree_tags %}
+
+{% block head_title %}
+    Detailed Sociodemographic Survey
+{% endblock %}
+
+{% block title %} Sociodemographic Survey {% endblock %}
+
+{% block content %}
+
+    <h4 style="padding-bottom: 30px;">
+        This survey is designed to obtain some demographic information and traits.  Each question has a “skip” option in case you do not want to answer the question.  To be paid, you must answer at least 14 of the 17 questions.
+    </h4>
+
+    <ol>
+    {% autoescape off %}
+    {% for field in form.visible_fields|slice:":14" %}
+        <li style="padding-bottom: 30px; border-bottom: 1px groove;">
+        <div class="toggleable">{% formfield field %}</div>
+        <input name="{{ field.html_name}}_skip" type='hidden' value='False'/>    
+        <label><input class="skip" name="{{ field.html_name}}_skip" id="id_{{field.html_name}}_skip" value='True' type='checkbox'/> Skip this question.</label>
+        </li>
+    {% endfor %}
+    {% endautoescape %}
+    
+    	  <li style="padding-bottom: 30px; border-bottom: 1px groove;">
+    	  <p style="font-weight: bold;">How many of the people living in your residence/home are in each of the following age categories?</p>
+    	  		<div class="toggleable">
+    	  			<table class="table" style="border: 0; display: inline-block;">
+    					{% for field in form.visible_fields|slice:"14:19" %}
+    					<tr style="border: 0;">
+        					<td style="border: 0;">
+            				{{ field.label_tag }}
+            				{{ field.errors }}
+        					</td>
+        					<td style="border: 0;"><input type="number" name="{{ field.html_name}}" value="0" required min="0" id="id_{{field.html_name}}" class="form-control"></td>
+    					</tr>
+    					{% endfor %}
+					</table>
+				</div>
+				
+				<input name="age_residence_skip" type='hidden' value='False'/>
+				<label><input class="skip" name="age_residence_skip" id="id_age_residence_skip" value='True' type='checkbox'/> Skip this question.</label>   
+				
+				 
+    	  </li>
+    	  <li style="padding-bottom: 30px; border-bottom: 1px groove;">
+    	  <p style="font-weight: bold;">Of the people 18 years old or younger living in your residence/home, how many participate in each of the following activities?</p>
+				<div class="toggleable">
+    	  		<table class="table" style="border: 0; display: inline-block;">
+    					{% for field in form.visible_fields|slice:"19:24" %}
+    					<tr style="border: 0;">
+        					<td style="border: 0;">
+            				{{ field.label_tag }}
+            				{{ field.errors }}
+        					</td>
+        					<td style="border: 0;"><input type="number" name="{{ field.html_name}}" value="0" required min="0" id="id_{{field.html_name}}" class="form-control"></td>
+    					</tr>
+    					{% endfor %}
+					</table>
+				</div>
+				<input name="activity_young_skip" type='hidden' value='False'/>
+				<label><input class="skip" name="activity_young_skip" id="id_activity_young_skip" value='True' type='checkbox'/> Skip this question.</label>   	  
+    	  </li>
+    	  <li style="padding-bottom: 30px; border-bottom: 1px groove;">
+    	  <p style="font-weight: bold;">Of the people 19 years old or older living in your residence/home, how many participate in each of the following activities?</p>
+				<div class="toggleable">
+    	  		<table class="table" style="border: 0; display: inline-block;">
+    					{% for field in form.visible_fields|slice:"24:30" %}
+    					<tr style="border: 0;">
+        					<td style="border: 0;">
+            				{{ field.label_tag }}
+            				{{ field.errors }}
+        					</td>
+        					<td style="border: 0;"><input type="number" name="{{ field.html_name}}" value="0" required min="0" id="id_{{field.html_name}}" class="form-control"></td>
+    					</tr>
+    					{% endfor %}
+					</table>
+				</div>
+				<input name="activity_old_skip" type='hidden' value='False' />
+				<label><input class="skip" name="activity_old_skip" id="id_activity_old_skip" value='True' type='checkbox'/> Skip this question.</label>   	  
+    	  </li>
+    </ol>
+
+<input type="hidden" id="nSkips" name="nSkips" value="0"/>
+
+<div style="position: fixed; top: 45px; display: none;" class="alert alert-warning" id="limit-warning" role="alert">
+  <strong>Too many skipped questions!</strong> You can still submit your survey, but you will only receive payment if you answer 14 out of the 17 questions.
+</div>
+
+    <br/>
+    {% next_button %}
+
+{% endblock %}
+
+{% block scripts %}
+
+<script type="text/javascript" >
+
+$(document).ready(function () {
+
+	$('input:not(.skip), select').attr('required', true);
+	
+});
+
+var nSkip = 0;
+
+$('.skip').click(function (e) {
+	var obj = e.currentTarget;
+	var inputs = obj.parentElement.parentElement.getElementsByClassName('toggleable')[0].getElementsByClassName('form-control');	
+	
+	if (obj.checked){
+		nSkip += 1;
+		for (i=0; i<inputs.length; i++)
+		{
+			inputs[i].disabled=true;
+		}
+	}
+	else {
+		nSkip -= 1;
+		for (i=0; i<inputs.length; i++)
+		{
+			inputs[i].disabled=false;
+			inputs[i].required=true;	
+		}
+	}
+	
+	if (nSkip > 3)
+	{
+		$('#limit-warning').show();	
+	}else {
+		$('#limit-warning').hide();
+	}
+	
+	$('#nSkips').val(nSkip);
+});
+
+</script>
+
+{% endblock %}
