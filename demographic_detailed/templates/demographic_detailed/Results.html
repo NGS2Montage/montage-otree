@@ -1,0 +1,31 @@
+{% extends "global/Page.html" %}
+{% load staticfiles otree_tags %}
+
+{% block title %}
+    Thank you!
+{% endblock %}
+
+{% block content %}
+
+	<h4>Thank you!</h4>
+	{% if player.participate %}
+	<p>
+		Thank you for participating in the survey.
+		{% if player.nSkips < 4 %}
+		You answered {{nQuestions}} questions out of 17 and will receive an additional {{session.config.optional_survey_payout|c}}.
+		{% else %}
+		You answered {{nQuestions}} questions and 14 are required. You will not receive an additional reward.
+		{% endif %}	
+	</p>
+
+	{% else %}
+	<p>You have chosen not to participate in the optional survey.</p>
+	{% endif %}	
+	
+	Please click next to continue.
+
+
+    {% next_button %}
+{% endblock %}
+
+

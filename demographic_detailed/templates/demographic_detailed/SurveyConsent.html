@@ -1,0 +1,30 @@
+{% extends "global/Page.html" %}
+{% load staticfiles otree_tags %}
+
+{% block head_title %}
+    Optional Detailed Survey
+{% endblock %}
+
+{% block title %} Optional Detailed Survey {% endblock %}
+
+
+{% block styles %}
+{% endblock %}
+
+{% block content %}
+<h4>You have been selected to participate in an optional additional survey for extra earnings.</h4>
+<p>
+You have been selected to participate in taking an additional detailed survey. 
+In return, you will receive additional earnings totaling {{session.config.optional_survey_payout|c}}.
+If you choose to take the survey, you will receive 17 questions and will have the option to skip questions.
+You may skip as many questions as you like, but in order to receive payment, you will need to answer at least 14 of the questions.
+
+If you would like to take the survey, please indicate below and click next.
+</p>
+
+{% formfield player.participate %}
+
+    <br/>
+    {% next_button %}
+
+{% endblock %}

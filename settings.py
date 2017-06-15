@@ -141,8 +141,9 @@ SESSION_CONFIGS = [
         'name': 'Ruse',
         'display_name': 'Ruse',
         'num_demo_participants': 2,
-        'app_sequence': ['demographic', 'ruse'],
+        'app_sequence': ['demographic', 'demographic_detailed', 'ruse'],
         'participation_money': 0.05,
+        'optional_survey_payout': 5,
     },
     {
         'name': 'productionNoPriming',
@@ -161,13 +162,22 @@ SESSION_CONFIGS = [
         'marginal_points': 1,
         'timeout_anagrams_min': 3,
         'pgg_bonus': 100,
-	'pgg_timeout_min': 1,
+	    'pgg_timeout_min': 1,
     },
     {
         'name': 'productionPriming',
         'display_name': 'Production P2 Priming',
         'num_demo_participants': 2,
-        'app_sequence': ['welcome', 'demographic', 'instructions_anagrams', 'anagrams','ruse','instructions_pgg', 'public_goods'],
+        'app_sequence': [
+            'welcome', 
+            'demographic', 
+            'instructions_anagrams',
+            'anagrams',
+            'ruse',
+            'instructions_pgg', 
+            'public_goods', 
+            'demographic_detailed',
+            ],
         'participation_money': 0.05,
         'ultimatum_split': False,
         'ultimatum_player_role': 'offeror',  # Applicable only if 'ultimatum_split' is False
@@ -184,6 +194,7 @@ SESSION_CONFIGS = [
         'xChange_ratio': 1,
         'n_games': 3,
         'n_neighbors': 2,
+        'optional_survey_payout': 5,
     },
 #   {
 #        'name': 'production',
