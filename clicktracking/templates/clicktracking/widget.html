@@ -31,9 +31,10 @@ $(function () {
             var data = {
                 'element': clickedElement.id,
                 'participant_code': participantCode,
-                'timestamp': (new Date).getTime()
+                'timestamp': (new Date).getTime(),
+                'page': window.location.href,
+                'session_code': '{{session.code}}',
             };
-
             socket.send(JSON.stringify(data));
         }
     }

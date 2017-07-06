@@ -1,12 +1,13 @@
 {% extends "global/WaitPage.html" %}
 {% load staticfiles otree_tags %}
 
-{% block head_title %} Please Wait - Phase I {% endblock %}
-{% block titletext %}Waiting for all participants to arrive{% endblock %}
+{% block head_title %} Teammates are on their way... {% endblock %}
+{% block titletext %}<strong>Your teammates are catching up: <span style="font-size: 20pt;" id="countdown"></span> out of <span id="N"></span> remaining.</strong>{% endblock %}
 
 {% block content %}
-
-
-
+<div class="row" style="width:100%; margin:0; padding:0;  text-align:center;">
+<img class="img img-responsive" style="display:inline-block;" src="{% static 'instructions/images/group_entry.png' %}" alt="">
+</div>
 {% endblock %}
+
 

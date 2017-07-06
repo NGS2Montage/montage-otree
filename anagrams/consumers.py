@@ -3,6 +3,7 @@ from .models import Dictionary, TeamWord, UserLetter, LetterTransaction, Player
 from otree.models.participant import Participant
 import json
 from channels.generic.websockets import JsonWebsocketConsumer
+import time
 
 
 def get_chat_group(channel):
@@ -18,6 +19,7 @@ def approval_consumer(message):
     transaction_pk = content['transaction_pk']
     transaction = LetterTransaction.objects.get(pk=transaction_pk)
     transaction.approved = True
+    transaction.approve_time = time.time()
     transaction.save()
 
     approval_message = {

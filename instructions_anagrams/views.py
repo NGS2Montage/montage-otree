@@ -12,6 +12,7 @@ class LoginRequiredMixin(object):
 
 class Introduction(Page):
     is_debug = False
+    timeout_seconds = 60
     template_name = 'instructions_anagrams/Introduction.html'
 
     def is_displayed(self):
@@ -32,6 +33,7 @@ class JoinTeamWaitPage(WaitPage):
 
 class TeamSummary(Page):
     is_debug = False
+    timeout_seconds = 60
     template_name = 'instructions_anagrams/TeamSummary.html'
 
     def is_displayed(self):
@@ -45,7 +47,8 @@ class TeamSummary(Page):
 
 class InstructionsPhase1(Page):
     is_debug = False
-
+    timeout_seconds = 180    
+    
     def is_displayed(self):
         if self.participant.vars['consent'] and self.participant.vars['playing'] and \
                         'anagrams' in self.session.config['app_sequence']:
@@ -53,15 +56,12 @@ class InstructionsPhase1(Page):
         else:
             return False
 
-    def before_next_page(self):
-        if self.timeout_happened:
-            self.participant.vars['playing'] = False
-    pass
-
 class InstructionsPhase1_Quiz(Page):
+    required = True
     form_model = models.Player
     form_fields = ['anagram_hidden']
     is_debug = False
+    timeout_seconds = 120
 
     def is_displayed(self):
         if self.participant.vars['consent'] and self.participant.vars['playing'] and \
@@ -98,12 +98,29 @@ class InstructionsPhase1_Quiz(Page):
         if self.timeout_happened:
             self.participant.vars['playing'] = False
 
+class DifiIndexBefore(Page):
+    is_debug = False
+    required = True
+    form_model = models.Player
+    form_fields = ['distanceScale_before', 'overlapScale_before']
 
+    timeout_seconds = 60
+    
+    def is_displayed(self):
+        if self.participant.vars['consent'] and self.participant.vars['playing']:
+            return True
+        else:
+            return False
+
+    def before_next_page(self):
+        if self.timeout_happened:
+            self.participant.vars['playing'] = False
 
 page_sequence = [
     Introduction,
     JoinTeamWaitPage,
     TeamSummary,
+    DifiIndexBefore,
     InstructionsPhase1,
     InstructionsPhase1_Quiz,
 ]

@@ -22,14 +22,14 @@
         			<h4><strong><em>How many points do you want to put toward the team account?</em></strong></h4>
         		</div>
 				<div class="panel-body">
-					<h4><strong>Your Bonus Earnings:</strong> {{ Constants.endowment}} pts</h4>
+					<h4><strong>Your Bonus Earnings:</strong> {{ session.config.pgg_bonus }} pts</h4>
 					<h4><strong>Enter Your Contribution to the Team Account:</strong></h4>
 					<div class="row input-group otree-chat" class="input-lg" id='anagrams-words-{{ word_channel }}' style="border: 0px; padding-top: 0px; margin:0; bottom: 0px;">
 
 								<input style="padding-left: 30px; width: 100%" name="contribution" id="id_contribution" class="form-control" placeholder="Enter amount here...">     					
       					      					
-      					<span id="tip" class="input-group-btn">
-        						<button class="btn btn-default" onclick="updateTable();" type="button" style="background-image:none;"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>&nbsp;&nbsp;View Risk/Reward</button>
+      					<span class="input-group-btn">
+        						<button id="tip" class="btn btn-default" onclick="updateTable();" type="button" style="background-image:none;"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>&nbsp;&nbsp;View Risk/Reward</button>
       					</span>
 
     					</div>
@@ -60,8 +60,8 @@
     	$('#id_contribution').focus();
     	function updateTable(){
     		var val = $('#id_contribution').val();
-    		if((!isNaN(+val)) && (val >= 0) && (val <= {{Constants.endowment}})) {
-    			var Table = new ContributionTable('{{nPlayers}}', '{{Constants.endowment}}', val);
+    		if((!isNaN(+val)) && (val >= 0) && (val <= {{session.config.pgg_bonus}})) {
+    			var Table = new ContributionTable('{{nPlayers}}', '{{session.config.pgg_bonus}}', val);
     			$('#contributionTable').html('');
     			Table.init($('#contributionTable'));
     		} else {

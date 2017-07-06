@@ -12,6 +12,7 @@ class LoginRequiredMixin(object):
 
 class Introduction(Page):
     is_debug = False
+    timeout_seconds = 60
     template_name = 'instructions_pgg/Introduction.html'
 
     def is_displayed(self):
@@ -22,6 +23,8 @@ class Introduction(Page):
 
 class InstructionsPhase2(Page):
     is_debug = False
+    timeout_seconds = 60
+    
     def is_displayed(self):
         if self.participant.vars['consent'] and self.participant.vars['playing'] and \
                         'public_goods' in self.session.config['app_sequence']:
@@ -35,6 +38,9 @@ class InstructionsPhase2(Page):
 class InstructionsPhase2_Quiz(Page):
     form_model = models.Player
     form_fields = ['public_goods_hidden']
+    required = True
+    timeout_seconds = 120
+    
     is_debug = False
 
     def is_displayed(self):

@@ -31,6 +31,10 @@ class Player(BasePlayer):
     # Anagram game Quiz
     anagram_question1 = models.CharField()
 
+    # Difi Index Columns
+    distanceScale_before = models.IntegerField()
+    overlapScale_before = models.IntegerField()
+    
     anagram_question1_solution = models.CharField(choices=["a__d"])
     anagram_hidden = models.IntegerField()
     anagram_score = models.IntegerField()

@@ -14,9 +14,10 @@
     </p>
 
     <p style="color: red;">
-        You are not allowed to play this game any further. We are sorry to see you go.
+        You are not allowed to play these exercises any further. We are sorry to see you go.
     </p>
     <br/>
-    <a href="{% url 'account_logout' %}" class="btn btn-primary" role="button">Sign Out</a>
+    
+    {% next_button %}
 
 {% endblock %}

@@ -15,15 +15,12 @@ class Constants(BaseConstants):
     name_in_url = 'phase2'
     players_per_group = None
     num_rounds = 1
-    endowment = 100
-    efficiency_factor = 2.0
-    decision_time_min = 3
 
 
 class Subsession(BaseSubsession):
     total_contribution = models.PositiveIntegerField()
     individual_share = models.FloatField()
-
+    
     def get_allowed_players(self):
         players = []
         for player in self.get_players():
@@ -35,21 +32,23 @@ class Subsession(BaseSubsession):
         allowed_players = self.get_allowed_players()
         if len(allowed_players) > 0:
             self.total_contribution = sum([p.contribution for p in allowed_players])
-            self.individual_share = (self.total_contribution * Constants.efficiency_factor) / len(allowed_players)
+            self.individual_share = (self.total_contribution * self.session.config['pgg_multiplier']) / len(allowed_players)
         else:
             self.total_contribution = 0
             self.individual_share = 0
         for p in allowed_players:
-            p.payoff = Constants.endowment - p.contribution + self.individual_share
-            p.profit = p.payoff - Constants.endowment
+            p.payoff = self.session.config['pgg_bonus'] - p.contribution + self.individual_share
+            p.profit = p.payoff - self.session.config['pgg_bonus']
 
 
 class Group(BaseGroup):
     pass
 
 
-class Player(BasePlayer):
-    contribution = models.IntegerField(min=-1, max=Constants.endowment)
+class Player(BasePlayer):      
+            
+    contribution = models.IntegerField()
+    
     profit = models.FloatField()
 
     # Difi Index Columns

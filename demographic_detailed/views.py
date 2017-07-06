@@ -14,6 +14,10 @@ class SurveyConsent(Page):
     is_debug = False
     form_model = models.Player
     form_fields = ['participate']
+    
+    timeout_seconds = 60
+    timeout_submission = {'participate': False}
+    
 
     def is_displayed(self):
         if self.participant.vars['consent'] and\
@@ -24,8 +28,9 @@ class SurveyConsent(Page):
             return False
 
 class Demographic(Page):
-    
+    timeout_seconds = 300
     form_model = models.Player
+    required = True
     template_name = 'demographic_detailed/Demographic.html'
     form_fields = [
         "income", 
@@ -92,7 +97,9 @@ class Demographic(Page):
                 self.player.payoff = 0
 
 class Results(Page):
-
+    timeout_seconds = 60
+    is_debug = False
+    
     def is_displayed(self):
         if self.participant.vars['consent'] and self.participant.vars['playing']:
             return True

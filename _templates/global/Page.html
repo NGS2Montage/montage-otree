@@ -2,8 +2,11 @@
 {% load staticfiles otree_tags %}
 {% load i18n %}
 {% load floppyforms otree_tags %}
+{% load clicktracking %}
 
 {% block body_main %}
+
+{% clicktrack %}
 
 {% block myscripts %} {% endblock %}
 
@@ -51,6 +54,12 @@
                 <h2>{% block title %}{% endblock %}</h2>
             </div> -->
 {% endcomment %}
+                {% if view.required %}
+                    <div class="alert alert-danger alert-dismissable">
+                        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                        <strong>This page has required input. When finished, please click next to continue or the experiment will end.</strong>
+                    </div>
+                {% endif %}
                 {% if view.has_timeout %}
                     {% include 'otree/includes/TimeLimit.html' with form_element_id="form" %}
                 {% endif %}

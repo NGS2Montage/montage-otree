@@ -10,8 +10,14 @@ class WaitPage(WaitPage):
     is_debug = False
     template_name = 'anagrams/WaitPage.html'
 
+    def is_displayed(self):
+        if self.participant.vars['consent'] and self.participant.vars['playing']:
+            return True
+        else:
+            return False
+    
     def after_all_players_arrive(self):
-        group_size = Constants.num_neighbors
+        group_size = self.session.config['n_neighbors']
         for group in self.subsession.get_groups():
             self.assign_players_in_chatgroups(group.get_players(), group_size)
         '''
@@ -85,7 +91,11 @@ class WaitPage(WaitPage):
 
 class Anagrams(Page):
     is_debug = False
-    timeout_seconds = Constants.anagrams_duration_sec
+    
+    timeout_seconds = 300
+    
+    def get_timeout_seconds(self):
+        return self.session.config['timeout_anagrams_min'] * 60
 
     def is_displayed(self):
         if self.participant.vars['consent'] and self.participant.vars['playing']:
@@ -124,12 +134,19 @@ class ResultsWaitPage(WaitPage):
     template_name = 'anagrams/initial_results_wait.html'
 
     def after_all_players_arrive(self):
-        pass
+        self.subsession.set_payoffs()
 
+    def is_displayed(self):
+        if self.participant.vars['consent'] and self.participant.vars['playing']:
+            return True
+        else:
+            return False
+        
 
 class Results(Page):
     is_debug = False
-
+    timeout_seconds = 60
+    
     def is_displayed(self):
         if self.participant.vars['consent'] and self.participant.vars['playing']:
             return True
@@ -137,34 +154,27 @@ class Results(Page):
             return False
 
     def vars_for_template(self):
-        word_count = len(TeamWord.objects.filter(group=self.group))
-        n_players = len(self.player.get_others_in_group()) + 1
-        earnings_per_word = 1
-        total_earnings = word_count * earnings_per_word
-        toReturn = {'word_count': word_count, 'earnings_per_word': earnings_per_word,
-                    'total_earnings': total_earnings, 'individual_earnings':
-                    total_earnings / float(n_players)}
+        word_count = self.subsession.n_words #len(TeamWord.objects.filter(group=self.group))
+        duplicates = self.subsession.n_duplicates
+        n_players = self.subsession.n_players #len(self.player.get_others_in_group()) + 1
+        threshold_points = self.session.config['threshold_num_points']
+        earnings_per_word = self.session.config['marginal_points']
+        total_earnings, threshold_reached = self.subsession.calculate_team_score()
+        toReturn = {
+            'word_count': word_count,
+            'duplicate_word': duplicates,
+            'earnings_per_word': earnings_per_word,
+            'total_earnings': total_earnings, 
+            'individual_earnings': self.player.payoff,
+            'threshold_reached': threshold_reached,
+        }
         return toReturn
-
-
-class DifiIndexBefore(Page):
-    is_debug = False
-    form_model = models.Player
-    form_fields = ['distanceScale_before', 'overlapScale_before']
-
-    def is_displayed(self):
-        if self.participant.vars['consent'] and self.participant.vars['playing']:
-            return True
-        else:
-            return False
-
-    def before_next_page(self):
-        if self.timeout_happened:
-            self.participant.vars['playing'] = False
 
 
 class DifiIndexAfter(Page):
     is_debug = False
+    timeout_seconds = 60
+    required = True
     form_model = models.Player
     form_fields = ['distanceScale_after', 'overlapScale_after']
 
@@ -180,7 +190,6 @@ class DifiIndexAfter(Page):
 
 
 page_sequence = [
-    DifiIndexBefore,
     WaitPage,
     Anagrams,
     ResultsWaitPage,

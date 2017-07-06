@@ -30,6 +30,7 @@ class Consent(Page):
 
 class ByeBye(Page):
     is_debug = False
+    timeout_seconds = 60
     template_name = 'demographic/ByeBye.html'
 
     def is_displayed(self):
@@ -174,12 +175,14 @@ class Demographic_Condensed(Page):
     form_fields = ["age", "sex", "country_reside",
                    "highest_degree", "device_type", "membership_duration"]
     is_debug = False
+    timeout_seconds = 60
+    required = True
     timeout_submission = {"age": 999,
                           "sex": "empty",
                           "country_reside": "empty",
                           "highest_degree": "empty",
                           "device_type": "empty", 
-                          "membership_duration": "empty"}
+                          "membership_duration": 999}
 
     def is_displayed(self):
         if self.participant.vars['consent'] and self.participant.vars['playing']:

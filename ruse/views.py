@@ -34,6 +34,14 @@ class OpinionPage(Page):
 
 class Introduction(Page):
     is_debug = False
+    timeout_seconds = 60
+    
+    def is_displayed(self):
+        if self.participant.vars['consent'] and self.participant.vars['playing']:
+            return True
+        else:
+            return False
+    
     pass
 
 class WaitPage(WaitPage):
@@ -52,7 +60,13 @@ class WaitPage(WaitPage):
  
 class Results(Page):
     is_debug = False
-    pass
+    timeout_seconds = 60
+    
+    def is_displayed(self):
+        if self.participant.vars['consent'] and self.participant.vars['playing']:
+            return True
+        else:
+            return False
 
 page_sequence = [
     Introduction,

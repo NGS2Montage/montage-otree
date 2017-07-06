@@ -9,7 +9,7 @@ var Tour = function (){
             steps: [
               { 
               	 element: document.querySelector('#your-letters'),
-                intro: "These are <strong>your</strong> letters. You will receive 3 letters that appear in <span class='label label-info'>BLUE</span> panels.",
+                intro: "<strong>Your</strong> letters will appear in <span class='label label-info'>BLUE</span> panels.",
                 position: 'auto'
               },
               {
