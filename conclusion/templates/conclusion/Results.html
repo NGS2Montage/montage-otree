@@ -1,0 +1,42 @@
+{% extends "global/Page.html" %}
+{% load staticfiles otree_tags %}
+
+{% block title %}
+    Thank You for Participating! - Your Session Results
+{% endblock %}
+
+{% block content %}
+
+    <h4>Thank you for participating in this research study! Your results here will help us to further the understanding of team-building exercises and group behaviors. We have provided a results summary in the table below.</h4>
+
+    {% if participant.vars.playing %}
+    {% else %}
+    <h4>
+        Unfortunately, you have timed out of a required entry and we are sorry to see you exit early.
+        We can only pay you for the participation fee and entries completed thus far.
+    </h4>
+    {% endif %}
+
+    <table class="table">
+        <thead>
+            <tr><th>Variable Income:</th><th>{{participant.payoff}}</th>
+        </thead>
+        <tbody>
+        {% for p in payoffs %}
+            <tr style="font-style: italic">
+                <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{p.name}}</td>
+                <td>{{p.pay}}</td>
+            </tr>
+        {% endfor %}
+        
+        <tr><th>Participation Income:</th><th>{{session.config.participation_fee}}</th>
+        <tr>
+            <th>Total Income (points conversion rate is ${{session.config.real_world_currency_per_point}}/pt):</th>
+            <th>{{participant.payoff_plus_participation_fee}}</th>
+        </tr>
+        </tbody>
+    </table>
+    </br>
+<p> Please click next to continue back to Amazon Mechanical Turk. </p>
+    {% next_button %}
+{% endblock %}
