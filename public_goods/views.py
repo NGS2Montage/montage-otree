@@ -22,12 +22,24 @@ class WaitPage(WaitPage):
                 participant.vars['locked'] = True
         self.session.vars['locked'] = True
 
+    def is_displayed(self):
+        if self.participant.vars['consent'] and self.participant.vars['playing']:
+            return True
+        else:
+            return False
 
+        
 class Contribute(Page):
     form_model = models.Player
     form_fields = ['contribution']
+    required = True
     is_debug = False
-    timeout_seconds = Constants.decision_time_min * 60;
+    
+    timeout_seconds = 180
+    
+    def get_timeout_seconds(self):
+        return self.session.config['pgg_timeout_min'] * 60
+    
     timeout_submission = {'contribution': -1}
 
     def is_displayed(self):
@@ -44,13 +56,13 @@ class Contribute(Page):
         return 0
 
     def contribution_max(self):
-        return Constants.endowment
+        return self.session.config['pgg_bonus']
 
     def contribution_error_message(self, value):
         if value < 0:
-            return "Must select a value between 0 and %d" % Constants.endowment
-        if value > Constants.endowment:
-            return "Must select a value between 0 and %d" % Constants.endowment
+            return "Must select a value between 0 and %d" % self.session.config['pgg_bonus']
+        if value > self.session.config['pgg_bonus']:
+            return "Must select a value between 0 and %d" % self.session.config['pgg_bonus']
 
     def vars_for_template(self):
         return {
@@ -63,18 +75,17 @@ class ResultsWaitPage(WaitPage):
     def after_all_players_arrive(self):
         self.subsession.set_payoffs()
 
-    '''
     def is_displayed(self):
         if self.participant.vars['consent'] and self.participant.vars['playing'] and self.participant.vars['locked']:
             return True
         else:
             return False
-    '''
 
 
 class Results(Page):
     is_debug = False
-
+    timeout_seconds = 60
+    
     def is_displayed(self):
         if self.participant.vars['consent'] and self.participant.vars['playing'] and self.participant.vars['locked']:
             return True
@@ -84,7 +95,8 @@ class Results(Page):
 
 class NoResponse(Page):
     is_debug = False
-
+    timeout_seconds = 60
+    
     def is_displayed(self):
         if self.participant.vars['consent'] and not self.participant.vars['playing'] and self.participant.vars['locked']:
             return True
@@ -94,6 +106,8 @@ class NoResponse(Page):
 
 class DifiIndex(Page):
     is_debug = False
+    timeout_seconds = 60
+    required = True
     form_model = models.Player
     form_fields = ['distanceScale', 'overlapScale']
 
@@ -114,4 +128,5 @@ page_sequence = [
     ResultsWaitPage,
     NoResponse,
     DifiIndex,
+    Results,
 ]

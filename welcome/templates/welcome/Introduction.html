@@ -13,9 +13,8 @@
         Welcome to <span class="app-title">Jointly</span>, a team-based platform for conducting group exercises!  
         If you agree to participate you will play {{session.config.n_games}} games where you will be teamed with other players. These are your teammates.
         You will have the opportunity to collaborate with your teammates to earn more rewards based on team performance.
-        In these game we use a points system where 1 point is worth ${{session.config.xChange_ratio}} USD.
-        The total time expected to complete this study is 15-20 minutes, and you will earn at least $2.00 for completing the entire experiment.
-        Increased wages can be achieved based on performance in the games.
+        In these game we use a points system where 1 point is worth ${{session.config.real_world_currency_per_point}} USD.
+        The total time expected to complete this study is 15-20 minutes, and you will earn additional compensation based on performance. We expect on average that pay will be around $7/hr.
     </p>
         {% comment %}
 	 <p>       
@@ -35,7 +34,7 @@
     	<tr>
         <td>Consent and Agreement to Participate</td>
         <td>< 1 minute</td>
-        <td>{{session.config.participation_money|c}}</td>
+        <td>{{session.config.participation_fee|c}}</td>
       </tr>
       <tr>
         <td>Survey (10 Questions)</td>

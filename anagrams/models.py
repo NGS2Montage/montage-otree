@@ -22,16 +22,10 @@ class Constants(BaseConstants):
     players_per_group = None
     num_groups = 1
     num_rounds = 1
-    num_user_letters = 3
-    num_neighbors = 2
     letter_distribution = [["a", 46], ["b", 10], ["c", 22], ["d", 19], ["e", 59], ["f", 6], ["g", 13], ["h", 14],
                            ["i", 46], ["j", 1], ["k", 4], ["l", 30], ["m", 15], ["n", 38], ["o", 38], ["p", 16],
                            ["q", 1], ["r", 38], ["s", 38], ["t", 34], ["u", 19], ["v", 5], ["w", 4], ["x", 1],
                            ["y", 10], ["z", 2]]
-    anagrams_duration_sec = 300
-    word_threshold = 12
-    threshold_payment = 12
-    marginal_payment = 1
 
 class Subsession(BaseSubsession):
     def before_session_starts(self):   # called each round
@@ -40,7 +34,8 @@ class Subsession(BaseSubsession):
         if self.round_number == 1:
 
             # extract and mix the players
-            players = self.get_players()
+            players = self.get_allowed_players()
+            
             # random.shuffle(players)
 
 ###############################
@@ -90,11 +85,58 @@ class Subsession(BaseSubsession):
             self.group_like_round(1)
 
 
-        for p in self.get_players():
+        for p in players:
             p.generate_user_letters()
             p.word_channel = p.get_word_channel()
             p.save()
 
+            
+    def get_allowed_players(self):
+        players = []
+        for player in self.get_players():
+            if player.participant.vars['consent'] and player.participant.vars['playing']:
+                players.append(player)
+        return players
+
+    def calculate_team_score(self):
+        
+        total_words = self.n_words + self.n_duplicates
+        word_threshold = self.session.config['threshold_num_words']
+        
+        if total_words < word_threshold:
+            return (0, False)
+        
+        # Threshold
+        score = self.session.config['threshold_num_points']
+        
+        # Marginal Score
+        score += max([self.n_words - word_threshold, 0]) * self.session.config['marginal_points']
+        
+        # Duplicate Score
+        score += self.n_duplicates * self.session.config['marginal_points']
+        
+        return (score, True)
+    
+    def set_payoffs(self):
+        
+        allowed_players = self.get_allowed_players()
+        
+        # Get total words:
+        word_objects = TeamWord.objects.filter(group=allowed_players[0].group)
+        
+        self.n_words = len(set(word_objects.values_list('word', flat=True)))
+        self.n_duplicates = len(word_objects.values_list('word', flat=True)) - self.n_words
+        self.n_players = len(allowed_players)
+        
+        if self.n_players > 0:
+            payoff = self.calculate_team_score()[0] / self.n_players
+            for p in allowed_players:
+                p.payoff = payoff
+    
+    
+    n_words = models.IntegerField()
+    n_duplicates = models.IntegerField()
+    n_players = models.IntegerField()
 
 class Group(BaseGroup):
     pass
@@ -104,9 +146,8 @@ class Player(BasePlayer):
 
     neighbors = django_models.ManyToManyField('Player')
     word_channel = django_models.CharField(max_length=255)
+
     # Difi Index Columns
-    distanceScale_before = models.IntegerField()
-    overlapScale_before = models.IntegerField()
     distanceScale_after = models.IntegerField()
     overlapScale_after = models.IntegerField()
 
@@ -117,7 +158,7 @@ class Player(BasePlayer):
         for ltr, num in Constants.letter_distribution:
             for i in range(num):
                 distributed_letters.append(ltr)
-        for _ in range(Constants.num_user_letters):
+        for _ in range(self.session.config['n_letters']):
             letter = self.userletter_set.create()
             found = False
             while not found:
@@ -174,7 +215,7 @@ class LetterTransaction(models.Model):
     player = ForeignKey(Player)  # this is the borrower
     letter = ForeignKey(UserLetter)
     approved = models.BooleanField(default=False)
-
+    approve_time = models.FloatField()
     channel = models.CharField(max_length=255)
     owner_channel = models.CharField(max_length=255)
     timestamp = models.FloatField(default=time.time)

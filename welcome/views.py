@@ -12,6 +12,7 @@ class LoginRequiredMixin(object):
 
 class Introduction(Page):
     is_debug = False
+    timeout_seconds = 60
     template_name = 'welcome/Introduction.html'
 
 

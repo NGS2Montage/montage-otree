@@ -36,7 +36,7 @@
     <table style="width: 60%">
         <tr>
             <th>Initial Endowment</th>
-            <td>{{ Constants.endowment }}</td>
+            <td>{{ session.config.pgg_bonus }}</td>
         </tr>
         <tr>
             <th>Your Contribution</th>
@@ -48,7 +48,7 @@
         </tr>
         <tr>
             <th>Multiplication Factor</th>
-            <td>{{ Constants.efficiency_factor }}</td>
+            <td>{{ session.config.pgg_multiplier }}</td>
         </tr>
         <tr>
             <th>Individual Earnings</th>

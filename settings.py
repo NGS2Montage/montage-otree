@@ -107,13 +107,13 @@ oTree games
 # https://boto.readthedocs.org/en/latest/ref/mturk.html?highlight=mturk#module-boto.mturk.qualification
 
 mturk_hit_settings = {
-    'keywords': ['easy', 'bonus', 'choice', 'study'],
-    'title': 'Title for your experiment',
-    'description': 'Description for your experiment',
-    'frame_height': 500,
+    'keywords': ['easy', 'bonus', 'choice', 'study', 'groups'],
+    'title': 'Jointly - Group Exercise Games',
+    'description': 'Play games with other AMT workers.',
+    'frame_height': 500, #Needs adjustment
     'preview_template': 'core/MTurkPreview.html',
     'minutes_allotted_per_assignment': 60,
-    'expiration_hours': 7*24,  # 7 days
+    'expiration_hours': 1,  # 7 days
     # 'grant_qualification_id': 'YOUR_QUALIFICATION_ID_HERE',# to prevent retakes
     'qualification_requirements': [
         # qualification.LocaleRequirement("EqualTo", "US"),
@@ -129,45 +129,51 @@ mturk_hit_settings = {
 # e.g. self.session.config['participation_fee']
 
 SESSION_CONFIG_DEFAULTS = {
-    'real_world_currency_per_point': 0.000,
-    'participation_fee': 0.00,
+    'real_world_currency_per_point': 1,
+    'participation_fee': 0.05,
     'doc': "",
     'mturk_hit_settings': mturk_hit_settings,
 }
 
 
 SESSION_CONFIGS = [
+#    {
+#        'name': 'production_pgg_IRBv1',
+#        'display_name': 'Public Goods Game - IRB.v1',
+#        'num_demo_participants': 2,
+#        'app_sequence': [
+#            'welcome', 
+#            'demographic', 
+#            'instructions_anagrams',
+#            'anagrams',
+#            'ruse',
+#            'instructions_pgg', 
+#            'public_goods',
+#            'conclusion',
+#            ],
+#        
+#        # Welcome - Variables
+#        'n_games': 2,
+#        
+#        # Anagrams - Phase 1 Options
+#        'bestScore': 400,
+#        'threshold_num_words': 100,
+#        'threshold_num_points': 100,
+#        'marginal_points': 1,
+#        'timeout_anagrams_min': 5, # do not change until otree upgrade
+#        'n_neighbors': 2,
+#        'n_letters': 3,
+#        'use_chat': False,
+#        
+#        # Public Goods Game - Phase 2 Options
+#        'pgg_bonus': 100,
+#        'pgg_multiplier': 2, #do not change!
+#        'pgg_timeout_min': 3, #do not change! dev coming
+#    },
     {
-        'name': 'Ruse',
-        'display_name': 'Ruse',
-        'num_demo_participants': 2,
-        'app_sequence': ['demographic', 'demographic_detailed', 'ruse'],
-        'participation_money': 0.05,
-        'optional_survey_payout': 5,
-    },
-    {
-        'name': 'productionNoPriming',
-        'display_name': 'Production P2 Only No Priming',
-        'num_demo_participants': 2,
-        'app_sequence': ['demographic', 'instructions_anagrams','ruse','public_goods'],
-        'participation_money': 0.05,
-        'ultimatum_split': False,
-        'ultimatum_player_role': 'offeror',  # Applicable only if 'ultimatum_split' is False
-        'ultimatum_cutoff': 50,  # Applicable only if 'ultimatum_split' is False
-        'ultimatum_group_size': 3,
-        'ultimatum_histogram': True,
-        'bestScore': 400,
-        'threshold_num_words': 100,
-        'threshold_num_points': 100,
-        'marginal_points': 1,
-        'timeout_anagrams_min': 3,
-        'pgg_bonus': 100,
-	    'pgg_timeout_min': 1,
-    },
-    {
-        'name': 'productionPriming',
-        'display_name': 'Production P2 Priming',
-        'num_demo_participants': 2,
+        'name': 'production_pgg_IRBv2',
+        'display_name': 'Public Goods Game - IRB.v2',
+        'num_demo_participants': 3,
         'app_sequence': [
             'welcome', 
             'demographic', 
@@ -177,96 +183,30 @@ SESSION_CONFIGS = [
             'instructions_pgg', 
             'public_goods', 
             'demographic_detailed',
+            'conclusion',
             ],
-        'participation_money': 0.05,
-        'ultimatum_split': False,
-        'ultimatum_player_role': 'offeror',  # Applicable only if 'ultimatum_split' is False
-        'ultimatum_cutoff': 50,  # Applicable only if 'ultimatum_split' is False
-        'ultimatum_group_size': 3,
-        'ultimatum_histogram': True,
+        
+        # Welcome - Variables
+        'n_games': 2,
+        
+        # Anagrams - Phase 1 Options
         'bestScore': 400,
         'threshold_num_words': 100,
         'threshold_num_points': 100,
         'marginal_points': 1,
-        'timeout_anagrams_min': 3,
-        'pgg_bonus': 100,
-	    'pgg_timeout_min': 1,
-        'xChange_ratio': 1,
-        'n_games': 3,
+        'timeout_anagrams_min': 5, # do not change until otree upgrade
         'n_neighbors': 2,
+        'n_letters': 3,
+        'use_chat': False,
+        
+        # Public Goods Game - Phase 2 Options
+        'pgg_bonus': 100,
+        'pgg_multiplier': 2, #do not change!
+        'pgg_timeout_min': 3, #do not change! dev coming
+        
+        # Demographic Detaile - "Optional Survey"
         'optional_survey_payout': 5,
     },
-#   {
-#        'name': 'production',
-#        'display_name': 'Production',
-#        'num_demo_participants': 4,
-#        'app_sequence': ['demographic', 'instructions', 'anagrams', 'public_goods', 'ultimatum'],
-#        'participation_money': 0.05,
-#        'ultimatum_split': False,
-#        'ultimatum_player_role': 'offeror',  # Applicable only if 'ultimatum_split' is False
-#        'ultimatum_cutoff': 50,  # Applicable only if 'ultimatum_split' is False
-#        'ultimatum_group_size': 3,
-#        'ultimatum_histogram': True
-#    },
-#    {
-#        'name': 'games',
-#        'display_name': 'Games',
-#        'num_demo_participants': 4,
-#        'app_sequence': ['demographic', 'anagrams', 'public_goods', 'ultimatum'],
-#        'participation_money': 0.05,
-#        'ultimatum_split': False,
-#        'ultimatum_player_role': 'offeror',  # Applicable only if 'ultimatum_split' is False
-#        'ultimatum_cutoff': 30,  # Applicable only if 'ultimatum_split' is False
-#        'ultimatum_group_size': 3,
-#        'ultimatum_histogram': True
-#    },
-    {
-        'name': 'anagrams',
-        'display_name': 'Anagrams',
-        'use_chat': False,
-        'num_demo_participants': 4,
-        'participation_money': 0.05,
-        #'app_sequence': ['demographic', 'anagrams'],
-        'app_sequence': ['demographic','instructions_anagrams','anagrams'],
-        'ultimatum_split': False,
-        'ultimatum_player_role': 'offeror',  # Applicable only if 'ultimatum_split' is False
-        'ultimatum_cutoff': 50,  # Applicable only if 'ultimatum_split' is False
-        'ultimatum_group_size': 3,
-        'ultimatum_histogram': True,
-        'bestScore': 400,
-        'threshold_num_words': 100,
-        'threshold_num_points': 100,
-        'marginal_points': 1,
-        'timeout_anagrams_min': 3,
-        'pgg_bonus': 100,
-	'pgg_timeout_min': 1,
-    },
-    {
-        'name': 'public_goods',
-        'display_name': 'Public Goods',
-        'num_demo_participants': 2,
-        'app_sequence': ['demographic', 'instructions_pgg', 'public_goods'],
-        'participation_money': 0.05,
-        'ultimatum_split': False,
-        'ultimatum_player_role': 'offeror',  # Applicable only if 'ultimatum_split' is False
-        'ultimatum_cutoff': 50,  # Applicable only if 'ultimatum_split' is False
-        'ultimatum_group_size': 3,
-        'ultimatum_histogram': True,
-        'pgg_bonus': 100,
-	'pgg_timeout_min': 1,
-    },
-#    {
-#        'name': 'ultimatum',
-#        'display_name': 'Ultimatum',
-#        'num_demo_participants': 4,
-#        'app_sequence': ['demographic', 'ultimatum'],
-#        'participation_money': 0.05,
-#        'ultimatum_split': False,
-#        'ultimatum_player_role': 'offeror',  # Applicable only if 'ultimatum_split' is False
-#        'ultimatum_cutoff': 30,  # Applicable only if 'ultimatum_split' is False
-#        'ultimatum_group_size': 3,
-#        'ultimatum_histogram': True
-#    },
 ]
 
 ROOT_URLCONF = 'urls'

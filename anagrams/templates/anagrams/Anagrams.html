@@ -1,7 +1,6 @@
 {% extends "global/Page.html" %}
 {% load staticfiles otree_tags %}
 {% load otreechat %}
-{% load clicktracking %}
 
 
 {% block title %}
@@ -17,7 +16,6 @@
         </script>
         <script type="text/javascript" src="{% static 'anagrams/rivets.bundled.min.js' %}"></script>
     {% endblock %}
-    {% clicktrack %}
 
     <div id="app-view" class="row" style="background: white;">
         <div class="modal fade" id="Instructions" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-backdrop="static">
