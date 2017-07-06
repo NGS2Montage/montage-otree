@@ -6,7 +6,7 @@ from otree.api import safe_json
 
 @register.inclusion_tag('clicktracking/widget.html', takes_context=True)
 def clicktrack(context, *args, **kwargs):
-    print("Who made context happen? {}".format(context))
+    #print("Who made context happen? {}".format(context))
     participant = context['participant']
 
     channel = 'clicktracking-{}'.format(participant.code)
