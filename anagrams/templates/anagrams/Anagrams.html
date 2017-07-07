@@ -175,9 +175,9 @@
                      <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
                      <span class="glyphicon glyphicon-user" aria-hidden="true"></span>        				
         				Need more letters?</h4> 
+            <div class="modal-body" style="max-height: 600px; overflow-y:auto;">
 						<p><em>No problem!</em> We've made it so you can see what a few of your team members have. Choose a letter, and just click on what you need:</p>
       			</div>
-      			<div class="modal-body" style="max-height: 600px; overflow-y:auto;">
                 		<ul class="list-group">
                     	<li class="list-group-item" rv-each-friend="app.friends">
                         <p style="margin-bottom: 5px;"><b>{ friend.name }</b></p>
@@ -251,7 +251,14 @@
 {% block global_scripts %}
 	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script type="text/javascript">
-    	// $("#Instructions").modal();
+
+    // $("#myModal").draggable({
+    //     handle: ".modal-header"
+    // }); 
+    $(".modal-dialog").draggable({
+        handle: ".modal-header"
+    });
+
 
     $('#get-ready-modal').modal();
     var timeRemaining = 5;
