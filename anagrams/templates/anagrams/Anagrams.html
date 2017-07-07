@@ -15,6 +15,43 @@
             var varsFromDjango = {{ vars_for_js }};
         </script>
         <script type="text/javascript" src="{% static 'anagrams/rivets.bundled.min.js' %}"></script>
+
+        <script type="text/javascript">
+        // Create cookie
+        function createCookie(name, value, days) {
+            var expires;
+            if (days) {
+                var date = new Date();
+                date.setTime(date.getTime()+(days*24*60*60*1000));
+                expires = "; expires="+date.toGMTString();
+            }
+            else {
+                expires = "";
+            }
+            document.cookie = name+"="+value+expires+"; path=/";
+        }
+
+        // Read cookie
+        function readCookie(name) {
+            var nameEQ = name + "=";
+            var ca = document.cookie.split(';');
+            for(var i=0;i < ca.length;i++) {
+                var c = ca[i];
+                while (c.charAt(0) === ' ') {
+                    c = c.substring(1,c.length);
+                }
+                if (c.indexOf(nameEQ) === 0) {
+                    return c.substring(nameEQ.length,c.length);
+                }
+            }
+            return null;
+        }
+
+        // Erase cookie
+        function eraseCookie(name) {
+            createCookie(name,"",-1);
+        }
+        </script>
     {% endblock %}
 
     <div id="app-view" class="row" style="background: white;">
@@ -252,15 +289,17 @@
 	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script type="text/javascript">
 
-    // $("#myModal").draggable({
-    //     handle: ".modal-header"
-    // }); 
     $(".modal-dialog").draggable({
         handle: ".modal-header"
     });
 
+    var cookieName = "getreadymodal_" + varsFromDjango.participant_code;
+    if (!!!readCookie(cookieName)) {
+      createCookie(cookieName, "true", 1000);
+      $('#get-ready-modal').modal();
+    }
 
-    $('#get-ready-modal').modal();
+
     var timeRemaining = 5;
 
     var countdown = function () {
