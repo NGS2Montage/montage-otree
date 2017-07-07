@@ -10,3 +10,5 @@ logs/
 *.ipynb
 *.save
 *~
+_static_root
+_static

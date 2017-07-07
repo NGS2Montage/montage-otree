@@ -18,22 +18,18 @@
     {% endblock %}
 
     <div id="app-view" class="row" style="background: white;">
-        <div class="modal fade" id="Instructions" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-backdrop="static">
+        <div class="modal fade" id="get-ready-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-backdrop="static">
   			<div class="modal-dialog" role="document">
     			<div class="modal-content">
       			<div class="modal-header">        				
-        				<h4 style="font-weight: bold; padding: 0;">
-							Get Ready to Play!</h4> 
-      			</div>
-      			<div class="modal-body" style="max-height: 600px; overflow-y:auto;">
-                		<p>
-    	Remember, try to score as many words as possible, and request more letters from your teammates.
-    	Duplicate words count 2x.
-    </p>	
-	 <p><strong>Click 'Play Game' to begin.</strong></p>
-	 <button type="button" class="btn btn-primary" data-dismiss="modal" style="display: inline-block;">
-			Play Game!
-   	</button>
+            <h4>
+              Get Ready to Play!
+              
+            </h4>
+            </div>
+            <div class="modal-body" style="max-height: 600px; overflow-y:auto;">
+                  The game will begin in:
+            	  <h1 class="text-center" id="countdown-number">5</h1>
       			</div>
     			</div>
   			</div>
@@ -255,7 +251,24 @@
 {% block global_scripts %}
 	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script type="text/javascript">
-    	$("#Instructions").modal();
+    	// $("#Instructions").modal();
+
+    $('#get-ready-modal').modal();
+    var timeRemaining = 5;
+
+    var countdown = function () {
+      timeRemaining--;
+      if (timeRemaining > 0) {
+        $('#countdown-number').text(timeRemaining);
+        setTimeout(countdown, 1000);
+      }
+      else {
+        $('#get-ready-modal').modal('hide');
+      }
+    };
+    setTimeout(countdown, 1000);
+
+
 		$(".letter-row").on('click','.letter', function () {
 			var letter= $.trim($(this).text());
 			$("#word-input").val($.trim($("#word-input").val()) + letter);

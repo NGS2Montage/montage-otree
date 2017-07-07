@@ -92,6 +92,12 @@ def msg_consumer(message):
 
     Group(channels_group).send({'text': json.dumps(words_message)})
 
+    # Check for game end
+    current_word_count = anagrams_player.group.teamword_set.count()
+    max_word_count = anagrams_player.session.config['threshold_stop_game_num_words']
+    if current_word_count >= max_word_count:
+        anagrams_player.session.advance_last_place_participants()
+
 
 class TransactionConsumer(JsonWebsocketConsumer):
 

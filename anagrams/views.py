@@ -141,7 +141,7 @@ class ResultsWaitPage(WaitPage):
             return True
         else:
             return False
-        
+
 
 class Results(Page):
     is_debug = False
@@ -160,6 +160,7 @@ class Results(Page):
         threshold_points = self.session.config['threshold_num_points']
         earnings_per_word = self.session.config['marginal_points']
         total_earnings, threshold_reached = self.subsession.calculate_team_score()
+        time_expired = self.group.teamword_set.count() < self.session.config['threshold_stop_game_num_words']
         toReturn = {
             'word_count': word_count,
             'duplicate_word': duplicates,
@@ -167,6 +168,7 @@ class Results(Page):
             'total_earnings': total_earnings, 
             'individual_earnings': self.player.payoff,
             'threshold_reached': threshold_reached,
+            'time_expired': time_expired
         }
         return toReturn
 
