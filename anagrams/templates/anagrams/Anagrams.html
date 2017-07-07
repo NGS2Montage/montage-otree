@@ -289,6 +289,9 @@
 	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script type="text/javascript">
 
+    // hack it up
+    $('#main_container > .row').css('margin-top', '60px');
+
     $(".modal-dialog").draggable({
         handle: ".modal-header"
     });
@@ -362,6 +365,10 @@
             display: inline-block;
             color: #C07A36;
             font-weight: bold;
+        }
+
+        .modal-header h4 {
+          cursor: move;
         }
     </style>
 
