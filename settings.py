@@ -191,7 +191,7 @@ SESSION_CONFIGS = [
         
         # Anagrams - Phase 1 Options
         'bestScore': 400,
-        'threshold_num_words': 100,
+        'threshold_num_words': 2,
         'threshold_num_points': 100,
         'marginal_points': 1,
         'timeout_anagrams_min': 5, # do not change until otree upgrade
