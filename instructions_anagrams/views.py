@@ -42,12 +42,19 @@ class TeamSummary(Page):
         else:
             return False
 
+    def get_allowed_players(self):
+        players = []
+        for player in self.subsession.get_players():
+            if player.participant.vars['consent'] and player.participant.vars['playing']:
+                players.append(player)
+        return players
+        
     def vars_for_template(self):
-        return {'N': len(self.player.get_others_in_group()) + 1}
+        return {'N': len(self.get_allowed_players())}
 
 class InstructionsPhase1(Page):
     is_debug = False
-    timeout_seconds = 180    
+    timeout_seconds = 300    
     
     def is_displayed(self):
         if self.participant.vars['consent'] and self.participant.vars['playing'] and \

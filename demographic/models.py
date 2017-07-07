@@ -37,9 +37,9 @@ class Player(BasePlayer):
         choices=[
             [1, "0-17 years old"],
             [2, "18-30 years old"],
-            [3, "30-40 years old"],
-            [4, "40-60 years old"],
-            [5, "60-80 years old"],
+            [3, "31-40 years old"],
+            [4, "41-60 years old"],
+            [5, "61-80 years old"],
             [6, "greater than 80 years old"],
         ],
         widget=widgets.RadioSelect(),

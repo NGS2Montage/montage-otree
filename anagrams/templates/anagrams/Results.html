@@ -11,31 +11,6 @@
 {% endblock %}
 
 
-{% block styles %}
-    <style>
-        table {
-            border: 1px solid #eeeeee;
-            border-collapse: collapse;
-        }
-
-        th {
-            border: 1px solid #eeeeee;
-            border-collapse: collapse;
-            padding: 10px;
-            text-align: left;
-            width: 60%;
-        }
-
-        td {
-            border: 1px solid #eeeeee;
-            border-collapse: collapse;
-            padding: 10px;
-            text-align: center;
-        }
-    </style>
-{% endblock %}
-
-
 {% block content %}
 <h4> {% if time_expired %}
     Time is up!
@@ -45,52 +20,39 @@
 
 Here is how your team performed on the Anagrams game:</h4>
 {% if threshold_reached %}
-<h5> <strong> Congratulations! Your team exceeded the word threshold of {{session.config.threshold_num_words}}.</strong> </h5>
-    <table style="width: 60%">
-        <tr>
-            <th>Total words contributed by your Team:</th>
-            <td> {{ word_count }}</td>
-        </tr>
-        <tr>
-            <th>Total duplicated words:</th>
-            <td>{{ duplicate_word|c}}</td>
-        </tr>
-        <tr>
-            <th>Team Total earnings:</th>
-            <td>{{ total_earnings|c}}</td>
-        </tr>
-        <tr>
-            <th>Your Total earnings:</th>
-            <td>{{ individual_earnings|c}}</td>
-        </tr>
-
-    </table>
-
+<h5> 
+    <strong> Congratulations! Your team submitted {{ word_count }} words and exceeded the word threshold of {{session.config.threshold_num_words}}.</strong> 
+</h5>
 {% else %}
-<h5> <strong> Your team did not make the word threshold of {{session.config.threshold_num_words}}. No points will be received.</strong> </h5>
-    <table style="width: 60%">
+<h5> 
+    <strong> Your team submitted {{ words_total }} words, and did not make the word threshold of {{session.config.threshold_num_words}}. No points will be received.</strong> 
+</h5>
+{% endif %}
+    <table class="table" style="width: 60%">
         <tr>
-            <th>Total words contributed by your Team:</th>
-            <td> {{ word_count }}</td>
+            <th>Total Points Earned by Team:</th>
+            <th> {{ total_earnings | c}}</th>
+        </tr>
+        <tr style="font-style: italic;">
+            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;» points for meeting threshold:</td>
+            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ threshold_points|c}}</td>
+        </tr>        
+        <tr style="font-style: italic;">
+            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;» bonus points from additional words:</td>
+            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ score_marginal | c }} ({{marginal_words}} words, {{session.config.marginal_points}}pts/word)</td>
+        </tr>
+        <tr style="font-style: italic;">
+            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;» bonus points from duplicate words:</td>
+            <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ score_duplicate|c}} ({{duplicate_word}} words, 2 x {{session.config.marginal_points}}pts/word)</td>
         </tr>
         <tr>
-            <th>Total duplicated words:</th>
-            <td>{{ duplicate_word|c}}</td>
-        </tr>
-        <tr>
-            <th>Team Total earnings (incl. threshold):</th>
-            <td>{{ total_earnings|c}}</td>
-        </tr>
-        <tr>
-            <th>Your earnings:</th>
-            <td>{{ individual_earnings|c}}</td>
+            <th>Your Earnings (team total / {{n_players}} players:)</th>
+            <th>{{ individual_earnings|c}}</th>
         </tr>
 
     </table>
 
-{% endif %}
-
-    <br/><br/>
+    <br/>
 
     <div style="text-align: center">{% next_button %}</div>
 
