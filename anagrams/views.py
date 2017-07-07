@@ -154,19 +154,25 @@ class Results(Page):
             return False
 
     def vars_for_template(self):
-        word_count = self.subsession.n_words #len(TeamWord.objects.filter(group=self.group))
+        words_unique = self.subsession.n_words #len(TeamWord.objects.filter(group=self.group))
         duplicates = self.subsession.n_duplicates
         n_players = self.subsession.n_players #len(self.player.get_others_in_group()) + 1
-        threshold_points = self.session.config['threshold_num_points']
         earnings_per_word = self.session.config['marginal_points']
-        total_earnings, threshold_reached = self.subsession.calculate_team_score()
+        threshold = self.session.config['threshold_num_words']
+        total_earnings, threshold_reached, score_marginal, score_duplicate = self.subsession.calculate_team_score()
+        threshold_points = int(threshold_reached) * self.session.config['threshold_num_points']
         toReturn = {
-            'word_count': word_count,
+            'words_total': words_unique + duplicates,
             'duplicate_word': duplicates,
+            'marginal_words': max(words_unique - threshold, 0),
+            'score_marginal': score_marginal,
+            'score_duplicate': score_duplicate,
             'earnings_per_word': earnings_per_word,
             'total_earnings': total_earnings, 
             'individual_earnings': self.player.payoff,
             'threshold_reached': threshold_reached,
+            'threshold_points': threshold_points,
+            'n_players': n_players,
         }
         return toReturn
 

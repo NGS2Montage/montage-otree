@@ -77,10 +77,12 @@
 <script type="text/javascript" >
 $(".next-button").addClass("disabled");
 $("#mySliderScale_before").animate({left: "+=100px"},1000)
-									.animate({left: "-=100px"},1000, function () {
-										$("#Instructions").modal();
-										$(".next-button").removeClass("disabled");
-									});
-
+						  .animate({left: "-=100px"},1000);
+function showModal(){
+    $("#Instructions").modal();
+    $(".next-button").removeClass("disabled");
+};
+setTimeout(showModal, 500);
+    
 </script>
 {% endblock %}

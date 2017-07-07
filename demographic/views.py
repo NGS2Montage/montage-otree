@@ -175,7 +175,7 @@ class Demographic_Condensed(Page):
     form_fields = ["age", "sex", "country_reside",
                    "highest_degree", "device_type", "membership_duration"]
     is_debug = False
-    timeout_seconds = 60
+    timeout_seconds = 180
     required = True
     timeout_submission = {"age": 999,
                           "sex": "empty",

@@ -104,18 +104,20 @@ class Subsession(BaseSubsession):
         word_threshold = self.session.config['threshold_num_words']
         
         if total_words < word_threshold:
-            return (0, False)
+            return (0, False, 0, 0)
         
         # Threshold
         score = self.session.config['threshold_num_points']
         
         # Marginal Score
-        score += max([self.n_words - word_threshold, 0]) * self.session.config['marginal_points']
+        score_marginal = max([self.n_words - word_threshold, 0]) * self.session.config['marginal_points']
+        score += score_marginal
         
         # Duplicate Score
-        score += self.n_duplicates * self.session.config['marginal_points']
+        score_duplicate = self.n_duplicates * self.session.config['marginal_points'] * 2
+        score += score_duplicate
         
-        return (score, True)
+        return (score, True, score_marginal, score_duplicate)
     
     def set_payoffs(self):
         
