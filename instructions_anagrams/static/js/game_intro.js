@@ -29,7 +29,7 @@ var Tour = function (){
               },
               {
                 element: document.querySelector('#word-panel'),
-                intro: 'Words submitted by you and your teammates appear in this window. We encourage your to duplicate as many words as possible from your teammates. Duplicate words earn 2x points.',
+                intro: 'Words submitted by you and your teammates appear in this window. We encourage you to duplicate as many words as possible from your teammates. Duplicate words earn 2x points.',
                 position: 'auto'
               },
               {
