@@ -85,7 +85,7 @@ class Player(BasePlayer):
 
     highest_degree = models.CharField(
         verbose_name="""What is the highest level of education that you have
-        completed (recieved degree or other certification)?""",
+        completed (received degree or other certification)?""",
         choices=["Did Not Complete High School", "High School", "Some College", "Bachelor's Degree", "Master's Degree",
                  "Advanced Graduate work or Ph.D.", "Not Sure"],
         widget=widgets.RadioSelect()
