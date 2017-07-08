@@ -12,7 +12,13 @@
 
 
 {% block content %}
-<h4>Time is up! Here is how your team performed on the Anagrams game:</h4>
+<h4> {% if time_expired %}
+    Time is up!
+    {% else %}
+    Game complete!
+{% endif %}
+
+Here is how your team performed on the Anagrams game:</h4>
 {% if threshold_reached %}
 <h5> 
     <strong> Congratulations! Your team submitted {{ word_count }} words and exceeded the word threshold of {{session.config.threshold_num_words}}.</strong> 

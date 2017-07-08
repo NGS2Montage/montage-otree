@@ -91,11 +91,14 @@ class WaitPage(WaitPage):
 
 class Anagrams(Page):
     is_debug = False
-    
-    timeout_seconds = 300
-    
-    def get_timeout_seconds(self):
-        return self.session.config['timeout_anagrams_min'] * 60
+
+    timeout_seconds = 5 * 60 + 5
+
+    # def get_timeout_seconds(self):
+    #     return self.session.config['timeout_anagrams_min'] * 60 + 5
+
+    # def has_timeout(self):
+    #     return True
 
     def is_displayed(self):
         if self.participant.vars['consent'] and self.participant.vars['playing']:
@@ -161,6 +164,7 @@ class Results(Page):
         threshold = self.session.config['threshold_num_words']
         total_earnings, threshold_reached, score_marginal, score_duplicate = self.subsession.calculate_team_score()
         threshold_points = int(threshold_reached) * self.session.config['threshold_num_points']
+        time_expired = self.group.teamword_set.count() < self.session.config['threshold_stop_game_num_words']
         toReturn = {
             'words_total': words_unique + duplicates,
             'duplicate_word': duplicates,
@@ -173,6 +177,7 @@ class Results(Page):
             'threshold_reached': threshold_reached,
             'threshold_points': threshold_points,
             'n_players': n_players,
+            'time_expired': time_expired
         }
         return toReturn
 
