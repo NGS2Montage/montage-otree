@@ -91,12 +91,14 @@ class WaitPage(WaitPage):
 
 class Anagrams(Page):
     is_debug = False
-        
-    def get_timeout_seconds(self):
-        return self.session.config['timeout_anagrams_min'] * 60 + 5
 
-    def has_timeout(self):
-        return True
+    timeout_seconds = 5 * 60 + 5
+
+    # def get_timeout_seconds(self):
+    #     return self.session.config['timeout_anagrams_min'] * 60 + 5
+
+    # def has_timeout(self):
+    #     return True
 
     def is_displayed(self):
         if self.participant.vars['consent'] and self.participant.vars['playing']:
