@@ -4,6 +4,7 @@ var Tour = function (){
           	disableInteraction: true,
           	exitOnOverlayClick: false,
           	exitOnEsc: false,
+            hideNext: true,
           	showStepNumbers: false,
           	scrollToElement: true,
             steps: [
