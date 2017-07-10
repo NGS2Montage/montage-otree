@@ -30,6 +30,8 @@ class Constants(BaseConstants):
 class Subsession(BaseSubsession):
     def before_session_starts(self):   # called each round
         """For each player, create a fixed number of "decision stubs" with random values to be decided upon later."""
+        if 'threshold_stop_game_num_words' not in self.session.config:
+            self.session.config['threshold_stop_game_num_words'] = 400
 
         if self.round_number == 1:
 
@@ -37,16 +39,6 @@ class Subsession(BaseSubsession):
             players = self.get_allowed_players()
             
             # random.shuffle(players)
-
-###############################
-## Development only!            
-###############################
-#            for p in players:
-#                p.participant.vars['consent'] = True
-#                p.participant.vars['playing'] = True
-
-###############################
-
 
             # create the base for number of groups
             num_players = len(players)
@@ -94,6 +86,14 @@ class Subsession(BaseSubsession):
     def get_allowed_players(self):
         players = []
         for player in self.get_players():
+            ###############################
+            ## Development only!            
+            ###############################
+            # player.participant.vars['consent'] = True
+            # player.participant.vars['playing'] = True
+
+            ###############################
+
             if player.participant.vars['consent'] and player.participant.vars['playing']:
                 players.append(player)
         return players

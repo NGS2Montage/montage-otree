@@ -94,7 +94,7 @@ def msg_consumer(message):
 
     # Check for game end
     current_word_count = anagrams_player.group.teamword_set.count()
-    max_word_count = anagrams_player.session.config['threshold_stop_game_num_words'] if 'threshold_stop_game_num_words' in anagrams_player.session.config else 400
+    max_word_count = anagrams_player.session.config['threshold_stop_game_num_words']
     if current_word_count >= max_word_count:
         anagrams_player.session.advance_last_place_participants()
 
