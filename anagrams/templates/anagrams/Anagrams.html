@@ -219,7 +219,7 @@
                     	<li class="list-group-item" rv-each-friend="app.friends">
                         <p style="margin-bottom: 5px;"><b>{ friend.name }</b></p>
                         <button type="button" class="btn btn-default" data-dismiss="modal" rv-each-letter="friend.letters"
-                                rv-on-click="letter.requestLetter" style="margin-left: 5px;">{ letter }
+                                rv-on-click="letter.requestLetter" rv-class-disabled="letter.requested" style="margin-left: 5px;">{ letter }
                         </button>
 
                     	</li>

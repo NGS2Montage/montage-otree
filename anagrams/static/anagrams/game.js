@@ -12,6 +12,7 @@ var app = {
     wordError: "",
     wordCount: "",
     sentWord: "",
+    requestedLetters: [],
 }
 
 var channel = varsFromDjango.channel;
@@ -63,11 +64,17 @@ function User(username) {
 
 function UserLetter(obj) {
     this.letter = obj.letter;
+    this.requested = false;
     this.pk = obj.pk;
 }
 
 UserLetter.prototype.requestLetter = function (event, model) {
     console.log("request a letter yo", model.letter.pk);
+
+    if (model.letter.requested) {
+        console.error("Can't request", model.letter.pk, ", it has already been requested");
+        return;
+    }
 
     var data = {
         'type': 'letter_request',
@@ -261,8 +268,15 @@ tSocket.onmessage = function (message) {
     console.log(message);
 
     if (message.type === "request_success") {
-        message.requested_letters.forEach(function (transaction) {
-            app.user.transactions.push(new LetterTransaction(transaction));
+        message.requested_letters.forEach(function (transactionRecord) {
+            app.friends.forEach(function (friend) {
+                friend.letters.forEach(function (letter) {
+                    if (letter.pk === transactionRecord.requested_letter) {
+                        letter.requested = true;
+                    }
+                });
+            });
+            app.user.transactions.push(new LetterTransaction(transactionRecord.transaction));
         });
     }
 

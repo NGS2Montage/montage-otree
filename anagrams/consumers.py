@@ -51,7 +51,10 @@ def transaction_consumer(message):
 
     requester_message = {
         'type': 'request_success',
-        'requested_letters': [transaction.to_dict()]
+        'requested_letters': [{
+            'transaction': transaction.to_dict(),
+            'requested_letter': letter_pk
+        }]
     }
     requester_group = get_transaction_group(channel)
     Group(requester_group).send({'text': json.dumps(requester_message)})
@@ -116,7 +119,10 @@ class TransactionConsumer(JsonWebsocketConsumer):
 
         message = {
             'type': 'request_success',
-            'requested_letters': [transaction.to_dict() for transaction in history]
+            'requested_letters': [{
+                'requested_letter': transaction.letter.pk,
+                'transaction': transaction.to_dict()
+            } for transaction in history]
         }
         self.send(message)
 
