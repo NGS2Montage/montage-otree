@@ -44,6 +44,8 @@ var Tour = function (){
             exitOnEsc: false,
             showStepNumbers: false,
             scrollToElement: true,
+            hidePrev: true,
+            hideNext: true,
             steps: [
               { 
                  element: document.querySelector('#your-letters'),
