@@ -36,7 +36,7 @@ var Tour = function (){
               {
                 element: document.querySelector('#score-div'),
                 intro: 'We show the score here. You want to increase this word count as much as possible.',
-                position: 'auto'
+                position: 'bottom-right-aligned'
               },
               {
                 element: document.querySelector('#copy-letters-div'),
