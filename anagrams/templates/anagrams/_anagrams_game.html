@@ -1,0 +1,148 @@
+
+ <div id="app-view" class="row" style="background: white;">
+        <div class="modal fade" id="get-ready-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-backdrop="static">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">                        
+                <h4>
+                  Get Ready to Play!
+                </h4>
+              </div>
+              <div class="modal-body" style="max-height: 600px; overflow-y:auto;">
+                  The game will begin in:
+                  <h1 class="text-center" id="countdown-number">5</h1>
+              </div>
+            </div>
+          </div>
+        </div>
+               
+        <div class="row anagrams-top-level">
+          <div class="col-xs-6 anagrams-letters-level">
+            <div class="row anagrams-my-letters spacered spacered-top">
+              <div class="col-xs-12">
+              <div class="col-xs-12">
+                    <div id="your-letters" class="row">
+                      <h4>
+                        <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+                        &nbsp;
+                        <b>Your Letters</b>
+                      </h4>
+                      <div class="row letter-row spaced-row" style="padding-left: 12px;">
+                        <button type="button" class="btn btn-info letter" rv-each-letter="app.user.letters"
+                          style="margin-left: 5px; margin-bottom: 5px; display: inline-block; background-image: none;"><strong>{ letter }</strong>
+                        </button>
+                      </div>
+                    </div>
+              </div>
+              </div>
+            </div>
+            <div class="row anagrams-my-requests spacered">
+              <div class="col-xs-12">
+              <div class="col-xs-12">
+                <div id="team-letters" class="row" style="margin-top: 5px;">
+                  <h4 style="margin: 0;">
+                    <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+                    <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+                    <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+                    &nbsp;&nbsp;<b>Team Provided Letters</b>
+                  </h4>
+                  <button id="get-team-letters" type="button" class="btn btn-default" data-toggle="modal" data-target="#myModal" style="background-image: none; display: inline-block; height: 25px; padding: 3px;">
+                    <span class="glyphicon glyphicon-download" aria-hidden="true"></span>                         
+                    Request More Letters
+                  </button>
+                  <p id="transaction_message" style="font-weight: bold; color:red;">{app.transactionError}</p>
+                  <div class="row letter-row spaced-row" style="padding-left: 12px; margin-top: 8px; white-space: nowrap;">
+                    <button type="button" class="btn btn-success letter" style="background-image: none; display: inline-block; margin-bottom: 5px; margin-left: 5px;" rv-each-transaction="app.user.transactions" rv-show="transaction.approved">
+                      <strong>{transaction.letter}</strong>
+                    </button>
+                    <button rv-each-transaction="app.user.transactions" type="button" class="btn btn-warning disabled" style="display: inline-block; background-image: none; margin-bottom: 5px; margin-left: 5px;" rv-hide="transaction.approved">
+                      <strong>{transaction.letter}</strong>
+                    </button>
+                  </div>
+                </div>
+              </div>
+              </div>
+            </div>
+            <div class="row anagrams-requests-of-me spacered">
+              <div id="copy-letters-div" class="col-xs-12" style="display: inline-block; padding-top: 5px; padding-right: 15px;">
+                <h4 style="padding: 0; font-weight: bold; margin: 2px;">
+                  <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+                  <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+                  <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+                  &nbsp;&nbsp;Copy Your Letters to the Team
+                </h4>
+                <p style="font-size: 9pt; margin:0;"><em>Help your team! Click on a request to copy and send a letter. You will still have a copy of your letter.</em></p>
+                <div class=" spaced-row" style="padding:0; overflow-y: auto; white-space: nowrap; overflow-x:scroll">
+                  <button type="button" class="btn btn-info" style="margin: 2px; display:inline-block;"
+                      rv-on-click="transaction.approve" 
+                      rv-hide="transaction.approved" 
+                      rv-each-transaction="app.requests">
+                    <span class="glyphicon glyphicon-share-alt" aria-hidden="true"></span>
+                    Copy "{transaction.letter}" for {transaction.borrower}
+                  </button>
+                </div>
+              </div>
+            </div>
+            <div class="row anagrams-input">
+              <div class="col-xs-12">
+                <div id="word-input-group" class="col-xs-12 col-md-12" style="padding: 0;">
+                  <p style="margin:0; font-size: 8pt;">
+                    <span class="label label-warning">Orange</span> letters need teammate approval.
+                  </p>
+                  <p style="margin:1; font-size:10pt;">Type any of the letters appearing in <span class="label label-info">blue</span> or <span class="label label-success">green</span> to form a word:</p>
+                  <div class="row input-group otree-chat" id='anagrams-words-{{ word_channel }}' style="border: 0px; padding-top: 0px; margin:0; bottom: 0px;">
+                    <div>
+                      <input style="padding-left: 30px", type="text" id="word-input" class="form-control" placeholder="Enter your word here...">
+                      <span style="cursor: pointer; color: gray; display: block; position: absolute; top: 12px;left: 3%;" id="searchclear" class="glyphicon glyphicon-remove-circle"></span>
+                    </div>                
+                                  
+                    <span class="input-group-btn">
+                        <button class="btn btn-default" type="button"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>&nbsp;&nbsp;Submit Word!</button>
+                    </span>
+
+                  </div>
+                  <p style="margin-top: 7px; color:red; padding-left: 10px; font-weight: bold; height: 2em;">{app.wordError}</p>
+                  <!-- <p style="font-size: 10pt;">or, if you are out of words to make:</p> -->
+                </div>
+                <div class='messages' style="height: 0px;"></div>
+              </div>
+            </div>
+          </div>
+          <div class="col-xs-6 anagrams-completed-words level">
+            <div id="word-panel" class="panel panel-default">
+              <div class="panel-heading">
+                <h4 style="padding: 0; margin: 2px; font-weight: bold;">
+                  <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+                  <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+                  <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+                  &nbsp;&nbsp;Your Team's Words
+                </h4>
+                <p style="font-size: 10pt;"><em>Duplicate words allowed.</em></p>
+                <div class="row" style="height: 25px; overflow: hidden; border-bottom: black groove 1px">
+                  <span style="font-weight: bold;padding-left: 5px;">Trending Now: </span>
+                  <button rv-each-word="app.trendingWords" type="button" class="btn disabled" style="padding: 2px; background-image: none; background-color: #222222; text-align: center; font-weight: bold; font-size: 8pt; border-color: black; color: white; margin: 2px; display: inline-block;">
+                    <span style="vertical-align: bottom;">{ word.word }&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                    <span class="badge badge-primary" style="width: 3em; color: black; background-color: white; font-size: 6pt; border-style: solid; border-color: black; border-width: 1pt;">{ word.freq }</span>
+                  </button>
+                </div>
+              </div>
+              <div id="word-tiles" class="panel-body" style="padding-top: 0px; height:21.5em; overflow-y: auto;">
+                <div  class="row">                  
+                  <button rv-id="word.id" rv-each-word="app.successWords" type="button" rv-addclass="word.class" class="btn btn-default disabled" style="background-image: none; background-color: #EEEEEE; text-align: center; font-weight: bold; font-size: 10pt; border-color: black; color: black; margin: 2px; display: inline-block;">
+                    <span style="vertical-align: bottom;">{ word.word }&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="badge badge-primary" style="width: 3em; color: black; background-color: white; font-size: 8pt; border-style: solid; border-color: black; border-width: 1pt;">{ word.freq }</span>
+                  </button>
+                </div>
+              </div>
+              <div id="score-div" class="panel-footer">
+                <p style="width:100%; text-align: right; margin:0; font-size: 10pt;">
+                  <strong>Word Count: <span id="word_count" style="display: inline-block; width:3em; text-align: right;">{app.wordCount}</span> words</strong>
+                </p>
+                <p style="width:100%; text-align: right; margin:0; font-size: 10pt;">
+                  Record to Beat: <span id="word_count_beat" style="display: inline-block; width:3em; text-align: right;">{{session.config.bestScore}}</span> words
+                </p>                
+              </div>
+            </div>  
+          </div>
+          
+        </div>
+          

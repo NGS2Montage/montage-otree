@@ -1,16 +1,53 @@
+var app = {
+  user: {
+    letters: ["R", "O", "L"],
+    transactions: [{
+      letter: "E",
+      approved: true
+    }, {
+      letter: "A",
+      approved: false
+    }]
+  },
+  requests: [{
+    letter: "O",
+    borrower: "Player 2"
+  }, {
+    letter: "L",
+    borrower: "Player 2"
+  }],
+  trendingWords: [{
+    word: "role",
+    freq: 2
+  }],
+  successWords: [{
+    word: "role",
+    freq: 2
+  }, {
+    word: "roll",
+    freq: 1
+  }],
+  wordCount: 0
+}
+
+app.wordCount = app.successWords.reduce(function(prev, next) {
+  return prev + next.freq;
+}, 0);
+
+rivets.bind(document.getElementById('app-view'), {app: app});
+
 var Tour = function (){
         this.intro = introJs();
         this.intro.setOptions({
-          	disableInteraction: true,
-          	exitOnOverlayClick: false,
-          	exitOnEsc: false,
-            hideNext: true,
-          	showStepNumbers: false,
-          	scrollToElement: true,
+            disableInteraction: true,
+            exitOnOverlayClick: false,
+            exitOnEsc: false,
+            showStepNumbers: false,
+            scrollToElement: true,
             steps: [
               { 
-              	 element: document.querySelector('#your-letters'),
-                intro: "<strong>Your</strong> letters will appear in <span class='label label-info'>BLUE</span> panels.",
+                 element: document.querySelector('#your-letters'),
+                intro: "These are <strong>your</strong> letters. You will receive 3 letters that appear in <span class='label label-info'>BLUE</span> panels.",
                 position: 'auto'
               },
               {
@@ -24,6 +61,11 @@ var Tour = function (){
                 position: 'auto'
               },
               {
+                element: document.querySelector('#copy-letters-div'),
+                intro: "Just as you request letters from your team, your teammates will request letters from you. Click on the buttons in this window to <strong><em>copy</em></strong> your letters to another teammate's window. This turns <strong>their</strong> letter from <span class='label label-warning'>ORANGE</span> to <span class='label label-success'>GREEN</span>.",
+                position: 'auto'
+              },
+              {
                 element: document.querySelector('#word-input-group'),
                 intro: 'You can either click on the letter or type in the words you can make in this box. Form a valid English word that is <strong>3 letters or longer</strong> and enter it into the submission box.</strong> For example, the letters R,O,L can be used to spell the word “ROLL” (case does not matter: roll = ROLL = roLL, etc.).  Remember, you can only type or click on <span class="label label-info">BLUE</span> or <span class="label label-success">GREEN</span> letters. Then click submit.',
                 position: 'auto'
@@ -31,17 +73,12 @@ var Tour = function (){
               {
                 element: document.querySelector('#word-panel'),
                 intro: 'Words submitted by you and your teammates appear in this window. We encourage you to duplicate as many words as possible from your teammates. Duplicate words earn 2x points.',
-                position: 'auto'
+                position: 'left'
               },
               {
                 element: document.querySelector('#score-div'),
                 intro: 'We show the score here. You want to increase this word count as much as possible.',
                 position: 'bottom-right-aligned'
-              },
-              {
-                element: document.querySelector('#copy-letters-div'),
-                intro: "Just as you request letters from your team, your teammates will request letters from you. Click on the buttons in this window to <strong><em>copy</em></strong> your letters to another teammate's window. This turns <strong>their</strong> letter from <span class='label label-warning'>ORANGE</span> to <span class='label label-success'>GREEN</span>.",
-                position: 'top'
               },
               {
                 element: document.querySelector('#info-detail'),
@@ -58,19 +95,19 @@ var Tour = function (){
           this.intro.start();
           
           this.next = function () {
-          	this.intro.nextStep();
+            this.intro.nextStep();
           };
           
           $('.introjs-skipbutton').hide();
 
-    		 this.intro.onafterchange(function(el){
-    		 	        
-        		if (this._introItems.length - 1 == this._currentStep || this._introItems.length == 1) {
-            	//$('.introjs-skipbutton').show();
-            	$('.introjs-disableInteraction').removeClass('introjs-disableInteraction');
-            	
-        		} 
-    		 });
+         this.intro.onafterchange(function(el){
+                  
+            if (this._introItems.length - 1 == this._currentStep || this._introItems.length == 1) {
+              //$('.introjs-skipbutton').show();
+              $('.introjs-disableInteraction').removeClass('introjs-disableInteraction');
+              
+            } 
+         });
 };
 
 
