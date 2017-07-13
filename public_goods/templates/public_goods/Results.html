@@ -35,28 +35,22 @@
 
     <table style="width: 60%">
         <tr>
-            <th>Initial Endowment</th>
-            <td>{{ session.config.pgg_bonus }}</td>
+            <th>In total, the whole group contributed</th>
+            <td>{{ subsession.total_contribution }} points</td>
+        </tr>
+    </table>
+    <table style="width: 60%">
+        <tr>
+            <th>Your share is ({{subsession.total_contribution}} * {{session.config.pgg_multiplier}} / number of players)</th>
+            <td>{{ subsession.individual_share|floatformat:"-3" }} points</td>
         </tr>
         <tr>
-            <th>Your Contribution</th>
-            <td>{{ player.contribution }}</td>
+            <th>After your contribution of {{ player.contribution }} you kept</th>
+            <td>{{ reserve|floatformat:"-3" }} points</td>
         </tr>
         <tr>
-            <th>Your Group's Total Contribution </th>
-            <td>{{ subsession.total_contribution }}</td>
-        </tr>
-        <tr>
-            <th>Multiplication Factor</th>
-            <td>{{ session.config.pgg_multiplier }}</td>
-        </tr>
-        <tr>
-            <th>Individual Earnings</th>
-            <td>{{ subsession.individual_share }}</td>
-        </tr>
-        <tr>
-            <th>Your Profit (or loss)</th>
-            <td>{{ player.profit }}</td>
+            <th>Your final takeaway (share + kept)</th>
+            <td><strong>{{ final_payout|floatformat:"-3" }} points</strong></td>
         </tr>
 
     </table>

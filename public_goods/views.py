@@ -86,6 +86,12 @@ class Results(Page):
     is_debug = False
     timeout_seconds = 60
     
+    def vars_for_template(self):
+        return {
+            'final_payout': (self.session.config['pgg_bonus'] - self.player.contribution + self.subsession.individual_share),
+            'reserve': (self.session.config['pgg_bonus'] - self.player.contribution)
+        }
+
     def is_displayed(self):
         if self.participant.vars['consent'] and self.participant.vars['playing'] and self.participant.vars['locked']:
             return True

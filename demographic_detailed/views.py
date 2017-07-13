@@ -15,8 +15,8 @@ class SurveyConsent(Page):
     form_model = models.Player
     form_fields = ['participate']
     
-    timeout_seconds = 60
-    timeout_submission = {'participate': False}
+    # timeout_seconds = 60
+    # timeout_submission = {'participate': False}
     
 
     def is_displayed(self):
@@ -28,7 +28,7 @@ class SurveyConsent(Page):
             return False
 
 class Demographic(Page):
-    timeout_seconds = 300
+    # timeout_seconds = 300
     form_model = models.Player
     required = True
     template_name = 'demographic_detailed/Demographic.html'
@@ -44,17 +44,27 @@ class Demographic(Page):
         "density",
         "ethnicity",
         "employment_status",
-        "free_time",
         "specialty",
         "occupation",
+        # "free_time",
     ]
     
     form_field_skip = ['{}_skip'.format(s) for s in form_fields]
     form_field_skip += [
+        'free_time_skip',
         'age_residence_skip', 
         'activity_young_skip',
         'activity_old_skip',
         ]
+
+    form_fields += [
+        "free_time_sports",
+        "free_time_singing",
+        "free_time_instrument",
+        "free_time_volunteer",
+        "free_time_hobbies",
+        "free_time_other",
+    ]
 
     form_fields += ['age_residence_{}'.format(i) for i in [6,12,18,65,"Over65"]]
     form_fields += ['activity_young_{}'.format(i) for i in [
@@ -97,7 +107,7 @@ class Demographic(Page):
                 self.player.payoff = 0
 
 class Results(Page):
-    timeout_seconds = 60
+    # timeout_seconds = 60
     is_debug = False
     
     def is_displayed(self):

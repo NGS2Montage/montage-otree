@@ -93,6 +93,9 @@ USE_POINTS = True
 # see: https://docs.djangoproject.com/en/1.9/topics/i18n/#term-language-code
 LANGUAGE_CODE = 'en'
 
+COUNTRIES_FIRST = [
+    'US'
+]
 
 # SENTRY_DSN = ''
 
@@ -193,6 +196,7 @@ SESSION_CONFIGS = [
         'bestScore': 400,
         'threshold_num_words': 2,
         'threshold_num_points': 100,
+        'threshold_stop_game_num_words': 5, # total words at which to stop game
         'marginal_points': 1,
         'timeout_anagrams_min': 5, # do not change until otree upgrade
         'n_neighbors': 2,

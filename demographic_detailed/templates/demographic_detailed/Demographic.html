@@ -15,7 +15,7 @@
 
     <ol>
     {% autoescape off %}
-    {% for field in form.visible_fields|slice:":14" %}
+    {% for field in form.visible_fields|slice:":13" %}
         <li style="padding-bottom: 30px; border-bottom: 1px groove;">
         <div class="toggleable">{% formfield field %}</div>
         <input name="{{ field.html_name}}_skip" type='hidden' value='False'/>    
@@ -24,11 +24,23 @@
     {% endfor %}
     {% endautoescape %}
     
+          <li style="padding-bottom: 30px; border-bottom: 1px groove;">
+          <p style="font-weight: bold;">How do you spend your free time? Please check all that apply.</p>
+            <div class="toggleable">
+                {% for field in form.visible_fields|slice:"13:19" %}
+                    {% formfield field %}
+                {% endfor %}
+            </div>
+            <input name="free_time_skip" type='hidden' value='False'/>
+            <label><input class="skip" name="free_time_skip" id="id_free_time_skip" value='True' type='checkbox'/> Skip this question.</label>
+          </li>
+
+
     	  <li style="padding-bottom: 30px; border-bottom: 1px groove;">
     	  <p style="font-weight: bold;">How many of the people living in your residence/home are in each of the following age categories?</p>
     	  		<div class="toggleable">
     	  			<table class="table" style="border: 0; display: inline-block;">
-    					{% for field in form.visible_fields|slice:"14:19" %}
+    					{% for field in form.visible_fields|slice:"19:24" %}
     					<tr style="border: 0;">
         					<td style="border: 0;">
             				{{ field.label_tag }}
@@ -49,7 +61,7 @@
     	  <p style="font-weight: bold;">Of the people 18 years old or younger living in your residence/home, how many participate in each of the following activities?</p>
 				<div class="toggleable">
     	  		<table class="table" style="border: 0; display: inline-block;">
-    					{% for field in form.visible_fields|slice:"19:24" %}
+    					{% for field in form.visible_fields|slice:"24:29" %}
     					<tr style="border: 0;">
         					<td style="border: 0;">
             				{{ field.label_tag }}
@@ -67,7 +79,7 @@
     	  <p style="font-weight: bold;">Of the people 19 years old or older living in your residence/home, how many participate in each of the following activities?</p>
 				<div class="toggleable">
     	  		<table class="table" style="border: 0; display: inline-block;">
-    					{% for field in form.visible_fields|slice:"24:30" %}
+    					{% for field in form.visible_fields|slice:"29:35" %}
     					<tr style="border: 0;">
         					<td style="border: 0;">
             				{{ field.label_tag }}
@@ -107,33 +119,37 @@ $(document).ready(function () {
 var nSkip = 0;
 
 $('.skip').click(function (e) {
-	var obj = e.currentTarget;
-	var inputs = obj.parentElement.parentElement.getElementsByClassName('toggleable')[0].getElementsByClassName('form-control');	
-	
-	if (obj.checked){
-		nSkip += 1;
-		for (i=0; i<inputs.length; i++)
-		{
-			inputs[i].disabled=true;
-		}
-	}
-	else {
-		nSkip -= 1;
-		for (i=0; i<inputs.length; i++)
-		{
-			inputs[i].disabled=false;
-			inputs[i].required=true;	
-		}
-	}
-	
-	if (nSkip > 3)
-	{
-		$('#limit-warning').show();	
-	}else {
-		$('#limit-warning').hide();
-	}
-	
-	$('#nSkips').val(nSkip);
+    var obj = e.currentTarget;
+    var inputs = obj.parentElement.parentElement.getElementsByClassName('toggleable')[0].getElementsByClassName('form-control');    
+    
+    if (obj.checked){
+        nSkip += 1;
+        for (i=0; i<inputs.length; i++)
+        {
+            inputs[i].disabled=true;
+        }
+    }
+    else {
+        nSkip -= 1;
+        for (i=0; i<inputs.length; i++)
+        {
+            inputs[i].disabled=false;
+            inputs[i].required=true;    
+        }
+    }
+    
+    var checkboxes = $('input[type=checkbox]:not(.skip)', obj.parentElement.parentElement);
+    var disabled = checkboxes.attr('disabled');
+    $('input[type=checkbox]:not(.skip)', obj.parentElement.parentElement).attr('disabled', !disabled);
+
+    if (nSkip > 3)
+    {
+        $('#limit-warning').show(); 
+    }else {
+        $('#limit-warning').hide();
+    }
+    
+    $('#nSkips').val(nSkip);
 });
 
 </script>

@@ -23,18 +23,18 @@ var ContributionTable = function (n_players,reward_player,contribution){
 		var col_header = document.createElement('thead');
 		var header_row = document.createElement('tr');
 		var first = document.createElement('th')
-		first.innerHTML = '<em>Your Contribution:</em>';
+		first.innerHTML = '<em>' + contribution +' pts </em>';
 		header_row.appendChild(first);
 
 		for (var i = 0, len = this.colPctCont.length; i < len; i++){
 			var val = this.colPctCont[i] * this.R;
 			var th = document.createElement('th');
-			th.innerHTML = '~ ' + val+' pts';
+			th.innerHTML = val+' pts';
 			header_row.appendChild(th);
 		}
 
 		var label_row = document.createElement('tr');
-		label_row.innerHTML = '<th></th><th colspan=' + this.colPctCont.length + '>~ Team Contribution (per person):</th>';
+		label_row.innerHTML = '<th><em>If you contribute:</em></th><th colspan=' + this.colPctCont.length + '>and everyone else contributes:</th>';
 				
 		col_header.append(label_row);		
 		col_header.append(header_row);
@@ -45,8 +45,8 @@ var ContributionTable = function (n_players,reward_player,contribution){
 	this.getRowHeader = function(rowVal){
 
 		var val = rowVal * this.R;
-		var th = document.createElement('th');
-		th.innerHTML = '<em>' + val+' pts </em>';	
+		var th = document.createElement('td');
+		th.innerHTML = '<em>Estimated returns (pts):</em>';
 		
 		return th;
 	};

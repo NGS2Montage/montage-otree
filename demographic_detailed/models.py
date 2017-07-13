@@ -2,7 +2,7 @@ from otree.api import (
     models, widgets, BaseConstants, BaseSubsession, BaseGroup, BasePlayer,
     Currency as c, currency_range
 )
-from django_countries.data import COUNTRIES
+from django_countries import countries
 
 doc = """
 This app displays the demographic survey
@@ -113,7 +113,7 @@ class Player(BasePlayer):
     country_born = models.CharField(
         blank = True,
         verbose_name="In which country were you born?",
-        choices = sorted(COUNTRIES.items()),
+        choices = countries,
     )
 
     #Question 6
@@ -121,7 +121,7 @@ class Player(BasePlayer):
     country_reside = models.CharField(
         blank = True,
         verbose_name="""In which country do you currently reside?""",
-        choices = sorted(COUNTRIES.items()),
+        choices = countries,
     )
 
     #Question 7
@@ -131,7 +131,8 @@ class Player(BasePlayer):
         verbose_name="""If your country of birth is different than your country of residence,
                         what year did you come to your country of current
                         residence?""",
-        choices = list(map(str,range(1960,2018))),
+        choices = list(map(str,range(1940,2018))),
+        # widget=widgets.DateInput,
     )
 
     #Question 8
@@ -205,10 +206,36 @@ class Player(BasePlayer):
  
     # Question 12
     free_time_skip = models.BooleanField()
+
+
+    free_time_sports = models.BooleanField(
+        verbose_name="""Play on sports team/club, such as for soccer, football, hockey, basketball, baseball.""",
+        widget=widgets.CheckboxInput()
+    )
+    free_time_singing = models.BooleanField(
+        verbose_name="""Part of a performing arts group such as singing, dancing.""",
+        widget=widgets.CheckboxInput()
+    )
+    free_time_instrument = models.BooleanField(
+        verbose_name="""Play a musical instrument in a band or take lessons.""",
+        widget=widgets.CheckboxInput()
+    )
+    free_time_volunteer = models.BooleanField(
+        verbose_name="""Do volunteer work such as work in a homeless shelter or package food for the hungry.""",
+        widget=widgets.CheckboxInput()
+    )
+    free_time_hobbies = models.BooleanField(
+        verbose_name="""I have hobbies such as book reading or collecting, drawing, stamp collecting, photography, hiking, bike riding.""",
+        widget=widgets.CheckboxInput()
+    )
+    free_time_other = models.BooleanField(
+        verbose_name="""Other""",
+        widget=widgets.CheckboxInput()
+    )
+
     free_time = models.CharField(
         blank = True,
-        verbose_name = """How do you spend your free time? Please check all
-        that apply.""",
+        verbose_name = """How do you spend your free time? Please check all that apply.""",
         choices=[
             """Play on sports team/club, such as for soccer, football, hockey, basketball, baseball.""",
             """Part of a performing arts group such as singing, dancing.""",
@@ -216,9 +243,11 @@ class Player(BasePlayer):
             """Do volunteer work such as work in a homeless shelter or package food for the hungry.""",
             """I have hobbies such as book reading or collecting, drawing, stamp collecting, photography, hiking, bike riding.""",
             """Other""",
-        #    "Skip this question",
+            #    "Skip this question",
         ],
         #checkbox
+        widget=widgets.CheckboxInput()
+        # input_type="checkbox"
     )
     
     # Question 13
