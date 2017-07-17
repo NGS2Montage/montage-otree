@@ -111,7 +111,7 @@ oTree games
 
 mturk_hit_settings = {
     'keywords': ['easy', 'bonus', 'choice', 'study', 'groups'],
-    'title': 'Jointly - Group Exercise Games',
+    'title': 'Jointly - Group Exercise Games (earn on average $7/hr with bonus pay)',
     'description': 'Play games with other AMT workers.',
     'frame_height': 500, #Needs adjustment
     'preview_template': 'core/MTurkPreview.html',
@@ -133,6 +133,7 @@ mturk_hit_settings = {
 
 SESSION_CONFIG_DEFAULTS = {
     'real_world_currency_per_point': 0.01,
+    'points_per_waiting_second': 0.1,
     'participation_fee': 0.05,
     'doc': "",
     'mturk_hit_settings': mturk_hit_settings,
@@ -210,6 +211,10 @@ SESSION_CONFIGS = [
         
         # Demographic Detaile - "Optional Survey"
         'optional_survey_payout': 5,
+
+        'paid_wait_pages': [
+            ('instructions_anagrams', 'JoinTeamWaitPage')
+        ]
     },
 ]
 
@@ -239,6 +244,7 @@ otree.settings.augment_settings(globals())
 
 MIDDLEWARE_CLASSES = [
     'otree.middleware.CheckDBMiddleware',
+    'anagrams.middleware.CheckDictionaryMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
     # this middlewware is for generate human redeable errors
 

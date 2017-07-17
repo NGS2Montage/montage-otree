@@ -2,6 +2,11 @@
 $(function () {
 
     var varsFromDjango = {{ vars_for_clicktracking }};
+
+    if (!('channel' in varsFromDjango)) {
+        return;
+    }
+
     var channel = varsFromDjango.channel;
     var participantCode = varsFromDjango.participant_code;
 

@@ -6,6 +6,10 @@ from otree.api import safe_json
 
 @register.inclusion_tag('clicktracking/widget.html', takes_context=True)
 def clicktrack(context, *args, **kwargs):
+    if 'participant' not in context:
+        context['vars_for_clicktracking'] = {}
+        return context
+
     #print("Who made context happen? {}".format(context))
     participant = context['participant']
 

@@ -5,7 +5,31 @@
 {% block titletext %}<strong>Building your team now: <span style="font-size: 20pt;" id="countdown"></span> out of <span id="N"></span> remaining.</strong>{% endblock %}
 
 {% block content %}
-<div class="row" style="width:100%; margin:0; padding:0;  text-align:center;">
-	<img class="img img-responsive" style="display:inline-block;" src="{% static 'instructions/images/group_entry.png' %}" alt="">
+<div class="row" style="margin:0; padding:0;  text-align:center;">
+	<img class="img img-responsive" style="display:inline-block; width:20%" src="{% static 'instructions/images/group_entry.png' %}" alt="">
 </div>
+
+<div id="main">
+<center>
+    <br>
+<p style="width:85%;text-align:left">We're waiting for more Turkers to join. I know your time is valuable so we are going to add <strong>{{session.config.points_per_waiting_second}} points</strong> for every second you have to wait, as long as you stick with us to the end.</p>
+<input type=hidden id="bonus_var" value=None name="bbonus">
+<h3 style="line-height: 1.8">You have been waiting <span id="timer">0</span> seconds.</h3>
+<h4>That's an extra <span id="bonus" style="color: #428bca">0.00</span> points once you finish the game!</h4>
+</center>
+</div>
+
+<script>
+
+var elapsed_seconds = 0;
+setInterval(function() {
+  elapsed_seconds = elapsed_seconds + 1;
+  // a = get_elapsed_time_string(elapsed_seconds);
+  document.getElementById('timer').innerHTML = elapsed_seconds;
+
+  bonus = elapsed_seconds * {{session.config.points_per_waiting_second}};
+  document.getElementById('bonus').innerHTML = bonus.toFixed(2);
+  }, 1000);
+</script>
+
 {% endblock %}
