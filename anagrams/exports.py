@@ -40,7 +40,6 @@ class NeighborsExport(vanilla.View):
             rows.append(row)
 
         writer = csv.writer(response)
-        writer.writerows([column_names])
         writer.writerows(rows)
 
         return response
