@@ -213,7 +213,11 @@ SESSION_CONFIGS = [
         'optional_survey_payout': 5,
 
         'paid_wait_pages': [
-            ('instructions_anagrams', 'JoinTeamWaitPage')
+            ('instructions_anagrams', 'JoinTeamWaitPage'),
+            ('anagrams', 'WaitPage'),
+            ('ruse', 'WaitPage'),
+            ('public_goods', 'WaitPage'),
+            ('public_goods', 'ResultsWaitPage'),
         ]
     },
 ]

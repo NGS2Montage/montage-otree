@@ -15,7 +15,7 @@
 <div id="main">
 <center>
     <br>
-<p style="width:85%;text-align:left">We're syncing up all your team members. I know your time is valuable so we are going to add <strong>{{session.config.points_per_waiting_second}} points</strong> for every second you have to wait, as long as you stick with us to the end.</p>
+<p style="width:85%;text-align:left">We're waiting for everyone to catch up. I know your time is valuable so we are going to add <strong>{{session.config.points_per_waiting_second}} points</strong> for every second you have to wait, as long as you stick with us to the end.</p>
 <input type=hidden id="bonus_var" value=None name="bbonus">
 <h3 style="line-height: 1.8">You have been waiting <span id="timer">0</span> seconds.</h3>
 <h4>That's an extra <span id="bonus" style="color: #428bca">0.00</span> points once you finish the game!</h4>
@@ -35,3 +35,4 @@ setInterval(function() {
   }, 1000);
 </script>
 {% endblock %}
+

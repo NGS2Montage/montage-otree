@@ -49,6 +49,7 @@ class WaitPage(WaitPage):
     title_text = "Processing Responses"
     body_text = """Thank you, please wait while the rest of the team submits their
     responses."""
+    template_name = 'ruse/WaitPage.html'
 
     def is_displayed(self):
         if self.participant.vars['consent'] and \
