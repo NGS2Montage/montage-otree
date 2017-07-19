@@ -15,7 +15,7 @@ class SurveyConsent(Page):
     form_model = models.Player
     form_fields = ['participate']
     
-    # timeout_seconds = 60
+    timeout_seconds = 60
     # timeout_submission = {'participate': False}
     
 
@@ -28,7 +28,7 @@ class SurveyConsent(Page):
             return False
 
 class Demographic(Page):
-    # timeout_seconds = 300
+    timeout_seconds = 360
     form_model = models.Player
     required = True
     template_name = 'demographic_detailed/Demographic.html'
@@ -107,7 +107,7 @@ class Demographic(Page):
                 self.player.payoff = 0
 
 class Results(Page):
-    # timeout_seconds = 60
+    timeout_seconds = 60
     is_debug = False
     
     def is_displayed(self):

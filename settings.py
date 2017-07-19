@@ -111,7 +111,7 @@ oTree games
 
 mturk_hit_settings = {
     'keywords': ['easy', 'bonus', 'choice', 'study', 'groups'],
-    'title': 'Jointly - Group Exercise Games (earn on average $7/hr with bonus pay)',
+    'title': 'Jointly - Group Exercise Games (earn about $7/hr in bonus pay)',
     'description': 'Play games with other AMT workers.',
     'frame_height': 500, #Needs adjustment
     'preview_template': 'core/MTurkPreview.html',

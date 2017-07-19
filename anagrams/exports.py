@@ -5,7 +5,45 @@ from django.http import HttpResponse
 
 import vanilla
 
-from .models import UserLetter, TeamWord, LetterTransaction
+from .models import UserLetter, TeamWord, LetterTransaction, Player
+
+
+class NeighborsExport(vanilla.View):
+
+    url_name = 'anagrams_neighbors_export'
+    url_pattern = '^anagrams_neighbors_export/$'
+    display_name = 'Anagrams Neighbors export'
+
+    def get(request, *args, **kwargs):
+
+        response = HttpResponse(content_type='text/csv')
+        response['Content-Disposition'] = 'attachment; filename="{}"'.format(
+            'Neighbors (accessed {}).csv'.format(
+                datetime.date.today().isoformat()
+            )
+        )
+
+        players = Player.objects.all()
+        max_neighbors = max([p.neighbors.all().count() for p in players])
+
+        rows = [['player__participant__code']]
+        for i in range(max_neighbors):
+            rows[0].append('neighbor__{}__participant__code'.format(i))
+
+        for player in Player.objects.all():
+            row = [player.participant.code]
+            neighbors = player.neighbors.all()
+            neighbors_count = neighbors.count()
+
+            for i in range(max_neighbors):
+                row.append(neighbors[i].participant.code if i < neighbors_count else "")
+            rows.append(row)
+
+        writer = csv.writer(response)
+        writer.writerows([column_names])
+        writer.writerows(rows)
+
+        return response
 
 
 class UserLetterExport(vanilla.View):
@@ -96,6 +134,7 @@ class LetterTransactionExport(vanilla.View):
             'channel',
             'owner_channel',
             'approved',
+            'approve_time',
             'timestamp'
         ]
 
