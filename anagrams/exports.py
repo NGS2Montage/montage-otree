@@ -23,7 +23,7 @@ class NeighborsExport(vanilla.View):
             )
         )
 
-        players = Player.objects.all()
+        players = Player.objects.all().order_by('session__code')
         max_neighbors = max([p.neighbors.all().count() for p in players])
 
         rows = [['player__session__code', 'player__participant__code']]
