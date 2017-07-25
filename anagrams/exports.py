@@ -30,7 +30,7 @@ class NeighborsExport(vanilla.View):
         for i in range(max_neighbors):
             rows[0].append('neighbor__{}__participant__code'.format(i))
 
-        for player in Player.objects.all():
+        for player in players:
             row = [player.session.code, player.participant.code]
             neighbors = player.neighbors.all()
             neighbors_count = neighbors.count()
