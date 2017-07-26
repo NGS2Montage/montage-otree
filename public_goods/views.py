@@ -50,7 +50,8 @@ class Contribute(Page):
 
     def before_next_page(self):
         if self.timeout_happened and self.player.contribution < 0:
-                self.participant.vars['playing'] = False
+            self.player.contribution = 0
+            self.participant.vars['playing'] = False
 
     def contribution_min(self):
         return 0
