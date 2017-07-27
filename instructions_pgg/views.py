@@ -67,6 +67,7 @@ class InstructionsPhase2_Quiz(Page):
     def before_next_page(self):
         if self.timeout_happened:
             self.participant.vars['playing'] = False
+            self.participant.vars['pgg_arrival_wait'] = True
 
 
 
