@@ -3,7 +3,7 @@ from django.contrib.auth.decorators import login_required
 from . import models
 from ._builtin import Page, WaitPage
 from .models import Constants
-
+from otree.models_concrete import CompletedGroupWaitPage
 
 class LoginRequiredMixin(object):
     @classmethod
@@ -16,6 +16,7 @@ class WaitPage(WaitPage):
     is_debug = False
     template_name = 'public_goods/WaitPage.html'
 
+
     def after_all_players_arrive(self):
         for participant in self.session.get_participants():
             if participant.vars['consent'] and participant.vars['playing']:
@@ -24,6 +25,8 @@ class WaitPage(WaitPage):
 
     def is_displayed(self):
         if self.participant.vars['consent'] and self.participant.vars['playing']:
+            return True
+        elif self.participant.vars['pgg_arrival_wait']:
             return True
         else:
             return False
@@ -50,7 +53,8 @@ class Contribute(Page):
 
     def before_next_page(self):
         if self.timeout_happened and self.player.contribution < 0:
-                self.participant.vars['playing'] = False
+            self.participant.vars['playing'] = False
+            self.participant.vars['pgg_results_wait'] = True
 
     def contribution_min(self):
         return 0
@@ -75,8 +79,15 @@ class ResultsWaitPage(WaitPage):
     def after_all_players_arrive(self):
         self.subsession.set_payoffs()
 
+    def IamLast(self):
+        unvisited_participants = self._tally_unvisited()
+        return len(unvisited_participants) < 2
+        
+        
     def is_displayed(self):
         if self.participant.vars['consent'] and self.participant.vars['playing'] and self.participant.vars['locked']:
+            return True
+        elif self.participant.vars['pgg_results_wait']:
             return True
         else:
             return False
