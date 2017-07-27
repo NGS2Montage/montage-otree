@@ -24,6 +24,10 @@ class Subsession(BaseSubsession):
             player.participant.vars['locked'] = False
             player.participant.vars['clicked'] = True
             player.participant.vars['money_earned'] = self.session.config['participation_fee']
+            player.participant.vars['anagrams_wait_required'] = False
+            player.participant.vars['pgg_arrival_wait'] = False
+            player.participant.vars['pgg_results_wait'] = False
+
         self.session.vars['locked'] = False
 
 
