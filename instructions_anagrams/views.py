@@ -25,6 +25,7 @@ class JoinTeamWaitPage(WaitPage):
     is_debug = False
     template_name = 'instructions_anagrams/JoinTeam.html'
 
+    # This is fine... no method to run once all join.
     def is_displayed(self):
         if self.participant.vars['consent'] and self.participant.vars['playing']:
             return True
@@ -104,6 +105,7 @@ class InstructionsPhase1_Quiz(Page):
     def before_next_page(self):
         if self.timeout_happened:
             self.participant.vars['playing'] = False
+            self.participant.vars['anagrams_wait_required'] = True
 
 class DifiIndexBefore(Page):
     is_debug = False
@@ -122,6 +124,7 @@ class DifiIndexBefore(Page):
     def before_next_page(self):
         if self.timeout_happened:
             self.participant.vars['playing'] = False
+            self.participant.vars['anagrams_wait_required'] = True
 
 page_sequence = [
     Introduction,

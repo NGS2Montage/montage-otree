@@ -13,6 +13,8 @@ class WaitPage(WaitPage):
     def is_displayed(self):
         if self.participant.vars['consent'] and self.participant.vars['playing']:
             return True
+        elif self.participant.vars['anagrams_wait_required']:
+            return True
         else:
             return False
     
@@ -189,6 +191,7 @@ class DifiIndexAfter(Page):
     form_model = models.Player
     form_fields = ['distanceScale_after', 'overlapScale_after']
 
+    # This is fine, because there is not path through which the players will go and not make it to this page.
     def is_displayed(self):
         if self.participant.vars['consent'] and self.participant.vars['playing']:
             return True
