@@ -58,7 +58,8 @@ INSTALLED_APPS = ['otree',
 
                   # our stuff
                   'core',
-                  'clicktracking'
+                  'clicktracking',
+                  'data_export_api',
                   ]
 
 
