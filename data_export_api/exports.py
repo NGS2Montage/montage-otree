@@ -4,6 +4,7 @@ from datetime import datetime, date
 from otree.api import Currency
 from otree.common import RealWorldCurrency
 from otree.models.session import Session
+from otree.models_concrete import PageCompletion
 
 from django.http import HttpResponse
 
@@ -21,7 +22,7 @@ class CompletedSessionSummaryExport(vanilla.View):
 
         response = HttpResponse(content_type='text/csv')
         response['Content-Disposition'] = 'attachment; filename="{}"'.format(
-            'Clicktracking (accessed {}).csv'.format(
+            'CompletedSessionSummary (accessed {}).csv'.format(
                 date.today().isoformat()
             )
         )
@@ -75,19 +76,29 @@ class CompletedSessionSummaryExport(vanilla.View):
                 start_time, duration = getStartStopTime(playing)
 
                 data.append({
-                    'code': code,
-                    'name': s.config['display_name'],
-                    'n_requested': requested_participants,
-                    'n_consented': len(consent),
-                    'n_played': len(playing),
+                    'session_code': code,
+                    'experiment_type': s.config['display_name'],
+                    'n_part_requested': requested_participants,
+                    'n_part_consented': len(consent),
+                    'n_part_finished': len(playing),
                     'start_time': start_time,
                     'duration': duration,
                     'total_cost': total_cost,
                 })
 
+        keys_order = ['session_code', 
+                     'experiment_type', 
+                     'n_part_requested', 
+                     'n_part_consented', 
+                     'n_part_finished', 
+                     'start_time', 
+                     'duration', 
+                     'total_cost']
+        
+        w = csv.DictWriter(response, keys_order)
+        w.writeheader()
+        
         if data:
-            w = csv.DictWriter(response, data[0].keys())
-            w.writeheader()
             w.writerows(data)
 
         return response
