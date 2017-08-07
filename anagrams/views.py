@@ -21,7 +21,8 @@ class WaitPage(WaitPage):
     def after_all_players_arrive(self):
         group_size = self.session.config['n_neighbors']
         for group in self.subsession.get_groups():
-            self.assign_players_in_chatgroups(group.get_players(), group_size)
+            players = [p for p in group.get_players() if p.participant.vars['consent'] and p.participant.vars['playing']]
+            self.assign_players_in_chatgroups(players, group_size)
         '''
         eligible_players = []
         self.session.vars['locked'] = True
