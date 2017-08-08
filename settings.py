@@ -241,10 +241,10 @@ SESSION_CONFIGS = [
         'n_games': 2,
         
         # Anagrams - Phase 1 Options
-        'bestScore': 400,
-        'threshold_num_words': 2,
-        'threshold_num_points': 100,
-        'threshold_stop_game_num_words': 5, # total words at which to stop game
+        'bestScore': 20,
+        'threshold_num_words': 10,
+        'threshold_num_points': 50,
+        'threshold_stop_game_num_words': 200, # total words at which to stop game
         'marginal_points': 1,
         'timeout_anagrams_min': 5, # do not change until otree upgrade
         'n_neighbors': 2,
@@ -257,7 +257,7 @@ SESSION_CONFIGS = [
         'pgg_timeout_min': 3, #do not change! dev coming
         
         # Demographic Detaile - "Optional Survey"
-        'optional_survey_payout': 5,
+        'optional_survey_payout': 20,
 
         'paid_wait_pages': [
             ('instructions_anagrams', 'JoinTeamWaitPage'),
