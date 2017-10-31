@@ -66,8 +66,9 @@ class WaitPage(WaitPage):
             self.send_error_email("Group Size was: %d" % group_size)
             return
         if len(players) < group_size + 1:
-            self.send_error_email("Number of Players were: %d\nGroup Size was: %d" % (len(players), group_size))
-            return
+            # self.send_error_email("Number of Players were: %d\nGroup Size was: %d" % (len(players), group_size))
+            # return
+            group_size = len(players) - 1
 
         success, groups = create_network(len(players), group_size, 55, 2, False, False, './')
         if not success:
