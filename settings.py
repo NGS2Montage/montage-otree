@@ -244,7 +244,7 @@ SESSION_CONFIGS = [
         'bestScore': 20,
         'threshold_num_words': 10,
         'threshold_num_points': 50,
-        'threshold_stop_game_num_words': 200, # total words at which to stop game
+        'threshold_stop_game_num_words': 20000, # total words at which to stop game
         'marginal_points': 1,
         'timeout_anagrams_min': 5, # do not change until otree upgrade
         'n_neighbors': 2,

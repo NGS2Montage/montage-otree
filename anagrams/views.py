@@ -105,6 +105,10 @@ class Anagrams(Page):
     #     return True
 
     def is_displayed(self):
+        p_count = sum([(p.participant.vars['consent'] and self.participant.vars['playing']) for p in self.group.get_players()])
+        if p_count < 3:
+            return False
+
         if self.participant.vars['consent'] and self.participant.vars['playing']:
             return True
         else:
@@ -144,6 +148,10 @@ class ResultsWaitPage(WaitPage):
         self.subsession.set_payoffs()
 
     def is_displayed(self):
+        p_count = sum([(p.participant.vars['consent'] and self.participant.vars['playing']) for p in self.group.get_players()])
+        if p_count < 3:
+            return False
+
         if self.participant.vars['consent'] and self.participant.vars['playing']:
             return True
         else:
@@ -155,6 +163,10 @@ class Results(Page):
     timeout_seconds = 60
     
     def is_displayed(self):
+        p_count = sum([(p.participant.vars['consent'] and self.participant.vars['playing']) for p in self.group.get_players()])
+        if p_count < 3:
+            return False
+
         if self.participant.vars['consent'] and self.participant.vars['playing']:
             return True
         else:
@@ -195,6 +207,10 @@ class DifiIndexAfter(Page):
 
     # This is fine, because there is not path through which the players will go and not make it to this page.
     def is_displayed(self):
+        p_count = sum([(p.participant.vars['consent'] and self.participant.vars['playing']) for p in self.group.get_players()])
+        if p_count < 3:
+            return False
+
         if self.participant.vars['consent'] and self.participant.vars['playing']:
             return True
         else:
