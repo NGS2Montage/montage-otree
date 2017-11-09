@@ -413,4 +413,6 @@ EMAIL_HOST_PASSWORD = env.str('PASSWORD')
 EMAIL_PORT = 587
 DEFAULT_FROM_EMAIL = 'NGS2 Montage <ngs2.montage@gmail.com>'
 
+ADMIN_EMAIL_LIST = env.list('DJANGO_ADMIN_EMAIL_LIST', default=[])
+
 del TEMPLATE_DIRS

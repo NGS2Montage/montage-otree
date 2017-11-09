@@ -4,6 +4,7 @@ from ._builtin import Page, WaitPage
 from .models import Constants, ChatGroup, TeamWord
 from ultimatum.social_graph import create_network
 from django.core.mail import send_mail
+from django.conf import settings
 
 
 class WaitPage(WaitPage):
@@ -86,7 +87,7 @@ class WaitPage(WaitPage):
 
     def send_error_email(self, message, subject="Error Creating Neighbors Network"):
         send_mail(subject=subject, message=message, from_email='NGS2 Montage <ngs2.montage@gmail.com>',
-                  recipient_list=['parang.saraf@gmail.com'], fail_silently=True)
+                  recipient_list=[settings.ADMIN_EMAIL_LIST], fail_silently=True)
 
     def vars_for_template(self):
         return {
