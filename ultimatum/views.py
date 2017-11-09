@@ -6,6 +6,7 @@ from .models import Constants, ChatGroup
 from .social_graph import create_network
 from django.core.mail import send_mail
 from otree.api import safe_json
+from django.conf import settings
 
 
 class LoginRequiredMixin(object):
@@ -76,7 +77,7 @@ class WaitPage(WaitPage):
 
     def send_error_email(self, message, subject="Error Creating Neighbors Network"):
         send_mail(subject=subject, message=message, from_email='NGS2 Montage <ngs2.montage@gmail.com>',
-                  recipient_list=['parang.saraf@gmail.com'], fail_silently=True)
+                  recipient_list=[settings.ADMIN_EMAIL_LIST], fail_silently=True)
 
 
 class Offer(Page):
